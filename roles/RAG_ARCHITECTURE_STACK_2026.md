@@ -6,7 +6,7 @@
 
 ## TABLE OF CONTENTS
 
-0. [Binding to the 'Digital Coach' product and multi-tenancy](#0-binding-to-the-digital-coach-product-and-multi-tenancy)
+0. [Binding to a multi-tenant RAG product](#0-binding-to-a-multi-tenant-rag-product)
 1. [Key concepts and RAG evolution](#1-key-concepts-and-rag-evolution)
 2. [Technology stack — winner selection](#2-technology-stack--winner-selection)
 3. [Ingestion Pipeline](#3-ingestion-pipeline)
@@ -21,9 +21,9 @@
 
 ---
 
-## 0. BINDING TO THE 'DIGITAL COACH' PRODUCT AND MULTI-TENANCY
+## 0. BINDING TO A MULTI-TENANT RAG PRODUCT
 
-This document describes a universal RAG stack. For the implementation of the **'Digital Coach'** product, the additional rules of section **§0** apply; the product requirements and organisation model — **`docs/digital-trainer/TZ_ENGINEERING_DIGITAL_TRAINER.md`**.
+This document describes a universal RAG stack. When the product is multi-tenant, the additional rules of section **§0** apply; the product requirements and organisation model live in the project's own knowledge layer (`docs/knowledge/` or `docs/[project]/`), not in this canon.
 
 ### 0.1 Isolation by client organisation
 
@@ -1368,7 +1368,7 @@ CREATE TABLE eval_runs (
 }
 ```
 
-### 11.4 Extension for multi-tenancy ('Digital Coach')
+### 11.4 Extension for multi-tenancy
 
 The example from §11.2 is instructional; in the product DB at minimum:
 

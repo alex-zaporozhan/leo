@@ -4,7 +4,7 @@
 
 > **Purpose:** fix **how** we bring a product from business canon to **executable** prompts with file paths, API, DB and block UI specs — **before the first line of application code**.
 >
-> **Reference implementation:** `docs/dev_execution/` (project "Digital Trainer", pack v3.2).
+> **Reference layout:** `docs/execution/` (the Execution Pack lives there; see `roles/DOC_TOPOLOGY.md`).
 >
 > **Connection:** supplements `roles/ENGINEERING_PLAN.md` (PLANNING phase), does not replace `roles/DEV_EXECUTION_PASSPORT.md` (work of @DEV **while** coding).
 

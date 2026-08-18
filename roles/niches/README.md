@@ -15,7 +15,7 @@
 1. @LEAD выбирает пакет по `roles/NICHE_BOOTSTRAP_PROTOCOL.md`.
 2. Заполняется `roles/TEMPLATE_PROJECT_PROFILE.md`.
 3. Профиль сохраняется в `docs/artifacts/PROJECT_PROFILE.md`.
-4. В `docs/digital-trainer/DEVELOPMENT_PLAN.md` фиксируется активный пакет.
+4. В `docs/knowledge/DEVELOPMENT_PLAN.md` (или `docs/[project]/DEVELOPMENT_PLAN.md`) фиксируется активный пакет.
 5. В первый `DEV_PROMPTS` добавляются инварианты и метрики выбранной ниши.
 
 ## Правило структуры пакета

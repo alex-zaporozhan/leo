@@ -90,20 +90,20 @@ Contour = named operator outcomes
         + forbidden claims until green
 ```
 
-**Program example (Digital Trainer / PP-PROD)** — source of truth for IDs: `docs/artifacts/LEAD_DECISIONS_PP_PROD_2026-07-26.md` §8:
+**Program example (generic, illustrative)** — source of truth for IDs lives in the project's `docs/artifacts/LEAD_DECISIONS_*.md`, not in this canon:
 
 | Contour | Claim unlocked when green |
 |---------|---------------------------|
-| **PR-VIDEO** | Operator video + LLM BYOK without customer `.env` |
-| **PR-NODES** | «12 nodes in production» |
-| **PR-NETWORK** | Primary media share |
-| **PR-LIVE** | LiveAvatar marketing |
+| **PR-CORE** | Core operator path works without customer-side secrets in `.env` |
+| **PR-GRAPH** | The advertised node/graph surface is actually in production |
+| **PR-SHARE** | Primary share / publish path is live |
+| **PR-LIVE** | Real-time / live surface may be marketed |
 | **PR-CLAIM** | External narrative / pilot story |
 
 **Rules:**
 
 1. Contours nest: later claims require earlier Contours (unless LEAD explicitly splits).  
-2. Closing PP-1+PP-2 packs ≠ Contour PR-VIDEO (needs Photo Avatar + tenant webhook policy, etc.).  
+2. Closing an early planning pack ≠ closing the first production contour (later contours still need their own evidence).  
 3. Marketing / sales claim language may only cite Contours that are 🟢 with evidence.
 
 ---

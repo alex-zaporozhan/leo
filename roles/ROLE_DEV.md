@@ -71,7 +71,7 @@ Goal: do not duplicate, do not break the style, do not reinvent what is already 
   SPDX ∈ allowlist (MIT, Apache-2.0, BSD, ISC, MPL-2.0 as a dep, PSF, PostgreSQL, CC0 for data)?
   No GPL/AGPL/SSPL/RSAL/Elastic/BSL/LGPL/NC/research-only/unknown?
   Infra: Valkey (not redis:7), Yandex S3 (not MinIO), no AGPL Grafana in the delivery?
-  A 50/50 doubt → STOP → @LEAD / @LAWYER. Canon: docs/digital-trainer/ADR_025_LICENSE_COMPLIANCE_AND_STACK.md
+  A 50/50 doubt → STOP → @LEAD / @LAWYER. Canon: the project's license-compliance ADR (typically `docs/decisions/ADR_025_LICENSE_COMPLIANCE_AND_STACK.md` or the equivalent recorded in the spine).
 ```
 
 ---

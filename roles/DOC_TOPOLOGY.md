@@ -48,7 +48,7 @@ decisions/
 ├── ADR_REGISTRY.md             # index: ID, title, status (Accepted/Rejected/Superseded), date
 └── ADR_[NNN]_[SLUG].md         # one decision = one file; only status is edited
 ```
-Why separate: ADR is a **causality log**, its value lies in immutability. When it sits mixed with living passports (as in `digital-trainer/`), both are lost: ADR gets "polluted" by neighbour edits, passports drown among ADR.
+Why separate: ADR is a **causality log**, its value lies in immutability. When it sits mixed with living passports in one project folder, both are lost: ADR gets "polluted" by neighbour edits, passports drown among ADR.
 
 ### `docs/knowledge/` — KNOWLEDGE / TRUTH (passports)
 Designed current truth about the product. Lives and is edited.
@@ -121,8 +121,8 @@ operations/
 
 | Currently (de-facto) | Nature | Where to |
 |-------------------|---------|------|
-| `digital-trainer/ADR_*.md`, `ADR_MASTER_*` | decision | `decisions/` |
-| `digital-trainer/ARCHITECTURE_*`, `BUSINESS_LOGIC_*`, `BUSINESS_ROUTES_*`, `AGENT_GRAPH_PASSPORT`, `MARKET_AUDIT`, `DEVELOPMENT_ROADMAP`, `EVAL_AND_GOLDEN_SET`, `golden/` | knowledge | `knowledge/` |
+| Mixed project folder: `ADR_*.md`, `ADR_MASTER_*` | decision | `decisions/` |
+| Mixed project folder: `ARCHITECTURE_*`, `BUSINESS_LOGIC_*`, `BUSINESS_ROUTES_*`, `AGENT_GRAPH_PASSPORT`, `MARKET_AUDIT`, `DEVELOPMENT_ROADMAP`, `EVAL_AND_GOLDEN_SET`, `golden/` | knowledge | `knowledge/` |
 | `dev_execution/` (all) | plan | `execution/` |
 | `artifacts/DEV_PROMPTS_WAVE_*`, `DESIGN_SPEC_*`, `ARCH_MODULE`, `ACCEPTANCE_TEST_REGISTRY`, `OPENAPI_DELTA`, `EVAL_PLAN` | delivery | `artifacts/waves/[N]/` |
 | `artifacts/COMMERCIAL_*`, `BRIEF_QUESTIONS_FOR_CLIENT`, `FEASIBILITY_*`, `docs/presentation/` | commerce | `commercial/` |
@@ -130,7 +130,7 @@ operations/
 | `product_state/openapi`, `schemas` | state | stays in `product_state/` |
 | `roles/DEPLOY_VPS_STEP_BY_STEP`, `RUN_SERVICES`, `MIGRATIONS_PLAYBOOK` (universal) | operations (canon) | stay in `roles/`; project runbooks → `docs/operations/` |
 
-> "Digital trainer" (`digital-trainer`) is the project name. In the topology, folder names are **functional** (`decisions/`, `knowledge/`), and the project name goes either into passport file names (`ARCHITECTURE_[PROJECT].md`) or into a wrapper `docs/[project]/` in a multi-product repository (see §5).
+> Folder names in the topology are **functional** (`decisions/`, `knowledge/`). The project name goes either into passport file names (`ARCHITECTURE_[PROJECT].md`) or into a wrapper `docs/[project]/` in a multi-product repository (see §5).
 
 ---
 

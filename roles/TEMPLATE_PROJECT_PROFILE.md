@@ -33,7 +33,7 @@ Project profile template for launching in the target niche.
 - `docs/artifacts/BUSINESS_LOGIC.md`
 - `docs/artifacts/BUSINESS_ROUTES.md`
 - `docs/artifacts/SAAS_ARCHITECTURE_SPINE_2026.md`
-- `docs/digital-trainer/DEVELOPMENT_PLAN.md`
+- `docs/knowledge/DEVELOPMENT_PLAN.md` (or `docs/[project]/DEVELOPMENT_PLAN.md` in a multi-product repo)
 - `docs/artifacts/PROJECT_PROFILE.md` (copy of filled profile)
 
 ## 5. Launch micro-checklist (mandatory)

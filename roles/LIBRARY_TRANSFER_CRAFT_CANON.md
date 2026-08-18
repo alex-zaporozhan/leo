@@ -192,5 +192,5 @@ Push/pull verbs in UI (consistent Russian copy):
 
 ---
 
-Reference: `roles/INTERFACE_CRAFT_CANON.md` (§2.3 repository · §5 drawer vs page) · `roles/FRONTEND_CAPABILITY_CANON.md` (C3/C6/C7/C11 · §6 module map) · `roles/CANVAS_CRAFT_CANON.md` (§11 material source ports) · `roles/VISUAL_CRAFT_CANON.md` (instrument register) · `docs/digital-trainer/ADR_041_PRIMARY_ORG_MATERIAL_BANKS.md` · `docs/digital-trainer/ADR_043_SHARED_TEMPLATE_LIBRARY.md` · `docs/dev_execution/frontend/15_ADMIN_INTERACTION_CONCEPT.md` · `roles/ROLE_DESIGN.md` · `roles/ROLE_QA_ARCH.md`
+Reference: `roles/INTERFACE_CRAFT_CANON.md` (§2.3 repository · §5 drawer vs page) · `roles/FRONTEND_CAPABILITY_CANON.md` (C3/C6/C7/C11 · §6 module map) · `roles/CANVAS_CRAFT_CANON.md` (§11 material source ports) · `roles/VISUAL_CRAFT_CANON.md` (instrument register) · `docs/decisions/ADR_[NNN]_[SLUG].md` (project license / library ADRs, when present) · `docs/execution/` (admin interaction concept, when present) · `roles/ROLE_DESIGN.md` · `roles/ROLE_QA_ARCH.md`
 Version: 1.0 | 2026-07-13

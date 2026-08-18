@@ -143,10 +143,10 @@ LEO is not a thought experiment. It has directed real, shipped engineering work 
 | | MedCore | Enterprise AI Training Platform | Public Education Platform |
 |---|---|---|---|
 | **Class** | Multi-tenant B2B clinic OS | AI content/agent SaaS | Public site + CMS |
-| **Backend** | FastAPI, SQLAlchemy 2 async, PostgreSQL 16, Celery/Redis | FastAPI, SQLAlchemy 2 async, PostgreSQL + pgvector, LangGraph agent graphs, Celery/Redis | FastAPI, SQLAlchemy 2 async, PostgreSQL 16, Valkey |
+| **Backend** | FastAPI, SQLAlchemy 2 async, PostgreSQL 16, Celery/Redis | FastAPI, SQLAlchemy 2 async, PostgreSQL + pgvector, LangGraph agent graphs, Celery/Valkey | FastAPI, SQLAlchemy 2 async, PostgreSQL 16, Valkey |
 | **Frontend** | React 18, Vite, Mantine, TanStack Query | React 18, node-graph pipeline builder (XYFlow-class), TanStack Query | Next.js 15 (SSR/SSG), React admin SPA |
-| **Notable engineering** | Tenant isolation, advisory locks, transactional outbox | RAG (pgvector), executable agent graphs, generative-media pipeline | SEO-gated SSR, licensed-content compliance, WCAG AA |
-| **Test surface** | 187 test modules (pytest + Playwright) | 300+ test modules (pytest + frontend harnesses) | Full ADR + QA_REPORT + PENTEST audit trail |
+| **Notable engineering** | Tenant isolation, advisory locks, transactional outbox, 49-code RBAC matrix with CI-enforced router↔matrix inventory | RAG (pgvector), executable agent graphs, generative-media pipeline, a dedicated adversarial/security test subset | SEO-gated SSR, licensed-content compliance, WCAG AA, a 20-block-type page builder, a shipped `craft-lint` CI stage (Law 39) |
+| **Test surface** | 189 pytest modules, 816 collected test cases (verified) + Playwright | ~300 pytest modules, ~2,900 collected test cases (order-of-magnitude verified) + ~75 frontend test files | 1,124 backend + 1,027 frontend Vitest cases (verified, all green) + 17 Playwright visual/a11y specs |
 | **Status** | Shipped; source-available (PolyForm Shield), going public at [github.com/alex-zaporozhan/medCore](https://github.com/alex-zaporozhan/medCore) | Client engagement (NDA — architecture disclosed, business logic withheld) | Shipped |
 
 These aren't demo apps. They are the reason most of LEO's 41 Laws exist in the first place — each one is a scar from something that actually broke.
