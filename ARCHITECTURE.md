@@ -39,7 +39,7 @@ LEO/
 `@LEAD` is not a role among equals — it is the only role the user talks to directly in the default flow. Every other role is reached through a **hand-off**, and every hand-off has a fixed shape (the Transmission Protocol, below). This keeps the system a **star topology with one router**, not a free-for-all where 22 personas argue with each other in the same context.
 
 ```mermaid
-flowchart TB
+flowchart LR
     U["User"] --> LEAD["@LEAD\nTech Lead / Orchestrator"]
 
     LEAD --> CREATOR["@CREATOR\nvision, one question,\nindustry intel"]

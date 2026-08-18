@@ -109,7 +109,7 @@ Every role writes to a file, not just to the chat. `docs/artifacts/SAAS_ARCHITEC
 ### 5. Gates, not steps
 
 ```mermaid
-flowchart LR
+flowchart TD
     A["Task"] --> B["@LEAD\nPre-Plan Gate + LPA"]
     B --> C["@ARCH / @FRONTEND\nSpine draft"]
     C --> D{"Model / AI /\nSecurity triggers?"}
