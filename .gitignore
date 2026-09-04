@@ -11,3 +11,7 @@ node_modules/
 __pycache__/
 *.pyc
 .venv/
+
+# Local article drafts (hidden working notes — not part of the public tree)
+ARTICLES/
+.ARTICLES/
