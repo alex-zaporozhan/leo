@@ -13,7 +13,7 @@ A written constitution that turns a general-purpose LLM coding agent into a disc
 [![Task classes](https://img.shields.io/badge/task%20classes-22-purple)](#2-every-task-is-classified-before-it-is-started)
 [![Agent-agnostic](https://img.shields.io/badge/works%20with-Cursor%20%C2%B7%20Claude%20Code%C2%B7%20Windsurf%20%C2%B7%20Copilot-black)](#compatibility)
 
-[What it is](#what-leo-actually-is) · [Why it exists](#why-this-exists) · [How it works](#how-it-works) · [Proof at scale](#proof-at-scale) · [Get started](#get-started) · [The Manifesto](./MANIFESTO.md) · [License](#license)
+[What it is](#what-leo-actually-is) · [Why it exists](#why-this-exists) · [How it works](#how-it-works) · [Proof at scale](#proof-at-scale) · [Get started](#get-started) · [**For founders — the business case**](./BUSINESS_CASE.md) · [The Manifesto](./MANIFESTO.md) · [License](#license)
 
 </div>
 
@@ -21,12 +21,12 @@ A written constitution that turns a general-purpose LLM coding agent into a disc
 
 ## TL;DR
 
-LEO is not a Python package and there is nothing to `pip install`. It is a **rule system**: a `.cursorrules` constitution plus a **129-file, ~36,700-line, ~294,000-word role library** (`roles/*.md`, including 5 niche-bootstrap packages under `roles/niches/`) that you hand to a coding agent — Cursor, Claude Code, Windsurf, or anything else with file-system/tool access that reads a system-prompt / project-rules file — instead of a one-line "you are a helpful senior engineer" prompt.
+LEO is not a Python package and there is nothing to `pip install`. It is a **rule system**: a `.cursorrules` constitution plus a **131-file, ~36,600-line, ~287,000-word role library** (`roles/*.md`, including 5 niche-bootstrap packages under `roles/niches/`) that you hand to a coding agent — Cursor, Claude Code, Windsurf, or anything else with file-system/tool access that reads a system-prompt / project-rules file — instead of a one-line "you are a helpful senior engineer" prompt.
 
 Where a raw LLM agent free-improvises architecture, skips edge cases under time pressure, and silently forgets a decision it made 40 messages ago, LEO gives it:
 
 - **A single entry point** (`@LEAD`) that routes every request to the right specialist instead of one model trying to be architect, developer, and QA simultaneously in the same breath.
-- **A task router** that resolves every request into one of **22 task classes** (`TC-00`…`TC-21`) and names the ≤6 files to read *first*, in order — so the agent never opens a 129-file library wondering where to start, and never starts a screen without the canon that governs it.
+- **A task router** that resolves every request into one of **22 task classes** (`TC-00`…`TC-21`) and names the ≤6 files to read *first*, in order — so the agent never opens a 131-file library wondering where to start, and never starts a screen without the canon that governs it.
 - **22 specialist roles** with narrow, named jurisdictions — `@ARCH`, `@DEV`, `@PRINCIPLE`, `@QA_ARCH`, `@QA_VISUAL`, `@PENTEST`, `@SEO`, `@DESIGN`, `@AI_ENGINEER`, and 13 more — so "who decides this" is never a coin flip.
 - **44 Absolute Laws** distilled from real production incidents (double-booked appointments, zombie Celery workers, leaked UUIDs in a UI, a `Promise.all` that silently ate an error) — so the same class of bug cannot recur, because the rule that would have caught it is now permanent.
 - **A gate protocol (GATE-0 → GATE-6)** that blocks the chain from advancing without a concrete artifact as proof — never on the agent's word alone.
@@ -34,6 +34,8 @@ Where a raw LLM agent free-improvises architecture, skips edge cases under time 
 - **Artifacts instead of chat history** — every architectural decision, security threat model, and QA verdict lives in a versioned markdown file the *next* agent session reads before doing anything, closing the single biggest failure mode of long-running agentic work: **context drift**.
 
 LEO has been directing real, shipped engineering work — not toy demos — across a multi-tenant healthcare SaaS, an AI training platform with RAG and executable agent graphs, and a public-facing marketing + CMS platform. See [Proof at scale](#proof-at-scale).
+
+> **Evaluating this as a business decision rather than a technical one?** [`BUSINESS_CASE.md`](./BUSINESS_CASE.md) is the one-page version: what shipped and in how long, where the money actually is, what adopting it costs, and what it does not do.
 
 ---
 
@@ -78,14 +80,14 @@ Cost is declared last on purpose: you cannot know the tier until the model and t
 
 ### 2. Every task is classified before it is started
 
-A 129-file rule library has an obvious failure mode: the agent does not know which handful of files this particular task actually needs, so it either reads nothing or grep-wanders. `roles/RAG_CANON.md` §2 is the router that closes it. `@LEAD` names the class in the first line of the reply — `CLASS: TC-03` — and the class states the **≤6 files to open, in that order**, with a section pointer where the canon is large, plus an explicit **OUT list** of what is deliberately not in scope for it.
+A 131-file rule library has an obvious failure mode: the agent does not know which handful of files this particular task actually needs, so it either reads nothing or grep-wanders. `roles/RAG_CANON.md` §2 is the router that closes it. `@LEAD` names the class in the first line of the reply — `CLASS: TC-03` — and the class states the **≤6 files to open, in that order**, with a section pointer where the canon is large, plus an explicit **OUT list** of what is deliberately not in scope for it.
 
 | | |
 |---|---|
 | `TC-01` operational-screen · `TC-02` public-screen · `TC-03` statement-surface · `TC-04` node-graph · `TC-05` visual-concept | the register decides the canon: an admin table and a landing page are graded by **partly opposite** rules |
 | `TC-06` backend-slice · `TC-07` async-pipeline · `TC-08` integrity/tenancy · `TC-09` migration · `TC-10` security-surface | the classes where a wrong answer is a production incident, not a taste dispute |
 | `TC-11` model · `TC-12` architecture · `TC-13` ai-contour · `TC-14` visibility · `TC-17` product-package | the decisions that are expensive to reverse, so they get read into first |
-| `TC-15/16` QA pass · `TC-18` execution-planning · `TC-19` documentation · `TC-20` system-evolution · `TC-21` operations · `TC-00` trivial | including the class for *auditing an audit* — and `TC-00`, which forbids ceremony on a one-line fix |
+| `TC-15/16` the QA gates · `TC-18` execution-planning · `TC-19` documentation · `TC-20` system-evolution · `TC-21` operations · `TC-00` trivial | the classes that govern the process itself — and `TC-00`, which forbids ceremony on a one-line fix |
 
 Three properties make this a router and not a whitelist: **it is a floor, never a ceiling** — any role may open any other file and say so; **a role may add to its class minimum but never drop from it**; and the router is **maintained by rule** — every canon must be reachable from a class or a categorical group, and every path named in it must resolve on disk, checked on entry to any `TC-20` task. A canon the router does not know about does not exist.
 
@@ -170,7 +172,7 @@ The session that wrote the code is the worst possible judge of whether the code 
 - **SP-0** — an interceptor that verifies the previous unit actually landed on disk before the next one is pasted.
 - **SP-1 per unit · SP-2 per stage · SP-3 per batch.** These are slots in the plan, not good intentions: a batch map showing only production steps is an incomplete batch map, and Law 43 explicitly does **not** count a planned second pass against the effort tier — an audit costing several times its unit is the correct price of that unit.
 - **The role set is a lookup, not a judgement call** — resolved from the task class. It is a default and never a permission list: no role is excluded by the table, and no set is complete merely because the table says so. What it removes is the blank page, not the choice.
-- **A catalogue of false greens (`FG-1`…`FG-12`)** with a per-project tally — the specific ways a pass reports 🟢 on something it did not actually check. `TC-15/16` is the class for auditing the auditor: spot-check two or three of a report's own claims against the code, because a green that does not survive re-reading was never green.
+- **A catalogue of false greens (`FG-1`…`FG-12`)** with a per-project tally — the specific ways a pass reports 🟢 on something it did not actually check. And the audit of a QA report is itself a second-pass class: spot-check two or three of the report's own claims against the code, because a green that does not survive re-reading was never green.
 
 This repository's own rule set was rectified this way. A clean-context pass over five waves of changes found a gate carrying two different numeric thresholds for the same countable rule, a source-priority ladder readable as "a project artifact outranks a law", a quality gate applying one visual register's checklist to both registers, and a protocol that had written the rule "a canon the router does not know does not exist" while being itself unregistered. None of those are visible from inside the session that wrote them.
 
@@ -182,7 +184,7 @@ This repository's own rule set was rectified this way. A clean-context pass over
 
 ## Proof at scale
 
-LEO is not a thought experiment. It has directed real, shipped engineering work across three systems of meaningfully different shape — a regulated multi-tenant SaaS, an AI/agent platform, and a public marketing + CMS platform. Full write-up with stack, scale, and what LEO's gates actually caught: **[`CASE_STUDIES.md`](./CASE_STUDIES.md)**.
+LEO is not a thought experiment. It has directed real, shipped engineering work across three systems of meaningfully different shape — a regulated multi-tenant SaaS, an AI/agent platform, and a public marketing + CMS platform. Full write-up with stack, scale, and what LEO's gates actually caught: **[`CASE_STUDIES.md`](./CASE_STUDIES.md)**. The same three systems framed as cost, risk and elapsed time: **[`BUSINESS_CASE.md`](./BUSINESS_CASE.md)**.
 
 | | MedCore | Enterprise AI Training Platform | Public Education Platform |
 |---|---|---|---|
@@ -202,12 +204,12 @@ These aren't demo apps. They are the reason most of LEO's 44 Laws exist in the f
 LEO is a file, not a build step.
 
 1. **Copy the constitution.** Drop [`.cursorrules`](./.cursorrules) into the root of your project (or translate it to `CLAUDE.md`/`AGENTS.md` if your agent uses that convention).
-2. **Copy the role library.** Copy `roles/` alongside it. Your agent reads these on demand — they are not all loaded into context at once; `@LEAD` routes to the specific file a task needs. Twelve of these files (`TPF_MASTER.md`, `TPF_MODULE_*.md`) are a real, filled-in reference passport from one shipped admin panel, not a generic template — they say so in their own first line, and you can safely delete them if you don't want dental-SaaS-flavored UI examples in an unrelated project.
+2. **Copy the role library.** Copy `roles/` alongside it. Your agent reads these on demand — they are not all loaded into context at once; `@LEAD` routes to the specific file a task needs. Twelve of these files (`TPF_MASTER.md`, `TPF_MODULE_*.md`) are a real, filled-in reference passport from one shipped admin panel, not a generic template — each says so in its own header, and you can safely delete them if you don't want dental-SaaS-flavored UI examples in an unrelated project.
 3. **Seed the artifact skeleton.** Copy the (empty, `.gitkeep`-only) `docs/` tree — `docs/artifacts/`, `docs/product_state/`, `docs/decisions/` — so the roles have somewhere to write.
-4. **Talk to `@LEAD` first.** Open your agent, address `@LEAD`, and describe the task. Let it route. The first line of a correct reply names the task class (`CLASS: TC-xx`) and the effort tier (`COST: tier=Ex`) — if it does not, the agent skipped the router and you should say so.
+4. **Talk to `@LEAD` first.** Open your agent, address `@LEAD`, and describe the task. Let it route. A correct reply carries the task class (`CLASS: TC-xx`) and the effort tier (`COST: tier=Ex`) — on the opening line when you address a specialist role directly, and in the COMMAND CENTER block that closes every `@LEAD` reply. If neither is anywhere in the answer, the agent skipped the router and you should say so.
 5. **Trim to your stack.** LEO ships with canons for a specific opinionated stack (Python/FastAPI, PostgreSQL, React/TypeScript, Celery/Redis) because *specificity is what makes a rule enforceable*. Swap the stack-specific canons (`roles/STACK_SELECTION.md`, `roles/DATA_STORE_SELECTION.md`, `roles/TEMPLATE_ADMIN_UI_UX.md`, …) for your own; keep the *process* canons (gates, laws, artifact contracts) as-is.
 
-**Minimum viable adoption:** even using just `.cursorrules` (the 44 Laws + LAW PRECEDENCE + Chain Protocol) without the full 129-file role library already fixes the most common agentic-coding failure modes — context drift and unearned confidence.
+**Minimum viable adoption:** even using just `.cursorrules` (the 44 Laws + LAW PRECEDENCE + Chain Protocol) without the full 131-file role library already fixes the most common agentic-coding failure modes — context drift and unearned confidence.
 
 ### Compatibility
 
@@ -227,10 +229,12 @@ LEO/
 ├── README.md                       # You are here
 ├── ARCHITECTURE.md                 # Deep dive: role jurisdictions, gate protocol, artifact layers
 ├── CASE_STUDIES.md                 # Real shipped systems built under LEO
+├── BUSINESS_CASE.md                # For founders: what shipped and in how long, where the money is,
+│                                   #   what adoption costs, and what the system does not do
 ├── MANIFESTO.md                    # Long-form: why context drift kills agentic dev, and how LEO stops it
 ├── LICENSE                         # PolyForm Shield 1.0.0 (source-available)
 ├── LICENSING.md                    # Why this license, in plain language, with a comparison table
-├── roles/                          # 123 top-level files + niches/ — 129 files total, the role library
+├── roles/                          # 125 top-level files + niches/ — 131 files total, the role library
 │   ├── RAG_CANON.md                #   THE TASK ROUTER — 22 task classes, the ≤6 files each one reads first
 │   ├── ROLE_LEAD.md                #   The orchestrator: routing, gates, the model and cost gates, REFLEX
 │   ├── ROLE_ARCH.md ROLE_DEV.md …  #   One constitution per specialist role
@@ -261,7 +265,7 @@ LEO/
 **Is this "vibe coding with extra Markdown"?**
 No — the entire point is the opposite. Vibe coding is "describe what you want, accept what comes back." LEO forces every non-trivial decision through a named owner, a written artifact, and a gate that a *different* pass of the agent — in a context that never saw the work being built — or a human has to actually check. The 44 Laws exist because the boring, unglamorous 20% of software (error contracts, race conditions, empty states) is exactly what an unconstrained agent skips first.
 
-**Do I need all 129 files?**
+**Do I need all 131 files?**
 No — and you are never expected to *read* them all either, which is the point of the router. Start with `.cursorrules` alone; add canons as you hit the problem they solve. The library is intentionally modular, and two files exist specifically to keep a rule set this size internally consistent as it grows: `roles/CONFLICT_REGISTRY.md` (a repeated collision gets one named winner, decided once) and `roles/RAG_CANON.md` §6 (a canon that is not reachable from the router does not exist).
 
 **Forty-four laws all act at once. What happens when two of them disagree?**
@@ -296,7 +300,7 @@ Full reasoning, a comparison against MIT / Apache-2.0 / CC-BY-NC-SA / PolyForm-N
 - 5 years in Emergency ICU — zero-error tolerance, algorithmic discipline, and rapid crisis execution, carried directly into how LEO treats a production defect (a permanent rule, not a one-off fix).
 - A rigorous CS foundation (algorithms & data structures in C++, OOP design, Java Core) built specifically because production SDLC cannot be learned from toy katas.
 - Facing the junior-hiring freeze, instead of waiting for a team, engineered one: LEO directs 22 specialized agent roles through 44 codified engineering laws and a closed-loop verification chain — from S-0 threat modeling to Playwright visual-render tests and adversarial security checks.
-- Directed 14B+ tokens across iterative verification loops in real client work and independent products, shipping a multi-tenant healthcare SaaS with row-level security and 800+ tests, an AI platform with executable LangGraph agent graphs and pgvector RAG, and a custom high-throughput CMS/PWA.
+- Directed 14B+ tokens across iterative verification loops in real client work and independent products, shipping a multi-tenant healthcare SaaS with database-enforced tenant separation and 800+ tests, an AI platform with executable LangGraph agent graphs and pgvector RAG, and a custom high-throughput CMS/PWA.
 - **Core stack:** Python 3.11 (FastAPI, SQLAlchemy 2 async, Alembic) · PostgreSQL 16 (pgvector, RLS) · Celery · Redis/Valkey · TypeScript, React 18, Vite, TanStack Query, Mantine, Tailwind · Agentic orchestration, context engineering, LangGraph, RAG, spec-driven development.
 
 Open to Founding Engineer roles, AI-native full-stack positions, and strategic AI-SDLC architecture contracts.

@@ -6,15 +6,15 @@ How LEO is actually built: the file layout, the role graph, the gate protocol, a
 
 ## 1. The three physical layers
 
-LEO's own knowledge is split into three layers so the agent never has to load all ~294,000 words at once — it loads the constitution always, and pulls a specific canon only when a task actually needs it. This split only pays off when the agent can actually open a file on demand — see [Compatibility](./README.md#compatibility) in the README for the tool-use requirement this implies.
+LEO's own knowledge is split into three layers so the agent never has to load all ~287,000 words of it at once — it loads the constitution always, and pulls a specific canon only when a task actually needs it. This split only pays off when the agent can actually open a file on demand — see [Compatibility](./README.md#compatibility) in the README for the tool-use requirement this implies.
 
 ```
 LEO/
 ├── .cursorrules        # Layer 0 — the constitution. Always loaded. 551 lines: 44 Laws,
 │                        # LAW PRECEDENCE, TASK ROUTING, role map, chain protocol, gate map,
 │                        # command centre. Everything else is reached FROM here.
-├── roles/               # Layer P — process norm. 123 top-level files + 6 under niches/ = 129 files,
-│   └── niches/           # ~36,700 lines, ~294,000 words. Loaded on demand via the task router.
+├── roles/               # Layer P — process norm. 125 top-level files + 6 under niches/ = 131 files,
+│   └── niches/           # ~36,600 lines, ~287,000 words. Loaded on demand via the task router.
 │                          # niches/ holds 5 domain-bootstrap packages (CRM/ERP, marketplace,
 │                          # mobile-consumer, content/social, AI-assistant) picked once at project start.
 └── docs/                # Layers S + W — product state & working artifacts.
@@ -33,13 +33,13 @@ LEO/
 
 **A library this size only works because nothing in it is reached by browsing.** Section 3 below describes the router; the property that makes it load-bearing is that it is maintained by rule rather than by discipline — every canon must be reachable from a task class or a categorical group, and every path the router names must resolve on disk. Both are checked on entry to any system-evolution task. **A canon the router does not know about does not exist**, which is a harsher rule than it sounds: it means adding a file to `roles/` is not how you add a rule to LEO.
 
-**One honest exception to "universal canon":** twelve files (`TPF_MASTER.md`, `TPF_MODULE_*.md`) are not a template — they're a real, filled-in UI/UX reference passport from MedCore's admin panel, and they say so in their own first line (`PROJECT EXAMPLE — dental Business OS, NOT a universal canon`). `roles/SYSTEM_FILES_MASTER.md` already flags them for relocation to `docs/artifacts/reference/tpf/` on a clean project; they're kept in `roles/` here as a concrete, non-hypothetical example of what a filled-out module passport looks like, not as something a new project should inherit by default.
+**One honest exception to "universal canon":** twelve files (`TPF_MASTER.md`, `TPF_MODULE_*.md`) are not a template — they're a real, filled-in UI/UX reference passport from MedCore's admin panel, and each says so in its own header: `**[v6.16] PROJECT EXAMPLE (dental Business OS), NOT a universal canon.**`. `roles/SYSTEM_FILES_MASTER.md` already flags them for relocation to `docs/artifacts/reference/tpf/` on a clean project; they're kept in `roles/` here as a concrete, non-hypothetical example of what a filled-out module passport looks like, not as something a new project should inherit by default.
 
 ---
 
 ## 2. The role graph
 
-`@LEAD` is not a role among equals — it is the only role the user talks to directly in the default flow. Every other role is reached through a **hand-off**, and every hand-off has a fixed shape (the Transmission Protocol, below). This keeps the system a **star topology with one router**, not a free-for-all where 22 personas argue with each other in the same context.
+`@LEAD` is not a role among equals — it is the only role the user talks to directly in the default flow. Every other role is reached through a **hand-off**, and every hand-off has a fixed shape (the Transmission Protocol, below). This keeps the system a **star topology with one router**, not a free-for-all where 22 personas argue with each other in the same context. *(23 `ROLE_*.md` files: 22 specialists plus @LEAD, which is the router rather than one of them.)*
 
 ```mermaid
 flowchart LR
@@ -97,7 +97,7 @@ Every arrow that isn't a dotted "escalation" line is a **hand-off with an artifa
 | Risk-tiered test floor, negative baseline, release gate | `@QA` | — |
 | Advisory 18-pillar security checklist | `@SEC` | `@PENTEST` (blocking authority) |
 | Adversarial threat modeling and red-team — **blocking**, peer to `@QA_VISUAL` | `@PENTEST` | `@LEAD` (risk acceptance, human-owned) |
-| Root cause after 2+ failed fix attempts | `@AUDITOR` | `@LEAD` (routes by hole shape) |
+| Root cause after 3+ failed fix attempts | `@AUDITOR` | `@LEAD` (routes by hole shape) |
 | Profiling, performance | `@PERF` | — |
 | Deploy — **always manual**, chain stops before it | `@OPS` | — |
 | Contracts, licensing, client handover | `@LAWYER` | — |
@@ -105,7 +105,7 @@ Every arrow that isn't a dotted "escalation" line is a **hand-off with an artifa
 
 ---
 
-## 3. The task router — how 129 files stay usable
+## 3. The task router — how 131 files stay usable
 
 Every task begins by being **classified**, not by being read into. `@LEAD` writes `CLASS: TC-xx` in the first line of the reply, and `roles/RAG_CANON.md` §2 answers what that class reads: **at most six files, in a stated order**, with a section pointer where the canon is large, plus an explicit **OUT list** naming what the neighbouring class owns instead.
 
@@ -116,7 +116,7 @@ There are 22 classes, `TC-00` through `TC-21`. The split is by *what kind of wro
 | Surfaces | `TC-01` operational-screen · `TC-02` public-screen · `TC-03` statement-surface · `TC-04` node-graph · `TC-05` visual-concept | the **register** decides the canon — an admin table and a landing page are graded by partly opposite rules (Law 33), and the sharpest OUT lists in the router sit on this boundary |
 | Machinery | `TC-06` backend-slice · `TC-07` async-pipeline · `TC-08` integrity/tenancy · `TC-09` migration · `TC-10` security-surface | a wrong answer is a production incident, not a taste dispute |
 | Decisions | `TC-11` model · `TC-12` architecture · `TC-13` ai-contour · `TC-14` visibility · `TC-17` product-package | expensive to reverse, so they are read into first and modelled before they are structured |
-| Process | `TC-15/16` a QA pass itself · `TC-18` execution-planning · `TC-19` documentation · `TC-20` system-evolution · `TC-21` operations · `TC-00` trivial | including the class for **auditing an audit**, and `TC-00`, which forbids ceremony on a one-line fix |
+| Process | `TC-15/16` the QA gates · `TC-18` execution-planning · `TC-19` documentation · `TC-20` system-evolution · `TC-21` operations · `TC-00` trivial | the process governing itself — and `TC-00`, which forbids ceremony on a one-line fix |
 
 **Three properties keep this a router and not a bureaucracy:**
 
@@ -124,7 +124,7 @@ There are 22 classes, `TC-00` through `TC-21`. The split is by *what kind of wro
 - **Cascade, not override.** Laws → task class → the acting role's own reading map. A role may **add** to its class minimum; it may never **drop** from it. Where both name the same canon, the more specific section pointer wins.
 - **A hard budget.** Six files per class, and a class whose six files run past roughly 100 KB is over budget — trimmed by naming sections, never by silently dropping a canon. A class that needs a seventh file is the signal that the class is wrong or that two canons should be merged.
 
-**Three orderings exist in LEO and they are deliberately different things** — confusing them is itself a recurring finding: the **router** orders *files to read*; **LAW PRECEDENCE** orders *laws in conflict*; **Law 13** orders *values inside one decision* (correctness → completeness → quality → speed). A fourth, `RAG_CANON` §1, orders *sources when two documents describe the project differently* — and the laws are deliberately not on it, because they are the frame every layer below is written inside.
+**Four orderings exist in LEO and they are deliberately different things** — the constitution singles this out as one of the most commonly confused points in the system: the **router** (§2 of `RAG_CANON`) orders *files to read* · **LAW PRECEDENCE** orders *laws in conflict* · **`RAG_CANON` §1** orders *sources when two documents describe the project differently*, and the laws are deliberately not on that ladder, because they are the frame every layer below is written inside · **Law 13** orders *values inside one decision* (correctness → completeness → quality → speed).
 
 ---
 
@@ -135,10 +135,13 @@ The core discipline of LEO is that **a phase transition is never automatic.** Ev
 ```mermaid
 flowchart TD
     T["Task arrives"] --> CLS["@LEAD resolves the class\nCLASS: TC-xx → the ≤6 files to read"]
-    CLS --> G0{"PRE-PLAN GATE\n7 points: market audit,\nkill signal, business routes…"}
+    CLS --> A0{"A0 FITNESS\nshould this exist at all?"}
+    A0 --> LPA["Leverage Point Analysis\n(6 lenses, non-trivial tasks)"]
+    LPA --> NEW{"New product or\nunvalidated direction?"}
+    NEW -->|"no — feature or fix\ninside a live project"| M
+    NEW -->|"yes"| G0{"PRE-PLAN GATE\n7 points: market audit,\nkill signal, business routes…"}
     G0 -->|missing| STOP1["STOP — return to\n@CREATOR / @BIZ"]
-    G0 -->|OK| LPA["Leverage Point Analysis\n(6 lenses, non-trivial tasks)"]
-    LPA --> M{"New module?\nTouches state/money/authority?"}
+    G0 -->|OK| M{"New module?\nTouches state/money/authority?"}
     M -->|yes| MODEL["@PRINCIPLE MODE:MODEL\n— BEFORE architecture, not after"]
     M -->|no| FOUND
     MODEL --> FOUND
@@ -184,12 +187,12 @@ The single most important idea in LEO, and the direct answer to context drift: *
 | Layer | Location | What it holds | Who writes it | Who reads it next |
 |---|---|---|---|---|
 | **P — Process norm** | `roles/*.md` | The rules themselves — how any role should behave | The human (via `@EVOLVE`, never the agent alone) | Every role, on demand |
-| **S — Product state** | `docs/product_state/` | Passports generated *from the actual code* — facts, not plans | `@SCRIBE`, generated rollups | Any role needing ground truth; wins on conflict with W |
+| **S — Product state** | `docs/product_state/` | Passports generated *from the actual code* — facts, not plans | `@SCRIBE`, generated rollups | Any role needing ground truth. **W outranks S on conflict** — the current wave's contracts beat a state summary that may lag them; code and tests outrank both (`RAG_CANON` §1) |
 | **W — Working artifacts** | `docs/artifacts/`, `docs/decisions/` | Architecture spine, `DEV_PROMPTS_*`, `QA_REPORT_*`, ADRs, `PRINCIPLE_FINDINGS_*` | `@ARCH`, `@DEV`, `@QA_ARCH`, `@PRINCIPLE`, … | The next role in the chain, and the next session of the same role |
 
 Concretely: if `@ARCH` decides "tenancy is Organization → Clinic, enforced by `clinic_id` + `organization_id`, not by RLS alone," that decision is not a sentence in chat that the next context window has to re-derive or re-guess. It is a line in `SAAS_ARCHITECTURE_SPINE_2026.md`. Three weeks and forty conversations later, a fresh agent session with zero chat history reads that file and inherits the decision exactly, instead of silently re-deciding it — possibly differently — because nobody told it not to.
 
-This is why a code-first / spine-first mismatch is treated as a hard signal: `roles/ENGINEERING_PLAN.md` §5 states plainly that when the markdown and the code disagree, **the code wins**, and the artifact gets updated — never the other way around. Artifacts describe reality; they don't get to override it.
+This is why a code-first / spine-first mismatch is treated as a hard signal: `roles/RAG_CANON.md` §1 puts **code and tests at the top of the source ladder** — when the markdown and the code disagree, the code wins and the artifact gets updated, never the other way around (`roles/ENGINEERING_PLAN.md` §5 says where that update is written). Artifacts describe reality; they don't get to override it.
 
 ---
 
@@ -264,7 +267,7 @@ Two "registers" get explicitly different rulebooks, because applying the wrong o
 - **`instrument`** (admin panels, dashboards, tools) → `VISUAL_CRAFT_CANON.md` + `INTERFACE_CRAFT_CANON.md`: restraint *is* the craft — one separation method per surface, one light source, chrome that whispers.
 - **`statement`** (landing pages, hero sections, campaigns) → `EDITORIAL_CRAFT_CANON.md`: **partly opposite laws** — scale as a weapon, deliberate asymmetry, one gesture committed to completely. *"Applying instrument-restraint to a showcase is exactly how a landing becomes a settings screen with a big button on it."*
 
-Both registers have a numbered detector (`X1–X12` cheapness, `ST1–ST12` stiffness, `Y1–Y12` timidity) that `@QA_VISUAL` and `@DESIGN` run against a render — not against a description of the render.
+The registers carry numbered detectors — three of them, one of which is register-independent (`X1–X12` cheapness, `ST1–ST12` stiffness, `Y1–Y12` timidity) that `@QA_VISUAL` and `@DESIGN` run against a render — not against a description of the render.
 
 ---
 
@@ -303,7 +306,7 @@ Everything in section 4 is a gate the *same session* passes. That session is str
 
 A batch map showing only production steps is an **incomplete batch map**. Law 43 explicitly does not count a planned second pass against the declared effort tier: an audit costing several times its unit is the correct price of that unit, not an overrun of it.
 
-**False greens are catalogued, not lamented.** `FG-1`…`FG-12` name the specific shapes a pass takes when it reports 🟢 on something it did not check, with a per-project tally in `docs/artifacts/FALSE_GREEN_REGISTER.md` — the point being that a recurring `FG` number is a fact about the process, not about one report. `TC-15/16` is the class for auditing an audit: spot-check two or three of a report's own claims against the code, because **a green that does not survive re-reading was never green.**
+**False greens are catalogued, not lamented.** `FG-1`…`FG-12` name the specific shapes a pass takes when it reports 🟢 on something it did not check, with a per-project tally in `docs/artifacts/FALSE_GREEN_REGISTER.md` — the point being that a recurring `FG` number is a fact about the process, not about one report. The second pass over a QA report is an audit of the auditor: spot-check two or three of the report's own claims against the code, because **a green that does not survive re-reading was never green.**
 
 This document's own rule set was rectified this way. A clean-context pass across five waves of changes to LEO found a gate carrying two different numeric thresholds for one countable rule, a source-priority ladder readable as "a project artifact outranks a law", a quality gate applying one visual register's checklist to both registers, and a protocol that had authored the rule *"a canon the router does not know does not exist"* while being itself unregistered. None of those are visible from inside the session that wrote them — not because the session was careless, but because it was the author.
 
@@ -339,7 +342,7 @@ The protocol carries an explicit scope guard, and it matters more than the tests
 
 ---
 
-## 15. What "22 roles, 44 laws, 129 files" actually buys you
+## 15. What "22 roles, 44 laws, 131 files" actually buys you
 
 None of this is complexity for its own sake. Each mechanism above maps to a specific, named failure mode of unconstrained agentic coding:
 
@@ -351,7 +354,7 @@ None of this is complexity for its own sake. Each mechanism above maps to a spec
 | Skips the boring 20% under time pressure | 44 Laws that make skipping *expensive* (a named 🔴, not a style nit) |
 | No adversary, no second opinion | `@PENTEST` blocking gate, `@QA_ARCH` audit, `@QA_VISUAL` render checks — separate passes, separate jurisdictions |
 | The session that built it is the one grading it | `SECOND_PASS_PROTOCOL.md` — a clean context that never saw the build, with a catalogued list of false greens |
-| Doesn't know which of 129 files this task needs | `RAG_CANON.md` §2 — 22 task classes, each naming ≤6 files in reading order |
+| Doesn't know which of 131 files this task needs | `RAG_CANON.md` §2 — 22 task classes, each naming ≤6 files in reading order |
 | Drifts from a small fix into a reconstruction nobody asked for | Law 43 — the effort tier declared up front in decisions reopened, with a countable stop threshold |
 | An audit "fixes" a rule and quietly destroys it | `RULE_INTEGRITY_PROTOCOL.md` — seven tests run on the *finding*, not only on the rule |
 | Race conditions and double-writes | `DATA_INTEGRITY_CANON.md` — protection at the schema/lock level, not an `if` |
@@ -361,4 +364,4 @@ None of this is complexity for its own sake. Each mechanism above maps to a spec
 
 ---
 
-See also: [`README.md`](./README.md) for the overview, [`CASE_STUDIES.md`](./CASE_STUDIES.md) for where this ran in production, and [`MANIFESTO.md`](./MANIFESTO.md) for the long-form argument.
+See also: [`README.md`](./README.md) for the overview, [`CASE_STUDIES.md`](./CASE_STUDIES.md) for where this ran in production, [`BUSINESS_CASE.md`](./BUSINESS_CASE.md) for the same material as risk, cost and elapsed time, and [`MANIFESTO.md`](./MANIFESTO.md) for the long-form argument.

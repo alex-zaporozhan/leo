@@ -1,6 +1,6 @@
 # Case Studies — proof at scale
 
-LEO's 41 Laws are not theoretical. Most of them exist because of a specific defect in one of the three systems below. This page describes what each system is, what it's built from, and — where disclosable — what a LEO gate actually caught before it reached production.
+LEO's 44 Laws are not theoretical. Most of them exist because of a specific defect in one of the three systems below. This page describes what each system is, what it's built from, and — where disclosable — what a LEO gate actually caught before it reached production.
 
 One note on scope: all three repositories were built with a coding agent operating under the LEO rule system as the sole author of the code (`@DEV` is the only role permitted to write code; every other role writes documents and prompts). The author directed the process; the agent executed it.
 
@@ -46,9 +46,10 @@ The platform is a modular SaaS for building and running AI-driven training/conte
 | **Backend** | Python 3.11+, FastAPI, SQLAlchemy 2 (async), asyncpg, Alembic, PostgreSQL + **pgvector** |
 | **AI orchestration** | **LangGraph** — executable, stateful agent graphs with PostgreSQL-backed checkpointing |
 | **Jobs / cache** | Celery, **Valkey** (BSD-3 — chosen over Redis for the same license reason as Law 27), Prometheus metrics |
-| **Frontend** | React 18 + TypeScript, a node-graph pipeline builder (XYFlow-class canvas UI), TanStack Query |
+| **Frontend** | React 18 + TypeScript, Mantine 7, two separate SPA entry points, a node-graph pipeline builder (XYFlow canvas UI), TanStack Query with virtualization |
 | **CI/CD** | A gated pipeline (test → build → deploy) with a license-purity scan on dependencies and images, plus an optional nightly job that exercises the multi-worker queue path against a real broker rather than mocks |
-| **Test surface** | On the order of **~300 backend test modules** and **~2,900 collected pytest cases**, including a dedicated adversarial/security subset, plus around **~75 frontend test files** |
+| **Scale on record** | 273 HTTP endpoints across 30 router modules · 48 Celery task types · 124 Alembic migrations · 61 numbered architectural decisions |
+| **Test surface** | **366 backend test modules · 3,888 test functions** across ~149k lines of test code, against ~129k lines of application code — including a dedicated adversarial/security subset — plus **115 frontend test files**. *(Static count, September 2026. The earlier figures on this page — ~300 modules / ~2,900 cases / ~75 frontend files — were the state at the time of the engagement write-up; the system kept growing.)* |
 | **Access control** | A small, explicit role/permission model (single-digit role count, roughly a dozen permission codes) — org / user / content / billing-scoped, plus one permission reserved for the platform operator's cross-tenant visibility, kept separate from any single tenant's admin rights |
 
 **Why this system stressed LEO's canons the hardest:**
@@ -87,6 +88,6 @@ A public-facing site and content-management platform for a licensed continuing-e
 
 ## What these three systems have in common
 
-They are three different *shapes* of software — a transactional multi-tenant SaaS, an AI/agent platform, and a content-and-SEO-driven public site — and LEO ran the same 22-role, 41-law process across all three without being rewritten per project. The **stack-specific canons** (`STACK_SELECTION.md`, `DATA_STORE_SELECTION.md`, the admin/design templates) changed per project's needs; the **process canons** (gates, laws, artifact contracts, the security and data-integrity disciplines) did not.
+They are three different *shapes* of software — a transactional multi-tenant SaaS, an AI/agent platform, and a content-and-SEO-driven public site — and LEO ran the same 22-role, 44-law process across all three without being rewritten per project. The **stack-specific canons** (`STACK_SELECTION.md`, `DATA_STORE_SELECTION.md`, the admin/design templates) changed per project's needs; the **process canons** (gates, laws, artifact contracts, the security and data-integrity disciplines) did not.
 
 That is the actual claim this repository is making: not "an AI wrote some code," but "a written engineering process, enforced by a rule system instead of a human reviewer's memory, produced systems that survived multi-tenancy, concurrency, AI-agent nondeterminism, and public-facing SEO/compliance scrutiny — repeatably, across genuinely different domains."
