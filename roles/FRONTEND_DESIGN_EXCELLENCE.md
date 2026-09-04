@@ -26,10 +26,10 @@
 
 Never mix them. This is the main cause of "stuffiness": a marketing philosophy on operational screens looks theatrical; an operational one on marketing looks dull.
 
-| Contour | Zone | Philosophy | References |
+| Contour | Zone | Philosophy | The standard to reach |
 |---------|------|-----------|-----------|
-| **Operational** | `/admin/*`, `/app/*` | Desktop App. Density + clarity. The user works here for hours. | Linear, Stripe Dashboard, Vercel Analytics, Google Calendar |
-| **Public site** | `/`, landings, promo | Marketing Page. Focus + emotion. The user decides "do I trust this". | Vercel home, Linear home, Stripe.com, Loom |
+| **Operational** | `/admin/*`, `/app/*` | Desktop App. Density + clarity. The user works here for hours. | The project's own instrument world (`VISUAL_CRAFT_CANON`; THE FLOOR §11 if none). Study any dense professional tool for the *shape of the problem* — never to copy its face |
+| **Public site** | `/`, landings, promo | Marketing Page. Focus + emotion. The user decides "do I trust this". | The project's own world (`VISUAL_CONCEPT_[PROJECT].md`) — Tier 0. A public site built to another product's face fails Law 28 |
 
 **Transfer rule:** glass cards, gradient heroes, reveal animations — **public site only**. On operational screens they create visual noise and slow down work.
 
@@ -259,7 +259,7 @@ import { IconCalendar, IconUser, IconCash } from '@tabler/icons-react'
 </Card>
 ```
 
-### 3.3. Metric widget (Stripe/Vercel pattern)
+### 3.3. Metric widget
 
 ```tsx
 <Paper withBorder radius="md" p="lg">
@@ -458,7 +458,8 @@ export function useReveal() {
 
 ```css
 /* DEPRECATED PATTERN — do not use in the document flow (violates LAYOUT_INVARIANTS §11).
-   Current canon: prism-reveal--fade (opacity-only) + motion-islands for transform. */
+   Current canon: the motion floor's entrance — opacity + translateY 8px + stagger
+   (MOTION_CRAFT_CANON §1). Islands are for motion needing its own scroll/overflow context. */
 .reveal-legacy-do-not-use {
   opacity: 0;
   transition: opacity 500ms ease;
@@ -474,22 +475,22 @@ export function useReveal() {
 
 ## §5. VISUAL LITERACY — REFERENCES FOR EACH SCREEN TYPE
 
-> **[v6.20]** The table below covers OPERATIONAL screen types. The reference for the PUBLIC SITE is the project world: `docs/artifacts/VISUAL_CONCEPT_*` + world recipe `roles/CONCEPT_DNA_LIBRARY.md` (Tier 0 in `roles/ROLE_DESIGN.md`). A public-site screen whose "reference = Linear" violates Law 28.
+> **[v6.20]** The table below covers OPERATIONAL screen types. The world for the PUBLIC SITE is the project world: `docs/artifacts/VISUAL_CONCEPT_*` + world recipe `roles/CONCEPT_DNA_LIBRARY.md` (Tier 0 in `roles/ROLE_DESIGN.md`). A public-site screen whose "reference = Linear" violates Law 28.
 
-Before any new screen — name the reference. @DEV must understand **the level**.
+Before any new screen — name **the standard it must reach**. @DEV must understand the level. The standard is a description of the finished behaviour, not a product to copy: the visual form comes from the project's own world (Tier 0).
 
-| Screen type | Reference | What we take |
-|------------|---------|------------|
-| Dashboard with metrics | Stripe Dashboard / Vercel Analytics | White cards, trend arrows, sparkline |
-| Record table | Linear Issues | Dense rows, hover, status tags on the left |
-| Kanban | Linear / Bitrix24 | Fixed columns 280-320px, ghost on DnD |
-| Schedule grid | Google Calendar | Status colours, drag-ghost, click → Popover |
-| Chat / Inbox | Intercom | 3 columns, bubbles, quick replies, inspector |
-| Form in Drawer | Notion / Linear | Clean fields, labels on top, validation inline |
-| Entity card | Stripe Customer / Linear Issue | Tabs, summary header, linked tables |
-| PWA home | Apple Wallet / Revolut | Ticket with gradient, bottom nav, safe-area |
-| Marketing hero | Linear.app / Vercel.com | 7/5 grid, mockup on the right, one H1 |
-| Landing sections | Stripe.com | Unified background, cards with border, no "zebra" |
+| Screen type | The standard it must reach |
+|------------|------------|
+| Dashboard with metrics | Cards carrying a value, a trend direction and a sparkline; nothing decorative competing with the number |
+| Record table | Dense rows, a hover affordance that shifts no geometry, status carried on the leading edge |
+| Kanban | Fixed column width 280–320px, a ghost during drag, column totals visible |
+| Schedule grid | Status by colour, a drag-ghost, click opens a popover rather than a page |
+| Chat / Inbox | Three columns — list, thread, inspector — with quick replies |
+| Form in Drawer | Labels above fields, validation inline, the record behind stays visible |
+| Entity card | A summary header with the key metric, tabs, linked tables below |
+| PWA home | A ticket-like primary object, bottom navigation, safe-area respected |
+| Marketing hero | One H1, one primary action, the product visible — the archetype chosen from `HERO_ARCHETYPES`, never a default split |
+| Landing sections | One unified background, bordered cards, no alternating "zebra" bands |
 
 ---
 
@@ -513,12 +514,12 @@ OPERATIONAL CONTOUR (admin/app):
 □ Skeleton mirrors content shape (not an abstract rectangle)
 □ ActionMenu (three dots) in every table row
 □ Drawer for forms, Modal only for confirm
-□ Reference product named (Linear/Stripe/etc.)
+□ The project's own world is named and cited (`VISUAL_CONCEPT_[PROJECT].md` — Tier 0). An outside product is never the acceptance base
 
 PUBLIC SITE (marketing):
 □ Single page background — no "zebra"
 □ Glass only here, not on operational screens
-□ Reveal in flow: **opacity-only** (`prism-reveal--fade`) — canon `LAYOUT_INVARIANTS` §11; transform only inside motion island
+□ Reveal in flow: the motion floor's entrance — opacity + `translateY` + stagger (`MOTION_CRAFT_CANON` §1); canon `LAYOUT_INVARIANTS` §10–§11. An island is for motion needing its own scroll/overflow context
 □ Carousel/autoplay: motion island + fixed height + autoplay only in-viewport
 □ Component Map in DESIGN_SPEC — `COMPONENT_REGISTRY.md` §5
 □ One H1 per page
@@ -540,7 +541,7 @@ Before the first screen @FRONTEND creates `docs/artifacts/DESIGN_TOKENS_[PROJECT
 
 ## Identity
 Feeling: [one word — e.g. "Professional", "Warm", "Bold"]
-Reference: [specific product — Linear/Stripe/Notion/Revolut]
+World: [the project's own concept — `VISUAL_CONCEPT_[PROJECT].md`, or THE FLOOR if none exists yet]
 
 ## Palette
 Primary: [hex] — accent, CTA

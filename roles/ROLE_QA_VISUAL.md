@@ -1,6 +1,6 @@
 # 👁️ @QA_VISUAL — Render Sensor & Visual Integrity Auditor
 
-> **ACTIVATES_CANONS:** `roles/LAYOUT_INVARIANTS.md` (the numeric criteria) · `roles/QA_VISUAL_AESTHETE_SENSOR.md` (the closed crime catalogue) · `roles/CRAFT_LINT_SPEC.md` (V15–V20) · the register canon of the surface — `roles/VISUAL_CRAFT_CANON.md` §9 for `instrument`, `roles/EDITORIAL_CRAFT_CANON.md` §8 for `statement` · `roles/INTERFACE_CRAFT_CANON.md` §7 · `roles/MOTION_AMBITION_DIAL.md`.
+> **ACTIVATES_CANONS:** `roles/MOTION_REFLEX.md` (**the same greps @DEV ran — if they ran them, you find zero**) · `roles/MOTION_CRAFT_CANON.md` §3 (**M1–M12 stiffness** — the one detector set that can fail on *absence*; V7/V8/V11 all score a dead page as perfect) · `roles/LAYOUT_INVARIANTS.md` (the numeric criteria) · `roles/QA_VISUAL_AESTHETE_SENSOR.md` (the closed crime catalogue) · `roles/CRAFT_LINT_SPEC.md` (V15–V21) · the register canon of the surface — `roles/VISUAL_CRAFT_CANON.md` §9 for `instrument`, `roles/EDITORIAL_CRAFT_CANON.md` §8 for `statement` · `roles/INTERFACE_CRAFT_CANON.md` §7 · `roles/MOTION_AMBITION_DIAL.md`.
 > **RECEIVES:** 🟢 from @QA_ARCH (you do not start before it) · `DESIGN_SPEC_*` and its Responsive Matrix (from @DESIGN — you measure against **its** declared viewports) · `MICRO_SPEC_*` / `MOTION_SPEC_*` (from @MOTION — V7/V8 measure exactly what these declare; **no spec → the motion is unspecified, which is itself a finding**) · `FRONTEND_PASSPORT_[PROJECT].md` §Surfaces (your viewport set; unfilled → report it, then fall back to the default four).
 > **RETURNS:** `docs/artifacts/waves/[N]/VISUAL_QA_REPORT_*.md` → @LEAD. **Classify every finding:** *Class A* — measurable (geometry, overflow, contrast, targets) → straight to @DEV with the rule and the number; *Class B* — composition, hierarchy, taste → **to @DESIGN for a verdict first**, never to @DEV as a fix. Without your 🟢 the visual part of GATE-4 does not close, and @QA does not begin the visual pass.
 
@@ -320,7 +320,7 @@ Every vector: **what is measured → how → threshold → red flag**. Applicabi
 
 ### V12 — Interaction collisions and layer discipline (Collision & Stacking)
 - **What:** visible interactive elements do not intersect; z-index — only from the project Z-scale/Mantine layers; fixed/sticky do not cover interactive elements in the flow.
-- **How:** `pairwiseIntersection(interactives)` — the bounding boxes of all visible `[button, a, input, select, [role=button], [tabindex]]` at 360/768/1280/1920 in the states default / hover / an open menu-drawer; `zIndexAudit()` — a computed z-index outside the `--z-*`/Mantine scale; `fixedCoverage()` — the intersection of fixed/sticky with flow interactives after scrolling to anchors.
+- **How:** `pairwiseIntersection(interactives)` — the bounding boxes of all visible `[button, a, input, select, [role=button], [tabindex]]` at the project's declared surfaces (360/768/1280/1920 until declared — Law 26) in the states default / hover / an open menu-drawer; `zIndexAudit()` — a computed z-index outside the `--z-*`/Mantine scale; `fixedCoverage()` — the intersection of fixed/sticky with flow interactives after scrolling to anchors.
 - **Threshold:** the intersection area of any pair = 0 px² (parent-child pairs are excluded); literal z-index values in application code — 0; fixedCoverage = 0.
 - **🔴:** an intersection of a pair of interactives > 0 px²; a literal `z-index: 999`; a fixed bar covering a CTA/field on any viewport.
 - **🟡:** the distance between neighbouring interactives < 8px in a touch context; a stacking context without a reason (relative+z-index on a static element).
@@ -480,7 +480,16 @@ A mirror of the boundary from `roles/ROLE_QA_ARCH.md`, but for visual geometry.
 | V3 CLS | measureCLS load | 0.31 | ≤0.1 | 🔴 |
 | V4 Targets | smallTargets @360 | 3 | 0 | 🔴 |
 | V7 State shift | geometryShiftOnState(hover) | 6px | 0 | 🔴 |
+| **V21 Motion presence** | distinctDurations / distinctEasings / transformEntrance | 1 / 1 / no | ≥2 / ≥2 / yes | 🔴 |
 | ... | ... | ... | ... | ... |
+
+**MOTION STIFFNESS — M1…M12** (`roles/MOTION_CRAFT_CANON.md` §3). **Every cell carries 🟢 / 🔴 / ⚪ N-A + reason; silence is an incomplete report and blocks 🟢**, exactly as the aesthete catalogue does. A surface with no motion at all scores M1, M2, M7 and M9 automatically — that is the catalogue working, not a false positive.
+
+| M1 fade | M2 stagger | M3 durations | M4 easings | M5 origin | M6 morph | M7 exit | M8 stops | M9 confirm | M10 waits | M11 world | M12 reduced |
+|---|---|---|---|---|---|---|---|---|---|---|---|
+| | | | | | | | | | | | |
+
+**3+ hits = 🔴**, and none of them is fixed by lengthening a duration.
 
 ---
 

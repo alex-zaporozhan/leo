@@ -220,27 +220,42 @@ Contract: if truncated — must provide the full text on hover (`title={fullText
 
 ---
 
-## §10. NO-LAYOUT-ANIMATION — no layout properties; transform only in island (§11)
+## §10. NO-LAYOUT-ANIMATION — never animate a layout property; `transform` is free in the flow (§11)
 
 **Rule (synchronised with `MOTION_LIBRARY §VII` and `ROLE_FRONTEND` Pillar 9):** transitions do **not animate** `top/left/right/bottom/width/height/margin/padding` — reflow on every frame.
 
 **Two contours:**
 
+**What this invariant protects, stated once so it is never over-read: the reader's scroll position and the absence of reflow.** It is not a ban on movement. A `transform` does not participate in layout — an element that translates, scales or rotates keeps the exact box it had, its neighbours do not move, and `scrollY` does not change. That is why `transform` is permitted where `top`/`margin`/`height` are not, and it is the reason the two are never interchangeable.
+
 | Contour | Permitted | Forbidden |
 |---------|-----------|-----------|
-| **Document flow** (sections, RevealSection) | **opacity only** — §11 | `translateY` / `scale` on sections |
-| **Motion island** (carousel, dots, strip) | `transform` + `opacity` | layout properties; influence on document `scrollY` |
+| **Document flow** (sections, cards, headings, list items) | `transform` (translate · scale · rotate) + `opacity` + `filter`, **inside the element's own reserved box** | animating `top/left/right/bottom/width/height/margin/padding`; any change to `scrollY`; any change to a neighbour's geometry; a start offset large enough to overflow the section — the allowance is **8px, or 10% of the element's own height, whichever is larger**; beyond that, guard the container with `overflow`/`clip-path` (`MOTION_CRAFT_CANON` §1) |
+| **Motion island** (carousel, strip, pinned scrub, canvas) | the above **plus** its own scroll/overflow context | layout properties; influence on document `scrollY` |
 
-**Why it breaks without it:** `translateY` reveal shifts content and scroll; `width` animation jitters neighbours.
+**The island is required only when the motion needs its own scroll or overflow context** — a carousel, a horizontal strip, a pinned scrub, a canvas. **A staggered entrance, a word reveal, a card lift, a scale-in, a parallax inside a reserved box need no island**, because none of them touch layout or scroll. Requiring one for those is the misreading this paragraph exists to stop, and it is what produced years of opacity-only fades.
+
+**Why it breaks without it:** animating `width` jitters neighbours on every frame; a reveal whose start offset is taller than its reserved space overflows the section; `scrollIntoView` on a slide change steals the reader's place.
 
 **Reference code:**
 ```css
-/* ✅ flow */ .prism-reveal--fade { transition: opacity 0.35s ease; }
+/* ✅ flow — the motion floor's entrance (MOTION_CRAFT_CANON §1) */
+.reveal { opacity: 0; transform: translateY(8px);
+          transition: opacity var(--motion-base) var(--ease-enter),
+                      transform var(--motion-base) var(--ease-enter); }
+.reveal.is-in { opacity: 1; transform: none; }
+.reveal:nth-child(n) { transition-delay: calc(var(--stagger-base) * var(--i)); }   /* G2 */
 /* ✅ island */ .dot.is-active { transform: scaleX(3); }
-/* ❌ flow */ .bad-reveal { transform: translateY(20px); }
-/* ❌ */ .bad { transition: left 200ms, width 200ms; }
+/* ❌ layout properties — reflow on every frame, forbidden everywhere */
+.bad { transition: left 200ms, width 200ms, height 200ms, margin 200ms; }
+/* ❌ an entrance whose start offset overflows its own section */
+.bad-reveal { transform: translateY(200px); }
 @media (prefers-reduced-motion: reduce) {
-  *, *::before, *::after { animation-duration: .001ms !important; transition-duration: .001ms !important; }
+  /* Do NOT clamp to .001ms — that is MOTION_CRAFT_CANON M12 ("reduced-motion kills the interface"):
+     the UI stops answering at all. Drop the travel, keep the answer. */
+  *, *::before, *::after { transition-duration: var(--motion-quick) !important;
+                           animation-duration: var(--motion-quick) !important; }
+  .reveal, .reveal.is-in { transform: none !important; }
 }
 ```
 
@@ -252,13 +267,13 @@ Contract: if truncated — must provide the full text on hover (`title={fullText
 
 **Rule:** any animation, autoplay, carousel, horizontal strip, or reveal does **not change** the document's `scrollY`, does not "pull" the viewport to a block, and does not change the height/width of flow neighbours. Animation lives in a **motion island** — an isolated zone with fixed geometry.
 
-**Why it breaks without it:** global `scroll-behavior: smooth` + focus-on-click on carousel buttons → browser scrolls to hero; `scrollIntoView` on slide change; `translateY` in reveal shifts content below; `100vw` causes horizontal overflow; `scroll-snap` on desktop without overflow jitters the anchor; autoplay outside the viewport changes the DOM while the user reads the bottom of the page.
+**Why it breaks without it:** global `scroll-behavior: smooth` + focus-on-click on carousel buttons → browser scrolls to hero; `scrollIntoView` on slide change; an entrance offset larger than the element's reserved space overflows the section below; `100vw` causes horizontal overflow; `scroll-snap` on desktop without overflow jitters the anchor; autoplay outside the viewport changes the DOM while the user reads the bottom of the page.
 
 **Architecture (three layers):**
 
 | Layer | Where | What is permitted |
 |-------|-------|----------------|
-| **Document** | page sections in the flow | **opacity only** for reveal (`prism-reveal--fade`). No `translateY`/`scale` in the flow. |
+| **Document** | page sections in the flow | `transform` + `opacity` within the element's own reserved box — staggered entrances, word and line reveals, scale-ins, card lifts. Never layout properties, never a change to `scrollY`, never an offset that overflows the section. |
 | **Motion Island** | carousel, tab strip, interactive hero | `transform`/`opacity` inside a container with `overflow: anchor none`, `contain: layout style`, fixed `height` |
 | **Horizontal scroll** | card strip | `overscroll-behavior-x: contain`; `scroll-snap` **mobile only**; `scrollTo` **only if** `scrollWidth > clientWidth` |
 
@@ -374,7 +389,7 @@ Any number > 0 = 🔴 with pair selectors and intersection area in px².
 □ §8  Variable text — truncate/line-clamp + title; min-width:0 on flex descendant; break for long strings
 □ §9  Spacing via gap/tokens, symmetric padding
 □ §10 Animations only transform/opacity; prefers-reduced-motion respected
-□ §11 Motion islands: fixed carousel geometry; reveal in flow — opacity-only; no scrollIntoView/autoplay outside viewport; focus-scroll blocked on controls
+□ §11 Motion islands: fixed carousel geometry; reveal in flow — `transform`+`opacity` inside the element's own reserved box — layout properties never, `scrollY` never (§10–§11); no scrollIntoView/autoplay outside viewport; focus-scroll blocked on controls
 □ §12.1 No literal z-index in task — only --z-* / Mantine layers
 □ §12.2 Every absolute — inside an anchor with reserve; fixed bars compensated with layout padding + safe-area
 □ §12.3 Action groups = flex + gap + wrap; no margin collision, no negative margin on interactive elements

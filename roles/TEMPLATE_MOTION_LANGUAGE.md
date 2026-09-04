@@ -37,16 +37,24 @@ Everything else is static.
 ## 2. Tokens
 
 ```typescript
+// The four-step scale and the easing set come from MOTION_CRAFT_CANON §1 (THE MOTION FLOOR).
+// Override the VALUES from the project's world (CONCEPT_DNA_LIBRARY) if it declares one — never the
+// number of steps, and never the roles. A fifth duration means the moment was mis-classified.
 export const motion = {
-  durationInstant: 80,
-  durationFast: 120,
-  durationNormal: 180,
-  durationSoft: 240,
-  durationSlow: 320,
+  motionInstant: 100,   // state feedback the finger must feel — press, toggle
+  motionQuick:   180,   // hover, focus ring, tooltip, icon state
+  motionBase:    280,   // THE DEFAULT — enter, exit, expand, tab change, drawer
+  motionSlow:    480,   // a large surface moving — modal, page transition, hero
 
-  easing: 'cubic-bezier(0.2, 0, 0, 1)',
-  easingSoft: 'cubic-bezier(0.16, 1, 0.3, 1)',
-  easingLinear: 'linear',
+  easeEnter:  'cubic-bezier(0.0, 0.0, 0.2, 1)',   // arriving — THE DEFAULT
+  easeExit:   'cubic-bezier(0.4, 0.0, 1, 1)',     // leaving
+  easeMove:   'cubic-bezier(0.4, 0.0, 0.2, 1)',   // travelling between two on-screen positions
+  easeSpring: 'cubic-bezier(0.34, 1.56, 0.64, 1)',// ONE confirming moment per screen
+
+  staggerTight: 30,     // dense rows, table lines, chips
+  staggerBase:  60,     // cards, list items, form fields — THE DEFAULT
+  staggerLoose: 90,     // large blocks, sections, hero lines
+  // Cap total stagger at 400ms: stagger the first 8, the rest arrive together.
 
   statusChange: 180,
   statusBloom: 240,
@@ -64,13 +72,13 @@ export const motion = {
 
 ## 3. Status Motion
 
-| ID | Moment | Motion | Duration | Reduced motion |
-|----|--------|--------|----------|----------------|
-| SD-01 | status appears | opacity + tiny translate | 120ms | instant |
-| SD-02 | category changes | dot scale + label crossfade | 180ms | switch only |
-| SD-03 | active progress | soft breath | 1800–2400ms loop | static |
-| SD-04 | running icon | slow spin | 1400ms+ | static |
-| SD-05 | waiting enters | one soft bloom | 240ms | static |
+| ID | Moment | Motion | Duration · easing | Origin · order · offset (`MOTION_CRAFT_CANON` §2) | Reduced motion |
+|----|--------|--------|----------|----------------|----------------|
+| SD-01 | status appears | opacity + `translateY 8px` | `--motion-quick` · `--ease-enter` | from the badge's own edge; single element | instant |
+| SD-02 | category changes | dot scale + label crossfade | `--motion-quick` · `--ease-move` | the dot itself; single element · CHANGE | switch only |
+| SD-03 | active progress | soft breath | 1800–2400ms loop · `--ease-move` | in place; a loop, not a transition | static |
+| SD-04 | running icon | slow spin | 1400ms+ · linear (the one place linear is correct) | in place; a loop | static |
+| SD-05 | waiting enters | one soft bloom | `--motion-base` · `--ease-enter` | from the badge · ARRIVE | static |
 | SD-06 | loader to check | crossfade + tiny scale | 180ms | final icon |
 | SD-07 | error appears | opacity/color only | 120ms | static |
 
@@ -85,16 +93,23 @@ Rules:
 
 ## 4. General Patterns
 
-| ID | Where | Motion |
-|----|-------|--------|
-| M1 | Buttons | hover color/opacity; optional press translate 1px |
-| M2 | Navigation | active surface/color change |
-| M3 | Modal | fade + tiny scale |
-| M4 | Toast | small slide/fade |
-| M5 | Drawer | fade + tiny translate/scale |
-| M6 | Card hover | color/shadow only |
-| M7 | Page load | skeleton to content crossfade |
-| M8 | KPI | one-shot count-up if useful |
+> **IDs are `PM-xx`, not `Mx`.** `M1–M12` is taken system-wide by the stiffness catalogue
+> (`MOTION_CRAFT_CANON` §3) and a bare `M5` would mean two different things in two files a role reads
+> together (`.cursorrules` — detector codes are always qualified).
+> **Each row names its origin and its verb** (`MOTION_CRAFT_CANON` §2 G4/G5), because a row that names
+> only a property is exactly the endpoint-only spec this column exists to prevent.
+
+| ID | Where | Motion | Origin · verb |
+|----|-------|--------|---------------|
+| PM-01 | Buttons | hover colour/opacity; press `scale(0.98)` `--motion-instant` | from the point touched · CONFIRM-lite |
+| PM-02 | Navigation | active surface/colour change, indicator slides between items | travels along the rail · CHANGE |
+| PM-03 | Modal | fade + `scale(0.96→1)`, scrim first, then panel, then content | grows from screen centre · ARRIVE, staggered `--stagger-base` |
+| PM-04 | Toast | slide + fade from the edge it docks to | its own edge · ARRIVE, exit at ~70% |
+| PM-05 | Drawer | slide from the edge it lives on + fade | that edge, never the centre · ARRIVE |
+| PM-06 | Card hover | colour/shadow, optional `translateY(-2px)` lift | in place · no verb (a state, not a transition) |
+| PM-07 | Page load | skeleton shaped like the arriving layout → content crossfade, staggered | reading order · ARRIVE |
+| PM-08 | KPI | one-shot count-up where the number is the point | in place · CONFIRM |
+| PM-09 | Row removed | collapses into the gap it leaves, neighbours close after | the gap itself · LEAVE |
 
 ---
 

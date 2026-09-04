@@ -24,7 +24,7 @@
     (palette/typography/effect kit/motion personality — as ready recipes, not slots).
   - Palettes and font pairs are not generated from scratch — taken from the world; any replacement = one line with a reason.
   - TASTE GATE (cliché blacklist K1–K10 + "remove the logo" test) — blocker for passing the concept forward.
-  - "Grey SaaS" (Linear/Stripe minimalism) — not the default world for a showcase; it is the operational contour.
+  - **Grey SaaS** (the category's converged low-chroma minimalism) — not the default world for a showcase; it is the operational contour.
   - Changing the concept on a live project — only @DESIGN mode RESKIN (skeleton stays, skin is replaced entirely).
   - Showcase lives in the world entirely; /admin,/app inherit palette/font/radii, effect kit is not transferred.
 ```
@@ -158,7 +158,7 @@ inbox/kanban mechanics) — and only after compatibility check with the world. T
 | World | Compositional references |
 |-------|--------------------------|
 | Gloss / luxury / museum | print gloss (spreads), fashion and watch brand storefronts, auction catalogues, Apple product pages (photo direction) |
-| Paper / document | official letterheads, book typesetting, Stripe Press (print site), iA Writer |
+| Paper / document | official letterheads, book typesetting, print-like editorial sites, distraction-free Writer |
 | Poster / pop | posters and zines, covers, consumer super-app promo mechanics |
 | Instruments / speed | dashboards and oscilloscopes, car configurators, telemetry |
 | Garden / care | apothecary labels and herbaria, contemporary clinic environments |

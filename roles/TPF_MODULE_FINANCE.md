@@ -9,7 +9,7 @@
 
 ## 0. Design Reference and Visual Standard
 
-**Reference:** Stripe Customer — transaction table; Quickbooks — cash registers and balances
+**The standard to reach:** transaction table; cash registers and balances
 **Constitution:** `roles/FRONTEND_DESIGN_EXCELLENCE.md` §2 (operational contour)
 
 **Implementation chain:**

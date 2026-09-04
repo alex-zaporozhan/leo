@@ -63,11 +63,11 @@ Usage context: [desktop/mobile/both, frequent/rare, pro/novice]
 
 ```
 Product feel: [one word — Professional / Warm / Bold / Playful]
-Primary reference: [Linear / Stripe Dashboard / Notion / Revolut / Figma]
-Why this reference: [one sentence of reasoning]
+World (Tier 0): [docs/artifacts/VISUAL_CONCEPT_[PROJECT].md — the concept phrase + the world]
+Why this world: [one sentence, tied to the niche objects — not to another product]
 
-Operational contour — reference: [specific screen: "Linear Issues list"]
-Showcase — reference: [specific screen: "linear.app homepage"]
+Operational contour — the standard to reach: [the behaviour, e.g. "a dense record list that stays stable under long text"]
+Showcase — the archetype: [one of the eight in HERO_ARCHETYPES + the gesture it commits to]
 
 Cannot: [what definitely not to do — "no dark theme", "no glass in admin", "no many colours"]
 ```
@@ -210,9 +210,9 @@ onSuccess: () => {
 
 ## §5. MODULES (filled in as development progresses)
 
-| Module | Path | Components | API endpoints | Status | Reference |
+| Module | Path | Components | API endpoints | Status | The standard it must reach |
 |--------|------|-----------|--------------|--------|--------|
-| Dashboard | /admin | DashboardPage.tsx | /api/v1/stats | ✅ / 🔄 / ❌ | Stripe Dashboard |
+| Dashboard | /admin | DashboardPage.tsx | /api/v1/stats | ✅ / 🔄 / ❌ | value + trend + sparkline, nothing competing with the number |
 | | | | | | |
 
 ---
@@ -260,7 +260,7 @@ Last updated: [date]
 Before every new screen, @FRONTEND / @DESIGN runs through:
 
 ```
-□ Reference defined (Linear/Stripe/etc. — specific screen)
+□ The project's own world defined and cited (`VISUAL_CONCEPT_[PROJECT].md` §world — specific screen), or THE FLOOR declared
 □ @DESIGN SPEC created (for a new screen — always)
 □ Visual Identity from §1.3 observed
 □ Design Tokens from §1.4 used

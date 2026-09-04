@@ -66,7 +66,7 @@ The class is already resolved by `roles/RAG_CANON.md` §2, so the role set is a 
 
 | Task class | Default roles | What each is there for |
 |------------|--------------------|------------------------|
-| **TC-01 · operational-screen** | @FRONTEND @DESIGN @QA_VISUAL @QA_ARCH | craft floor and primitive · pattern and composition · rendered geometry and states · business logic and the four states |
+| **TC-01 · operational-screen** | @FRONTEND @DESIGN @QA_VISUAL @QA_ARCH @MOTION | craft floor and primitive · pattern and composition · rendered geometry and states · business logic and the four states · **the motion floor taken and M1–M12 walked — the class that historically shipped stiff because nobody was looking**|
 | **TC-02 / TC-03 · public / statement** | @DESIGN @MOTION @QA_VISUAL @SEO | world fidelity and timidity (Y1–Y12) · motion ambition delivered · geometry and rhythm · semantics not cut by design |
 | **TC-04 · node-graph** | @FRONTEND @DESIGN @AI_ENGINEER @QA_VISUAL | node readability (G1–G10) · inspector density · graph semantics and run contour · overlay geometry |
 | **TC-06 · backend-slice** | @DEV @QA_ARCH @PRINCIPLE | contract sheet honoured · vectors and error contract · invariants and reachable states |
@@ -152,6 +152,11 @@ narrow viewport · critical, medium and minor risks (queues, races, gaps) · wha
 not actually work · what could have been done better · outright bugs. Fix what you find, implement your own
 recommendations within the platform's declared architecture. Do not stop at the first defect — go deep.
 Extend the audit criteria yourself where mine are weaker than they should be.
+Two exceptions to "fix what you find", and they are absolute: a finding whose real tier is E3-E4 is NAMED
+and SCOPED, not reconstructed silently (see the paragraph above); and a finding in the RULE SYSTEM ITSELF
+(.cursorrules, roles/*.md) is REPORTED, never edited — the system is changed only on a direct human request
+naming the file (Law 16, and RAG_CANON TC-20: "the system never edits itself"). On a TC-20 pass you audit
+and report; you do not repair.
 ```
 
 **Two rules about this text.** (1) The invitation to *extend the criteria* stays — it is what lets the pass exceed the author's imagination. (2) It is **never** replaced by a list of specific checks; a narrowed pass is a different, weaker instrument (§1).

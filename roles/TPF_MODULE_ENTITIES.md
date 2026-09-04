@@ -9,7 +9,7 @@
 
 ## 0. Design Reference and Visual Standard
 
-**Reference:** Linear Issue detail — tabs + Stripe Customer — header with key metrics
+**The standard to reach:** tabs + header with key metrics
 **Constitution:** `roles/FRONTEND_DESIGN_EXCELLENCE.md` §2 (operational contour)
 
 **Implementation chain:**

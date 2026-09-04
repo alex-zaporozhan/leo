@@ -3,7 +3,7 @@
 # Mandatory for @DESIGN (SPEC), @FRONTEND (VQG + handoff), @QA_ARCH (Vector 6.1)
 
 > **Principle:** a screen is designed and assembled **only from registered components**. A raw "div + styles" block is permitted only as a temporary stub marked in DEV_PROMPTS — not as final UI.
-> **Related:** geometry and motion — `roles/LAYOUT_INVARIANTS.md` (§1–§11); taste — `roles/FRONTEND_DESIGN_EXCELLENCE.md`; the live project registry — **`docs/knowledge/FRONTEND_PASSPORT_[PROJECT].md` §3** (the project canon; template — `roles/TEMPLATE_PROJECT_FRONTEND_PASSPORT.md` §3).
+> **Related:** geometry and motion — `roles/LAYOUT_INVARIANTS.md` (§1–§12); taste — `roles/FRONTEND_DESIGN_EXCELLENCE.md`; the live project registry — **`docs/knowledge/FRONTEND_PASSPORT_[PROJECT].md` §3** (the project canon; template — `roles/TEMPLATE_PROJECT_FRONTEND_PASSPORT.md` §3).
 
 ---
 
@@ -67,6 +67,19 @@
 
 ## §4. MOTION COMPONENTS (mandatory wrapper)
 
+> **Two kinds, and only one of them existed before v6.38.** A **containment** component keeps motion from
+> touching layout or scroll — that is the six below. An **expression** component *is* the motion: a staggered
+> list, a word reveal, a sequenced entrance. A registry holding only containment devices makes stiffness the
+> only registered option, and Law 25 step (4) — "a screen is assembled only from registered components" —
+> then forbids everything else as an unregistered pattern. That is how a motion library of a thousand lines
+> ended up unreachable.
+> **Both kinds are registered.** The expression set derives from `roles/MOTION_CRAFT_CANON.md` §1–§2 and is
+> entered in the project passport §3 like any other component: **`Stagger`** (a group with an order and an
+> offset — G1/G2) · **`Reveal`** (opacity + transform from a named origin — G4) · **`Sequence`** (an ordered
+> multi-element entrance with overlap — G3) · **`StateTransition`** (the same node changing, not destroyed
+> and recreated — G5 CHANGE) · **`Confirm`** (the one spring moment per screen — G5 CONFIRM).
+> A project may name them differently. What it may not do is have none of them.
+
 Any block with autoplay, swipe, or crossfade — **not a section with classes**, but a component with a contract:
 
 | Pattern | Class / hook | Where |
@@ -101,7 +114,7 @@ The **Stability** column references items from `LAYOUT_INVARIANTS` (§1, §2, §
 
 ## §6. PROJECT REGISTRY (example of a filled registry)
 
-The live registry is maintained in **`docs/knowledge/FRONTEND_PASSPORT_[PROJECT].md` §3** (@FRONTEND updates it after every UI wave).
+The live registry is maintained in **`docs/artifacts/FRONTEND_PASSPORT_[PROJECT].md` §3** (@FRONTEND updates it after every UI wave).
 
 | Component | Path | Status |
 |-----------|------|--------|
@@ -122,7 +135,7 @@ The live registry is maintained in **`docs/knowledge/FRONTEND_PASSPORT_[PROJECT]
 
 ```
 □ T1 primitives from §3 exist or are registered in the project passport
-□ RevealSection / motion — opacity-only in flow (§11)
+□ Reveal / motion in flow — `transform`+`opacity` in the element's own reserved box (layout properties never, `scrollY` never) (§10–§11); at least one Stagger, Reveal or Sequence expression component registered (§4)
 □ Hero/carousel — a separate motion component, not inlined in the page
 □ FRONTEND_PASSPORT §3.1 filled with current paths
 □ DESIGN_SPEC contains a Component Map for the new screen

@@ -204,4 +204,4 @@ Proposal: [targeted change in .cursorrules or ENGINEERING_PLAN]
 
 - When a checkbox is detected at GATE-N → @LEAD applies the response protocol from `LEAD_PRODUCT_GATE_PROTOCOL.md` §"@LEAD response protocol on gate failure".
 - On L-assessment → checkboxes in the GATE-6 E2E grid (`roles/LEAD_PRODUCT_GATE_PROTOCOL.md`, section "E2E — strict grid") = automatic FAIL.
-- On a systemic pattern → `CRYSTALS.md` is proposed to be updated after user confirmation.
+- On a systemic pattern → an `@EVOLVE` proposal is raised for the owning canon (`roles/SYSTEM_EVOLUTION_PROTOCOL.md`), and it is applied only after the human confirms.

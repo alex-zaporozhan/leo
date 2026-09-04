@@ -9,7 +9,7 @@
 
 ## 0. Design Reference and Visual Standard
 
-**Reference:** Stripe Dashboard — metric widgets + Vercel Analytics — event timeline
+**The standard to reach:** metric widgets + event timeline
 **Constitution:** `roles/FRONTEND_DESIGN_EXCELLENCE.md` §2 (operational contour)
 
 **Implementation chain:**

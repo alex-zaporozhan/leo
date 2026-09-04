@@ -9,7 +9,7 @@
 
 ## 0. Design Reference and Visual Standard
 
-**Reference:** Typeform admin — template list; Notion databases — simple table with actions
+**The standard to reach:** template list; simple table with actions
 **Constitution:** `roles/FRONTEND_DESIGN_EXCELLENCE.md` §2 (operational contour)
 
 **Implementation chain:**

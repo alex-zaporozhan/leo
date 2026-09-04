@@ -60,7 +60,7 @@ For each Contour being claimed, all applicable layers are green — not «demo-h
 | **Logic** | Happy path + failure edges; real ports (not stub on prod path); single retry owner; lease/heartbeat where async |
 | **UX** | Declared **product class** at **L3** (`PRODUCT_MATURITY`); no internal names; EmptyState; mutation disable |
 | **Security** | S1–S12 grepped; Contract in DEV_PROMPTS; tenant isolation evidenced |
-| **Design** | Class non-negotiables in SPEC; Reference Walk written; craft floor V15–V20 |
+| **Design** | Class non-negotiables in SPEC; Capability Walk written; craft floor V15–V21 |
 | **Ops** | Versioned health; runbooks for stuck jobs; Law 36 artifact identity on env claims |
 
 ---

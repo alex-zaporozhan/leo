@@ -2,14 +2,15 @@
 
 > **What this is:** the closed ledger of every conflict between system files (a rule/value stated differently in two places) and the single winner chosen for it — **and** the central index of every mirror set in the system (conflict-born or intentional accent; see "Mirror sets beyond conflicts" + "Marker model" below).
 > **Why it exists:** the system grows additively (new Law + new canon + mirror in a role). Without a registry, copies drift into contradiction (e.g. Law 33 meaning both Security and Craft across files). A drifted repeated-accent drives two conflicting trajectories at once — strictly worse than one.
-> **Rule:** any `@EVOLVE` that introduces an overlap (the same concept stated in ≥2 files) must add a row here, pick the winner, and synchronise every mirror verbatim. A mirror is a full-text repeated accent (see `.cursorrules` §1 philosophy) — **never** replaced by a "see section X" pointer.
+> **Rule:** any `@EVOLVE` that introduces an overlap (the same concept stated in ≥2 files) must add a row here, pick the winner, and synchronise every mirror verbatim. **A mirror is a full-text repeated accent that carries a `MIRROR OF:` marker naming its home** — it is not thinned to a bare "see section X" pointer, because the reader does not reliably follow one, and it is not left as an unmarked copy either, because an unmarked copy is what drifts.
+> **Doctrine owner: `roles/RULE_INTEGRITY_PROTOCOL.md` T2** (decision versus meaning, and when a full echo is legitimate). This registry applies that test to one case — a **conflict winner**, which is always a decision — and keeps no second version of the doctrine. If the doctrine changes, it changes in T2 first.
 > **Verification:** before applying any row, re-verify it by grep in the living files. The registry is a hypothesis; the living file is truth.
 
 ---
 
 ## Legend
 
-- **Winner** — the single source-of-truth decision. Its value is written **verbatim in every mirror location**, not referenced.
+- **Winner** — the single source-of-truth decision. It has **one home**, and its value may be written **verbatim in every mirror location** — each mirror naming that home (`MIRROR OF:`). A verbatim mirror with a named home is legitimate; a verbatim copy without one is the drift this registry exists to prevent (`RULE_INTEGRITY_PROTOCOL` T2).
 - **Status** — `✅ applied` · `🟡 pending` · `🔎 verify` (needs a fresh grep before touching).
 
 ---
@@ -85,15 +86,27 @@
 - **Conflict:** Laws 19 and 25 name a golden library of seven external products (and name it differently in each of the two laws), while `ROLE_DESIGN` Tier 0 and `VISUAL_CONCEPT_PROTOCOL` make the project's own world the primary reference. `ROLE_FRONTEND` opened with "every screen must feel like a Linear/Stripe/Notion-grade product", which reads as the opposite instruction.
 - **Winner:** **Tier 0 — the project world (`docs/artifacts/VISUAL_CONCEPT_[PROJECT].md`) outranks every external reference.** The SaaS golden library is a **fallback for the `instrument` register only**, never the source of a public site's aesthetic. Absent a world: THE FLOOR (`VISUAL_CRAFT_CANON` §11) for instrument, a stop to @CREATOR for statement.
 - **Affected:** `ROLE_FRONTEND.md` (visual standard rewritten; DESIGN SOLUTION Steps 1–2) · `RAG_CANON.md` TC-02/TC-03/TC-05 (the world is item 1 of the minimum, and the library is out of scope for statement).
-- **Remaining:** Laws 19 and 25 in `.cursorrules` still list the library without naming Tier 0, and their two lists differ from each other. Planned.
-- **Status:** 🟡 applied in the role layer, pending in the constitution.
+- **Closed:** Laws 19 and 25 were rewritten in v6.37 and no longer enumerate an external library at all; Law 25 names `ROLE_DESIGN` Tier 0 as the owner of the reference rule.
+- **Status:** ✅ applied everywhere.
+
+### C12 — "opacity-only in the flow" vs the motion arsenal
+- **Conflict:** `LAYOUT_INVARIANTS` §10/§11 was read across eight files as *no `transform` in the document flow*, while `MOTION_LIBRARY` T1–T6, I1–I3 and `MOTION_AMBITION_DIAL` all describe techniques that are transforms on elements in the flow. Every downstream file copied the broad reading; `ROLE_MOTION` conceded it in advance ("§11 wins"); `ROLE_DESIGN` shipped the answer pre-filled in its own SPEC template; `COMPONENT_REGISTRY` registered six motion components, all of them containment devices. The result was one legal pattern — an opacity fade — and a system that could not produce anything else.
+- **Winner:** **the invariant owns reflow and the reader's scroll position, and nothing else.** A `transform` does not participate in layout: the element keeps its box, neighbours do not move, `scrollY` does not change. Therefore `transform` + `opacity` + `filter` are **permitted in the document flow**, inside the element's own reserved space; animating layout properties is forbidden everywhere; a **motion island is required only where the motion needs its own scroll or overflow context** (carousel, strip, pinned scrub, canvas).
+- **Affected (all verified by grep, not by intention):** `.cursorrules` Law 26 and Law 39 · `LAYOUT_INVARIANTS` §10 heading, §10 table, §11 architecture table, the reference CSS, the reduced-motion sample, the @DEV checklist · `ROLE_QA_ARCH` (its reveal line was a 🔴 that **rejected** floor-compliant motion — the gate that ran before the role holding the new detector) · `ROLE_MOTION` (Principle 7, the ScrollTrigger note, the Motion Quality Gate, the MOTION_SPEC template, both conflict clauses) · `ROLE_FRONTEND` (activation header, Pillar 9, rule 14, the pre-handoff checklist) · `ROLE_DESIGN` (SPEC production step 4, audit lens 10, the DESIGN_SPEC motion block) · `COMPONENT_REGISTRY` (§4 and the first-screen checklist) · `FRONTEND_DESIGN_EXCELLENCE` (the reveal CSS comment and the public-site checklist) · `MOTION_LIBRARY` (the `clip-path` boundary clause) · `MOTION_AMBITION_DIAL` (safety rails and the MICRO catalogue).
+- **Also fixed with it:** motion had no craft canon and no floor while every other discipline had both — `roles/MOTION_CRAFT_CANON.md` now supplies the floor (§1), the grammar of the in-between (§2) and the M1–M12 stiffness catalogue (§3), and `CRAFT_LINT_SPEC` V21 is the first motion vector in the system that can fail on absence.
+- **Status:** ✅ applied. *The first pass at this row claimed "applied everywhere" while ten copies of the losing side were still live, three of them gates — the claim was written from intention rather than from grep. Re-verify by grep before trusting this line (the rule at the top of this file), and that is exactly why that rule is there.*
+
+---
 
 ## Mirror sets beyond conflicts (Law 41 / gates / semantic echoes)
 
-> These are not resolved fights — they are **intentional repeated accents** (a rule stated in several roles on purpose, per `.cursorrules` §1). They still need a drift-guard: change the SoT → sync the accents. Listed here so one grep of this file finds **every** mirror set in the system, conflict or not.
+> These are not resolved fights — they are **intentional repeated accents** (a rule stated in several roles on purpose, per `roles/RULE_INTEGRITY_PROTOCOL.md` T2). They still need a drift-guard: change the SoT → sync the accents. Listed here so one grep of this file finds **every** mirror set in the system, conflict or not.
 
 | Set | SoT (source of truth) | Accents (mirror locations) | Kind |
 |-----|----------------------|----------------------------|------|
+| The motion floor (durations · easings · stagger · the floor entrance · reduced-motion) | `MOTION_CRAFT_CANON.md §1` | `TEMPLATE_MOTION_LANGUAGE.md §2` · `MOTION_AMBITION_DIAL.md` MICRO catalogue · `LAYOUT_INVARIANTS.md §10` reference CSS · `CRAFT_LINT_SPEC.md §1d` | verbatim tokens |
+| M1–M12 motion stiffness | `MOTION_CRAFT_CANON.md §3` | `ROLE_QA_VISUAL.md` report format · `CRAFT_LINT_SPEC.md §1d` · `MOTION_REFLEX.md` · `.cursorrules` Law 39 | reference |
+| R1–R12 motion reflex | `MOTION_REFLEX.md §1` | `ROLE_DEV.md` · `ROLE_FRONTEND.md` · `ROLE_QA_VISUAL.md` · `CRAFT_LINT_SPEC.md §4.0` | reference |
 | Foundation-completeness rollup (Law 41) | `PLANNING_MATURITY_CANON.md §3` | `ROLE_CREATOR.md` · `ROLE_BIZ.md` · `TEMPLATE_BIZ_LOGIC.md §3 anchor` | verbatim rollup |
 | Foresight forward-questions | `PLANNING_MATURITY_CANON.md` | `ROLE_PRINCIPLE.md` | verbatim |
 | FORESIGHT / COMPLETENESS gate | `.cursorrules` CHAIN step 0.8 | `ROLE_LEAD.md` (gate section + CHAIN) · `LEAD_PRODUCT_GATE_PROTOCOL.md` GATE-0/GATE-1 | verbatim |
@@ -127,5 +140,5 @@ Where each applies:
 
 ---
 
-Reference: `roles/SYSTEM_UPGRADE_MANIFEST.md` (historical origin only — this registry is self-contained and does not depend on that transient plan) · `.cursorrules` §1 philosophy (consistent redundancy; mirrors are full-text, not pointers) · `roles/SYSTEM_FILES_MASTER.md` (Single Sources of Truth table) · `roles/SYSTEM_EVOLUTION_PROTOCOL.md`
+Reference: `roles/SYSTEM_UPGRADE_MANIFEST.md` (historical origin only — this registry is self-contained and does not depend on that transient plan) · `roles/RULE_INTEGRITY_PROTOCOL.md` T2 (a decision has one home; a full-text mirror is legitimate when it names that home) · `roles/SYSTEM_FILES_MASTER.md` (Single Sources of Truth table) · `roles/SYSTEM_EVOLUTION_PROTOCOL.md`
 Version: 1.0 | 2026-07-23

@@ -39,7 +39,7 @@ Q3. BRAND AMBITION: the dial from roles/MOTION_AMBITION_DIAL.md
 The intersection yields 1–2 candidates from the routing table (at the bottom of the file). With two — the winner rule (`ROLE_DESIGN`): @CREATOR/@DESIGN names one with justification through material (Q1).
 
 **Strict selection rules:**
-- "Grey SaaS" (Linear/Stripe minimalism) — **not a default world for the showcase**. It is the operational contour (`FRONTEND_DESIGN_EXCELLENCE §2`) and an acceptable choice only when Q1 genuinely is "tool/data".
+- **Grey SaaS** — the neutral, low-chroma, hairline-and-density minimalism the whole category converged on — is **not a default world for the showcase**. It is the operational contour (`FRONTEND_DESIGN_EXCELLENCE §2`) and an acceptable choice only when Q1 genuinely is "tool/data".
 - The world is chosen by niche objects (Q1), not by the author's taste or the last successful project.
 - If no world fits — Custom World Constructor (below), not "Inter + blue".
 
@@ -142,7 +142,7 @@ Rounded "SaaS cards" with shadows · three-column icon-heading-text · pastels �
 **Feel:** notarially, weighty, "a document one trusts".
 **For:** notaries, lawyers, audit, assessment, insurance of trust, premium accounting, official registries.
 **NOT for:** entertainment and youth products, discounters.
-**Compositional references:** forms and stamp paper, book typography (Stripe Press as a web example of "print" site), iA Writer (the silence of the page).
+**Compositional references:** forms and stamp paper, book typography (print-like editorial sites as a web example of "print" site), iA Writer (the silence of the page).
 **Hero archetypes:** B (Centered Statement), F (Editorial). **Ambition:** restrained–confident.
 
 ### Palette (copy-paste)
@@ -505,7 +505,7 @@ Pastels · thin 1px rgba grey borders · glassmorphism · soft shadows.
 **Feel:** engineering credibility, "system under control".
 **For:** dev tools, monitoring, analytics, cybersecurity, IoT, trading analytics, API products.
 **NOT for:** "warm" B2C, luxury, children's.
-**References:** aviation instruments and oscilloscopes (material), Vercel/Grafana dark dashboards (compositionally, not as default palette).
+**References:** aviation instruments and oscilloscopes (material), dark observability dashboards (compositionally, not as default palette).
 **Hero archetypes:** G, A. **Ambition:** confident.
 
 ### Palette (copy-paste)

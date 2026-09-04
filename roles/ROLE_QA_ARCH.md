@@ -154,7 +154,7 @@ Reconcile with `roles/DOMAIN_STANDARDS.md` for the page type.
 - [ ] 4 typography levels distinguishable: title / data / auxiliary / label
 - [ ] Hover on all clickable rows, buttons, cards (transition 150ms)
 - [ ] Tabler icons stroke={1.5}, size=16/18
-- [ ] A reference named in DESIGN_SPEC or DEV_PROMPTS (Linear/Stripe/etc.)
+- [ ] The project's own world named and cited in DESIGN_SPEC or DEV_PROMPTS (Tier 0), or THE FLOOR taken verbatim where no world exists
 - [ ] Font in tables ≥ 13px, in content ≥ 15px
 - [ ] The primary button visually dominates the secondary
 - [ ] Icons without labels have a tooltip
@@ -195,7 +195,7 @@ Applies to **any UI** with grids, a carousel, reveal, autoplay, a horizontal str
 - [ ] Hover/focus do not change width/height/margin in flow (§7)
 
 **Motion & scroll (🔴):**
-- [ ] Reveal in document flow — **opacity-only** (`prism-reveal--fade`), not `translateY` on sections (§11)
+- [ ] Reveal in document flow — **`transform`/`opacity` inside the element's own reserved box**; 🔴 only for an animated **layout property** (`top/left/width/height/margin/padding`) or a change to `scrollY` (§10–§11). A staggered `translateY` entrance is correct and is **not** a finding — the motion floor prescribes it (`roles/MOTION_CRAFT_CANON.md` §1)
 - [ ] Carousel/autoplay wrapped in `.prism-motion-island` (or an equivalent with `overflow-anchor: none` + `contain`)
 - [ ] No `scrollIntoView` in slide-change/autoplay handlers (only an explicit anchor `#lead` on a user click is allowed)
 - [ ] No global `html { scroll-behavior: smooth }` — smooth only in the target `scrollToElement`

@@ -236,7 +236,7 @@ Level 4 — @LEAD blocks the phase, requests user input
 □ @PRINCIPLE:     if called — all findings either reflected in the contract, or explicitly rejected (date + reason)
 □ @AI_ENGINEER:   if AI contour — RAG_PASSPORT + EVAL_PLAN exist; last eval run above the blocking threshold
 □ @QA_VISUAL:     visual render audit 🟢 for all affected UI routes (geometry/overflow/CLS/states/micro
-                   under hostile content; craft floor V15–V20 + aesthete crime-verdict table; baseline current)
+                   under hostile content; craft floor V15–V21 + aesthete crime-verdict table; baseline current)
 □ @QA:            risk-tiered floor T0–T3 + negative baseline; no open P0/P1
 □ @SEC:           18-pillar audit — advisory input; exploitable gaps handed to @PENTEST
 □ @PENTEST:       (surface touched) PENTEST_REPORT_[WAVE] closed, no open 🔴; Security Contract lines verified HELD;

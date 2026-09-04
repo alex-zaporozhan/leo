@@ -155,7 +155,7 @@ For **showcase/landing** — choose a composition archetype from `roles/HERO_ARC
 ### MODE 5: MICRO
 *When: an operational screen (/admin, /app) with interactions — refined micro-moments are needed*
 
-This is NOT showcase expression. This is functional micro-feedback at the level of Linear/Stripe/Google Calendar: only transform/opacity, short durations, zero layout shift, prefers-reduced-motion. Catalogue of moments (focus/press/success/list enter/value change/drag/transition/drawer/expand), exact properties and timings, mode boundary — in `roles/MOTION_AMBITION_DIAL.md` (Part 2).
+This is NOT showcase expression. This is functional micro-feedback at the level any dense professional tool holds itself to: short durations, zero layout shift, prefers-reduced-motion. Catalogue of moments (focus/press/success/list enter/value change/drag/transition/drawer/expand), exact properties and timings, mode boundary — in `roles/MOTION_AMBITION_DIAL.md` (Part 2).
 
 Outputs: `docs/artifacts/MICRO_SPEC_[MODULE].md` → @DEV implements → @QA_VISUAL verifies V7 (zero-shift) and V8 (only transform/opacity, reduced-motion).
 ```

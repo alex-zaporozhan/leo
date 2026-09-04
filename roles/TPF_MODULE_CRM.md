@@ -9,7 +9,7 @@
 
 ## 0. Design Reference and Visual Standard
 
-**Reference:** Linear Kanban — cards + Bitrix24 funnel — column totals
+**The standard to reach:** a pipeline board where a card carries its own state at a glance and every column shows its total, so the funnel is legible without opening anything
 **Constitution:** `roles/FRONTEND_DESIGN_EXCELLENCE.md` §2 (operational contour)
 
 **Implementation chain:**

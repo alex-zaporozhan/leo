@@ -38,7 +38,7 @@ A small task inside an already-described spine — a new one is NOT needed: a re
 | 8 | ASYNC | The background contour is lawful | a reference to `JOB_PASSPORTS_*` (all task types) + `PIPELINE_PASSPORT_*` for pipelines with an external provider/progress, or "no background tasks" | `ASYNC_WORKERS_CANON` (Law 30, PART II) |
 | 9 | CAPACITY | The load is computed, not guessed | a reference to the completed Steps 1–4 of SYSTEM_DESIGN + total connections ≤ the DB limit | `SYSTEM_DESIGN_PROTOCOL` |
 | 10 | FAILURE | Failure points and the blast radius | the Step 5 table filled; for every external dependency: circuit/fallback/degradation; the blast radius of one death | `SYSTEM_DESIGN_PROTOCOL` Step 5 |
-| 11 | DR CLASS | What we lose in a catastrophe | RPO/RTO as numbers + a backup schedule + **the date of the last restore test** (a backup without a restore = not a backup) | `DEPLOY_VPS_RUNBOOK` · `MIGRATIONS_PLAYBOOK` |
+| 11 | DR CLASS | What we lose in a catastrophe | RPO/RTO as numbers + a backup schedule + **the date of the last restore test** (a backup without a restore = not a backup) | the project's deploy runbook in `docs/operations/` · `MIGRATIONS_PLAYBOOK` |
 | 12 | THREAT SKETCH | What here will be stolen/forged/uploaded | 5 lines of STRIDE-lite: asset → vector → control (an input for @SEC/@PENTEST, not a replacement for the audit) | `ROLE_SEC` · `PENTEST_SCENARIOS` |
 
 Filling rule: each vertebra — 1–3 lines. A spine on one page, not a treatise: if a vertebra
@@ -57,7 +57,7 @@ Vertebra 8  ASYNC ───────► ASYNC_WORKERS_CANON: JOB_PASSPORT (§
                                A passport number that cannot be grepped is a number nobody will check.
 Vertebra 9  CAPACITY ────► SYSTEM_DESIGN_PROTOCOL Steps 1–5 (load/latency/bottleneck)
 Vertebra 10 FAILURE ─────► ASYNC §2 (bulkhead/backpressure) + §10 lease/recovery window
-Vertebra 11 DR CLASS ────► MIGRATIONS_PLAYBOOK + DEPLOY_VPS_RUNBOOK (a restore test with a date)
+Vertebra 11 DR CLASS ────► MIGRATIONS_PLAYBOOK + the project's deploy runbook in docs/operations/ (a restore test with a date)
 Vertebra 12 THREATS ─────► ROLE_SEC / ROLE_PENTEST (STRIDE, T-H5 isolation)
 ```
 

@@ -7,7 +7,7 @@
 
 ## 0. Design Reference and Visual Standard
 
-**Reference:** Apple Wallet — card stack; Revolut — loyalty progress bar
+**The standard to reach:** Apple Wallet — card stack; loyalty progress bar
 **Constitution:** `roles/FRONTEND_DESIGN_EXCELLENCE.md` §2 (operational contour)
 
 **Implementation chain:**

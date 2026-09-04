@@ -16,7 +16,7 @@ Two working questions: *"Who should answer this?"* and *"Are there enough facts 
 
 You do not generate ideas and do not write code — you direct, synthesise the roles' conclusions, and move the project forward.
 
-**ACTIVATES_CANONS:** on activation, read — `roles/PRODUCTION_READINESS_CANON.md` (the bar: production-ready by default; foundation complete / delivery phased — Law 41) · `roles/PLANNING_MATURITY_CANON.md` (the self-audit loop + Completeness Ledger + the three criteria) · `roles/LEAD_PRODUCT_GATE_PROTOCOL.md` (GATE-0…6) · `roles/LEAD_ANTI_CHECKBOX_PROTOCOL.md` · `roles/CONFLICT_REGISTRY.md` (resolved cross-file winners) · `.cursorrules` (Laws 1–41).
+**ACTIVATES_CANONS:** on activation, read — `roles/PRODUCTION_READINESS_CANON.md` (the bar: production-ready by default; foundation complete / delivery phased — Law 41) · `roles/PLANNING_MATURITY_CANON.md` (the self-audit loop + Completeness Ledger + the three criteria) · `roles/LEAD_PRODUCT_GATE_PROTOCOL.md` (GATE-0…6) · `roles/LEAD_ANTI_CHECKBOX_PROTOCOL.md` · `roles/CONFLICT_REGISTRY.md` (resolved cross-file winners) · `.cursorrules` (Laws 1–44).
 
 ---
 
@@ -295,7 +295,7 @@ Two checkpoints that force planning to production depth. Canons: `roles/PRODUCTI
         concept is not a licence to invent — it is a licence to take the floor.
    NO → go to step 1.7
   ↓
-1.7 An operational screen with interactions? ("buttons twitch / fly out")
+1.7 An operational screen with interactions? **Every one of them, at creation — not only when someone reports that buttons twitch.** It takes the motion floor (`roles/MOTION_CRAFT_CANON.md` §1) alongside the visual floor, and the MICRO catalogue (`roles/MOTION_AMBITION_DIAL.md` Part 2) answers its moments
    YES → @MOTION MICRO → docs/artifacts/waves/[N]/MICRO_SPEC_[NAME].md → @DEV → @QA_VISUAL
    NO → go to step 1.8
   ↓
@@ -371,7 +371,7 @@ Two checkpoints that force planning to production depth. Canons: `roles/PRODUCTI
 **@DEV** executes the to-dos from `DEV_PROMPTS` and delivers code. Discussion **instead of** code or "next" without closed points — the task is not closed; the reply: "Continue the to-dos. Next point."
 
 **Maturity acceptance (@LEAD, before closing ANY UI epic):** the CLASS was declared · the LEVEL is stated with
-evidence ("L3 — class CONSOLE; inventory I1/I3/I4/I6/I8 present; I11 N/A — 7 records") · the **REFERENCE WALK**
+evidence ("L3 — class CONSOLE; inventory I1/I3/I4/I6/I8 present; I11 N/A — 7 records") · the **CAPABILITY WALK**
 (`PRODUCT_MATURITY_CANON` §3) is written: the benchmark product **and its concrete screen**, three things it does
 that we do not, and for each: taken / deliberately rejected + why. *"Rejected because it is hard" is not a reason —
 it is a confession.* · the **lazy-frontend detector** L1–L10 (§5): 3+ hits = furniture, whatever the gates said ·
@@ -811,5 +811,5 @@ A capstone view for a full project with a public site, data and background work 
 
 ---
 
-Reference: roles/LOGIC_MODELING_CANON.md (the modeling core — the model before the structure) · roles/PRODUCT_MATURITY_CANON.md (the class, the level, the reference walk — "working" is level one) · roles/VISUAL_CRAFT_CANON.md · roles/EDITORIAL_CRAFT_CANON.md · roles/INTERFACE_CRAFT_CANON.md · roles/CANVAS_CRAFT_CANON.md · roles/FRONTEND_CAPABILITY_CANON.md · roles/DATABASE_RUNTIME_CANON.md · roles/SYSTEM_EVOLUTION_PROTOCOL.md (the `@EVOLVE` command — how the system may be changed) · roles/TEMPLATE_ADMIN_UI_UX.md · roles/TEMPLATE_DESIGN_UX.md · roles/ENGINEERING_PLAN.md · roles/METRICS_PROTOCOL.md · docs/artifacts/METRICS_REGISTRY.md · roles/ROLE_LEAD.md (§CRYSTALLIZATION) · roles/STACK_SELECTION.md · roles/ROLE_PRINCIPLE.md · roles/ROLE_AI_ENGINEER.md · roles/ROLE_QA_ARCH.md · roles/ROLE_QA_VISUAL.md · roles/ROLE_SCRIBE.md · roles/ROLE_DOMAIN_EXPERT.md · roles/ROLE_CREATOR.md · roles/ROLE_DESIGN.md · roles/ROLE_MOTION.md · roles/ROLE_SEO.md · roles/DOMAIN_STANDARDS.md · roles/RAG_ARCHITECTURE_STACK_2026.md · roles/LEAD_PRODUCT_GATE_PROTOCOL.md · roles/LEAD_ANTI_CHECKBOX_PROTOCOL.md · roles/LEAD_PRODUCT_LOGIC_EXCELLENCE.md · roles/HERO_ARCHETYPES.md · roles/MOTION_AMBITION_DIAL.md · roles/LAYOUT_INVARIANTS.md · roles/VISUAL_CONCEPT_PROTOCOL.md · roles/CONCEPT_DNA_LIBRARY.md · roles/ARCH_SPINE_PROTOCOL.md · roles/DATA_INTEGRITY_CANON.md · roles/ASYNC_WORKERS_CANON.md · roles/SEO_CANON.md · roles/SECURITY_GATE_PROTOCOL.md · roles/ROLE_PENTEST.md · `roles/ROLE_MEDIA_ENGINEER.md` (renders the approved VISUAL_CONCEPT into real photo/video/3D media — trigger it for a public site needing generated assets; see the ROLE MAP row + CHAIN) · `roles/PRODUCTION_READINESS_CANON.md` · `roles/PLANNING_MATURITY_CANON.md` · `roles/CONFLICT_REGISTRY.md` · `.cursorrules` (layers W/S/P · Laws 1–41)
+Reference: roles/LOGIC_MODELING_CANON.md (the modeling core — the model before the structure) · roles/PRODUCT_MATURITY_CANON.md (the class, the level, the reference walk — "working" is level one) · roles/VISUAL_CRAFT_CANON.md · roles/EDITORIAL_CRAFT_CANON.md · roles/INTERFACE_CRAFT_CANON.md · roles/CANVAS_CRAFT_CANON.md · roles/FRONTEND_CAPABILITY_CANON.md · roles/DATABASE_RUNTIME_CANON.md · roles/SYSTEM_EVOLUTION_PROTOCOL.md (the `@EVOLVE` command — how the system may be changed) · roles/TEMPLATE_ADMIN_UI_UX.md · roles/TEMPLATE_DESIGN_UX.md · roles/ENGINEERING_PLAN.md · roles/METRICS_PROTOCOL.md · docs/artifacts/METRICS_REGISTRY.md · roles/ROLE_LEAD.md (§CRYSTALLIZATION) · roles/STACK_SELECTION.md · roles/ROLE_PRINCIPLE.md · roles/ROLE_AI_ENGINEER.md · roles/ROLE_QA_ARCH.md · roles/ROLE_QA_VISUAL.md · roles/ROLE_SCRIBE.md · roles/ROLE_DOMAIN_EXPERT.md · roles/ROLE_CREATOR.md · roles/ROLE_DESIGN.md · roles/ROLE_MOTION.md · roles/ROLE_SEO.md · roles/DOMAIN_STANDARDS.md · roles/RAG_ARCHITECTURE_STACK_2026.md · roles/LEAD_PRODUCT_GATE_PROTOCOL.md · roles/LEAD_ANTI_CHECKBOX_PROTOCOL.md · roles/LEAD_PRODUCT_LOGIC_EXCELLENCE.md · roles/HERO_ARCHETYPES.md · roles/MOTION_AMBITION_DIAL.md · roles/LAYOUT_INVARIANTS.md · roles/VISUAL_CONCEPT_PROTOCOL.md · roles/CONCEPT_DNA_LIBRARY.md · roles/ARCH_SPINE_PROTOCOL.md · roles/DATA_INTEGRITY_CANON.md · roles/ASYNC_WORKERS_CANON.md · roles/SEO_CANON.md · roles/SECURITY_GATE_PROTOCOL.md · roles/ROLE_PENTEST.md · `roles/ROLE_MEDIA_ENGINEER.md` (renders the approved VISUAL_CONCEPT into real photo/video/3D media — trigger it for a public site needing generated assets; see the ROLE MAP row + CHAIN) · `roles/PRODUCTION_READINESS_CANON.md` · `roles/PLANNING_MATURITY_CANON.md` · `roles/CONFLICT_REGISTRY.md` · `.cursorrules` (layers W/S/P · Laws 1–44)
 Version: 2.5 | 2026-09-03

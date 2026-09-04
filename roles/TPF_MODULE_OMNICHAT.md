@@ -9,7 +9,7 @@
 
 ## 0. Design Reference and Visual Standard
 
-**Reference:** Intercom Inbox — three-column layout + Linear Issue — right inspector panel
+**The standard to reach:** three-column layout + right inspector panel
 **Constitution:** `roles/FRONTEND_DESIGN_EXCELLENCE.md` §2 (operational contour)
 
 **Implementation chain:**

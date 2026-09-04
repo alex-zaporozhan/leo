@@ -100,6 +100,8 @@ roles/SYSTEM_UPGRADE_MANIFEST.md  ← upgrade manifest
 roles/LEAD_PRODUCT_GATE_PROTOCOL.md   ← quality gates GATE-0..GATE-6
 roles/LEAD_ANTI_CHECKBOX_PROTOCOL.md  ← detecting checkboxes without evidence
 roles/SECOND_PASS_PROTOCOL.md          ← the clean-context audit pass (SP-0…SP-3, role set by task class, derivation chain, false-green catalogue)
+roles/MOTION_REFLEX.md                 ← the motion reflex: R1–R12 literal greps @DEV runs over their own diff before handoff, mirrored at @QA_VISUAL
+roles/MOTION_CRAFT_CANON.md            ← the craft of movement: THE MOTION FLOOR (§1), the grammar of the in-between (§2 order·offset·overlap·origin·verb·keyframes), the M1–M12 stiffness catalogue (§3)
 roles/RULE_INTEGRITY_PROTOCOL.md       ← the seven tests a rule must pass before it enters the system, and the ladder between two rules that are both true (run on a finding before it is accepted)
 roles/LOGIC_MODELING_CANON.md          ← the domain model before the structure (Law 42): seven layers, twelve adversaries
 roles/LEAD_PRODUCT_LOGIC_EXCELLENCE.md ← product logic excellence reference

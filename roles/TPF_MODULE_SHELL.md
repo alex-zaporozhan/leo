@@ -9,7 +9,7 @@
 
 ## 0. Design Reference and Visual Standard
 
-**Reference:** Linear — main navigation (dark sidebar + light main)
+**The standard to reach:** main navigation (dark sidebar + light main)
 **Constitution:** `roles/FRONTEND_DESIGN_EXCELLENCE.md` §2 (operational contour)
 
 **Implementation chain:**
@@ -45,7 +45,7 @@ Frequent actions: navigate between sections, global patient search, quick jump t
 
 ## 1. Purpose
 
-The admin panel must feel like professional desktop software (Linear, Notion), not a 2010s website. The shell defines navigation, workspace, and global search mechanisms.
+The admin panel must feel like professional desktop software, not a 2010s website. The shell defines navigation, workspace, and global search mechanisms.
 
 ---
 

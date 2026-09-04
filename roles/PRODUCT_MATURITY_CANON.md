@@ -98,7 +98,7 @@ A Contour closed at L1 «happy path works» is **not** a production release — 
 
 ---
 
-## §3. THE REFERENCE WALK — the mechanism that makes the model SEE
+## §3. THE CAPABILITY WALK — the mechanism that makes the model SEE
 
 > **This is the most important section in this file.** The model does not fail to see mediocrity out of laziness —
 > it fails because it has **no contrast**. "Is this good?" is a question with no checkable answer.
@@ -107,14 +107,16 @@ A Contour closed at L1 «happy path works» is **not** a production release — 
 **Mandatory before closing any screen above L2. Written, not felt.**
 
 ```
-REFERENCE WALK — [screen]
-Class:      [from §1]
-Benchmark:  [the ONE product that does this class best. Not "Linear" in general —
-             a CONCRETE product AND its CONCRETE screen.
-             builder → Webflow/Framer/n8n · console → Linear/Vercel · table → Linear/Notion db ·
-             dashboard → Stripe/Vercel · pipeline → n8n/Temporal · media library → Figma/Notion]
+CAPABILITY WALK — [screen]
+Class:      [from §1 — builder · console · dashboard · pipeline · media library · table · inbox]
+Standard:   [the ONE capability this class is judged on, written as a BEHAVIOUR.
+             e.g. builder → "you see the page without clicking into it"
+                  console → "every frequent action has a keyboard path"
+                  pipeline → "you can see where a run is right now, and stop it"
+             Study whatever software does this best — study what it DOES, never how it LOOKS.
+             The visual form comes from the project's own world (Tier 0), always.]
 
-THREE THINGS THEY DO THAT WE DO NOT (be specific — a behaviour, not an adjective):
+THREE THINGS THE BEST OF THIS CLASS DO THAT WE DO NOT (a behaviour, not an adjective):
   1. [e.g. "the block list shows a THUMBNAIL of each block, so you see the page without clicking"]
   2. [e.g. "editing a field updates the preview instantly — the edit and the result are ONE surface"]
   3. [e.g. "no technical field names anywhere — 'Media Id' is called 'Image'"]
@@ -187,7 +189,7 @@ level** problem. Go back to §1.
            Names the TARGET LEVEL (L3 for client-facing). Does not close below L3.
            Does not call Contours «MVP quality». "It works" is a report of L1.
 @DESIGN  — designs TO the class; the SPEC names each class non-negotiable as present or N/A+why.
-           Runs the REFERENCE WALK (§3) before the SPEC is final. Three things, written down.
+           Runs the CAPABILITY WALK (§3) before the SPEC is final. Three things, written down.
 @FRONTEND— builds the class primitives ONCE (the canvas, the inspector, the palette, the bulk machinery),
            so the second screen of a class is cheap and consistent.
 @DEV     — executes; refuses to render an internal name in the UI (§4).

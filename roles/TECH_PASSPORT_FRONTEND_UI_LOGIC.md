@@ -139,7 +139,7 @@ Implementation only via `DEV_PROMPTS` + contracts; this section does not require
 
 ## 7. Admin Light Theme: Crisp SaaS / Enterprise (visual hierarchy)
 
-**Purpose:** establish the **product** style for the light work zone (similar feel to Linear, Vercel, Stripe): layer depth, micro-contrasts, button hierarchy — without "flat" grey-white mush and without heavy solid fills on metrics. This is **not** a marketing glass landing (`TEMPLATE_DESIGN_UX.md`), but an **operational** interface.
+**Purpose:** establish the **product** style for the light work zone (the feel of expensive professional software): layer depth, micro-contrasts, button hierarchy — without "flat" grey-white mush and without heavy solid fills on metrics. This is **not** a marketing glass landing (`TEMPLATE_DESIGN_UX.md`), but an **operational** interface.
 
 ### 7.1. Elevation (depth)
 
@@ -189,7 +189,7 @@ Ideas at the level of **Marketing ROI drill-down**, **Retention Engine**, **Omni
 
 ## 9. Premium Micro-Design Codex (Mantine v7)
 
-**Mandatory for @FRONTEND when laying out any product screens** (`/admin/*`, `/app/*`). Goal: the interface feels like a **premium desktop application** (Linear / Stripe / Google Calendar), not a loose 2010s website.
+**Mandatory for @FRONTEND when laying out any product screens** (`/admin/*`, `/app/*`). Goal: the interface feels like a **premium desktop application**, not a loose 2010s website.
 
 Connection to the rest of the tech passport: **§7** — light theme tokens and global theme; **§1–6** — modules and entities; **below** — specific JSX/Mantine patterns. On wording conflicts, priority goes to agreed **§7** + `frontend/src/theme.ts`, then §9.
 

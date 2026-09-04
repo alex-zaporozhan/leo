@@ -75,7 +75,7 @@ This is the canonical index of global system files for agent work in this reposi
 - `roles/CONFLICT_REGISTRY.md` *(resolved cross-file conflicts and their single winners — added v6.35)*
 - `roles/SECURITY_GATE_PROTOCOL.md` *(SECURITY SURFACE S1–S12, three checkpoints — Law 38; @PENTEST/ROLE_SEC already in Core Role Files)*
 - `roles/PENTEST_SCENARIOS.md` *(pytest/curl/locust attack artifacts)*
-- `roles/CRAFT_LINT_SPEC.md` *(machine vectors V15–V20 + the `craft` CI job — Law 39)*
+- `roles/CRAFT_LINT_SPEC.md` *(machine vectors V15–V21 + the `craft` CI job — Law 39)*
 - `roles/QA_VISUAL_AESTHETE_SENSOR.md` *(closed crime catalogue A–H + mandatory verdict — Law 39)*
 - `roles/VISUAL_CRAFT_CANON.md` · `roles/EDITORIAL_CRAFT_CANON.md` · `roles/INTERFACE_CRAFT_CANON.md` · `roles/CANVAS_CRAFT_CANON.md` *(the four craft registers — Law 33)*
 - `roles/FRONTEND_CAPABILITY_CANON.md` *(CAPABILITY_MAP; the frontend plays the backend — Law 34)*
@@ -86,6 +86,8 @@ This is the canonical index of global system files for agent work in this reposi
 - `roles/ROLE_MEDIA_ENGINEER.md` · `roles/MEDIA_SYNTHESIS_CANON.md` *(generative media pipelines — Law 28, added v6.34)*
 - `roles/LOGIC_MODELING_CANON.md` *(DOMAIN_MODEL — @PRINCIPLE MODE: MODEL, Law 42)*
 - `roles/SECOND_PASS_PROTOCOL.md` *(the clean-context audit pass — SP-0…SP-3; role set by task class; not automatable by design)*
+- `roles/MOTION_REFLEX.md` *(R1–R12 — literal greps over the diff, the motion peer of `ASYNC_AWAIT_REFLEX`; run by @DEV/@FRONTEND before handoff, mirrored at @QA_VISUAL)*
+- `roles/MOTION_CRAFT_CANON.md` *(the motion peer of `VISUAL_CRAFT_CANON`: the floor taken verbatim when no motion concept exists, the grammar of the in-between, and M1–M12 — the first detector set in the system that fails on the ABSENCE of motion)*
 - `roles/RULE_INTEGRITY_PROTOCOL.md` *(the seven tests a rule must pass — goal · axis · home · name · reach · sides · measure — and the priority ladder between two true rules; run on an audit finding **before** it is accepted as a defect)*
 
 ## Templates And TPF

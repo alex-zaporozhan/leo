@@ -9,7 +9,7 @@
 
 ## 0. Design Reference and Visual Standard
 
-**Reference:** Google Calendar — status colours + drag-drop layer; Yclients — doctor grid
+**The standard to reach:** Google Calendar — status colours + drag-drop layer; Yclients — doctor grid
 **Constitution:** `roles/FRONTEND_DESIGN_EXCELLENCE.md` §2 (operational contour)
 
 **Implementation chain:**

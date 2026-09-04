@@ -39,7 +39,7 @@ Basis:    [brand / audience / risk / user request]
 1. **Order of technique consideration.** At `bold/experimental`, 3D/WebGL (`W1–W4`) is considered **on equal footing or first**, not "as a last resort". The three `W1` questions remain (the metaphor must be justified), but 3D ceases to be "an extreme measure".
 2. **Amplitude.** Dominant type size, reveal distance, duration and easing character grow with the level: `restrained` — `power2.out` short; `experimental` — `power4.out`/`elastic`/`back` with range (`ROLE_MOTION` principle 2).
 3. **Right to a "face".** At `bold+` the system must propose a **distinctive** technique (custom cursor, kinetics, scene), not a template. "The same stagger everywhere" at `bold+` = `🔴` anti-pattern.
-4. **Prohibition of degenerating into a template.** At any level above `restrained`, repeating the same Linear-style technique without connection to the metaphor is a violation (see `ROLE_MOTION` anti-pattern "micro-animation instead of character"). Including [v6.20]: a single `power2.out`/`ease-in-out` across all project techniques = personality degeneration — 🔴 at `confident+`. Easing and durations are taken from the world's motion personality (`docs/artifacts/VISUAL_CONCEPT_*` ← `roles/CONCEPT_DNA_LIBRARY.md`):
+4. **Prohibition of degenerating into a template.** At any level above `restrained`, repeating the same generic SaaS technique with no connection to the world's metaphor is a violation (see `ROLE_MOTION` anti-pattern "micro-animation instead of character"). Including [v6.20]: a single `power2.out`/`ease-in-out` across all project techniques = personality degeneration — 🔴 at `confident+`. Easing and durations are taken from the world's motion personality (`docs/artifacts/VISUAL_CONCEPT_*` ← `roles/CONCEPT_DNA_LIBRARY.md`):
 
 | Personality | Easing | Range |
 |-------------|--------|-------|
@@ -54,7 +54,7 @@ Basis:    [brand / audience / risk / user request]
 ```
 ✗ Does not weaken Lighthouse Performance ≥ 85 mobile
 ✗ Does not cancel prefers-reduced-motion (at any level, reduced = heavy disabled)
-✗ Does not permit animating layout properties (LAYOUT_INVARIANTS §10 — transform/opacity only)
+✗ Does not permit animating layout properties (LAYOUT_INVARIANTS §10 — `transform`/`opacity`/`filter` only). It does **not** restrict `transform` in the document flow: stagger, reveals and scale-ins are expected there.
 ✗ Does not cancel mobile degradation (parallax/3D fallback — MOTION_LIBRARY §VII)
 ✗ Does not permit background competing with content (opacity < 10%, ROLE_MOTION principle 5)
 ```
@@ -76,7 +76,7 @@ AI / spatial / immersive product                           → bold–experiment
 ### Problem it solves
 Animation on operational screens (`/admin`, `/app`) was effectively forbidden (`FRONTEND_DESIGN_EXCELLENCE §1` — "reveal only on public site"; `ROLE_MOTION` — "does not handle admin/app"). As a result, micro-interactions on work screens **belonged to no one**: `@DESIGN` provides statics (ceiling — 150ms hover), `@MOTION` is forbidden, `@DEV` improvises — and buttons "run off" and jitter. This is a responsibility gap.
 
-`MICRO` mode gives operational micro-moments to `@MOTION` — but within **strict work interface boundaries**: this is not public-site expression, but calibrated functional micro-feedback at the level of Linear/Stripe/Google Calendar.
+`MICRO` mode gives operational micro-moments to `@MOTION` — but within **strict work interface boundaries**: this is not public-site expression, but calibrated functional micro-feedback at the level any dense professional tool holds itself to.
 
 ### MICRO mode boundary
 ```
@@ -94,18 +94,20 @@ Public-site expression (kinetics, WebGL, scroll narrative) on /admin and /app �
 
 Each: **what → principle → permitted technique → duration → red flag**. All — `transform/opacity` only, zero layout shift (`LAYOUT_INVARIANTS §7, §10`).
 
-| Moment | Principle | Technique | Duration | 🔴 Red flag |
+> **Durations and easings below are the floor's tokens** (`roles/MOTION_CRAFT_CANON.md` §1), not hand-typed numbers. A project with a declared world takes that world's values instead; nobody invents a third scale.
+
+| Moment | Principle | Technique | Duration · easing | 🔴 Red flag |
 |--------|-----------|-----------|----------|------------|
-| **Row/card hover** | "live interface" | `background`/`box-shadow` change | 120–150ms ease | geometry shift, jitter |
-| **Focus-visible** | state visibility | `outline`/ring without flow shift | instant/100ms | no focus-visible; layout shift |
-| **Press / active** | tactile response | `transform: scale(0.98)` | 80–120ms | `width/margin` animation; "jump" |
-| **Success confirmation** | close the action | short check/toast `opacity`+`translateY(4px)` | 150–250ms | no feedback; toast shifts content |
-| **List enter/exit** | explain the change | `opacity`+`translateY` for the new row | 150–200ms small stagger | entire list reorder as "jump" |
-| **Value change** (counter, status) | notice the change | gentle `opacity` pulse or colour transition | 150–200ms | change without signal; number "jumps" (need `tabular-nums`, `LAYOUT_INVARIANTS §3`) |
-| **Drag affordance** (kanban) | show draggability | ghost + `transform`, drop-zone highlight | follow + 150ms | real reflow during drag; no ghost |
-| **State transition** (loading→content) | without "jump" | crossfade skeleton↔content at equal height | 150ms | skeleton at different height → CLS (`LAYOUT_INVARIANTS §5`, V3) |
-| **Drawer/Modal open** | spatial connection | `transform: translateX/Y` + `opacity` | 200–250ms | `left/width` animation; jerk |
-| **Expand/collapse** (accordion, inspector) | continuity | `grid-template-rows`/`transform`, not `height:auto` animation | 200ms | `height` animation from/to auto → jank |
+| **Row/card hover** | "live interface" | `background`/`box-shadow` change | `--motion-quick` · `--ease-move` | geometry shift, jitter |
+| **Focus-visible** | state visibility | `outline`/ring without flow shift | `--motion-instant` | no focus-visible; layout shift |
+| **Press / active** | tactile response | `transform: scale(0.98)`, origin at the point touched | `--motion-instant` · `--ease-exit` | `width/margin` animation; "jump" |
+| **Success confirmation** | close the action | the object itself confirms — short check or lift, `opacity`+`translateY` | `--motion-base` · **`--ease-spring`** (the one spring per screen) | no feedback; toast shifts content |
+| **List enter/exit** | explain the change | `opacity`+`translateY 8px` for the new row | `--motion-base` · `--ease-enter` · **`--stagger-tight` (rows), first 8 only** | entire list reorder as "jump" |
+| **Value change** (counter, status) | notice the change | gentle `opacity` pulse or colour transition on the same node (never remount) | `--motion-quick` · `--ease-move` | change without signal; number "jumps" (need `tabular-nums`, `LAYOUT_INVARIANTS §3`) |
+| **Drag affordance** (kanban) | show draggability | ghost + `transform`, drop-zone highlight | follow + `--motion-quick` | real reflow during drag; no ghost |
+| **State transition** (loading→content) | without "jump" | crossfade skeleton↔content at equal height | `--motion-quick` · `--ease-move` | skeleton at different height → CLS (`LAYOUT_INVARIANTS §5`, V3) |
+| **Drawer/Modal open** | spatial connection | `transform: translateX/Y` + `opacity`, **from the edge the panel lives on** | `--motion-base` · `--ease-enter` | `left/width` animation; jerk |
+| **Expand/collapse** (accordion, inspector) | continuity | `grid-template-rows`/`transform`, not `height:auto` animation | `--motion-base` · `--ease-move` | `height` animation from/to auto → jank |
 
 ### What MICRO mode produces
 
@@ -113,15 +115,19 @@ Each: **what → principle → permitted technique → duration → red flag**. 
 ```markdown
 ## MICRO SPEC: [screen/component]
 Contour: operational (/admin | /app)
-Responsiveness reference: [Linear list / Stripe table / Google Calendar event]
+Responsiveness standard: [the interaction must feel answered within 100 ms — name the moment, not a product]
 
-| Moment | Trigger | Property (transform/opacity) | Duration · easing | reduced-motion |
-|--------|---------|------------------------------|-------------------|----------------|
-| press  | :active | scale(0.98)                  | 100ms · ease-out  | no scale, instant |
-| ...    | ...     | ...                          | ...               | ... |
+| Moment | Trigger | Property (transform/opacity) | Duration · easing | Origin · order · offset | reduced-motion |
+|--------|---------|------------------------------|-------------------|--------------------------|----------------|
+| press  | :active | scale(0.98)                  | `--motion-instant` · `--ease-exit` | from the point touched | no scale, instant |
+| list arrives | mount | opacity + translateY 8px | `--motion-base` · `--ease-enter` | reading order · `--stagger-base`, first 8 only | opacity only |
+| ...    | ...     | ...                          | ...               | ... | ... |
 
 Prohibitions: no layout properties; no public-site "character"; zero geometry shift.
-Criterion for @QA_VISUAL: V7 geometryShiftOnState == 0; V8 0 layout animations, reduced ok.
+**A row with an empty Origin/order/offset cell is not finished** — that column is where stiffness lives
+(`roles/MOTION_CRAFT_CANON.md` §2). Durations and easings come from the motion floor (§1), not invented.
+Criterion for @QA_VISUAL: V7 geometryShiftOnState == 0 · V8 0 layout animations, reduced ok · **V21
+durations ≥ 2 and easings ≥ 2 with at least one transform entrance** · M1–M12 walked, <3 hits.
 ```
 
 ### Who does what in MICRO mode

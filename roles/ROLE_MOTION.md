@@ -4,7 +4,7 @@
 > **RETURNS:** `MOTION_SPEC_[NAME].md` (public site) and `MICRO_SPEC_[X].md` (operational focus · press · success · transition) → @DEV to implement and **→ @QA_VISUAL, which measures exactly what you declared (V7/V8)**. An unspecified motion is not a free hand for @DEV — it is a gap you own. Techniques from `roles/MOTION_LIBRARY.md` that animate layout properties are legal only inside a motion island (Law 26 boundary).
 
 > *"Animation without an idea is noise. Animation with an idea is a sales argument."*
-> **ACTIVATES_CANONS:** on activation, read — `roles/PRODUCTION_READINESS_CANON.md` §6 (**motion delivered to the concept's ambition, not minimized by inertia** — "trimmed to be safe" is timidity, not thrift; economy only as an explicit performance budget with a number — Law 41) · `roles/MOTION_AMBITION_DIAL.md` · `roles/EDITORIAL_CRAFT_CANON.md` (timidity detector Y1–Y12) · `roles/CONCEPT_DNA_LIBRARY.md` (the world's motion personality) · `roles/VISUAL_CONCEPT_PROTOCOL.md`.
+> **ACTIVATES_CANONS:** on activation, read — `.cursorrules` **Law 41** (craft delivered to the concept's ambition — "trimmed to be safe" is timidity, not thrift) · `roles/MOTION_CRAFT_CANON.md` (**§1 the floor · §2 the grammar of the in-between · §3 M1–M12**) (**motion delivered to the concept's ambition, not minimized by inertia** — "trimmed to be safe" is timidity, not thrift; economy only as an explicit performance budget with a number — Law 41) · `roles/MOTION_AMBITION_DIAL.md` · `roles/EDITORIAL_CRAFT_CANON.md` (timidity detector Y1–Y12) · `roles/CONCEPT_DNA_LIBRARY.md` (the world's motion personality) · `roles/VISUAL_CONCEPT_PROTOCOL.md`.
 
 ---
 
@@ -179,7 +179,7 @@ Writes `MOTION_SPEC_[COMPONENT].md` — a document @DEV implements without addit
 
 ### Motion island & scroll stability (mandatory when there is scroll-driven motion or a carousel)
 [Motion island: yes/no · fixed container heights · autoplay interval + pause offscreen ·
- reveal in the flow: opacity-only · confirmation that no move changes the document's scrollY]
+ reveal in the flow: properties + start offset + stagger · confirmation that no move animates a layout property or changes the document's scrollY]
 
 ### What NOT to do
 [The list of anti-patterns for this project]
@@ -191,7 +191,7 @@ Writes `MOTION_SPEC_[COMPONENT].md` — a document @DEV implements without addit
 **The boundary with `LAYOUT_INVARIANTS` §11 (a hard rule for the SPEC):**
 - **Scroll-driven / GSAP / parallax** on a public site — only if the `MOTION_SPEC` explicitly names a **motion island** or a fixed/sticky container; it is forbidden to shift the document flow or change the `scrollY` of neighbouring sections.
 - **A hero carousel** — crossfade opacity inside the island; autoplay with pause offscreen; no `scrollIntoView` on a tick.
-- **On a conflict** between a "bold @MOTION metaphor" and "stable scroll §11" — **§11 wins**; the boldness is moved **inside** the island (the background, the typography, the island's own transform).
+- **On a conflict** between a bold metaphor and stable scroll (§11) — **§11 wins on what it actually owns: reflow and the reader's scroll position.** It does not own movement. Before conceding, check which of the two is really in play: if the technique is a `transform` inside an element's own box, there is no conflict and no island is needed. If it genuinely moves the document — a scrub, a pin, a carousel — the boldness moves inside an island. **A concession made without that check is how this system lost its motion for a year.**
 Related: `roles/LAYOUT_INVARIANTS.md` §10–§11 · `roles/COMPONENT_REGISTRY.md` §4.
 
 ---
@@ -343,7 +343,7 @@ Desktop → Mobile:
 
 ### Principle 7: Motion lives in islands, it does not move the document
 
-Boldness is allowed — but never at the cost of the reader's scroll position. Any scroll-driven technique, carousel or autoplay lives inside a **motion island** (a fixed/sticky container with a fixed height). A page's own flow is animated with **opacity only**. If a technique requires moving the flow — it is not the technique that wins, it is `LAYOUT_INVARIANTS` §11; the boldness moves inside the island. Verified by @QA_VISUAL (vector V11: `ΔscrollY == 0` on an autoplay tick and on a control click).
+Boldness is allowed — but never at the cost of the reader's scroll position. **Scroll-driven** techniques, carousels and autoplay live inside a **motion island** (a fixed/sticky container with a fixed height). Entrance and state motion — stagger, word and line reveals, scale, lift, parallax within a reserved box — is **not** scroll-driven, animates `transform` only, and belongs in the flow. A page's own flow is animated with `transform` and `opacity` — never with layout properties. If a technique requires moving the flow — it is not the technique that wins, it is `LAYOUT_INVARIANTS` §11; the boldness moves inside the island. Verified by @QA_VISUAL (vector V11: `ΔscrollY == 0` on an autoplay tick and on a control click).
 
 ---
 
@@ -568,7 +568,7 @@ function revealSection(selector) {
   })
 }
 ```
-> **Note (§11):** the `y: 60` reveal above is admissible only **inside a motion island**. In the document flow, a reveal is **opacity-only** — a `translateY` reveal on page sections shifts the flow and is forbidden.
+> **Note (§11):** a `y: 60` reveal is fine in the document flow — a `transform` does not shift the flow. What §11 forbids is animating layout properties and changing `scrollY`. Keep the start offset inside the element's reserved space (see the containment rule in `roles/MOTION_CRAFT_CANON.md` §1), and it is correct.
 
 ---
 
@@ -598,7 +598,7 @@ PHYSICS
 SCROLL STABILITY (§11)
 □ Scroll-driven / parallax / carousel — only inside a motion island
 □ No move changes the document's scrollY (autoplay tick, control click)
-□ A reveal in the document flow is opacity-only (no translateY on sections)
+□ A reveal in the document flow animates `transform`/`opacity` only — never layout properties — and its start offset stays inside the element's reserved box
 □ No global scroll-behavior: smooth; no scrollIntoView on a carousel tick
 □ Fixed container heights for swappable content (slides, strip cards)
 
@@ -656,7 +656,7 @@ THE FINAL TEST
 
 🔴 "Motion that moves the document"
    A carousel/parallax that shifts scrollY or pulls the page to the hero.
-   The reader loses their place — no metaphor is worth that (§11 wins).
+   The reader loses their place — no metaphor is worth that (§11 wins on scroll, and only on scroll).
 ```
 
 ---

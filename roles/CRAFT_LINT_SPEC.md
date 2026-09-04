@@ -6,7 +6,7 @@
 **Date:** 2026-07-20 · **Roles:** @QA_VISUAL (owner) · @DEV (applies fixes) · @FRONTEND (lint rules)
 **Thesis:** every rule of taste that reduces to a count, a grep or a meter becomes a **blocking check**. Whatever does not reduce goes to `QA_VISUAL_AESTHETE_SENSOR.md` as a catalogue of crimes with a mandatory verdict.
 
-> Principle: **the machine holds the floor, the eye holds the ceiling.** Geometry (`V1–V12`) is already machine-checked. This file adds `V15–V18` — new *measurable* vectors that close frequent "eye" bugs — and reduces X1–X12 / I1–I12 to checks wherever that is possible.
+> Principle: **the machine holds the floor, the eye holds the ceiling.** Geometry (`V1–V12`) is already machine-checked. This file adds `V15–V21` — new *measurable* vectors that close frequent "eye" bugs — and reduces X1–X12 / I1–I12 to checks wherever that is possible.
 
 ---
 
@@ -163,6 +163,26 @@ The rule inserts into the roles — see §4.
 
 ---
 
+## 1d. Motion presence — vector V21 (the only motion vector that can fail on ABSENCE)
+
+**Why it exists:** V7, V8 and V11 all measure *harmlessness* — geometry shift == 0, layout animations == 0, `ΔscrollY` == 0. A page with `animation: none` scores perfect on every one of them. Before V21 there was no state of the world in which this system could report an animation as too weak.
+
+**Applies to:** any surface declaring interaction, in either register. N/A only for a surface with no interactive element at all, and that must be stated with the reason.
+
+**One carve-out, and it is narrow.** Where the project declares a world whose motion personality is deliberately minimal (`CONCEPT_DNA_LIBRARY` — e.g. a curatorial world specifying a slow opacity-only reveal), V21's third threshold is waived **on the surfaces that world governs**, and the waiver is written into the report citing the world and the token. The first two thresholds still hold: a declared world sets the *character* of motion, it never licenses one duration and one easing for everything. A waiver with no world cited is not a waiver.
+
+**Measure on the RENDER, not the source.** Collect every computed `transition-duration`, `animation-duration`, `transition-timing-function` and `animation-timing-function` in use on the surface, plus the set of properties actually animated.
+
+| Threshold | Fails when | The sign it catches |
+|---|---|---|
+| `distinctDurations >= 2` | one number for a press and a modal alike | **M3** one duration everywhere |
+| `distinctEasings >= 2` | one curve for arriving, leaving and moving alike | **M4** `ease-in-out` by default |
+| `entranceCarriesTransform == true` | every entrance is `opacity` and nothing else | **M1** the bare fade |
+
+**Verdict:** any threshold failed → the surface is stiff. Walk `roles/MOTION_CRAFT_CANON.md` §3 (**M1–M12**) and report the hits; **3+ hits = 🔴**, and none of them is fixed by lengthening a duration. A surface with no motion at all scores M1, M2, M7 and M9 automatically — that is the point of the catalogue.
+
+---
+
 ## 2. X1–X12 (cheapness, `VISUAL_CRAFT §9`) → checks
 
 > **The numbering is owned by the canon.** The meaning of each X is set by `VISUAL_CRAFT_CANON.md` §9; this table is only the machine projection of it and introduces no numbers of its own. Previously X6/X7/X8/X10/X11 meant something here other than in the canon — fixed.
@@ -208,6 +228,19 @@ The rule inserts into the roles — see §4.
 
 ## 4. Role inserts (ready to copy)
 
+### 4.0 Into `ROLE_DEV.md` / `ROLE_FRONTEND.md` → before every UI handoff
+
+```
+□ MOTION REFLEX RUN (roles/MOTION_REFLEX.md) over my own diff — R1…R12.
+  Report line, required even at zero: `MOTION REFLEX: <n> triggers, <n> fixed, <n> N/A + reason`.
+□ V21 holds: ≥2 distinct durations, ≥2 distinct easings, ≥1 entrance carrying a transform.
+□ Durations/easings/stagger come from the floor tokens (MOTION_CRAFT_CANON §1) or the project's
+  declared world — never hand-typed. A literal `0.3s` or `ease-in-out` in the diff is a trigger.
+□ Any rendered list of siblings carries a stagger (G2): one line, transition-delay from the index.
+□ prefers-reduced-motion present, dropping travel and KEEPING the answer (never .001ms — that is M12).
+□ No layout property animated anywhere (top/left/width/height/margin/padding) — 🔴 on its own.
+```
+
 ### 4.1 Into `ROLE_DEV.md` → the "Frontend geometry" section (after §12.3)
 
 ```
@@ -245,7 +278,9 @@ craft:
   steps:
     - run: npm run lint:craft         # eslint: V18 (button primitive), no-inline-style, no magic hex
     - run: npm run grep:craft         # X2/X4/X5/X9: shadows, hue-count, gradient-budget, dead-greys
+    - run: npm run grep:motion       # MOTION_REFLEX R1/R3/R4/R8: bare fades, one duration, ease-in-out, layout props
     - run: npx playwright test tests/visual/craft.spec.ts   # V15/V16/V17 measurably
+    - run: npx playwright test tests/visual/motion.spec.ts  # V21: distinct durations/easings, transform entrance
     - run: node scripts/craft-report.js --fail-on=blocking  # 🔴 → exit 1
 ```
 

@@ -15,7 +15,7 @@
 
 | Standard | Rule | Verification |
 |----------|---------|----------|
-| **Visual Identity** | Before the first screen: name the reference (Linear/Stripe/etc.) and verify §1.3 in the project FRONTEND_PASSPORT. All decisions = aligned with the reference, not "as it comes out". | Reference named in module spec. |
+| **Visual Identity** | Before the first screen: name the **project's own world** (`VISUAL_CONCEPT_[PROJECT].md` — Tier 0; THE FLOOR if none exists) and verify §1.3 in the project FRONTEND_PASSPORT. All decisions = aligned with the reference, not "as it comes out". | Reference named in module spec. |
 | **Drawer > Modal** | Creating and editing entities — only in Drawer (position right, size lg/md). Modal — only Confirm/Alert. | Module spec explicitly states: "form in Drawer". |
 | **ActionMenu in row** | In every table/list row on the right — a "three dots" button → Menu with actions (Edit, Delete + contextual). | For each list, menu items and endpoints are listed. |
 | **EmptyState** | When the list is empty (`length === 0`) — component with icon, heading, description, and one CTA button. | Mockup/spec describes EmptyState for each empty state. |

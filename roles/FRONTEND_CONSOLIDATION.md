@@ -3,7 +3,8 @@
 # Eliminates "text multiplication": the same rules no longer duplicated across 8 files.
 
 > **Principle (from your own `MIRROR_PROTOCOL`):** "Signal over volume. One canonical body of a document + references — not five copies of a rule in five files."
-> This directive does not delete knowledge — it assigns a **single source of truth** to each rule and converts duplicates into references. Nothing is lost; only the repetition that masked gaps is removed.
+> This directive does not delete knowledge — it assigns a **single source of truth** to each rule and converts **unowned** duplicates into references. Nothing is lost; only the repetition that masked gaps is removed.
+> **Scope, and it is narrow.** What this directive removes is the **unowned copy**: a rule repeated in a second file with nothing saying where it lives. It does **not** touch a deliberate echo that names its home (`MIRROR OF:`, or a clause naming the owning law or canon) — that repetition is structural and load-bearing, because the model does not reliably follow a reference. **Doctrine owner: `roles/RULE_INTEGRITY_PROTOCOL.md` T2.** Deleting a marked mirror because it looks like duplication is the failure this scope line exists to prevent.
 
 ---
 
@@ -27,7 +28,7 @@ After the upgrade, each rule lives in exactly one canon. Other files **reference
 | **Showcase: tokens/landing build order** | `roles/TEMPLATE_DESIGN_UX.md` | `FRONTEND_DESIGN_EXCELLENCE §4` (general, references) |
 | **Project business logic** | Project spec + `@BIZ` → `docs/artifacts/BUSINESS_LOGIC.md` (schema — `TEMPLATE_BIZ_LOGIC.md`) + `BUSINESS_ROUTES.md` | `TPF_*` no longer **a** source of business logic |
 
-**De-duplication rule:** on the next touch of any file in the "was duplicating" column — delete the repeated rules block, leaving a reference line pointing to the canon (texts below, §3). Module/route/behaviour context in the file stays — only the copy of the general rule is removed.
+**De-duplication rule:** on the next touch of any file in the "was duplicating" column — if the repeated rules block carries **no** marker naming its home, delete it and leave a reference line pointing to the canon (texts below, §3). If it **does** carry one, it is a marked mirror: leave it, and verify only that the marker still points at the live home. Module/route/behaviour context in the file stays — only the copy of the general rule is removed.
 
 ---
 

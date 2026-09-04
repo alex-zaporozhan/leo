@@ -9,7 +9,7 @@
 
 ## 0. Design Reference and Visual Standard
 
-**Reference:** Revolut mobile — bottom nav + cards; Apple Health — tickets and progress
+**The standard to reach:** bottom nav + cards; Apple Health — tickets and progress
 **Constitution:** `roles/FRONTEND_DESIGN_EXCELLENCE.md` §2 (operational contour)
 
 **Implementation chain:**

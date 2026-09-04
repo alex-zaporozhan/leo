@@ -130,7 +130,7 @@ operations/
 | `artifacts/COMMERCIAL_*`, `BRIEF_QUESTIONS_FOR_CLIENT`, `FEASIBILITY_*`, `docs/presentation/` | commerce | `commercial/` |
 | `artifacts/history/`, `_transient_meeting_rudiments/` | history | `archive/` |
 | `product_state/openapi`, `schemas` | state | stays in `product_state/` |
-| `roles/DEPLOY_VPS_STEP_BY_STEP`, `RUN_SERVICES`, `MIGRATIONS_PLAYBOOK` (universal) | operations (canon) | stay in `roles/`; project runbooks → `docs/operations/` |
+| `roles/MIGRATIONS_PLAYBOOK.md` (universal) | operations (canon) | stay in `roles/`; project runbooks → `docs/operations/` |
 
 > Folder names in the topology are **functional** (`decisions/`, `knowledge/`). The project name goes either into passport file names (`ARCHITECTURE_[PROJECT].md`) or into a wrapper `docs/[project]/` in a multi-product repository (see §5).
 

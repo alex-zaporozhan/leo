@@ -9,9 +9,12 @@
 
 ## §1. THE SEVEN TESTS — a rule enters only by passing all seven
 
+*(T1a is a branch of T1, not an eighth test: the axis decides which half of it applies.)*
+
 **T0 · GOAL — what is this law FOR? One sentence.**
 The goal is the **core of meaning**. Everything else in the law — motivation, algorithm, owners, the worked case — exists to accumulate toward that one goal. **A law that smears its goal has lost it:** two goals in one law means neither is enforced, because the reader satisfies the cheaper one and reports the law as met.
 *The test:* strike any clause and ask whether the goal still lands. A clause serving a **different** goal belongs to a different law, or it is decoration.
+When editing, the question is never “is this true?” but **“does this serve the goal?”** — a true clause serving a different goal belongs to a different rule, or it is decoration.
 *Failure: smeared centre.* The most common way a good law is ruined by a well-meant edit — an audit adding "completeness" does this routinely.
 *Case: Law 5's first rewrite fused two goals — "make the thought constructive" and "leave no dead end in the output" — and enforced neither. Its goal is the first; everything in it must serve that or leave.*
 
@@ -21,10 +24,18 @@ Exactly one of: **register** (how a thing is said) · **action** (what is done) 
 *Failure: category error.* The deepest of the seven, and the only one that survives every other check.
 *Case: Law 5 is a register rule. Twice it was rewritten as a procedure with owners and a gate, and twice the filter was lost — a register rule cannot have a gate, and demanding one destroys it. Silence was then attached to Law 5 and belongs to Law 13: withholding a known improvement is an **action** failure, not a **register** failure.*
 
+**T1a · Does this rule name an OWNER and a GATE?** *(Applies to the rule you are writing or changing. It is not a survey of the rules already in force — see §Scope.)*
+A **procedural** rule — one that describes a step — names who owns it and where it is verified. One with neither is not a rule, it is a wish, and it will be obeyed by whoever happens to remember it.
+**The exception is not an exception at all, it is a different axis (T1).** A **register** rule does not describe a step: it sets the register in which every other rule is written and the filter each role thinks through (`.cursorrules` **Law 5** is the clearest; Laws 3 and 13 sit near it). A register rule is verified by **reading the system**, not at a gate, and counting how many other rules "violate" it by word choice measures nothing. **Demanding an owner and a gate for a register rule is the category error that destroys it** — an earlier attempt to operationalise Law 5 turned a one-line filter into a procedure with owners and a taxonomy, and lost the filter. Improve a register rule by making it **sharper and shorter**, never by giving it machinery.
+*Failure: a wish with no owner · or a filter turned into a procedure.* Answer T1 first: the axis decides which half of this test applies.
+
 **T2 · HOME — is this a DECISION or a MEANING?** They obey opposite rules, and confusing them is where "single source of truth" advice goes wrong in a system like this one.
+**This test is the OWNER of the duplication doctrine for the whole system.** Wherever another file rules on copying, mirroring, de-duplicating or referencing a rule — `roles/CONFLICT_REGISTRY.md` (conflict winners and mirror sets), `roles/FRONTEND_CONSOLIDATION.md` (the de-duplication directive), `.cursorrules` LAW PRECEDENCE (b) (law-to-law resolutions) — it is applying this test to its own case, and it says so. If the doctrine changes, it changes here first. **There is no fourth policy, and a file that states one without naming this test as its owner is the defect.**
 A **decision** — a resolved value, a threshold, an address, a winner, a name — has **exactly one home**; every other place points at it. Copies of a decision drift, and a drifted decision gives two confident answers instead of one honest gap.
 A **meaning** — a principle, a priority, a way of thinking — **belongs in many homes on purpose.** Repetition across files is not redundancy, it is reinforcement: a reader who meets the same principle from three directions cannot slip past it, and laws that reference each other hold each other up. **Isolation is the failure mode of other systems, not the goal of this one** — this library is deliberately interwoven, and its stability comes from that.
 *The test:* if this text changes, must the other copies change too? **Yes → decision → one home.** **No → meaning → repeat it**, in the local voice, wherever the reader needs it.
+**One home does not mean one mention.** A decision may be **echoed in full** wherever the cost of the reader not following the pointer is high — the model does not reliably open a reference, and a decision governing a frequent action is cheaper repeated than missed. The condition is absolute and it is the whole rule: **every echo names its home.** An echo that names the home repeats; an echo that does not, drifts. What is forbidden is the **unowned copy** — two statements of one decision, neither pointing at the other, which come apart on the first edit with nobody able to tell which half is stale. This is why `MIRROR OF:` exists, and why a verbatim mirror is legitimate while a bare copy is not.
+**The law-to-law case, since it is the one that recurs.** A resolution between two laws has one owner and the owner is **named**: the owning law states it in full, the yielding law carries a pointer that says so (“… — Law 43 owns this”). `.cursorrules` **LAW PRECEDENCE (b)** applies this case; it keeps no second version of the doctrine.
 **A repeated meaning carries its link, or it will be consolidated away.** When a law reinforces the goal of another, or sharpens it by contrast, **the link is named in both places** — two kinds, and both are load-bearing:
 > **REINFORCES:** — another law serves this goal from a different angle. Naming it turns a coincidence into a mesh: the reader who arrives from either side lands on the same goal.
 > **CONTRASTS:** — another law sharpens this goal by holding up its anti-pattern. Contrast focuses a goal more sharply than repetition does, and a contrast nobody linked reads as a contradiction to the next auditor.

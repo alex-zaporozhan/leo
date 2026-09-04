@@ -11,7 +11,7 @@
 >
 > **⚠ THE SCOPE OF THIS FILE — read this before applying it to a landing.**
 > This is the craft of the **INSTRUMENT**: restraint, quiet, subtraction. It is the physics of expensive
-> *operational* software (Linear, Stripe, a console) — and it is exactly right there.
+> *operational* software — a console, a dense professional tool — and it is exactly right there.
 > **It is NOT the craft of a statement.** A hero, a landing, a brand page, a fashion or editorial surface obeys
 > partly OPPOSITE laws (scale as a weapon, deliberate asymmetry, one gesture committed to completely) —
 > those live in `roles/EDITORIAL_CRAFT_CANON.md`. Applying §1's restraint to a showcase is precisely how a
@@ -258,7 +258,7 @@ THE PROXIMITY LAW AS A NUMBER (also LAYOUT_COMPOSITION):
   Violated → the eye cannot see the grouping → the screen reads as "a pile", however pretty the parts.
 
 DENSITY ≠ CRAMPED:
-  Data screens MAY be tight — Linear and Bloomberg are tight — IF the rhythm is constant.
+  Data screens MAY be tight — the best of them are — IF the rhythm is constant.
   Cramped is what happens when the rhythm is broken, not when the numbers are small.
 
 AIR IS A MATERIAL:
@@ -341,7 +341,9 @@ products feel calm. Craft is mostly subtraction; the additive instinct is the am
 ## §11. THE FLOOR — the default operational system (when there is NO concept)
 
 > **The rule this exists to enforce:** the absence of a concept is **NOT a licence to invent**.
-> It is a licence to take the floor. An internal admin, a tool, an ops panel does not need a *world* —
+> It is a licence to take the floor. **This floor covers the still image only. Its motion peer is
+> `roles/MOTION_CRAFT_CANON.md` §1, taken verbatim at the same moment — a screen that took this floor
+> and shipped no movement took half of it.** An internal admin, a tool, an ops panel does not need a *world* —
 > it needs **craft**. Improvisation here is exactly how 2008 gets in.
 
 When a screen is operational (`/admin`, `/app`, internal tooling) **and** no `VISUAL_CONCEPT` applies —
