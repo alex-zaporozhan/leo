@@ -1,6 +1,6 @@
 # LEAD_ANTI_CHECKBOX_PROTOCOL — detecting "done for the checkbox" protocol
 
-> **Path:** `docs/LEAD_ANTI_CHECKBOX_PROTOCOL.md`  
+> **Path:** `roles/LEAD_ANTI_CHECKBOX_PROTOCOL.md`  
 > **Role:** @LEAD — the only one who applies this protocol.  
 > **Principle:** a checkbox is a result that looks complete but creates no real value or provability. A checkbox is worse than no result: it creates an illusion of readiness.  
 > **Auto-trigger:** this protocol is applied by @LEAD always — not only during "critical analysis". Every artifact, report, and handoff passes through the §2 filter.
@@ -203,5 +203,5 @@ Proposal: [targeted change in .cursorrules or ENGINEERING_PLAN]
 ## 7. CONNECTION WITH OTHER PROTOCOLS
 
 - When a checkbox is detected at GATE-N → @LEAD applies the response protocol from `LEAD_PRODUCT_GATE_PROTOCOL.md` §"@LEAD response protocol on gate failure".
-- On L-assessment → checkboxes in the GATE-6 E2E grid (`docs/LEAD_PRODUCT_GATE_PROTOCOL.md`, section "E2E — strict grid") = automatic FAIL.
+- On L-assessment → checkboxes in the GATE-6 E2E grid (`roles/LEAD_PRODUCT_GATE_PROTOCOL.md`, section "E2E — strict grid") = automatic FAIL.
 - On a systemic pattern → `CRYSTALS.md` is proposed to be updated after user confirmation.

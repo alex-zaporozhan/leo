@@ -17,7 +17,7 @@ Reusable standard / process / role / template     → roles/   (Layer P — glob
 Implementation fact of a specific project          → docs/    (further — by nature, §1)
 ```
 
-Example: `roles/RUN_SERVICES.md`, `roles/MIGRATIONS_PLAYBOOK.md`, `roles/DEPLOY_VPS_STEP_BY_STEP.md` — **universal** ops protocols → `roles/`. But "how **this specific** product is deployed", its runbook and envelopes → `docs/operations/` (§2). Same principle: token canon — in `roles/`, project token values — in `docs/`.
+Example: `roles/DOCKER_INFRA_PASSPORT.md`, `roles/MIGRATIONS_PLAYBOOK.md`, `roles/DOCKER_INFRA_PASSPORT.md` — **universal** ops protocols → `roles/`. But "how **this specific** product is deployed", its runbook and envelopes → `docs/operations/` (§2). Same principle: token canon — in `roles/`, project token values — in `docs/`.
 
 ---
 
@@ -81,7 +81,9 @@ execution/                       # was dev_execution/ — functional name
 Everything for wave N together (see `roles/FRONTEND_CONSOLIDATION.md` Patch 13):
 ```
 artifacts/waves/[N]/
-├── DEV_PROMPTS_WAVE_[N].md     # wave index → link to execution/waves/Px
+├── DEV_PROMPTS_WAVE_[N].md     # wave INDEX only — it points at the binder, it is not a second binder.
+#   The binder itself has ONE address: docs/artifacts/DEV_PROMPTS_[EPIC].md (.cursorrules, Layer W).
+#   A file under waves/[N]/ may index or extend it; @DEV opens the binder, never a copy.
 ├── QA_REPORT_*.md  ·  VISUAL_QA_REPORT_*.md
 ├── DESIGN_SPEC_*.md  ·  MOTION_CONCEPT_*.md  ·  MICRO_SPEC_*.md
 └── ACCEPTANCE_TEST_REGISTRY_*.md  ·  ARCH_MODULE_*.md (if for this wave)
@@ -99,8 +101,8 @@ product_state/
 Operational procedures for **this specific** product: how to deploy, start, migrate, recover, plus scale envelopes (load/latency/degradation for this specific installation).
 ```
 operations/
-├── DEPLOY_RUNBOOK.md           # step-by-step deployment of this product (based on roles/DEPLOY_VPS_STEP_BY_STEP.md)
-├── RUN_SERVICES.md             # how to bring up services locally/prod (based on roles/RUN_SERVICES.md)
+├── DEPLOY_RUNBOOK.md           # step-by-step deployment of this product (based on roles/DOCKER_INFRA_PASSPORT.md)
+├── RUN_SERVICES.md             # how to bring up services locally/prod (based on roles/DOCKER_INFRA_PASSPORT.md)
 ├── MIGRATION_RUNBOOK.md        # migration order for this product (base — roles/MIGRATIONS_PLAYBOOK.md)
 ├── INCIDENT_RUNBOOK.md         # recovery, rollback, on-call
 └── SCALE_ENVELOPES.md          # target loads/latency/limits (from SYSTEM_DESIGN)

@@ -189,7 +189,7 @@ This is what keeps @PENTEST's verdict real: the team is never forced to choose b
 The gate exists to make the product **honestly** reliable, not to be evaded. Two consequences:
 
 1. **Findings feed the source, not just the instance.** A 🔴 is patched *and* its class is removed: a missing tenant scope → not one patch but a repository-scope pattern + a @QA_ARCH grep; a race → a constraint pattern in the INVARIANT LEDGER; a recurring class → **⚡ REFLEX**, and if it is a knowledge gap, an **`@EVOLVE`** candidate (`roles/SYSTEM_EVOLUTION_PROTOCOL.md`). "Passed pentest" over a patched instance while the class survives is a failure.
-2. **@ARCH and @DEV build knowing @PENTEST will come — to build higher, not to hide lower.** The self-pentest before handoff (`roles/ROLE_PENTEST.md`, "Бич contract") is not concealment; it is the floor. The measure of success is that S-Wave finds only genuinely non-obvious issues — because the obvious ones were designed out at S-0 and self-caught before handoff.
+2. **@ARCH and @DEV build knowing @PENTEST will come — to build higher, not to hide lower.** The self-pentest before handoff (`roles/ROLE_PENTEST.md`, the scourge contract) is not concealment; it is the floor. The measure of success is that S-Wave finds only genuinely non-obvious issues — because the obvious ones were designed out at S-0 and self-caught before handoff.
 
 ---
 

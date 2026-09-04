@@ -940,7 +940,7 @@ STEP 2 — DOMINANT MATERIAL: choose one object as the interface material.
         It answers: what background? what shadow? what radius? does this material round in real life?
 STEP 3 — 60/30/10 PALETTE FROM THE MATERIAL:
         60% background (material colour, muted), 30% ink/surfaces, 10% one accent
-        (the most saturated colour of an object from Step 1). Check pairs against WCAG AA (TEMPLATE_DESIGN_PASSPORT §2.3).
+        (the most saturated colour of an object from Step 1). Check pairs against WCAG AA (TEMPLATE_DESIGN_PASSPORT §2).
 STEP 4 — TYPOGRAPHY BY POSTURE (Q2): pick a pair from the neighbouring world tables
         (respectably → serif worlds 2/11; boldly → 6; technically → 7; warmly → 3/8).
         Cyrillic support mandatory for RU market — "Cyrillic" column from the worlds.

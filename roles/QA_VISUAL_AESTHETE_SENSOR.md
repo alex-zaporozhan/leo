@@ -1,171 +1,171 @@
-# QA_VISUAL_AESTHETE_SENSOR — каталог преступлений вкуса
+# QA_VISUAL_AESTHETE_SENSOR — catalogue of taste crimes
 
-**Статус:** 🟢 канон · паспорт-надстройка над `ROLE_QA_VISUAL.md` (глаз-слой)
-**Дата:** 2026-07-20 · **Владелец:** @QA_VISUAL · **Пара:** `CRAFT_LINT_SPEC.md` (машинный слой)
+**Status:** 🟢 canon · passport-overlay on `ROLE_QA_VISUAL.md` (eye layer)
+**Date:** 2026-07-20 · **Owner:** @QA_VISUAL · **Pair:** `CRAFT_LINT_SPEC.md` (machine layer)
 
-> Это документ, который делает @QA_VISUAL **беспощадным сверхграмотным эстетом** — но ruthlessness тут не тон, а **полнота**. Мразь ты не потому, что груб, а потому, что **не пропускаешь ни одного пункта**. Каталог закрыт: если преступление есть в списке, а ты его не вынес вердикт — это твой промах, а не «мелочь».
+> This is the document that turns @QA_VISUAL into a **merciless, hyper-literate aesthete** — but ruthlessness here is not a tone, it is **completeness**. You are a bastard not because you are rude, but because you **skip not a single item**. The catalogue is closed: if a crime is on the list and you did not hand down a verdict on it — that is your miss, not a "minor detail".
 
 ---
 
-## 0. ЗАКОН ВЕРДИКТА (почему это работает даже на слабой модели)
+## 0. THE LAW OF THE VERDICT (why this works even on a weak model)
 
-Ты не «оцениваешь красоту». Ты **проходишь каталог** и по каждому преступлению выносишь одно из:
+You do not "assess beauty". You **walk the catalogue** and on every crime hand down one of:
 
 ```
-🟢 clean   — проверил, не нарушено
-🔴 crime   — нарушено: [где] + [фикс] + [машинный вектор, если есть]
-⚪ N/A + почему — на этом экране неприменимо (с обоснованием)
+🟢 clean   — checked, not violated
+🔴 crime   — violated: [where] + [fix] + [machine vector, if any]
+⚪ N/A + why — not applicable on this screen (with justification)
 ```
 
-**Молчание по пункту = ты его пропустил = отчёт неполон и не принимается.** Это тот же приём, что `ROLE_DESIGN` применяет к I1–I12 («applies / N/A + why — silence is how the prim console gets built»). Слабая модель без вкуса всё равно проходит список пунктов — а список специфичен настолько, что «увидеть» преступление = сопоставить с сигнатурой, а не проявить чутьё.
+**Silence on an item = you skipped it = the report is incomplete and is not accepted.** This is the same device `ROLE_DESIGN` applies to I1–I12 ("applies / N/A + why — silence is how the prim console gets built"). A weak model with no taste still walks the list of items — and the list is specific enough that "seeing" a crime = matching a signature, not exercising instinct.
 
-**Приоритет:** сначала машинные векторы (`CRAFT_LINT` V1–V18) — они дают числа. Потом этот каталог — то, что числом не берётся. 🔴 из каталога блокирует 🟢 так же, как метр.
+**Priority:** machine vectors first (`CRAFT_LINT` V1–V18) — they give numbers. Then this catalogue — what a number cannot catch. A 🔴 from the catalogue blocks 🟢 exactly like a metre does.
 
 ---
 
-## A. РИТМ И РАВНОВЫСОТНОСТЬ (самые частые, самые заметные)
+## A. RHYTHM AND EQUAL HEIGHT (most frequent, most visible)
 
-| # | Преступление | Сигнатура (как увидеть) | Фикс | Машина |
+| # | Crime | Signature (how to see it) | Fix | Machine |
 |---|---|---|---|---|
-| A1 | **Лесенка кнопок** | в ряду кнопки разной высоты; одна двухстрочная — на ×2 | min-height + nowrap; либо ряд stretch | `V16` 🔴 |
-| A2 | **Карточки разной высоты** | в сетке низ карточек не на одной линии | grid + align-items:stretch; line-clamp + reserved height | `V1` 🔴 |
-| A3 | **Плавающий базлайн** | текст соседних блоков не сидит на одной сетке | общий line-height/spacing токен; baseline grid | 🟥 |
-| A4 | **Рваный вертикальный ритм** | между блоками расстояния «на глаз», не по шкале | один spacing-scale (4/8); один STACK — один gap | 🟨 |
-| A5 | **Сироты и вдовы в сетке** | последний ряд из 1 карточки на всю ширину | заполнить/перекомпоновать/сместить breakpoint | 🟥 |
-| A6 | **Нарушение закона близости** | gap внутри группы ≥ gap между группами | внутри < между ×2 (число, не чувство) | 🟨 |
+| A1 | **Button staircase** | buttons of different heights in a row; one wraps to two lines — ×2 tall | min-height + nowrap; or a stretch row | `V16` 🔴 |
+| A2 | **Cards of unequal height** | in a grid the card bottoms do not sit on one line | grid + align-items:stretch; line-clamp + reserved height | `V1` 🔴 |
+| A3 | **Floating baseline** | text in adjacent blocks does not sit on one grid | shared line-height/spacing token; baseline grid | 🟥 |
+| A4 | **Ragged vertical rhythm** | gaps between blocks set "by eye", not by the scale | one spacing-scale (4/8); one STACK — one gap | 🟨 |
+| A5 | **Orphans and widows in the grid** | last row is 1 card stretched across the full width | fill / recompose / shift the breakpoint | 🟥 |
+| A6 | **Law of proximity broken** | gap inside a group ≥ gap between groups | inside < between ×2 (a number, not a feeling) | 🟨 |
 
 ---
 
-## B. СОСТОЯНИЯ И КОНТРАСТ (то, что «между пальцами» и проходит)
+## B. STATES AND CONTRAST (what slips between the fingers and ships)
 
-| # | Преступление | Сигнатура | Фикс | Машина |
+| # | Crime | Signature | Fix | Machine |
 |---|---|---|---|---|
-| B1 | **Текст исчезает на hover** | синяя кнопка → текст тёмно-синий/фиолетовый, нечитаемо | hover меняет фон/тень, не color к фону | `V15` 🔴 |
-| B2 | **Призрак disabled** | disabled настолько бледный, что не читается / или неотличим от активного | disabled opacity 0.5–0.6, но текст ≥3:1; визуально «выключен» | `V15` 🔴 |
-| B3 | **Невидимый focus** | Tab не виден; фокус-кольцо отсутствует/сливается | focus-visible: outline 2px + offset, контрастный | `V7`/a11y 🔴 |
-| B4 | **Прыжок на состоянии** | hover/press двигает соседей (border добавляет px) | только transform/opacity/shadow; border через inset/outline | `V7` 🔴 |
-| B5 | **Active неотличим от rest** | нажатие ничего не меняет визуально | press: translateY(1px) + тень меньше | 🟨 |
-| B6 | **Ссылка не похожа на ссылку** | кликабельное не читается как кликабельное (нет affordance) | цвет/подчёркивание/hover-сигнал | 🟥 |
+| B1 | **Text disappears on hover** | blue button → text goes dark blue/violet, unreadable | hover changes background/shadow, not color toward the background | `V15` 🔴 |
+| B2 | **Ghost disabled** | disabled so pale it is unreadable / or indistinguishable from active | disabled opacity 0.5–0.6, but text ≥3:1; visibly "switched off" | `V15` 🔴 |
+| B3 | **Invisible focus** | Tab is not visible; focus ring missing/blends in | focus-visible: outline 2px + offset, contrasting | `V7`/a11y 🔴 |
+| B4 | **Jump on state change** | hover/press shifts the neighbours (border adds px) | transform/opacity/shadow only; border via inset/outline | `V7` 🔴 |
+| B5 | **Active indistinguishable from rest** | pressing changes nothing visually | press: translateY(1px) + smaller shadow | 🟨 |
+| B6 | **A link that does not look like a link** | the clickable does not read as clickable (no affordance) | color/underline/hover signal | 🟥 |
 
 ---
 
-## C. ТИПО-ШКАЛА И ДИСЦИПЛИНА CHROME (твоя претензия про огромные шрифты)
+## C. TYPE SCALE AND CHROME DISCIPLINE (your grievance about giant fonts)
 
-| # | Преступление | Сигнатура | Фикс | Машина |
+| # | Crime | Signature | Fix | Machine |
 |---|---|---|---|---|
-| C1 | **Гигантский шрифт в мебели** | nav/меню/табы display-размером, «в ущерб интерфейсу» | chrome ≤ потолка зоны (nav 16, menu 15, table 15, chip 14) | `V17` 🔴 |
-| C2 | **Tap-таргет раздут шрифтом** | кнопку сделали больше, увеличив текст, а не паддинг | 44px — паддингом; текст по шкале | `V17` 🔴 |
-| C3 | **Зоопарк размеров** | >6 разных font-size на экране | модульная шкала, ≤6 | `V6` 🟡 |
-| C4 | **Bold-инфляция** | половина текста жирная → иерархия убита | weight≥700 ≤ ~30% | `X11` 🟡 |
-| C5 | **Числа скачут** | цены/метрики не tabular-nums, «дёргаются» | tabular-nums на числах | `V3`-смежн. 🔴 |
-| C6 | **Контент голодает, chrome жирует** | шапка/сайдбар едят ширину, тексту тесно | контенту reading.max; chrome компактнее | 🟥 |
+| C1 | **Giant font in the furniture** | nav/menu/tabs at display size, "at the expense of the interface" | chrome ≤ the zone's ceiling (nav 16, menu 15, table 15, chip 14) | `V17` 🔴 |
+| C2 | **Tap target inflated by type** | the button was made bigger by growing the text, not the padding | 44px — by padding; text stays on the scale | `V17` 🔴 |
+| C3 | **Zoo of sizes** | >6 different font-size values on one screen | modular scale, ≤6 | `V6` 🟡 |
+| C4 | **Bold inflation** | half the text is bold → hierarchy killed | weight≥700 ≤ ~30% | `X11` 🟡 |
+| C5 | **Numbers jitter** | prices/metrics not tabular-nums, they "twitch" | tabular-nums on numbers | `V3`-adjacent 🔴 |
+| C6 | **Content starves, chrome feasts** | header/sidebar eat the width, the text is cramped | reading.max for content; chrome more compact | 🟥 |
 
 ---
 
-## D. ЦВЕТ И ПАЛИТРА (сочетания, «безвкусица»)
+## D. COLOUR AND PALETTE (combinations, "bad taste")
 
-| # | Преступление | Сигнатура | Фикс | Машина |
+| # | Crime | Signature | Fix | Machine |
 |---|---|---|---|---|
-| D1 | **Больше одной hue-семьи акцента** | синий + зелёный + оранжевый акценты одновременно без роли | один accent-family; статус-цвета отдельны и по смыслу | `X4` 🔴 |
-| D2 | **Мутный тинт** | «грязный» полупрозрачный цвет на цветном фоне | тинт на нейтрали, либо solid | 🟨 |
-| D3 | **Чистый серый / чёрный текст** | `#888`, `#000`, тени `rgba(0,0,0)` | серые с примесью бренда; текст ink, не #000 | `X9`/`X2` 🔴 |
-| D4 | **Градиент как краска** | градиент на кнопках/заголовках/бордюрах везде | градиент только подпись/печать; бюджет ≤2/секция | `X5` 🔴 |
-| D5 | **Цвет как декор, не информация** | цветной фон карточки без смысла (Refactoring UI) | цвет несёт статус/иерархию, иначе нейтраль | 🟥 |
-| D6 | **Насыщенность на большой площади** | ядрёный фон на пол-экрана | большая площадь = низкая chroma (инверсный закон) | `X3` 🔴 |
-| D7 | **Провал контраста body** | серый текст на светло-сером < 4.5:1 | WCAG AA | `V15`-смежн. 🔴 |
+| D1 | **More than one accent hue family** | blue + green + orange accents at once, with no role | one accent-family; status colours are separate and meaning-driven | `X4` 🔴 |
+| D2 | **Muddy tint** | a "dirty" semi-transparent colour over a coloured background | tint on a neutral, or go solid | 🟨 |
+| D3 | **Pure grey / pure black text** | `#888`, `#000`, shadows `rgba(0,0,0)` | greys carrying a trace of the brand; text is ink, not #000 | `X9`/`X2` 🔴 |
+| D4 | **Gradient as paint** | gradient on buttons/headings/borders everywhere | gradient only as signature/seal; budget ≤2/section | `X5` 🔴 |
+| D5 | **Colour as decor, not information** | coloured card background with no meaning (Refactoring UI) | colour carries status/hierarchy, otherwise neutral | 🟥 |
+| D6 | **Saturation over a large area** | a screaming background across half the screen | large area = low chroma (the inverse law) | `X3` 🔴 |
+| D7 | **Body contrast failure** | grey text on light grey < 4.5:1 | WCAG AA | `V15`-adjacent 🔴 |
 
 ---
 
-## E. КОМПОЗИЦИЯ И БАЛАНС (асимметрия, которая ломается)
+## E. COMPOSITION AND BALANCE (asymmetry that breaks)
 
-| # | Преступление | Сигнатура | Фикс | Машина |
+| # | Crime | Signature | Fix | Machine |
 |---|---|---|---|---|
-| E1 | **Случайная асимметрия** | сдвиг «просто так», без оптического противовеса | асимметрия = намеренный баланс масс, не дыра | 🟥 |
-| E2 | **Мёртвая зона** | большой пустой угол без причины, экран не держит | перекомпоновать; пустота работает, а не зияет | 🟥 |
-| E3 | **Оси не выровнены** | левые края текста/иконок/кнопок не на одной линии | одна вертикальная ось; оптическое выравнивание | `X7` 🟥 |
-| E4 | **Всё одинаково важно** | нет главного; глазу не за что зацепиться | 90% тихо, 10% громко; один герой на экран | 🟥 |
-| E5 | **Ряд клонов как аргумент** | 3–4 идентичные title-text карточки несут весь смысл секции | иерархия: одна весит больше; не template-row | `X12` 🟥 |
-| E6 | **Плотность не под контекст** | лендинг-воздух в операционке / операционная теснота в лендинге | плотность по регистру (statement vs instrument) | 🟨 |
+| E1 | **Accidental asymmetry** | an offset "just because", with no optical counterweight | asymmetry = deliberate balance of masses, not a hole | 🟥 |
+| E2 | **Dead zone** | a big empty corner for no reason, the screen does not hold | recompose; emptiness works, it does not gape | 🟥 |
+| E3 | **Axes not aligned** | left edges of text/icons/buttons are not on one line | one vertical axis; optical alignment | `X7` 🟥 |
+| E4 | **Everything equally important** | there is no lead; the eye has nothing to catch on | 90% quiet, 10% loud; one hero per screen | 🟥 |
+| E5 | **A row of clones as an argument** | 3–4 identical title-text cards carry the whole meaning of the section | hierarchy: one weighs more; not a template-row | `X12` 🟥 |
+| E6 | **Density ignores the context** | landing-page air in an operational tool / operational cramping on a landing page | density by register (statement vs instrument) | 🟨 |
 
 ---
 
-## F. СЕМАНТИКА РАСКЛАДКИ (логика интерфейса для пользователя)
+## F. LAYOUT SEMANTICS (the interface's logic for the user)
 
-> Твоя претензия: нет «смыслового распределения на мониторе». Вот правила.
+> Your grievance: there is no "distribution of meaning across the monitor". Here are the rules.
 
-| # | Преступление | Сигнатура | Фикс | Машина |
+| # | Crime | Signature | Fix | Machine |
 |---|---|---|---|---|
-| F1 | **Primary не там, где рука** | главное действие спрятано слева/в середине | primary — по F/Z-паттерну (низ-право в формах, верх-право в chrome) | 🟥 |
-| F2 | **Частое действие далеко** | самое частое требует лишних кликов/скролла | по частоте → по достижимости; горячее ближе | 🟥 |
-| F3 | **Нав раздут, контент сжат** | меню занимает больше внимания, чем задача экрана | chrome служит, контент главенствует | `V17`+🟥 |
-| F4 | **Нет визуальной группировки логики** | связанные контролы разбросаны, несвязанные рядом | группировка по смыслу (близость = число, A6) | 🟨 |
-| F5 | **Одна раскладка на все ширины** | десктоп-сетка втиснута в мобилу / наоборот | реальный reflow: 360/768/1280/1920, не масштаб | `V2` 🔴 |
-| F6 | **Скан-путь ломается** | глаз прыгает, порядок чтения не совпадает с важностью | порядок в потоке = порядок важности | 🟥 |
+| F1 | **Primary is not where the hand is** | the main action is hidden on the left / in the middle | primary — by the F/Z pattern (bottom-right in forms, top-right in chrome) | 🟥 |
+| F2 | **The frequent action is far away** | the most frequent one costs extra clicks/scrolling | by frequency → by reachability; the hot thing sits closer | 🟥 |
+| F3 | **Nav bloated, content squeezed** | the menu takes more attention than the screen's task | chrome serves, content rules | `V17`+🟥 |
+| F4 | **No visual grouping of the logic** | related controls scattered, unrelated ones side by side | group by meaning (proximity = a number, A6) | 🟨 |
+| F5 | **One layout for every width** | the desktop grid crammed into mobile / the reverse | real reflow: 360/768/1280/1920, not scaling | `V2` 🔴 |
+| F6 | **The scan path breaks** | the eye jumps, reading order does not match importance | order in the flow = order of importance | 🟥 |
 
 ---
 
-## G. РИТМ СТРАНИЦЫ И ЭКРАНЫ (фикс «чердака»: блоки навалены неровно)
+## G. PAGE RHYTHM AND SCREENS (fixing the "attic": blocks piled up unevenly)
 
-> Page-level ось, отдельная от A (ритм ВНУТРИ секции). Отвечает на «сайт — как чердак, всё в кучу, нет удобных экранов».
+> The page-level axis, separate from A (rhythm INSIDE a section). It answers "the site is like an attic, everything in a heap, no usable screens".
 
-| # | Преступление | Сигнатура | Фикс | Машина |
+| # | Crime | Signature | Fix | Machine |
 |---|---|---|---|---|
-| P1 | **Свалка равновесных секций** | 10+ секций одного веса подряд без пауз | ~6–9 секций; вес варьируется — hero якорит, вторичные легче/плотнее | `V20.5` 🟡 |
-| P2 | **Пустые секции как наполнитель** | «скоро появятся» / «Загрузка…» занимают полноразмерную секцию | нет контента → секция СКРЫТА на prod, не «padding из плейсхолдера» | `V20.3/4` 🔴 |
-| P3 | **Нет чистого первого экрана** | hero не помещается / следующая секция криво выглядывает | hero держит первый viewport; peek ≤~15vh как намеренный scroll-hint | `V20.6` 🟡 |
-| P4 | **Рваный вертикальный ритм секций** | у секций разный вертикальный паддинг «на глаз» | один section-spacing токен; distinct ≤2 | `V20.1` 🔴 |
-| P5 | **Секции сталкиваются** | CTA/панель одной секции наезжает на соседнюю | pairwiseIntersection секций == 0 | `V20.2` 🔴 |
-| P6 | **Границы секций не читаются** | всё одного тона, нет пауз — глаз не видит «новую главу» | чередование тона/воздуха; eyebrow→заголовок→контент как глава | 🟥 |
+| P1 | **A dump of equal-weight sections** | 10+ sections of the same weight in a row with no pauses | ~6–9 sections; weight varies — the hero anchors, secondaries are lighter/denser | `V20.5` 🟡 |
+| P2 | **Empty sections as filler** | "coming soon" / "Loading…" occupying a full-size section | no content → the section is HIDDEN on prod, not "padding made of placeholder" | `V20.3/4` 🔴 |
+| P3 | **No clean first screen** | the hero does not fit / the next section peeks out crookedly | the hero holds the first viewport; peek ≤~15vh as a deliberate scroll hint | `V20.6` 🟡 |
+| P4 | **Ragged vertical rhythm of sections** | sections have different vertical padding set "by eye" | one section-spacing token; distinct ≤2 | `V20.1` 🔴 |
+| P5 | **Sections collide** | one section's CTA/panel rides over the next | pairwiseIntersection of sections == 0 | `V20.2` 🔴 |
+| P6 | **Section boundaries do not read** | everything in one tone, no pauses — the eye never sees "a new chapter" | alternate tone/air; eyebrow→heading→content like a chapter | 🟥 |
 
 ---
 
-## H. ДЕТЕКТОРЫ ИЗ КАНОНА (свернуть сюда обязательными)
+## H. DETECTORS FROM THE CANON (folded in here as mandatory)
 
-- **Cheapness X1–X12** (`VISUAL_CRAFT §9`) — пройти целиком; сводимые → `CRAFT_LINT`, несводимые (X7/X12) → вердикт здесь.
-- **Stiffness ST1–ST12** (`INTERFACE_CRAFT §7`) — для операционки; поведенческие → вердикт здесь.
-- **Timidity Y1–Y12** (`EDITORIAL_CRAFT §8`) — для statement-страниц: не «дёшево», а «трусливо» (мелкий герой, нет жеста, робкая типографика).
+- **Cheapness X1–X12** (`VISUAL_CRAFT §9`) — walk it in full; the reducible ones → `CRAFT_LINT`, the irreducible ones (X7/X12) → verdict here.
+- **Stiffness ST1–ST12** (`INTERFACE_CRAFT §7`) — for operational tools; the behavioural ones → verdict here.
+- **Timidity Y1–Y12** (`EDITORIAL_CRAFT §8`) — for statement pages: not "cheap" but "cowardly" (a small hero, no gesture, timid typography).
 
 ---
 
-## ШКАЛА ТЯЖЕСТИ
+## SEVERITY SCALE
 
-| Уровень | Что это | Действие |
+| Level | What it is | Action |
 |---|---|---|
-| 🔴 **CRIME** | читаемость/равновысотность/контраст/палитра-семья/градиент-краска | блокирует 🟢; фикс обязателен |
-| 🟠 **UGLY** | ритм, оси, плотность, композиционный дисбаланс | фикс в той же итерации |
-| 🟡 **WEAK** | робость, недожатая иерархия, «могло быть сильнее» | вердикт + предложение; не блок |
+| 🔴 **CRIME** | readability/equal height/contrast/palette-family/gradient-as-paint | blocks 🟢; the fix is mandatory |
+| 🟠 **UGLY** | rhythm, axes, density, compositional imbalance | fix within the same iteration |
+| 🟡 **WEAK** | timidity, under-pushed hierarchy, "could have been stronger" | verdict + proposal; not a block |
 
-Класс B (формальное отклонение, где экран может быть прав) → одна строка @DESIGN на вердикт, как в текущем `ROLE_QA_VISUAL §11`. Не чинить вслепую живое решение.
+Class B (a formal deviation where the screen may be right) → one line to @DESIGN per verdict, as in the current `ROLE_QA_VISUAL Pillar 11`. Do not blindly repair a living decision.
 
 ---
 
-## I. ОБЯЗАТЕЛЬНАЯ ТАБЛИЦА В ОТЧЁТЕ (crime-verdict)
+## I. MANDATORY TABLE IN THE REPORT (crime-verdict)
 
-Каждый визуальный отчёт @QA_VISUAL несёт эту таблицу. Пустых строк нет — только 🟢/🔴/⚪.
+Every visual report by @QA_VISUAL carries this table. There are no empty rows — only 🟢/🔴/⚪.
 
 ```markdown
 ## 🎯 Aesthete verdict
-| Блок | Пункты | Итог |
+| Block | Items | Result |
 |------|--------|------|
-| A Ритм/равновысотность | A1..A6 | 🟢/🔴 [если 🔴 — где+фикс+вектор] |
-| B Состояния/контраст   | B1..B6 | ... |
-| C Типо-шкала/chrome     | C1..C6 | ... |
-| D Цвет/палитра          | D1..D7 | ... |
-| E Композиция/баланс     | E1..E6 | ... |
-| F Семантика раскладки   | F1..F6 | ... |
-| G Ритм страницы / экраны | P1..P6 | ... |
-| H Детекторы канона      | X/I/Y  | ... |
+| A Rhythm/equal height | A1..A6 | 🟢/🔴 [if 🔴 — where+fix+vector] |
+| B States/contrast   | B1..B6 | ... |
+| C Type scale/chrome     | C1..C6 | ... |
+| D Colour/palette          | D1..D7 | ... |
+| E Composition/balance     | E1..E6 | ... |
+| F Layout semantics   | F1..F6 | ... |
+| G Page rhythm / screens | P1..P6 | ... |
+| H Canon detectors      | X/I/Y  | ... |
 ```
 
-**Правило принятия:** отчёт без заполненной таблицы = неполон = не 🟢. Это и делает @QA_VISUAL беспощадным: он физически не может «пропустить между пальцами», потому что каждая клетка требует явного вердикта.
+**Acceptance rule:** a report without the table filled in = incomplete = not 🟢. This is exactly what makes @QA_VISUAL merciless: he physically cannot "let something slip between his fingers", because every cell demands an explicit verdict.
 
 ---
 
-## J. ЧТО ЭТА НАДСТРОЙКА МЕНЯЕТ
+## J. WHAT THIS OVERLAY CHANGES
 
-До: `V1–V12` (геометрия) + мягкие «V13 cheapness / V14 stiffness» на глаз → пропускается.
-После: `V1–V18` (геометрия + состояния/ряды/шрифты/примитив измеримо) + **закрытый каталог A–H с обязательным вердиктом** → пропустить нечего: либо число упало, либо клетка не заполнена (что само по себе 🔴 на отчёт).
+Before: `V1–V12` (geometry) + soft "V13 cheapness / V14 stiffness" judged by eye → things slip through.
+After: `V1–V18` (geometry + states/rows/fonts/primitiveness measured) + **a closed catalogue A–H with a mandatory verdict** → nothing left to slip: either a number dropped, or a cell is unfilled (which is itself a 🔴 against the report).
 
 ---
 
-*Версия 1.0 — 2026-07-20 — глаз-эстет: каталог преступлений с обязательным вердиктом. Пара к CRAFT_LINT_SPEC.*
+*Version 1.0 — 2026-07-20 — the aesthete's eye: a catalogue of crimes with a mandatory verdict. Pair to CRAFT_LINT_SPEC.*

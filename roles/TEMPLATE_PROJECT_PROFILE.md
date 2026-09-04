@@ -9,6 +9,8 @@ Project profile template for launching in the target niche.
 - Product type: (B2B / B2C / B2B2C / Internal)
 - Target platform: (Web / Mobile / API / Multi-platform)
 - Market: (RU / CIS / Global)
+- `DOCS_LANGUAGE`: (Law 44 — the language of this project's `docs/` artifacts. Leave blank for the default, **English**. Setting it does not change `roles/` or `.cursorrules`, which stay English, and it never applies to the product's own user-facing strings — those follow the product's audience.)
+- Chat language: (the reply always follows the language of the request; recorded here only when the owner wants it fixed to one)
 - Main value scenario (1 sentence):
 
 ## 2. Operational profile

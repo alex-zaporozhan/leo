@@ -65,6 +65,6 @@ Such a mechanism requires code changes and a small key-verification service (you
 
 ---
 
-**Preparation of the contract/offer and LICENSE.txt is performed by the @LAWYER role** (docs/ROLE_LAWYER.md). Call @LAWYER with the request: "Before client handover: draw up contract/offer, place LICENSE.txt in the deploy folder per the template from DEPLOY_LICENSE_AND_PIRACY.md".
+**Preparation of the contract/offer and LICENSE.txt is performed by the @LAWYER role** (roles/ROLE_LAWYER.md). Call @LAWYER with the request: "Before client handover: draw up contract/offer, place LICENSE.txt in the deploy folder per the template from DEPLOY_LICENSE_AND_PIRACY.md".
 
 *This document is used at the "after deploy, before client handover" stage. See PROCESS_LAUNCH.md and ROLE_LEAD.md.*

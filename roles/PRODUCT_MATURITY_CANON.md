@@ -117,7 +117,7 @@ Benchmark:  [the ONE product that does this class best. Not "Linear" in general 
 THREE THINGS THEY DO THAT WE DO NOT (be specific — a behaviour, not an adjective):
   1. [e.g. "the block list shows a THUMBNAIL of each block, so you see the page without clicking"]
   2. [e.g. "editing a field updates the preview instantly — the edit and the result are ONE surface"]
-  3. [e.g. "no technical field names anywhere — 'Media Id' is called 'Изображение'"]
+  3. [e.g. "no technical field names anywhere — 'Media Id' is called 'Image'"]
 
 FOR EACH:  [we take it — how] / [we deliberately reject it — WHY, in one sentence]
 "We reject it because it is hard" is not a reason. It is a confession.
@@ -147,8 +147,9 @@ Law 8 forbids UUIDs. That was too narrow. **The database must not appear in the 
 ✅ REQUIRED:
    Every field the user sees has a HUMAN name and, where it is not obvious, a one-line explanation of what
    it does — written for the person doing the job, not for the person who wrote the migration.
-   `Carousel Media Ids` → `Изображения карусели` · `Media Id` → `Изображение` · `block_type: video_block` → the
-   block is simply CALLED «Видео», and its type is shown by its ICON, not by a string.
+   `Carousel Media Ids` → `Carousel images` · `Media Id` → `Image` · `block_type: video_block` → the
+   block is simply CALLED “Video”, and its type is shown by its ICON, not by a string.
+   (Write these in the **product's own user language**; the examples here are in English because the canon is.)
 
 THE TEST: show the screen to someone who has never seen the codebase. Every word they cannot explain is a defect.
 ```

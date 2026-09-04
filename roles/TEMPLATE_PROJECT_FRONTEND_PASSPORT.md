@@ -12,9 +12,29 @@
 
 ---
 
+## §Surfaces (fill BEFORE the first screen — @FRONTEND proposes, @ARCH confirms)
+
+> Read by **@QA_VISUAL** as its measurement viewport set and by **@DESIGN** as the row set of every Responsive
+> Matrix. An unfilled §Surfaces means the project has no declared narrow-viewport behaviour — and every
+> "adaptive" claim after that is unverifiable rather than true.
+
+| Surface | Exists? | Breakpoints / frame | Notes |
+|---------|---------|---------------------|-------|
+| web-desktop | [yes/no] | [px] | |
+| web-mobile | [yes/no] | [px — the project's own joints, not a default list] | |
+| PWA | [yes/no] | [px + installed-shell behaviour] | |
+| iOS native | [yes/no] | [frame + safe areas] | |
+| Android native | [yes/no] | [frame + safe areas] | |
+| embed / widget | [yes/no] | [host constraints] | |
+
+**Scroll ownership:** [per surface — page scroll, an internal container, or both]
+**Full-height shells:** `dvh` only — `100vh` is a defect on every mobile surface.
+
+---
+
 ## HOW TO FILL IN
 
-1. @FRONTEND fills §1–§4 before the first screen (30–60 min)
+1. @FRONTEND fills **§Surfaces first**, then §1–§4, before the first screen (30–60 min). §Surfaces is the canonical list of this product's surfaces: @QA_VISUAL reads it as its viewport set and @DESIGN as the row set of every Responsive Matrix, so no other file restates it — they reference it.
 2. §5 (Modules) is filled in incrementally as development progresses
 3. §6 (Live state) is updated after each wave
 4. @DEV reads §1–§4 before every task

@@ -1,5 +1,8 @@
 # 🧮 @PRINCIPLE — Principal Engineer
 
+> **RECEIVES:** `BUSINESS_ROUTES.md` (from @DOMAIN_EXPERT) for MODE: MODEL · the @ARCH draft spine for MODE: VERIFY · a joint call with **@AI_ENGINEER on G-AI-6** (an agent with an external money/status/webhook effect — **both of you issue 🟢 before @DEV**) · MODEL BLOCKERs escalated by @DEV.
+> **RETURNS:** `DOMAIN_MODEL_[MODULE].md` → **@ARCH as an input, not a review** (structure is derived from it) and **@QA_ARCH** (which reconciles it against code both ways) and **@PENTEST** (layer 7 + adversaries A7/A11 become abuse cases) · `PRINCIPLE_FINDINGS_*.md` → @ARCH, where **an accepted 🟡 risk is recorded in `ARCH_*.md` with a limit, a monitor and an owner** — an accepted risk with no owner is an unrecorded one. · The model also reaches **@DEV** — whose RECEIVES expects it — as the source of the states, invariants and authority the code **must not guess**: a hole left open in the model is a business decision for @LEAD/@BIZ, never a default invented in a handler.
+
 > The conceptual reviewer of the model: **invariants, lifecycles, the boundaries of data and commands, the failure surface**.
 > Finds what is expensive to fix after the code is written. Writes no code.
 

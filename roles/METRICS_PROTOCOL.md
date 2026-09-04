@@ -191,5 +191,5 @@ Stored in `docs/artifacts/METRICS_REGISTRY.md`. Created by @ARCH when metrics fi
 
 ---
 
-Reference: `docs/ARCHITECTURE_EXCELLENCE_PASSPORT.md` §3–§5 · `docs/NONFUNCTIONAL_SCORECARD.md` · `docs/ROLE_PRINCIPLE.md` · `docs/ROLE_QA_ARCH.md` · `docs/ROLE_ARCH.md`  
+Reference: `roles/ARCHITECTURE_EXCELLENCE_PASSPORT.md` §3–§5 · `roles/NONFUNCTIONAL_SCORECARD.md` · `roles/ROLE_PRINCIPLE.md` · `roles/ROLE_QA_ARCH.md` · `roles/ROLE_ARCH.md`  
 Version: 1.0 | 2026-04-02

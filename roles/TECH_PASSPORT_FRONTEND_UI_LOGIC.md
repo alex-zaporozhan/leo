@@ -10,12 +10,12 @@
 
 | Document | Purpose |
 |----------|--------|
-| `docs/DOMAIN_STANDARDS.md` | Page-type checklists for @QA_ARCH |
-| `docs/TEMPLATE_MODULE_DEV.md` | Module skeleton for @ARCH design |
-| `docs/TEMPLATE_DESIGN_UX.md` | Visual system for **marketing** pages (landing, glass, hero) |
+| `roles/DOMAIN_STANDARDS.md` | Page-type checklists for @QA_ARCH |
+| `roles/TEMPLATE_MODULE_DEV.md` | Module skeleton for @ARCH design |
+| `roles/TEMPLATE_DESIGN_UX.md` | Visual system for **marketing** pages (landing, glass, hero) |
 | `docs/artifacts/ARCH_FRONTEND_TECH_PASSPORT_DENTAL_BOOKING.md` | Repository facts: routes, zones, stack |
-| `docs/ARCH_FRONTEND_UI_LOGIC.md` | Repository: admin light theme, Mantine tokens, injection points (`theme.ts`, CSS, layout); **micro-norms §9** of this tech passport |
-| `docs/ARCHITECTURE_EXCELLENCE_PASSPORT.md` §5 (showcases), `docs/TEMPLATE_ERP_REPORTING_VITRINES.md` | NFR: ERP reporting showcases — not a UI spec; field/metadata contract with backend |
+| `roles/ARCH_FRONTEND_UI_LOGIC.md` | Repository: admin light theme, Mantine tokens, injection points (`theme.ts`, CSS, layout); **micro-norms §9** of this tech passport |
+| `roles/ARCHITECTURE_EXCELLENCE_PASSPORT.md` §5 (showcases), `roles/DOMAIN_STANDARDS.md` | NFR: ERP reporting showcases — not a UI spec; field/metadata contract with backend |
 
 **Historical drafts with prompts and duplicates** — `docs/artifacts/archive/`; brief index `docs/archive/` — `docs/archive/README.md`. Programme **8.5+** — `docs/artifacts/85 plus/`.
 
@@ -31,7 +31,7 @@ Target reference **Enterprise Pro-SaaS** (navigation separated from work):
 - **Spotlight / Cmd+K** — global search and quick navigation (as data grows).
 - **Light work zone (main):** background is not "pure white", but **level 0** — neutral grey (`gray.0` / `#F8F9FA`), so **level 1** (cards, `Paper`/`Card`) reads as white "sheets" with a micro-border and optional light shadow. **Crisp SaaS** norms — **§7**; operational micro-style (scroll, cards, statuses, typography, buttons) — **§9**.
 
-Actual layout and components — verify with `frontend/src/admin/layouts/AdminLayout.tsx` and the project passport; light theme tokens and file map — `docs/ARCH_FRONTEND_UI_LOGIC.md`.
+Actual layout and components — verify with `frontend/src/admin/layouts/AdminLayout.tsx` and the project passport; light theme tokens and file map — `roles/ARCH_FRONTEND_UI_LOGIC.md`.
 
 ---
 
@@ -47,9 +47,9 @@ Actual layout and components — verify with `frontend/src/admin/layouts/AdminLa
 6. **Keyboard** — `Escape` closes Drawer; `Cmd/Ctrl+K` — Spotlight (when connected). **Omni Chat** (`/admin/omni-chat`, `AdminOmniChatPage`): `mod+J` — focus dialog search; `mod+Enter` — send message; `Escape` — close Drawer form/task; **`mod+shift+l`** — collapse/expand the **right** "Work Centre" inspector (does not fire in input fields by default). Canon: `ARCH_FRONTEND_TECH_PASSPORT_DENTAL_BOOKING.md` §2.2.1.
 
 7. **Owner reports (ERP / period analytics)** — do not mix with marketing visuals:
-   - Backend may serve aggregates from a **showcase** (pre-aggregate) with fallback to a "raw" query; **portable** norms — `docs/TEMPLATE_ERP_REPORTING_VITRINES.md`; contract and facts for this repository — `docs/artifacts/ARCH_DEV_ERP_VITRINES_026.md`, `docs/artifacts/ARCH_PERF_ENGINE_L2_DEEP_2026.md` §6.
+   - Backend may serve aggregates from a **showcase** (pre-aggregate) with fallback to a "raw" query; **portable** norms — `roles/DOMAIN_STANDARDS.md`; contract and facts for this repository — `docs/artifacts/ARCH_DEV_ERP_VITRINES_026.md`, `docs/artifacts/ARCH_PERF_ENGINE_L2_DEEP_2026.md` §6.
    - **UI:** same four states (Loading / Empty / Error / Success), see `ARCHITECTURE_EXCELLENCE_PASSPORT.md` §11. If the API returns a stale-showcase flag (e.g. `aggregate_stale`), an **unobtrusive** indicator or "refresh report" hint is acceptable (copy and placement — per product); **do not** show users internal table names, Celery internals or UUID unless necessary.
-   - Screen-level finance/ROI detail — in `docs/TPF_MASTER.md` §4.6 / corresponding `TPF_MODULE_*`.
+   - Screen-level finance/ROI detail — in `roles/TPF_MASTER.md` §4.6 / corresponding `TPF_MODULE_*`.
 
 ---
 
@@ -158,7 +158,7 @@ Floating layers (modals, Drawer, dropdowns) use **layered** shadows from theme (
 ### 7.3. Shadows (Crisp / layered)
 
 - Avoid **default "blurry"** shadows; define **multi-layer** `xs`–`xl` values in `createTheme` (two `box-shadow` layers with small alpha) so modal and card borders are crisp.
-- Specific strings for this repository — in `docs/ARCH_FRONTEND_UI_LOGIC.md` (single sync point with `frontend/src/theme.ts`).
+- Specific strings for this repository — in `roles/ARCH_FRONTEND_UI_LOGIC.md` (single sync point with `frontend/src/theme.ts`).
 
 ### 7.4. Button hierarchy
 
@@ -177,7 +177,7 @@ Floating layers (modals, Drawer, dropdowns) use **layered** shadows from theme (
 
 ### 7.7. Repository implementation
 
-- Code points, @FRONTEND checklist and sync with Midnight/Graphite — **`docs/ARCH_FRONTEND_UI_LOGIC.md`**. Prompts and tasks — via `DEV_PROMPTS` / epics, not mandatory "HANDOFF @LEAD" blocks from drafts.
+- Code points, @FRONTEND checklist and sync with Midnight/Graphite — **`roles/ARCH_FRONTEND_UI_LOGIC.md`**. Prompts and tasks — via `DEV_PROMPTS` / epics, not mandatory "HANDOFF @LEAD" blocks from drafts.
 
 ---
 
@@ -235,11 +235,11 @@ Connection to the rest of the tech passport: **§7** — light theme tokens and 
 
 ### 9.7. Repository implementation
 
-- Global tokens — `frontend/src/theme.ts`, `frontend/src/index.css`, `docs/ARCH_FRONTEND_UI_LOGIC.md`.
+- Global tokens — `frontend/src/theme.ts`, `frontend/src/index.css`, `roles/ARCH_FRONTEND_UI_LOGIC.md`.
 - **@FRONTEND** role: during review and specification, verify **§9** compliance alongside §7.
 
 ---
 
-Reference: `docs/DOMAIN_STANDARDS.md` · `docs/TEMPLATE_MODULE_DEV.md` · `docs/TEMPLATE_DESIGN_UX.md` · `docs/artifacts/ARCH_FRONTEND_TECH_PASSPORT_DENTAL_BOOKING.md` · `docs/ARCH_FRONTEND_UI_LOGIC.md` · `docs/ROLE_FRONTEND.md` · `docs/ARCHITECTURE_EXCELLENCE_PASSPORT.md` §5 · `docs/TEMPLATE_ERP_REPORTING_VITRINES.md`
+Reference: `roles/DOMAIN_STANDARDS.md` · `roles/TEMPLATE_MODULE_DEV.md` · `roles/TEMPLATE_DESIGN_UX.md` · `docs/artifacts/ARCH_FRONTEND_TECH_PASSPORT_DENTAL_BOOKING.md` · `roles/ARCH_FRONTEND_UI_LOGIC.md` · `roles/ROLE_FRONTEND.md` · `roles/ARCHITECTURE_EXCELLENCE_PASSPORT.md` §5 · `roles/DOMAIN_STANDARDS.md`
 
 Version: 2.5 | 2026-03-26 — **§9 Premium Micro-Design Codex (Mantine v7)**; fixed Crisp reference in §0 (§7); §7–§8 Roadmap numbering unchanged

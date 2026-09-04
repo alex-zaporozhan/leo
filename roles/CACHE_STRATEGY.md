@@ -2,7 +2,7 @@
 
 > **Purpose:** uniform criteria for introducing and changing cache in the system, to avoid **stale money/slots**, data leaks between clinics, and "silent" incidents without metrics.  
 > **Decision is made by @ARCH** and recorded in `docs/artifacts/ARCH_*.md` / `docs/artifacts/DEV_PROMPTS_*.md`; **@DEV** implements only the described contract.  
-> **Connection:** `docs/ARCHITECTURE_EXCELLENCE_PASSPORT.md` (observability, data integrity, performance).
+> **Connection:** `roles/ARCHITECTURE_EXCELLENCE_PASSPORT.md` (observability, data integrity, performance).
 
 This is **not** a replacement for Redis as a Celery broker — this is about **response and computation caching**.
 
@@ -11,7 +11,7 @@ This is **not** a replacement for Redis as a Celery broker — this is about **r
 ## 1. Where the decision is recorded
 
 - In the architectural artifact or in the task for @DEV: **what** is cached, **key**, **TTL**, **invalidation**, **degradation** when Redis is unavailable.
-- Any new use of server-side cache in a critical path — with an explicit line in the handoff (see `docs/ROLE_ARCH.md`, @DEV handoff section).
+- Any new use of server-side cache in a critical path — with an explicit line in the handoff (see `roles/ROLE_ARCH.md`, @DEV handoff section).
 
 ---
 

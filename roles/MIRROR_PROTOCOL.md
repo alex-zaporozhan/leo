@@ -229,5 +229,5 @@ Status: ✅ Applied
 
 ---
 
-Reference: `docs/ENGINEERING_PLAN.md` · `.cursorrules` Law 16
+Reference: `roles/ENGINEERING_PLAN.md` · `.cursorrules` Law 16
 Version: 1.0 | 2026-04-02

@@ -3,6 +3,144 @@
 
 ---
 
+# UPGRADE v6.37 — "Routing, the model, and the cost" (2026-09-03)
+
+> **One sentence:** the system gained an entry point (every task resolves a class in the router before any role
+> acts), the domain model became a law rather than a canon nobody was routed to, effort became a declared and
+> countable quantity, and the clean-context audit pass — the strongest verification in practice — became a
+> declared object instead of a habit.
+
+## What was added
+- **TASK ROUTING block** in `.cursorrules`, before the laws: task → class → the class minimum → LPA → the chain.
+  Stated explicitly as a **priority order, not a whitelist**, and carrying the registration rule: a canon that
+  is not in the router does not exist.
+- **`roles/RAG_CANON.md` v3.0 — the Task Router.** Twenty task classes (TC-01…TC-20 + TC-00 trivial), each with
+  its register, a **≤6-file minimum with the sections named**, an on-demand list and an explicit **OUT** list.
+  Plus §2.1–2.5: roles read on activation · templates (a form to fill, not a rule) · event-driven files ·
+  **project examples that are never a default** (`TPF_*`, `TECH_PASSPORT_FRONTEND_UI_LOGIC`,
+  `ARCH_FRONTEND_UI_LOGIC`) · files under review. §6 gives the router a maintenance rule with teeth and a
+  two-directional drift check.
+- **Law 42 — the model precedes the structure.** `LOGIC_MODELING_CANON` (seven layers, twelve adversaries,
+  a terminating cycle) wired into the ROLE MAP, the CHAIN PROTOCOL, @PRINCIPLE ROUTING and Layer P. Duties
+  mirrored into `ROLE_ARCH` (structure derived FROM the model), `ROLE_QA_ARCH` (model↔code reconciliation both
+  ways — a bug class with no other detector), `ROLE_CREATOR` (first model of the differentiator journey).
+- **Law 43 — leverage before effort.** Effort measured in **decisions reopened**: E1 TOUCH · E2 EXTENSION ·
+  E3 INTERLOCK (4–6 reopened) · E4 RECONSTRUCTION. Take the lowest tier reaching the declared result; the deep
+  pass is refused unless the last 10% *is* the product, the domain is **binary rather than fractional**
+  (money/medical/legal/statistics/algorithms), it is **foundation under Law 41** (where this law is silent), or
+  the owner asked. E4 is never entered by drift. Declaration format and enforcement: `ROLE_LEAD` §THE MODEL AND
+  THE COST.
+- **`roles/SECOND_PASS_PROTOCOL.md`** — the clean-context audit: why isolation, not wording, is the mechanism;
+  SP-0 interceptor · SP-1 per unit · SP-2 per stage · SP-3 per batch; the role set looked up from the task
+  class; **the derivation chain** (what each artifact is checked against — what turns re-reading into checking);
+  the false-green catalogue FG-1…FG-12; the boundary that stops a pass from silently reconstructing.
+- **`ROLE_FRONTEND` v3.0** — ACTIVATES_CANONS header (router first, then the register canon); Tier 0 replaces
+  "Linear-grade" as the standard; the contour table restated by register; the stack demoted to a class default;
+  the `DESIGN SOLUTION` section (glass cards, gradient icons, text gradients) replaced by a four-step
+  register-aware procedure; and a new **MOBILE AND PLATFORM COMPOSITION** section — the surface set is declared,
+  the responsive matrix has five mandatory answers, `dvh`/safe-area/scroll ownership are non-negotiable, and an
+  unspecified narrow viewport blocks the handoff to @DEV.
+
+## What was rewritten
+- **Law 21** — from "Jenkins + GHCR by default, do not propose GitHub Actions" to **"CI/CD is a declared
+  decision"**: no engine forbidden or mandatory; what stays mandatory is pull-not-rebuild (Law 36), digest
+  addressing, and the centralised config contract. The violation is an undeclared contour, not a choice of tool.
+- **QA_ARCH visual gate** — now asks for the REGISTER before applying the instrument checklist, and marks the
+  checklist's concrete values as superseded by the project design passport wherever it is filled.
+- **`ROLE_QA_VISUAL` viewports** — from a fixed four to the project's declared surfaces, with the four as default.
+
+## Conflicts resolved
+C9 (which visual checklist applies to which surface) · C10 (where the viewport set comes from) ·
+C11 (project world outranks the golden library) — see `roles/CONFLICT_REGISTRY.md`.
+
+## Known open after this upgrade
+Dead references (`TEMPLATE_ERP_REPORTING_VITRINES`, `CRYSTALS`, five more) · X-numbering divergence between
+`CRAFT_LINT_SPEC` §2 and `VISUAL_CRAFT_CANON` §9 · I1–I12 vs ST1–ST12 residue in `CRAFT_LINT_SPEC` §3 and
+Law 39 · the duplication policy contradiction between `CONFLICT_REGISTRY` and `FRONTEND_CONSOLIDATION` ·
+no craft reflex yet (frontend has R1 routing, not R2 self-check) · no mobile composition canon and no mobile
+task class · Laws 19/25 still name the golden library without Tier 0 · `FRONTEND_DESIGN_EXCELLENCE` §6 values
+still written as absolutes.
+
+
+## Second wave of v6.37 (same upgrade, later the same day)
+
+- **Law 19 rewritten** — from "Design is a decision, not taste" (which carried a brand list) to **"The frontend is edited from decisions, not from the screen"**: @DEV opens world → passports → `DESIGN_SPEC` → component registry before touching UI; a UI change with no decision behind it is an **undeclared design decision**; several worlds per product are explicit, and carrying one surface's skin onto another is a defect.
+- **Law 25 rewritten** — from a second copy of Law 19 plus a second, differently-composed brand list, to **"Design is produced in an order, and the order is the quality"**: the seven-step chain world → register → typography and spatial grammar → component design → adaptive composition → **motion** → verdict, each step naming the canon that owns its detail. This is also the first law that **owns motion as a discipline** rather than mentioning it in passing.
+- **Brand templates removed from the constitution** — the golden-library enumerations are gone from Laws 19 and 25, from the @DESIGN row of the ROLE MAP, and from the @QA_ARCH acceptance checklist. Precedence (Tier 0 = the project world) lives in `roles/ROLE_DESIGN.md`; the constitution points, it no longer prescribes a look.
+- **Law 12 extended** — the **diff is the primary evidence surface** (a claim is checked against the change, not the file it landed in), and every report carries a **`NOT DONE:`** line: what was in scope and consciously left, or "nothing declined".
+- **Cascade rule** — three levels, not three competing lists: laws → task class (`RAG_CANON` §2) → the acting role's own **reading map**. The more specific section pointer wins; a role may add a file the class does not name and may not drop one it does. Stated in both `.cursorrules` and the router.
+- **Role sets are defaults, never permission lists** — written into the cascade rule and into `SECOND_PASS_PROTOCOL` §4. Composition of roles stays the developer's instrument; no table excludes a role.
+- **READING MAP sections** in `ROLE_DESIGN` (7 design task types) and `ROLE_FRONTEND` (7 frontend task types) — each row: what to open in what order, with **section pointers**, plus an explicit *not in scope* column.
+- **Product invariants** — new class and artifact `PRODUCT_INVARIANTS_[PROJECT].md` (`LEAD_PRODUCT_LOGIC_EXCELLENCE` §7): statements about the shape of the product that no schema holds and no per-screen gate sees. Checked by @QA_ARCH every audit and at SP-2/SP-3; countable, not judged.
+- **False-green counter** — `SECOND_PASS_PROTOCOL` §6 now tallies hits per shape; **three hits promote the shape to an `@EVOLVE` candidate**, closing incident → rule.
+- **@LEAD fitness gate `A0`** — three questions on an unplanned feature (whose scenario · where is the home · what do we remove), with routing by the answers. @CREATOR is reserved for a positioning change, not a button.
+- **@ARCH ADR discipline** — an ADR is born only from a decision with a spine vertebra or a model layer behind it; anything else is a task-report line.
+
+**Known open after the second wave:** seven dead `roles/*.md` references (`CRYSTALS`, `TEMPLATE_ERP_REPORTING_VITRINES`, `DEPLOY_VPS_RUNBOOK`, `DEPLOY_VPS_STEP_BY_STEP`, `RUN_SERVICES`, `MIGRATION_UPGRADE`, `roles/README`) · X-numbering divergence between `CRAFT_LINT_SPEC` §2 and `VISUAL_CRAFT_CANON` §9 · I1–I12 vs ST1–ST12 residue · `ACTIVATES_CANONS` present in 8 roles of 22 · no craft reflex · no mobile composition canon · no `PROJECT_CLASS` · batch protocol still a draft.
+
+
+## Third wave of v6.37 — repairs found by a clean-context audit of the second wave
+
+The second wave was audited from an empty context window (the mechanism `SECOND_PASS_PROTOCOL` describes). It returned **44 findings against work that had just been reported as done** — the strongest available evidence that the isolation is the active ingredient, not the wording. Repaired:
+
+**Contradictions between new and existing laws.** Law 43 was silent about Law 13 — an improvement seen mid-task is now explicitly made *inside* the declared tier, and one that would raise the tier goes through a Law 23 objection instead of silently. Law 19 skipped the REGISTER step that Laws 25 and 33 make first, and gave @MOTION only the public site while Law 25 and the chain also give it operational MICRO. The `foundation` list was duplicated in Laws 41 and 43 with different wording — 43 now points to 41 and keeps no copy. The DESIGN GATE still demanded "the main reference (a concrete product + screen)", which the rewritten 19/25 and the acceptance checklist now refuse — replaced by Tier 0, and the fourth mode RESKIN added with its output.
+
+**Rules without a place of execution.** Law 42 called @QA_ARCH the only detector of an entire bug class and that detector was absent from the QA_ARCH checklist — added, together with a release-contour line that gives the rewritten Law 21 the owner it lost. Law 25 gained owners and a named failure ("a skipped step is a finding with a name"). Law 21 gained Owners. The `NOT DONE:` line was required of "every task report" while living only in @LEAD's footer — it is now in @DEV's report shape alongside `EVIDENCE:`.
+
+**Uncountable thresholds.** The effort tiers had a numeric gap (nothing covered 1–3 reopened decisions) and the stop rule "twice the declared tier's scope" could not be computed from a range. The scale is now continuous (E2 = 0 reopened · E3 = 1–6 · E4 = >6 or the set rewritten) and the stop is a count: two past the upper bound. Percentages were demoted to illustration; the tier is the deciding unit.
+
+**Ghost artifacts.** `PRODUCT_INVARIANTS_[PROJECT].md` was read by three roles and created by none — @CREATOR now opens it with the package, and @QA_ARCH treats its absence as a finding rather than an N/A. The false-green counter was unusable: one stub row for twelve shapes, kept in `roles/` where Law 16 forbids per-project writing, with no increment trigger — the tally moved to a per-project `FALSE_GREEN_REGISTER.md` and the increment became a line in CLOSURE. `§Surfaces` was outside the passport's own filling instructions and unknown to the @ARCH who confirms it — both fixed, and iOS/Android split into separate rows since they are separate surfaces.
+
+**Cascade violated at the moment it was introduced.** Both READING MAPs dropped canons their class names (`LAYOUT_INVARIANTS` and `ASYNC_WORKERS_CANON` from the canvas row, `LAYOUT_COMPOSITION` from the public row) — restored. The maps spoke in prose while the router speaks in `TC-xx`, with no join: a class-join line added to each. A class for **operations** (release contour · deploy · performance · licensing) did not exist at all, so @OPS, @PERF and @LAWYER work resolved to no class — **TC-21** added.
+
+**Broken text.** The opening sentence of TASK ROUTING — the most-read sentence in the file — had been mangled into an unparseable clause and is rewritten as two. `SECOND_PASS` §3 carried an unnamed reference to a "batch protocol queue doctrine" that does not exist in the repository; the doctrine is now stated in place. `LEAD_PRODUCT_LOGIC_EXCELLENCE` had §7 physically before §6. `CONFLICT_REGISTRY` C2 quoted law text that this upgrade had deleted. The live component registry had three different addresses across four files; one address now.
+
+**Still open:** seven dead `roles/*.md` references · X-numbering divergence (`CRAFT_LINT_SPEC` §2 vs `VISUAL_CRAFT_CANON` §9) · I1–I12 vs ST1–ST12 residue · `ACTIVATES_CANONS` in 8 roles of 22 · `CRAFT_REFLEX` · `TENANCY_REFLEX` and the tenant passport · a mobile composition canon · `PROJECT_CLASS` · promotion of the batch protocol · GATE MATRIX in `LEAD_PRODUCT_GATE_PROTOCOL` does not yet list A0/A/B.
+
+
+## Fourth wave of v6.37 — system rectification
+
+Five independent clean-context audits ran against the whole system along different axes: the lifecycle as a state machine · role-to-role interaction · law-level simultaneity · reference and namespace integrity · duplication. They returned roughly **110 findings**, most of them older than this upgrade. Repaired in this wave:
+
+**A precedence rule for the laws — the largest structural gap in the system.** 43 laws act simultaneously and most of them can block, and until now exactly one pair had a declared winner. A `## LAW PRECEDENCE` block now opens the constitution, before Law 1: safety and irreversibility (38 · 40 · 27 · 32) → truth about the current state (12 · 36 · 4; a law whose input is unproven does not apply yet) → **stopping beats proceeding**, with every stop funnelled into the single Law 23 objection format and one queue (16 · 37 · 41 · 43) → the specific narrows the general **inside its declared scope only**, and a general law with no scope clause is amended through `@EVOLVE` rather than reinterpreted in the moment → otherwise the later, more specific law wins and the pair is recorded once in `CONFLICT_REGISTRY`. Plus two standing obligations: every law names an owner and a gate, and a resolution between two laws lives in one place.
+
+**Law 16 protected a file that does not exist.** It listed `.cursorrules.md` — the real file is `.cursorrules` — and covered 36 files of 122. It now covers the constitution itself and the whole `roles/` directory: the boundary is the directory, not a list that drifts.
+
+**Law 26 blocked the craft Law 33 requires.** Geometry invariants carried no register clause, so deliberate overlap and bleed — canonical `statement` technique — measured as 🔴. A register clause now allows them for **non-interactive** elements while keeping what never inverts: no two interactive boxes intersect, no horizontal overflow, contrast in every state, reachable targets.
+
+**`MOTION_LIBRARY` contradicted the law that binds it.** The mandatory arsenal contains morph, blur, clip-path reveals and size transitions — all forbidden by Law 26 in the document flow. A boundary note now scopes them to motion islands with reserved space, and to `statement` surfaces for the heavier ones: listing a technique is not permission to use it in flow.
+
+**Law 19 gave a second answer to "there is no concept"** where Laws 25 and 33 already had one. Routed by register: `instrument` takes THE FLOOR verbatim and continues; `statement` stops and requests the world.
+
+**113 broken references repaired** — 7 dead `roles/*` targets across 21 mentions, and 89 legacy `docs/<file>.md` paths pointing at files that moved into `roles/` years of edits ago. Zero dead `roles/*` references remain.
+
+**Detector namespaces.** `X1–X12` diverged in five of twelve numbers between `CRAFT_LINT_SPEC` §2 and the canon it claims to project (`VISUAL_CRAFT_CANON` §9) — renumbered to the canon, with the two genuinely missing machine checks added (icon set and stroke consistency · `tabular-nums`) and the two that were never X-codes moved out of the series. The stiffness detector still carried its pre-rename identity `I1–I12` in `CRAFT_LINT_SPEC` §3 and in Law 39, colliding with the live `I4` ("undo instead of confirm") — now `ST1–ST12` everywhere. And because `C`, `G`, `T`, `S`, `A`, `E` and `X` each mean different things in different canons, LAW PRECEDENCE now requires every detector code to be cited **with its canon**: an unqualified `C1` is a guess, not a finding.
+
+**Ghost artifacts given owners.** GATE-1 did not require `DOMAIN_MODEL_[MODULE].md` — the central artifact of Law 42 — nor `QA_TEST_STRATEGY_[MODULE].md`; both are blockers now. `FALSE_GREEN_REGISTER.md` is opened by @LEAD at the first matching pass. The "wave ledger" had no name: `docs/artifacts/waves/[N]/WAVE_LEDGER.md`, owned by @LEAD.
+
+**`CAPABILITY_MAP` could not exist on a greenfield module** while being a hard blocker before @DESIGN — a genuine deadlock. A greenfield clause derives the map from the domain model and the spine with rows marked `PLANNED`, converting to `VERIFIED` at the first @QA_ARCH pass; a row still `PLANNED` then is a finding.
+
+**One opening order.** `ROLE_LEAD` declared two different sequences for its own gates in the same file. Canonical now: **A0 fitness → 0.5 LPA → 0.7 model (Law 42) → 0.8 foundation (Law 41) → cost (Law 43)** — cost last, because the tier cannot be known before the model and the foundation question are answered.
+
+**Both sides of every contract.** The audit found 17 of 20 role-to-role handoffs written only in the file of the role that *demands* them: `ROLE_DEV` knew nothing of `DESIGN_SPEC`, the Component Map, Class A/B findings, `PIPELINE_PASSPORT`, the RAG passports or `MEDIA_PASSPORT`, while four roles addressed obligations to it; `ROLE_ARCH` knew nothing of @PRINCIPLE, who precedes it in the chain. Both now carry `RECEIVES` tables (artifact · from whom · what you must do · **what to do when it is missing**) and `RETURNS` lines, and the ROLE MAP makes the pattern normative for the rest: *an obligation written only in the file of the role that demands it is a wish, not a contract*.
+
+**Known open after the fourth wave:** the remaining ~19 roles still need `RECEIVES`/`RETURNS` and `ACTIVATES_CANONS` (a per-role list is prepared) · @MEDIA_ENGINEER is absent from `ROLE_LEAD` · @PERF names no return address · `ROLE_LAWYER` delegates to a role `@PRE` that does not exist · `DEV_PROMPTS` has three declared addresses across three files · seven broken `§`-references and a citation of a non-existent `AW-14` · Law 5 (positive phrasing) is contradicted by most laws and has no owner · Laws 5 · 13 · 17 exist only in the constitution and nowhere in `roles/` · `CRAFT_LINT_SPEC` and `QA_VISUAL_AESTHETE_SENSOR` are written in Russian while the rest of the layer is English · `CRAFT_REFLEX` · `TENANCY_REFLEX` · a mobile composition canon · `PROJECT_CLASS` · promotion of the batch protocol.
+
+
+## Fifth wave of v6.37 — contracts, routing law, and the language of the layer
+
+**Both sides of every contract, across all 23 roles.** The rectification audit found 17 of 20 role-to-role handoffs written only in the file of the role that *demanded* them. Every role now carries **`ACTIVATES_CANONS`** (what to open on activation, in order), **`RECEIVES`** (artifact · from whom · what you must do · **what to do when it is missing**) and **`RETURNS`** (artifact · to whom · verdict form). The links that had no second side are now named on both: @DEV knows `DESIGN_SPEC`, the Component Map, Class A/B findings, the job and pipeline passports, the RAG passports and `MEDIA_PASSPORT` · @ARCH knows @PRINCIPLE, the semantic core and the "backend must GROW" requests · @QA_VISUAL knows that `MICRO_SPEC` is what its V7/V8 measure · @PENTEST knows @AUDITOR escalates to it · @SEC and @OPS know that @SEO TECH is a deploy blocker peer to @PENTEST · @DOMAIN_EXPERT knows its routes are the input to the domain model and the place where regulatory requirements enter · @PERF now has a return address at all.
+
+**Law 5 — two rejected drafts before the right one, and the reason is the finding.** The audit reported Law 5 as the deadest rule in the constitution: no owner, no gate, "33 of 43 laws violate it". Both rewrites that followed made it worse. The first, *"constructive routing"*, collided with the system's own loaded term (TASK ROUTING · the Task Router · the per-role ROUTING sections) and ran to 1419 characters against 167 for Law 8. The second, *"name the next action"*, was shorter and still wrong — it was a **procedure**. **The real defect was in the diagnosis, not the law.** Law 5 is a **register law**: it does not describe a step, it sets the register every other rule is written in. It has no owner and no gate because it cannot have one, and the metric "33 laws violate it" counted negation words in laws — 38 and 40 — whose nature is prohibition. Restored close to its original brevity, in the owner's formulation: *a statement of what to do and how outranks a caution about what must not be done; a warning with no call to action is noise.* LAW PRECEDENCE now names the distinction, so the next audit does not "repair" it the same way: **procedural laws take owners and gates; register laws are made sharper and shorter, never given machinery.** A later pass then added the discriminator the law was missing — a warning carrying **basis · consequence · proposal** is a professional objection (Law 23 gives it its form), and noise is what remains when any of the three is absent. **Silence stayed with Law 13, deliberately:** withholding a known improvement is not a phrasing failure but quality seen and not acted on, and the objection Law 23 shapes is a sentence, never the deliverable. The three laws now divide cleanly by axis — **5 the register · 23 the form · 13 the action** — and Law 23's citation of Law 13 for silence, which an audit had flagged as broken, is correct exactly as written.
+
+**Laws 13 and 17 operationalised.** Law 13 ("quality stops speed") had no owner and no gate for its whole life; it is now verified through the report — an improvement made appears as what changed, an improvement **seen and not made** appears in the `NOT DONE:` line, and silence about a seen improvement is the violation. Law 17's `[STUB]` had no register, so a stub was forgettable by design; every stub is now recorded in the wave ledger with what it fakes, what would make it real and who decides, and an unregistered stub is 🔴 even when correctly marked in code.
+
+**The layer speaks one language.** `CRAFT_LINT_SPEC.md` and `QA_VISUAL_AESTHETE_SENSOR.md` were written in Russian while the other 127 files were English — and one of them is the machine floor that Law 39 makes blocking. Both fully translated with structural parity verified (line counts, every detector id, every threshold, every code fence byte-identical, emoji markers counted). `LIBRARY_TRANSFER_CRAFT_CANON.md` carried Russian product strings and one client's ADR numbers: strings translated, and a reading note marks the concrete routes and `ADR-0xx` references as one delivered product's example, never defaults for another project.
+
+**Phantoms and misroutes closed.** `@PRE` — a role referenced twice by @LAWYER and existing nowhere — replaced by the real owners (@DOMAIN_EXPERT for the regulatory picture, @BIZ for the KILL SIGNAL). `AW-14` was cited as a law in a series that ends at AW-13; the rule belongs to `DATA_INTEGRITY_CANON` §3 and now says so. Seven broken `§` references repaired against the real section structure (`METRICS_PROTOCOL` has §2.1/2.2 and §3.1/3.2 — not the §2.4 and §3.3 three files cited). `DEV_PROMPTS` had three declared addresses; the binder has one, and a wave file may index it but is never a second binder. **@MEDIA_ENGINEER existed in the constitution, had a detailed role file, and was absent from the orchestrator** — @LEAD now carries its trigger, its mode requirement and the stop condition when a hero needs plates and no passport exists.
+
+---
+
 # UPGRADE v6.35 — "Production-readiness & drift cleanup" (2026-07-23)
 
 > **One sentence:** the system now builds production-grade products by default (Law 41 — "MVP" is a delivery
@@ -37,7 +175,7 @@
 - TEMPLATE_BIZ_LOGIC.md `[FILL IN]` reconciliation check.
 - Project `.cursorrules` overlays are pre-v6.35 snapshots (validation copies) — intentionally not synced.
 
-Plan of record: `docs/ROLE_SYSTEM_RECONSTRUCTION_PLAN.md`.
+Plan of record: `roles/SYSTEM_UPGRADE_MANIFEST.md`.
 
 ---
 
@@ -346,6 +484,25 @@ Two axes separated:
 
 Version: 6.25 | 2026-07-08
 Composition v6.25: ASYNC_WORKERS_CANON v2.0 (PART II) + addenda ARCH/DEV/QA_ARCH/PENTEST + Law 30 v2.0 + PIPELINE_PASSPORT
+**v6.37 — seventh wave: language, and the rule about repeating a rule.**
+- **New Law 44 — the system writes in English; the reply speaks the user's language.** Everything on disk (canons, `docs/artifacts/*`, prompt series, batch headers, ADRs, code comments, commit messages) is **English by default**; everything said to the human in the chat is in **the language the human used**, because a reply is direct speech and not an artifact. The default is a **declared decision, not a fact of nature**: a project sets `DOCS_LANGUAGE` in `PROJECT_PROFILE.md` §1 and its `docs/` follow it, while `roles/` and `.cursorrules` stay English. The clause that matters most is the carve-out — **the product's own user-facing strings are never touched by this law**; an agent that "translates the interface to English" has inverted it.
+- Law 40's refusal script no longer hardcodes Russian; it replies in the language of the request.
+- **The Russian layer is gone.** `roles/niches/*` (six files, 485 lines) translated with verified structural parity; `контур` rendered as the canon's own **contour**, not "loop", so the niches and the rest of the system name the same object the same way. Placeholder `.gitkeep` notes under `docs/` translated. Zero Cyrillic remains in `.cursorrules`, `roles/` and `docs/`.
+- **LAW PRECEDENCE (b) rewritten — the owned echo.** The old rule ("a resolution lives in one place, the other keeps no second copy") was true about drift and wrong about how a model reads: the agent does not always open a pointer. The rule is now about **ownership, not uniqueness** — one law owns the resolution and is *named*; restating it in full elsewhere is legitimate where the cost of a missed pointer is high, provided the restatement names the same owner. **The forbidden thing is the unowned copy** — two statements, neither pointing at the other, which come apart on the first edit with no way to tell which half is stale.
+- **Law 25 kept whole, with owners stamped on it.** It restates Laws 28 · 33 · 34 · 26 · 39 and the `ROLE_DESIGN` Tier 0 rule at seven points. Under the old (b) that was six defects; under the new one it is legitimate, and it stays — this chain is read at the opening of every surface, and a step whose rule is only a link is a step that gets skipped. Each restating step now **names the law that owns it**, and the preamble says the echo is deliberate. Nothing was deleted: what changed is that a future editor now knows, at every one of those seven points, which file to change instead.
+- Applied immediately: **Law 43 declared owner** of the 13↔43 resolution (drift is 43's goal), Law 13 reduced to a pointer that says so. **Detector-code qualification** kept in LAW PRECEDENCE as the owner *and* repeated in full as `RAG_CANON` §1.1 — a deliberate echo, marked as one, because it governs every citation the agent writes.
+
+**v6.37 — sixth wave: semantic rectification (no new rules, no new files).**
+A clean-context audit of the five preceding waves, run under `roles/RULE_INTEGRITY_PROTOCOL.md`: every correction had to either **reinforce** an object's own goal or mark its **contrast**, never add a claim. What it removed:
+- **Two numbers for one threshold.** `ROLE_LEAD` §B carried its own E3/E4 bounds (`4–6 reopened`, `past 2× the tier`) that disagreed with Law 43 (`1–6`, `upper bound + 2`). The gate now points at the law and keeps no second copy — a countable threshold with two values is not countable.
+- **A fourth ordering nobody had named.** `RAG_CANON` §1 ranks documents and placed `roles/` *below* `docs/artifacts/`, with `.cursorrules` absent — readable as "an artifact outranks a law". §1 is now explicitly a **source** ladder that the laws are not on, and LAW PRECEDENCE names four orderings instead of three.
+- **A gate that ignored the register.** The @FRONTEND Visual Quality Gate applied the `instrument` checklist (`gray.0`, reference product named) to every surface — the collision `CONFLICT_REGISTRY` had already decided against. The gate now declares the register first, and the comparison base is the project passport, never an outside product.
+- **A greenfield deadlock.** `ROLE_DESIGN` still said "no capability map → stop", against `FRONTEND_CAPABILITY_CANON`'s own greenfield clause in the same system. A module with no backend yet is mapped from the domain model with `PLANNED` rows, not blocked forever.
+- **Self-contradiction inside single laws.** Law 39 named a CI job as owner while the same law says the executor may not exist; Law 22 named Jenkins as canon after Law 21 stopped mandating an engine; the CHAIN still demanded "a reference" before @DEV. All three now match the law they sit in.
+- **A protocol that miscounted itself.** `RULE_INTEGRITY_PROTOCOL` has seven tests and called them six in three places, and — having written the rule that a canon the router does not know does not exist — was itself missing from `FILE_MAP` and `SYSTEM_FILES_MASTER`. Both fixed; `RAG_CANON` TC-20 renumbered and brought back under the six-file cap.
+- **Coverage holes.** `SECOND_PASS` §4 had no audit set for TC-21 · `ROLE_PRINCIPLE` RETURNS did not name @DEV though @DEV's RECEIVES expects the model from it · `LAYOUT_INVARIANTS` §12 (collision) was missing from the @DESIGN and @QA_ARCH activation lists · V12 in `ROLE_DEV` hardcoded four viewports against Law 26's declared surfaces.
+- **Language.** Russian residue removed from the canon layer (the scourge contract, placeholder examples, criterion glosses). Still outstanding and **not** touched: `roles/niches/*` (six files) and the "reply in Russian" clause in Law 40's refusal script.
+
 Composition v6.24: DATA_INTEGRITY_CANON (+Law 32, integrations ARCH/DEV/QA_ARCH/PENTEST/MIGRATIONS, registries)
 Composition v6.23: ARCH_SPINE_PROTOCOL (+Law 31, integrations ARCH/QA_ARCH/SYSTEM_DESIGN, registries)
 Composition v6.22: ASYNC_WORKERS_CANON (+integrations ARCH/DEV/PENTEST/SYSTEM_DESIGN, registries)

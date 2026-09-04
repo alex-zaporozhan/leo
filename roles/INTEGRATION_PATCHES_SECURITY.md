@@ -60,7 +60,7 @@ The first draft was re-reviewed adversarially. Eleven substantive issues were fo
 
 **Rewritten (full replacements)**
 - `roles/ROLE_PENTEST.md` → **v2.0** — merciless mindset (six axioms), blocking authority at three points, `THREAT_MODEL`
-  (planning) and `GLOBAL_AUDIT` (red-team) modes, the vector tree A–G + T-series kept, the "бич" contract with @ARCH/@DEV,
+  (planning) and `GLOBAL_AUDIT` (red-team) modes, the vector tree A–G + T-series kept, the scourge contract with @ARCH/@DEV,
   the @DEV self-pentest, acceptance rules (🔴 never), @SEC-advisory clarity.
 - `roles/ROLE_QA.md` → **v2.0** — three modes PLAN/BUILD/GATE, tiered suite table, the 21 Pillars kept as the final pass
   (P19 = the isolation/XSS floor), the @PENTEST relationship + tier↔severity orthogonality.

@@ -437,7 +437,7 @@ linear.app — reference ONLY for restrained operational tasks, not the showcase
 
 ---
 
-## PATCH 8 — Header pointers (de-duplication, FRONTEND_CONSOLIDATION §3 style)
+## PATCH 8 — Header pointers (de-duplication, FRONTEND_CONSOLIDATION PART 3 style)
 
 ### 8.1 — `roles/DESIGN_DECISION_LIBRARY.md`
 

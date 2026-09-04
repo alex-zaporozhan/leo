@@ -130,7 +130,7 @@ Python: with session.begin():
 Question: if the transaction rolls back — has the task already left? if the task is faster than the commit — reads empty?
 Fix:    · enqueue AFTER commit  ·  or OUTBOX: write the event into the outbox table IN THE SAME transaction,
           a relay worker publishes after commit (guarantee: "exactly what was committed")
-Law:    HTTP/enqueue/sleep forbidden inside a transaction (AW-14; DATA_INTEGRITY §3).
+Law:    HTTP/enqueue/sleep forbidden inside a transaction (`roles/DATA_INTEGRITY_CANON.md` §3 — the transaction-boundary rule; it is not an AW law, the AW series ends at AW-13).
 ```
 
 **C2. Transaction open during an external call** — holds a connection from the pool, breaks limits.

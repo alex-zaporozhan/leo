@@ -99,6 +99,9 @@ roles/SYSTEM_UPGRADE_MANIFEST.md  ← upgrade manifest
 ```
 roles/LEAD_PRODUCT_GATE_PROTOCOL.md   ← quality gates GATE-0..GATE-6
 roles/LEAD_ANTI_CHECKBOX_PROTOCOL.md  ← detecting checkboxes without evidence
+roles/SECOND_PASS_PROTOCOL.md          ← the clean-context audit pass (SP-0…SP-3, role set by task class, derivation chain, false-green catalogue)
+roles/RULE_INTEGRITY_PROTOCOL.md       ← the seven tests a rule must pass before it enters the system, and the ladder between two rules that are both true (run on a finding before it is accepted)
+roles/LOGIC_MODELING_CANON.md          ← the domain model before the structure (Law 42): seven layers, twelve adversaries
 roles/LEAD_PRODUCT_LOGIC_EXCELLENCE.md ← product logic excellence reference
 ```
 
@@ -111,14 +114,14 @@ roles/TEMPLATE_COMMERCIAL_PACK.md     ← commercial package template
 roles/TEMPLATE_DESIGN_UX.md           ← UI/UX for marketing pages
 roles/TEMPLATE_ADMIN_UI_UX.md         ← UI/UX for operational screens (admin/app)
 roles/TEMPLATE_QA_FRONTEND_VISUAL_CANON.md
-roles/TEMPLATE_ERP_REPORTING_VITRINES.md
+roles/DOMAIN_STANDARDS.md (§5 Analytics/Reports)
 roles/TEMPLATE_PROJECT_PROFILE.md
 ```
 
 ### Optional
 
 ```
-roles/CRYSTALS.md                     ← only upon @LEAD proposal + user confirmation
+roles/ROLE_LEAD.md (§CRYSTALLIZATION)                     ← only upon @LEAD proposal + user confirmation
 roles/NICHE_BOOTSTRAP_PROTOCOL.md
 ```
 

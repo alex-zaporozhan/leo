@@ -11,7 +11,7 @@
 
 | Zone | Which document leads |
 |------|----------------------|
-| **Admin panel `/admin`, PWA `/app`, operational screens** | `docs/TECH_PASSPORT_FRONTEND_UI_LOGIC.md`, `docs/DOMAIN_STANDARDS.md`, `docs/TEMPLATE_MODULE_DEV.md`, `docs/artifacts/ARCH_FRONTEND_TECH_PASSPORT_DENTAL_BOOKING.md` |
+| **Admin panel `/admin`, PWA `/app`, operational screens** | `roles/TECH_PASSPORT_FRONTEND_UI_LOGIC.md`, `roles/DOMAIN_STANDARDS.md`, `roles/TEMPLATE_MODULE_DEV.md`, `docs/artifacts/ARCH_FRONTEND_TECH_PASSPORT_DENTAL_BOOKING.md` |
 | **Marketing: `/`, landings, promo, "showcase"** | **This file** + if needed, a separate brief in `docs/artifacts/` |
 
 **Error:** applying glass-hero and "zebra backgrounds" to admin tables as mandatory norm. **Correct:** admin — light work zone and cards from `ROLE_FRONTEND` / UI passport; marketing — tokens and composition below.
@@ -33,10 +33,10 @@ docs/artifacts/DEV_PROMPTS_*.md   → Task for the page / sections
         ↓
 TEMPLATE_DESIGN_UX.md             → HOW the marketing page LOOKS and in what ORDER to build
         ↓
-docs/ROLE_FRONTEND.md             → Who hands off to @DEV, two visual contours (admin vs marketing)
+roles/ROLE_FRONTEND.md             → Who hands off to @DEV, two visual contours (admin vs marketing)
 ```
 
-NFR and overall maturity: `docs/ARCHITECTURE_EXCELLENCE_PASSPORT.md`.
+NFR and overall maturity: `roles/ARCHITECTURE_EXCELLENCE_PASSPORT.md`.
 
 ---
 

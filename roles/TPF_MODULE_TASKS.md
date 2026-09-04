@@ -3,7 +3,7 @@
 > **[v6.16] PROJECT EXAMPLE (dental Business OS), NOT a universal canon.** Universal module type direction — `roles/TEMPLATE_MODULE_DEV.md §2`; screen business minimum — `roles/DOMAIN_STANDARDS.md`; tokens — `roles/FRONTEND_DESIGN_EXCELLENCE.md`; geometry — `roles/LAYOUT_INVARIANTS.md`; business logic — project specification + `docs/artifacts/BUSINESS_LOGIC.md`. Not created by default for a new project. Target repository location: `docs/artifacts/reference/tpf/`.
 
 > Prefix `TPF_` — Tech Passport Frontend. Module tech passport.
-> Connections: `TPF_MASTER.md`, `docs/artifacts/ARCH_TASKS_NEXT.md`, `docs/TECH_PASSPORT_FRONTEND_UI_LOGIC.md`.
+> Connections: `TPF_MASTER.md`, `docs/artifacts/ARCH_TASKS_NEXT.md`, `roles/TECH_PASSPORT_FRONTEND_UI_LOGIC.md`.
 
 ---
 

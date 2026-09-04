@@ -4,6 +4,8 @@
 # This is not a technical stack canon — it is a creative arsenal
 
 > **Principle:** a technique without a concept is decoration. A technique with a concept is an argument.
+
+> **Boundary with Law 26 — read before picking anything from this file.** The law says animation runs on `transform`/`opacity` **in the document flow**, and that is not negotiable: nothing here may animate width, height, margin, padding, `top/left`, or `clip-path` on an element that other content is laid out against. Several techniques below (morph, blur fields, clip-path reveals, size transitions) do exactly that. They are legitimate **only inside a motion island** — an element with reserved space and a fixed box, whose internal animation cannot move a neighbour (`roles/LAYOUT_INVARIANTS.md` §11) — and, for the heavier ones, only on a `statement` surface. Outside an island they are a 🔴 at @QA_VISUAL, and the fact that this file lists them is not a permission. `prefers-reduced-motion` is honoured everywhere, without exception.
 > Before choosing any technique — answer: "what does this communicate about the product?"
 
 ---

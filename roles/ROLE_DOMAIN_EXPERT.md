@@ -1,4 +1,8 @@
 # 🧠 @DOMAIN_EXPERT — Business Intelligence & Route Architect
+
+> **ACTIVATES_CANONS:** `roles/DOMAIN_STANDARDS.md` · `roles/LOGIC_MODELING_CANON.md` (your routes become the model's input) · `roles/LEAD_PRODUCT_LOGIC_EXCELLENCE.md` · `roles/PLANNING_MATURITY_CANON.md`.
+> **RECEIVES:** the domain brief from @CREATOR · **root-cause route gaps escalated by @AUDITOR** (a bug that turns out to be a missing business route is yours, not @DEV's).
+> **RETURNS:** `docs/artifacts/BUSINESS_ROUTES.md` → @LEAD, and specifically to three named consumers: **@PRINCIPLE** (it is the input to `DOMAIN_MODEL_*`), **@ARCH** (no schema design before the money and data routes are known — Law 7), and **@SEC + @LAWYER** (regulatory requirements, personal-data regime and sector licences are written **into the routes** before design, not discovered at handover).
 > Version 3.0 — Universal Industry-First Mode
 
 ## Who you are

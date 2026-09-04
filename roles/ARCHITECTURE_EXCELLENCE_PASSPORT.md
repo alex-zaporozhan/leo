@@ -2,7 +2,7 @@
 
 > **Roles:** @ARCH (design and invariants) · @QA_ARCH (evidence, risks, DoD) · @LEAD (priority and acceptance).  
 > **Purpose:** single **universal** reference for **non-functional** maturity: security, durability, multi-tenancy, operations, delivery discipline.  
-> **Passport vs project facts:** here — norms and checklists for any product; **specific KPIs, baseline and targets** for a specific team are maintained in `docs/NONFUNCTIONAL_SCORECARD.md` (or equivalent per repo convention).
+> **Passport vs project facts:** here — norms and checklists for any product; **specific KPIs, baseline and targets** for a specific team are maintained in `roles/NONFUNCTIONAL_SCORECARD.md` (or equivalent per repo convention).
 
 **How to use:** @ARCH verifies new decisions against sections **3.1, 4–12, 15** before committing to `docs/artifacts/ARCH_*.md`. @QA_ARCH uses **§3 (including 3.1), §13–§15** and checklist **§14** as an extension to `.cursorrules` and DOMAIN_STANDARDS.
 
@@ -12,9 +12,9 @@
 
 **Problem without a shared language:** NFR and "commercial maturity" are easy to interpret differently if criteria are scattered across chat history and old notes.
 
-**Risk of expectation vs. fact divergence:** actual delivery discipline (CI, images, migrations) changes over time — it must be verified against **`docs/DOCKER_INFRA_PASSPORT.md`**, **`docs/MIGRATION_UPGRADE.md`** and the current workflow in `.github/workflows/`, not stale assumptions.
+**Risk of expectation vs. fact divergence:** actual delivery discipline (CI, images, migrations) changes over time — it must be verified against **`roles/DOCKER_INFRA_PASSPORT.md`**, **`roles/MIGRATIONS_PLAYBOOK.md`** and the current workflow in `.github/workflows/`, not stale assumptions.
 
-This passport **fixes the criteria for target maturity (10/10 north star)** and a **gap matrix** so that @ARCH and @QA_ARCH check the same plane; measurable team targets — in `docs/NONFUNCTIONAL_SCORECARD.md`.
+This passport **fixes the criteria for target maturity (10/10 north star)** and a **gap matrix** so that @ARCH and @QA_ARCH check the same plane; measurable team targets — in `roles/NONFUNCTIONAL_SCORECARD.md`.
 
 ---
 
@@ -34,7 +34,7 @@ This passport **fixes the criteria for target maturity (10/10 north star)** and 
 
 ## 3. Weighted Evaluation Matrix (scorecard)
 
-Overall maturity score — weighted sum of categories; **live tracking** — in `docs/NONFUNCTIONAL_SCORECARD.md`:
+Overall maturity score — weighted sum of categories; **live tracking** — in `roles/NONFUNCTIONAL_SCORECARD.md`:
 
 | Category | Weight | What @QA_ARCH proves |
 |-----------|-----|-------------------------|
@@ -49,7 +49,7 @@ Overall maturity score — weighted sum of categories; **live tracking** — in 
 
 ### 3.1. Approximate KPI targets (set by @LEAD, not dogma)
 
-For @QA_ARCH to say "verified by number" rather than "seems fine", the team sets target values in `docs/NONFUNCTIONAL_SCORECARD.md` or records them in ADR / `docs/artifacts/ARCH_*.md`. **Below — a typical 8.5+ target** for B2B SaaS / commercial contour (product-specific adjustment mandatory):
+For @QA_ARCH to say "verified by number" rather than "seems fine", the team sets target values in `roles/NONFUNCTIONAL_SCORECARD.md` or records them in ADR / `docs/artifacts/ARCH_*.md`. **Below — a typical 8.5+ target** for B2B SaaS / commercial contour (product-specific adjustment mandatory):
 
 | Area | Target |
 |---------|-----------|
@@ -209,7 +209,7 @@ Below — not a single-sprint TODO, but a **maturity checklist** (prioritisation
 10. **Tenant safety** — path audit and negative tests.  
 11. **Perf baseline + budgets** — measured before optimisations.  
 12. **AI reliability metrics** — treated like any other first-class external service.  
-13. **KPIs** — target numbers and baseline measurement date recorded in `docs/NONFUNCTIONAL_SCORECARD.md` (§3.1).  
+13. **KPIs** — target numbers and baseline measurement date recorded in `roles/NONFUNCTIONAL_SCORECARD.md` (§3.1).  
 14. **Financial consistency + audit** — reconciliation/alerts on money; trail of sensitive actions.  
 15. **Test pyramid on critical paths** — see §15; flaky test policy (do not ignore).
 
@@ -251,11 +251,11 @@ Below — not a single-sprint TODO, but a **maturity checklist** (prioritisation
 
 ## 16. References
 
-- **Live NFR tracking:** `docs/NONFUNCTIONAL_SCORECARD.md`  
-- **Roles (this repository):** `docs/ROLE_ARCH.md`, `docs/ROLE_QA_ARCH.md`  
-- **Product UI/module plane (this repository):** `docs/TEMPLATE_MODULE_DEV.md`, `docs/TPF_MASTER.md`, `docs/TPF_MODULE_*.md`  
-- **Cache:** `docs/CACHE_STRATEGY.md`  
-- **Migrations (operational runbook):** `docs/MIGRATION_UPGRADE.md`  
+- **Live NFR tracking:** `roles/NONFUNCTIONAL_SCORECARD.md`  
+- **Roles (this repository):** `roles/ROLE_ARCH.md`, `roles/ROLE_QA_ARCH.md`  
+- **Product UI/module plane (this repository):** `roles/TEMPLATE_MODULE_DEV.md`, `roles/TPF_MASTER.md`, `docs/TPF_MODULE_*.md`  
+- **Cache:** `roles/CACHE_STRATEGY.md`  
+- **Migrations (operational runbook):** `roles/MIGRATIONS_PLAYBOOK.md`  
 
 In another project, replace paths with the ones accepted by the team; passport and scorecard remain the "norms / facts" separation.
 

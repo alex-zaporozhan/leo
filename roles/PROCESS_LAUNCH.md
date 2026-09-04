@@ -3,7 +3,7 @@
 > Universal process. Run for every new product.
 > Do not skip phases — each exists because someone skipped it.
 >
-> Session states, handoff protocol and quality gate — docs/ENGINEERING_PLAN.md.
+> Session states, handoff protocol and quality gate — roles/ENGINEERING_PLAN.md.
 
 ---
 
@@ -86,7 +86,7 @@
 [ ] @LEAD — explicit decision: release approved
 ```
 
-Full Quality Gate checklist — docs/ENGINEERING_PLAN.md.
+Full Quality Gate checklist — roles/ENGINEERING_PLAN.md.
 
 **Output:** Release is executed after gate is passed.
 
@@ -95,7 +95,7 @@ Full Quality Gate checklist — docs/ENGINEERING_PLAN.md.
 ## After deploy (before handover to client)
 ```
 [ ] Licence and protection: contract/offer signed, LICENSE.txt in deploy folder
-    (on request — @LAWYER: docs/ROLE_LAWYER.md)
+    (on request — @LAWYER: roles/ROLE_LAWYER.md)
 [ ] Commercial package: COMMERCIAL_PACK_[Project].md filled
     (@BIZ: price, description, competitors, objections, ROI)
 [ ] Sales card text ready (from COMMERCIAL_PACK_*.md)
@@ -136,4 +136,4 @@ The entire process up to the decision — maximum 2-3 hours.
 
 ---
 
-Reference: docs/ENGINEERING_PLAN.md · docs/ROLE_CREATOR.md · docs/STACK_SELECTION.md
+Reference: roles/ENGINEERING_PLAN.md · roles/ROLE_CREATOR.md · roles/STACK_SELECTION.md

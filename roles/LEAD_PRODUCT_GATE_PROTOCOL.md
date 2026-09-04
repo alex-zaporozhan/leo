@@ -81,6 +81,8 @@ Artifacts `MARKET_AUDIT.md` + `BUSINESS_ROUTES.md` exist, read by @LEAD, verdict
 
 ### Blockers:
 ```
+□ **DOMAIN_MODEL_[MODULE].md exists and was stressed against the twelve adversaries** (Law 42, `roles/LOGIC_MODELING_CANON.md`) — for a new module, a changed domain, or any change to states / money / authority / lifecycles. A structure drafted without a model is the defect this gate exists to stop; "we will find the edge cases in QA" is not an answer here
+□ **QA_TEST_STRATEGY_[MODULE].md exists** (@QA PLAN, `roles/TESTING_CANON.md`) and its risk tiers are reflected in DEV_PROMPTS — a plan written after the code tests what was built, not what was required
 □ ARCH_*.md exists and covers all entities from BUSINESS_ROUTES.md
 □ API contracts documented before the first endpoint
 □ Error contract defined: {"detail": "...", "code": "SNAKE_CASE"}
@@ -295,7 +297,7 @@ Minimum for commercial maturity. Specific project scenarios are added in `tests/
 | **Regression** | CI fails on critical scenario violation | Green CI when critical path is broken |
 
 **Addition:** for each critical journey — **negative** E2E (payment failure, 401, another tenant).  
-**Connection with anti-checkbox:** checkboxes in this grid on L-assessment = automatic FAIL (`docs/LEAD_ANTI_CHECKBOX_PROTOCOL.md` §7).
+**Connection with anti-checkbox:** checkboxes in this grid on L-assessment = automatic FAIL (`roles/LEAD_ANTI_CHECKBOX_PROTOCOL.md` §7).
 
 ### Verdict scale (commercial)
 
@@ -373,7 +375,7 @@ Minimum for commercial maturity. Specific project scenarios are added in `tests/
 ### Reference for system prompt / @LEAD rule
 
 ```
-When critically assessing maturity follow GATE-6 in docs/LEAD_PRODUCT_GATE_PROTOCOL.md: six breakdown blocks, E2E grid, L0–L3, report template; do not soften conclusions.
+When critically assessing maturity follow GATE-6 in roles/LEAD_PRODUCT_GATE_PROTOCOL.md: six breakdown blocks, E2E grid, L0–L3, report template; do not soften conclusions.
 ```
 
 ### Definition of Done of release (unified artifact) {#gate-6-release-dod}
@@ -388,7 +390,7 @@ Minimum (all items must be explicitly ✅ or marked "not applicable" with reason
 | R2 | No open 🔴 from QA_REPORT on affected modules | GATE-3 |
 | R3 | Compliance with `ARCHITECTURE_EXCELLENCE_PASSPORT.md` / TECH_PASSPORT for affected UI — recorded | @QA_ARCH |
 | R4 | Multi-tenancy and SEC P0/P1 closed for affected endpoints | GATE-4 |
-| R5 | For affected screens — **process logic** check (`docs/LEAD_PRODUCT_LOGIC_EXCELLENCE.md` §2–3), no unjustified dead buttons | @LEAD / @QA_ARCH |
+| R5 | For affected screens — **process logic** check (`roles/LEAD_PRODUCT_LOGIC_EXCELLENCE.md` §2–3), no unjustified dead buttons | @LEAD / @QA_ARCH |
 | R6 | L-verdict ≥ target for the deployment type (internal / pilot / commerce) | GATE-6 |
 | R7 | Ops: images by sha, smoke/runbook per deployment policy | GATE-5 |
 | R8 | For affected UI — 🟢 @QA_VISUAL (geometry/overflow/CLS/states/micro under hostile content); baseline is current | GATE-4, @QA_VISUAL |
@@ -397,7 +399,7 @@ Minimum (all items must be explicitly ✅ or marked "not applicable" with reason
 
 See: `roles/ROLE_QA_VISUAL.md`
 
-Artifact: section in `docs/ENGINEERING_PLAN.md` or `docs/artifacts/RELEASE_NOTES_*.md` with table R1–R10 — **named** release DoD, not scattered "in @LEAD's head".
+Artifact: section in `roles/ENGINEERING_PLAN.md` or `docs/artifacts/RELEASE_NOTES_*.md` with table R1–R10 — **named** release DoD, not scattered "in @LEAD's head".
 
 ---
 
@@ -441,6 +443,6 @@ On any unclosed blocker:
 
 ```
 When transitioning between phases and on any trigger "done / complete / deploy":
-docs/LEAD_PRODUCT_GATE_PROTOCOL.md
+roles/LEAD_PRODUCT_GATE_PROTOCOL.md
 Check the required gates. Without a proof artifact — the gate is not open.
 ```

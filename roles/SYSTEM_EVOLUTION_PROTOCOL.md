@@ -240,5 +240,5 @@ makes retirement (§7) possible years later, when nobody remembers.
 
 ---
 
-Reference: `roles/ROLE_LEAD.md` (⚡ REFLEX — proposes; `@EVOLVE` disposes) · `roles/CRYSTALS.md` (successful paths — a different memory: what worked, not what broke) · `roles/SYSTEM_UPGRADE_MANIFEST.md` (the record of waves) · `roles/INTEGRATION_PATCHES_TASTE.md` (the record of where integrations landed) · `roles/ASYNC_WORKERS_CANON.md` §0/§9 (two incidents that became laws — the model for Phase 2) · `roles/DATABASE_RUNTIME_CANON.md` §0 (the third) · `.cursorrules`
+Reference: `roles/ROLE_LEAD.md` (⚡ REFLEX — proposes; `@EVOLVE` disposes) · `roles/ROLE_LEAD.md (§CRYSTALLIZATION)` (successful paths — a different memory: what worked, not what broke) · `roles/SYSTEM_UPGRADE_MANIFEST.md` (the record of waves) · `roles/INTEGRATION_PATCHES_TASTE.md` (the record of where integrations landed) · `roles/ASYNC_WORKERS_CANON.md` §0/§9 (two incidents that became laws — the model for Phase 2) · `roles/DATABASE_RUNTIME_CANON.md` §0 (the third) · `.cursorrules`
 Version: 1.0 | 2026-07-12

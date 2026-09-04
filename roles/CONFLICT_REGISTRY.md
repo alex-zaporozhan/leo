@@ -24,7 +24,7 @@
 - **Status:** ✅ applied (2026-07-23). Verify: `grep "Law 33"` in the security files = 0.
 
 ### C2 — @DESIGN scope trigger
-- **Conflict:** Law 25 "any new screen" vs Law 19 "UI-heavy" vs `ROLE_DESIGN` "CRUD by pattern — skip".
+- **Conflict (historical wording, laws since rewritten in v6.37):** the former Law 25 said "any new screen", the former Law 19 said "UI-heavy", `ROLE_DESIGN` said "CRUD by pattern — skip". Laws 19 and 25 no longer carry the trigger at all — 19 now governs *editing the frontend from decisions* and 25 *the order design is produced in*; the trigger itself lives in `ROLE_DESIGN` and in Law 25 step 4.
 - **Winner:** trigger = **NEW PATTERN / COMPOSITION**, not "any screen". New pattern → SPEC mandatory; a screen by an existing pattern (CRUD, tech page) → skip.
 - **Affected:** `.cursorrules` Law 19 / Law 25 · `ROLE_DESIGN.md` trigger + header · `ROLE_LEAD.md` step 1.6. Same decision (new-pattern trigger + the existing-pattern skip list) mirrored in each.
 - **Status:** ✅ applied (2026-07-23). ROLE MAP (`.cursorrules` line 139) also aligned to "new pattern/composition" (it earlier said bare "ANY new screen"). Chain-rules line 354 already carries "Exception — editing an existing component without a new pattern" — consistent, left as-is.
@@ -68,6 +68,26 @@
 
 ---
 
+### C9 — Which visual checklist applies to which surface
+- **Conflict:** the `.cursorrules` QA_ARCH gate embedded the `FRONTEND_DESIGN_EXCELLENCE` §6 checklist (`gray.0` background, white cards with a 1px hairline, Drawer for forms, three-dot row menu, Tabler `stroke={1.5}`, 150ms hover) as a **universal** acceptance criterion, while Law 33 splits craft into two registers with **partly opposite** laws and `EDITORIAL_CRAFT_CANON` states them. A landing measured by the instrument list fails for being a landing; passing that list on a showcase is itself the defect.
+- **Winner:** **the REGISTER is declared before any visual verdict.** `instrument` → `VISUAL_CRAFT_CANON` (+ the §6 list, whose concrete values are superseded by the project design passport wherever it is filled). `statement` → `EDITORIAL_CRAFT_CANON` (timidity Y1–Y12) + the project world. **Register unstated → no visual verdict is issued.**
+- **Affected:** `.cursorrules` QA_ARCH GATE (register line added above the checklist) · `ROLE_FRONTEND.md` (contour table by register; DESIGN SOLUTION Step 0) · `RAG_CANON.md` TC-01/TC-02/TC-03 (each class names its register and its OUT list).
+- **Remaining:** the §6 values themselves are still written as absolutes inside `FRONTEND_DESIGN_EXCELLENCE`. Moving them into a project passport is a separate, planned change.
+- **Status:** ✅ applied (2026-09-03), partial as noted.
+
+### C10 — Where the viewport set comes from
+- **Conflict:** `ROLE_QA_VISUAL` fixed the measurement viewports at 360/768/1280/1920 as a constant of the system, while a product's real surfaces (PWA, native, embed, an internal tool that is desktop-only) are a per-project decision. A project breakpoint outside the four was measured nowhere.
+- **Winner:** the viewport set comes from **the project's declared surfaces** — `FRONTEND_PASSPORT_[PROJECT].md` §Surfaces, fixed by @FRONTEND with @ARCH before the first screen. The four values remain **the default when nothing is declared**, not the law.
+- **Affected:** `ROLE_QA_VISUAL.md` (fixtures table) · `ROLE_FRONTEND.md` (§MOBILE AND PLATFORM COMPOSITION — who declares it and where it lives).
+- **Status:** ✅ applied (2026-09-03).
+
+### C11 — Reference precedence: the project world vs the golden library
+- **Conflict:** Laws 19 and 25 name a golden library of seven external products (and name it differently in each of the two laws), while `ROLE_DESIGN` Tier 0 and `VISUAL_CONCEPT_PROTOCOL` make the project's own world the primary reference. `ROLE_FRONTEND` opened with "every screen must feel like a Linear/Stripe/Notion-grade product", which reads as the opposite instruction.
+- **Winner:** **Tier 0 — the project world (`docs/artifacts/VISUAL_CONCEPT_[PROJECT].md`) outranks every external reference.** The SaaS golden library is a **fallback for the `instrument` register only**, never the source of a public site's aesthetic. Absent a world: THE FLOOR (`VISUAL_CRAFT_CANON` §11) for instrument, a stop to @CREATOR for statement.
+- **Affected:** `ROLE_FRONTEND.md` (visual standard rewritten; DESIGN SOLUTION Steps 1–2) · `RAG_CANON.md` TC-02/TC-03/TC-05 (the world is item 1 of the minimum, and the library is out of scope for statement).
+- **Remaining:** Laws 19 and 25 in `.cursorrules` still list the library without naming Tier 0, and their two lists differ from each other. Planned.
+- **Status:** 🟡 applied in the role layer, pending in the constitution.
+
 ## Mirror sets beyond conflicts (Law 41 / gates / semantic echoes)
 
 > These are not resolved fights — they are **intentional repeated accents** (a rule stated in several roles on purpose, per `.cursorrules` §1). They still need a drift-guard: change the SoT → sync the accents. Listed here so one grep of this file finds **every** mirror set in the system, conflict or not.
@@ -107,5 +127,5 @@ Where each applies:
 
 ---
 
-Reference: `docs/ROLE_SYSTEM_RECONSTRUCTION_PLAN.md` (historical origin only — this registry is self-contained and does not depend on that transient plan) · `.cursorrules` §1 philosophy (consistent redundancy; mirrors are full-text, not pointers) · `roles/SYSTEM_FILES_MASTER.md` (Single Sources of Truth table) · `roles/SYSTEM_EVOLUTION_PROTOCOL.md`
+Reference: `roles/SYSTEM_UPGRADE_MANIFEST.md` (historical origin only — this registry is self-contained and does not depend on that transient plan) · `.cursorrules` §1 philosophy (consistent redundancy; mirrors are full-text, not pointers) · `roles/SYSTEM_FILES_MASTER.md` (Single Sources of Truth table) · `roles/SYSTEM_EVOLUTION_PROTOCOL.md`
 Version: 1.0 | 2026-07-23

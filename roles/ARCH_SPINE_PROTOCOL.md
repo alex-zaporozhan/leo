@@ -164,5 +164,5 @@ Spine revision: on every tier rise and once a quarter for a live product (togeth
 
 ---
 
-Reference: `roles/ROLE_ARCH.md` · `roles/SYSTEM_DESIGN_PROTOCOL.md` · `roles/DATABASE_RUNTIME_CANON.md` (vertebra 4: the DB's own clock) · `roles/ASYNC_AWAIT_REFLEX.md` (the @DEV/@QA_ARCH grep mirror of vertebra 8) · `roles/DATA_INTEGRITY_CANON.md` · `roles/ARCHITECTURE_EXCELLENCE_PASSPORT.md` · `roles/DOMAIN_STANDARDS.md` · `roles/ASYNC_WORKERS_CANON.md` · `roles/DATA_STORE_SELECTION.md` · `roles/MIGRATIONS_PLAYBOOK.md` · `roles/DEPLOY_VPS_RUNBOOK.md` · `roles/ROLE_QA_ARCH.md` · `roles/LEAD_PRODUCT_GATE_PROTOCOL.md`
+Reference: `roles/ROLE_ARCH.md` · `roles/SYSTEM_DESIGN_PROTOCOL.md` · `roles/DATABASE_RUNTIME_CANON.md` (vertebra 4: the DB's own clock) · `roles/ASYNC_AWAIT_REFLEX.md` (the @DEV/@QA_ARCH grep mirror of vertebra 8) · `roles/DATA_INTEGRITY_CANON.md` · `roles/ARCHITECTURE_EXCELLENCE_PASSPORT.md` · `roles/DOMAIN_STANDARDS.md` · `roles/ASYNC_WORKERS_CANON.md` · `roles/DATA_STORE_SELECTION.md` · `roles/MIGRATIONS_PLAYBOOK.md` · `roles/DOCKER_INFRA_PASSPORT.md` · `roles/ROLE_QA_ARCH.md` · `roles/LEAD_PRODUCT_GATE_PROTOCOL.md`
 Version: 2.0 (system v6.25) | 2026-07-09

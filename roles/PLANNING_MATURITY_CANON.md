@@ -34,14 +34,14 @@ The loop repeats until the SELF-PASS finds nothing new that the three criteria (
 
 Every planning artifact is graded on three axes. A miss on any is not "practically fine" (Law 14) — it is unfinished.
 
-### Criterion 1 — RESPONSIBILITY (ответственность)
+### Criterion 1 — RESPONSIBILITY
 Every claim in the plan is in exactly **one of two states**. There is no third (silent vagueness):
 - **DECIDED** — backed by a number, a rule, or a reference.
 - **DECLARED-OPEN** — marked `[CLARIFY]` / `[STUB]` / `[ASSUMED]` **+ owner + cost of leaving it open**.
 
 A claim that is neither (a soft "probably", "generally", "later") = a Law 12 violation.
 
-### Criterion 2 — FORESIGHT (дальновидность)
+### Criterion 2 — FORESIGHT
 Every entity / flow / screen answers the fixed **forward-question set**:
 - Will the schema/contract survive waves N+1 and N+2 without a breaking migration?
 - Are **all** lifecycle states and forbidden transitions enumerated?
@@ -51,7 +51,7 @@ Every entity / flow / screen answers the fixed **forward-question set**:
 
 A design that does not answer these is **sketched, not planned**.
 
-### Criterion 3 — COMPLETENESS (полнота)
+### Criterion 3 — COMPLETENESS
 Coverage is measured against the **product-need surface**, not intuition:
 - Every item of the **production completeness rollup** (§3 below) + the niche map (`roles/niches/*`) + the page-type minimum (`DOMAIN_STANDARDS.md`) is tagged **`Contour / WAVE-1 | WAVE-2 | LATER | OUT`** (delivery), with **foundation items forbidden from `LATER`** (`PRODUCTION_READINESS_CANON.md` §2).
 - Prefer Contour IDs when the program has them (e.g. `PR-VIDEO`, `PR-NODES`) — a Contour is a **claim gate**, not a quality downgrade.

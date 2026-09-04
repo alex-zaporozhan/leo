@@ -43,7 +43,7 @@ This is the canonical index of global system files for agent work in this reposi
 - `roles/DEV_EXECUTION_PASSPORT.md`
 - `roles/NONFUNCTIONAL_SCORECARD.md`
 - `roles/CACHE_STRATEGY.md`
-- `roles/README.md`
+- `roles/SYSTEM_FILES_MASTER.md`
 
 ## Frontend and Design Canons
 
@@ -84,7 +84,9 @@ This is the canonical index of global system files for agent work in this reposi
 - `roles/SYSTEM_EVOLUTION_PROTOCOL.md` *(the `@EVOLVE` command — manual trigger only)*
 - `roles/PRODUCT_MATURITY_CANON.md` *(CLASS/LEVEL + reference walk)*
 - `roles/ROLE_MEDIA_ENGINEER.md` · `roles/MEDIA_SYNTHESIS_CANON.md` *(generative media pipelines — Law 28, added v6.34)*
-- `roles/LOGIC_MODELING_CANON.md` *(DOMAIN_MODEL — @PRINCIPLE MODE: MODEL)*
+- `roles/LOGIC_MODELING_CANON.md` *(DOMAIN_MODEL — @PRINCIPLE MODE: MODEL, Law 42)*
+- `roles/SECOND_PASS_PROTOCOL.md` *(the clean-context audit pass — SP-0…SP-3; role set by task class; not automatable by design)*
+- `roles/RULE_INTEGRITY_PROTOCOL.md` *(the seven tests a rule must pass — goal · axis · home · name · reach · sides · measure — and the priority ladder between two true rules; run on an audit finding **before** it is accepted as a defect)*
 
 ## Templates And TPF
 
@@ -93,7 +95,7 @@ This is the canonical index of global system files for agent work in this reposi
 - `roles/TEMPLATE_MODULE_DEV.md`
 - `roles/TEMPLATE_BIZ_LOGIC.md`
 - `roles/TEMPLATE_COMMERCIAL_PACK.md`
-- `roles/TEMPLATE_ERP_REPORTING_VITRINES.md`
+- `roles/DOMAIN_STANDARDS.md (§5 Analytics/Reports)`
 - `roles/TEMPLATE_DOCUMENTATION_ARCHITECTURE.md`
 - `roles/TEMPLATE_PROJECT_PROFILE.md`
 - `roles/TPF_MASTER.md`
@@ -112,13 +114,13 @@ This is the canonical index of global system files for agent work in this reposi
 ## Operational Protocols
 
 - `roles/TESTING_CANON.md`
-- `roles/RUN_SERVICES.md`
+- `roles/DOCKER_INFRA_PASSPORT.md`
 - `roles/MIGRATIONS_PLAYBOOK.md`
 - `roles/SEED_PROTOCOL.md`
 - `roles/DOCKER_INFRA_PASSPORT.md`
-- `roles/DEPLOY_VPS_STEP_BY_STEP.md`
+- `roles/DOCKER_INFRA_PASSPORT.md`
 - `roles/NICHE_BOOTSTRAP_PROTOCOL.md`
-- `roles/CRYSTALS.md`
+- `roles/ROLE_LEAD.md (§CRYSTALLIZATION)`
 
 ## System Upgrade Records
 
@@ -168,7 +170,7 @@ Wave artifacts (DEV_PROMPTS, QA_REPORT, VISUAL_QA_REPORT, DESIGN_SPEC, MOTION_CO
 
 ## Name Verification (v6.16)
 
-- `roles/DEPLOY_VPS_RUNBOOK.md` → actually `roles/DEPLOY_VPS_STEP_BY_STEP.md` (corrected).
-- `roles/MIGRATION_UPGRADE.md` → actually `roles/MIGRATIONS_PLAYBOOK.md` (corrected).
+- `roles/DOCKER_INFRA_PASSPORT.md` → actually `roles/DOCKER_INFRA_PASSPORT.md` (corrected).
+- `roles/MIGRATIONS_PLAYBOOK.md` → actually `roles/MIGRATIONS_PLAYBOOK.md` (corrected).
 - `roles/DOC_TOPOLOGY.md` — now exists (documentation topology canon).
-- **Project-local records** (project history, may be absent in a clean system, not part of the global system): `roles/README.md`, `roles/niches/*`, `roles/TEMPLATE_ERP_REPORTING_VITRINES.md`, `docs/DOCUMENTATION_SYSTEM.md`. Created for a specific project, not included in the universal master.
+- **Project-local records** (project history, may be absent in a clean system, not part of the global system): `roles/SYSTEM_FILES_MASTER.md`, `roles/niches/*`, `roles/DOMAIN_STANDARDS.md (§5 Analytics/Reports)`, `docs/DOCUMENTATION_SYSTEM.md`. Created for a specific project, not included in the universal master.

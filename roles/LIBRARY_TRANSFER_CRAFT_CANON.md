@@ -1,4 +1,6 @@
 # LIBRARY_TRANSFER_CRAFT_CANON.md
+
+> **Reading note.** The craft rules here are universal; the concrete route names, cluster labels and `ADR-0xx` / `A-xx` references are **one delivered product's worked example**, kept because a rule without a case is hard to apply. Read them as illustration — never as defaults, routes or naming for another project.
 # The craft of versioned shared libraries: shelves, adoption, provenance, draft/published.
 # Class of product: Material Bank · npm registry · Figma libraries · Stripe Connect templates · Notion template gallery.
 # Position: a specialisation of INTERFACE_CRAFT_CANON (§2.3 repository) + FRONTEND_CAPABILITY_CANON (C3/C6/C7/C11) for the **transfer** genre — when materials move between orgs as immutable snapshots, not live links.
@@ -49,7 +51,7 @@ A shelf item must answer five questions **at a glance, without opening the versi
 □ ADOPTION COUNT IS VISIBLE — a shelf item whose usage is invisible is a coin flip (INTERFACE §2.2).
 □ SNAPSHOT SUMMARY ON THE TILE — not hidden behind a click: "2 RAG libraries · 14 documents · 1 pipeline graph".
 □ ONE PRIMARY ACTION PER TILE: Adopt (pull) or Review (for contributions queue) — not six equal buttons.
-□ FILTER BY item_type IS FIRST-CLASS — "Библиотека промптов" = filter prompt_bundle, not a separate product.
+□ FILTER BY item_type IS FIRST-CLASS — "Prompt library" = filter prompt_bundle, not a separate product.
 ```
 
 ---
@@ -65,9 +67,9 @@ Primary org workshop          Customer org workshop
 ```
 □ LIVE ≠ SHELF — editing a live pipeline_definition does not mutate a published bank version.
 □ CONTRIBUTION = propose to shelf — creates contribution row (wait), not instant publish.
-□ ADOPTED COPY SHOWS PROVENANCE INLINE — every adopted entity: "Импортировано из Банка материалов · v3 · 2026-07-01" as clickable backlink (CAPABILITY C3).
+□ ADOPTED COPY SHOWS PROVENANCE INLINE — every adopted entity: "Imported from the Material Bank · v3 · 2026-07-01" as clickable backlink (CAPABILITY C3).
 □ NO LIVE-LINK INDICATOR — if UI ever shows "shared from Primary" without "copied", that is a 🔴 isolation bug.
-□ CREDENTIAL_REF NEVER TRANSFERS — adopted graph shows "требует привязки credential" badge until bound (ADR-043 §3.5).
+□ CREDENTIAL_REF NEVER TRANSFERS — adopted graph shows "credential binding required" badge until bound (ADR-043 §3.5).
 ```
 
 ---
@@ -89,9 +91,9 @@ The conveyor is a **Stepper in AppDrawer** (right, page continuity), never a cen
 □ PREFLIGHT IS NOT OPTIONAL for template/pipeline types — unresolved retrieval ref or missing bundle → shown here as blocking list.
 □ CAPACITY EXCEEDED (429) — blocking message with retry_after, not silent failure.
 □ PARTIAL_FAILED — show lineage summary + explicit Retry / Rollback actions; do not show "succeeded".
-□ CANCEL — only before irreversible_started_at; after S3 copy UI shows "отмена недоступна" + reason (C7).
+□ CANCEL — only before irreversible_started_at; after S3 copy UI shows "cancel unavailable" + reason (C7).
 □ PROGRESS NEVER SPINNER-ONLY — if backend has cursor, UI shows cursor (T5).
-□ IDEMPOTENCY — duplicate adopt with same key → same result, no double copy (C11); UI says "уже применяется" not error soup.
+□ IDEMPOTENCY — duplicate adopt with same key → same result, no double copy (C11); UI says "already being applied" not error soup.
 ```
 
 ---
@@ -111,7 +113,7 @@ retrieval_set "Sales onboarding mix"
 □ RETRIEVAL-SET HAS ITS OWN SCREEN — not buried in collapsed dock on RAG page (first-class nav).
 □ SOURCE LIST SHOWS HUMAN LIBRARY NAMES + provenance (source_bank_version_id as label, not filter).
 □ WEIGHT + max_chunks VISIBLE ON TILE — user understands the mix without opening editor.
-□ DEBUG RETRIEVAL FROM SET EDITOR — "Проверить поиск" uses same API as pipeline node (C4).
+□ DEBUG RETRIEVAL FROM SET EDITOR — "Test retrieval" uses same API as pipeline node (C4).
 □ STALE/ARCHIVED SOURCE — warning badge on source row; publish/run blocked with reason (C5).
 □ PROVENANCE PER HIT in debug — program_name, topic_name, source_bank_version_id (never UUID in label).
 ```
@@ -127,18 +129,18 @@ Two parallel status machines — do not conflate:
 | Machine | Entities | States | UI zone |
 |---------|----------|--------|---------|
 | **Shelf** | bank item versions | draft → published (immutable) | Material Bank |
-| **Artifact** | lesson packages, rop_content_package | draft → methodologist_approved → sent_to_supervisor → … | Admin «Готовые» + ROP «Входящие» |
+| **Artifact** | lesson packages, rop_content_package | draft → methodologist_approved → sent_to_supervisor → … | Admin "Ready" + Supervisor "Inbox" |
 
 **Laws:**
 ```
 □ DRAFT ≠ PUBLISHED visually unmistakable — neutral dot vs success dot; published rows non-editable (only new draft version).
-□ METHODOLOGIST_APPROVED = "Готовые" cluster (ADR-022) — not visible to learner until sent.
-□ SEND TO ROP — outside pipeline graph (A-32); HG-1 approve → persist_artifact → deep link «Готовые», not inline send in graph.
+□ METHODOLOGIST_APPROVED = the "Ready" cluster (ADR-022) — not visible to learner until sent.
+□ SEND TO ROP — outside pipeline graph (A-32); HG-1 approve → persist_artifact → deep link to "Ready", not inline send in graph.
 □ ROP SEES ONLY sent_to_supervisor+ — employee never sees methodologist_approved (server-side filter, ADR-022).
-□ WITHDRAW_FROM_READY — confirm + returns to draft; visible only in «Готовые» row actions.
+□ WITHDRAW_FROM_READY — confirm + returns to draft; visible only in the "Ready" row actions.
 ```
 
-ROP supervisor view (`/app` zone): segmented **Входящие** | **Опубликовано для команды** — data-comfort density, StatusIndicator `text`/`row`, no creator glow.
+ROP supervisor view (`/app` zone): segmented **Inbox** | **Published to the team** — data-comfort density, StatusIndicator `text`/`row`, no creator glow.
 
 ---
 
@@ -146,15 +148,15 @@ ROP supervisor view (`/app` zone): segmented **Входящие** | **Опубл
 
 | Plane | Shelf role | Key routes |
 |-------|------------|------------|
-| **МАТЕРИАЛЫ** | Primary shelf + local corpora | `/admin/material-bank`, `/admin/kb`, `/admin/retrieval-sets`, `/admin/programs` |
-| **ИНСТРУМЕНТЫ** | adopt creates local copies used here | `/admin/pipelines`, `/admin/prompts`, `/admin/trainer-agents` |
-| **ИСПОЛНЕНИЕ** | adoption audit + runs + HITL + Готовые | `/admin/pipeline-runs`, `/admin/hitl-queue`, A-32 |
+| **MATERIALS** | Primary shelf + local corpora | `/admin/material-bank`, `/admin/kb`, `/admin/retrieval-sets`, `/admin/programs` |
+| **TOOLS** | adopt creates local copies used here | `/admin/pipelines`, `/admin/prompts`, `/admin/trainer-agents` |
+| **EXECUTION** | adoption audit + runs + HITL + Ready | `/admin/pipeline-runs`, `/admin/hitl-queue`, A-32 |
 
 Push/pull verbs in UI (consistent Russian copy):
-- **Применить клиенту** = pull/adopt
-- **Сохранить в банк** = push/contribute
-- **Опубликовать версию** = publish to shelf
-- **Сравнить версии** = C6 time-travel
+- **Apply to client** = pull/adopt
+- **Save to bank** = push/contribute
+- **Publish version** = publish to shelf
+- **Compare versions** = C6 time-travel
 
 ---
 

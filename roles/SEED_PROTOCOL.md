@@ -504,5 +504,5 @@ asyncio.run(main())
 
 ---
 
-Reference: docs/ROLE_DEV.md · docs/ROLE_ARCH.md · docs/STACK_SELECTION.md
+Reference: roles/ROLE_DEV.md · roles/ROLE_ARCH.md · roles/STACK_SELECTION.md
 Version: 1.0 | 2026-03

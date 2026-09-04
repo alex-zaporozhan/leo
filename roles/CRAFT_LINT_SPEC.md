@@ -1,42 +1,44 @@
-# CRAFT_LINT_SPEC — машинный пол вкуса и вёрстки
+# CRAFT_LINT_SPEC — the machine floor of taste and layout
 
-**Статус:** 🟢 канон · слой между `LAYOUT_INVARIANTS` (геометрия) и `VISUAL_CRAFT`/`INTERFACE_CRAFT` (вкус)
-**Дата:** 2026-07-20 · **Роли:** @QA_VISUAL (владелец) · @DEV (исполняет фиксы) · @FRONTEND (правила линта)
-**Тезис:** каждое правило вкуса, которое сводится к счёту/грепу/метру, становится **блокирующей проверкой**. Что не сводится — уходит в `QA_VISUAL_AESTHETE_SENSOR.md` как каталог преступлений с обязательным вердиктом.
+> **What this file is, and is not.** It is the **specification** of the machine floor — what is measured, by what rule, at what threshold. It is **not** an implementation, and this system ships no runnable code by design (no dependency, no attack surface, nothing that ages out of step with the project). The paths named below (`.ci/craft.yml`, `scripts/craft-report.js`, `tests/visual/craft.spec.ts`) are **the shape the project generates in its first frontend wave**, not files that exist here. Owner in the project: @FRONTEND for the greps and lint rules, @ARCH for wiring them into the declared release contour. **Until that executor exists in a given project, every check below is self-signed by the agent — and a self-signed floor is reported as such, never presented as a passed gate.**
 
-> Принцип: **пол держит машина, потолок — глаз.** Геометрия (`V1–V12`) уже машинная. Этот файл добавляет `V15–V18` — новые *измеримые* векторы, которые закрывают частые «глазные» баги, и сводит X1–X12 / I1–I12 к проверкам там, где это возможно.
+**Status:** 🟢 canon · the layer between `LAYOUT_INVARIANTS` (geometry) and `VISUAL_CRAFT`/`INTERFACE_CRAFT` (taste)
+**Date:** 2026-07-20 · **Roles:** @QA_VISUAL (owner) · @DEV (applies fixes) · @FRONTEND (lint rules)
+**Thesis:** every rule of taste that reduces to a count, a grep or a meter becomes a **blocking check**. Whatever does not reduce goes to `QA_VISUAL_AESTHETE_SENSOR.md` as a catalogue of crimes with a mandatory verdict.
+
+> Principle: **the machine holds the floor, the eye holds the ceiling.** Geometry (`V1–V12`) is already machine-checked. This file adds `V15–V18` — new *measurable* vectors that close frequent "eye" bugs — and reduces X1–X12 / I1–I12 to checks wherever that is possible.
 
 ---
 
-## 0. Как читать таблицы
+## 0. How to read the tables
 
-| Колонка | Значение |
+| Column | Meaning |
 |---|---|
-| **Проверка** | конкретный греп / eslint-правило / Playwright-метр |
-| **Тип** | 🟩 machine (детерминированно) · 🟨 hybrid (метр + порог, но нужен зонный контекст) · 🟥 eye (только `AESTHETE_SENSOR`) |
-| **Гейт** | 🔴 blocking (роняет CI) · 🟡 advisory (в отчёт, не блок) |
+| **Check** | a concrete grep / eslint rule / Playwright meter |
+| **Type** | 🟩 machine (deterministic) · 🟨 hybrid (meter + threshold, but zone context required) · 🟥 eye (only `AESTHETE_SENSOR`) |
+| **Gate** | 🔴 blocking (fails CI) · 🟡 advisory (reported, not blocking) |
 
 ---
 
-## 1. Новые измеримые векторы V15–V18 (закрывают частые баги)
+## 1. New measurable vectors V15–V18 (they close frequent bugs)
 
-> Эти четыре — прямой ответ на «двухстрочная кнопка ×2», «ряд кнопок разной высоты», «текст на hover становится нечитаемым», «огромные шрифты в меню». Раньше это ловилось глазом (и пропускалось). Теперь — числом.
+> These four are a direct answer to "a two-line button at ×2 height", "a row of buttons of unequal height", "text becomes unreadable on hover", "huge fonts in the menu". Previously this was caught by eye (and missed). Now — by number.
 
-### V15 — State Contrast (текст читаем во ВСЕХ состояниях)
+### V15 — State Contrast (text readable in ALL states)
 
-**Баг, который убивает:** синяя кнопка → на hover текст уходит в тёмно-синий/фиолетовый → нечитаемо.
+**The bug that kills:** a blue button → on hover the text drifts into dark blue/violet → unreadable.
 
 ```ts
 // measures.ts
-/** Минимальный контраст текст↔фон по всем состояниям. WCAG: ≥4.5 обычный, ≥3 крупный. */
+/** Minimum text↔background contrast across all states. WCAG: ≥4.5 normal, ≥3 large. */
 export async function stateContrast(page, selector,
   states = ['rest','hover','active','focus-visible','disabled']): Promise<{state:string,ratio:number}> {
   let worst = {state:'rest', ratio:99};
   for (const s of states) {
-    await applyState(page, selector, s);           // hover/focus/[data-state]/:active эмуляция
+    await applyState(page, selector, s);           // hover/focus/[data-state]/:active emulation
     const { color, bg } = await page.$eval(selector, el => {
       const cs = getComputedStyle(el);
-      return { color: cs.color, bg: effectiveBg(el) }; // effectiveBg поднимается по предкам до непрозрачного
+      return { color: cs.color, bg: effectiveBg(el) }; // effectiveBg walks up the ancestors to an opaque one
     });
     const ratio = wcagContrast(color, bg);
     if (ratio < worst.ratio) worst = { state:s, ratio };
@@ -45,20 +47,20 @@ export async function stateContrast(page, selector,
 }
 ```
 
-| Проверка | Тип | Гейт | Порог |
+| Check | Type | Gate | Threshold |
 |---|---|---|---|
-| `stateContrast(button).ratio ≥ 4.5` (обычный текст) / `≥ 3` (крупный ≥18.66px bold) во всех состояниях | 🟩 | 🔴 | disabled может 🟡 (но ≥3 всё равно) |
+| `stateContrast(button).ratio ≥ 4.5` (normal text) / `≥ 3` (large ≥18.66px bold) in every state | 🟩 | 🔴 | disabled may be 🟡 (but still ≥3) |
 
-**Правило для @DEV:** hover меняет **фон/тень**, но НЕ уводит текст в цвет, близкий к фону. `color` на hover либо не меняется, либо меняется на такой же контрастный. Синяя кнопка → текст остаётся белым.
+**Rule for @DEV:** hover changes the **background/shadow**, but does NOT push the text toward a colour close to the background. `color` on hover either stays the same or moves to an equally contrasting value. Blue button → the text stays white.
 
 ---
 
-### V16 — Control-Row Equal-Height (ряд кнопок/чипов ровный)
+### V16 — Control-Row Equal-Height (a row of buttons/chips stays even)
 
-**Баг, который убивает:** в ряду одна кнопка однострочная, другая двухстрочная → высота ×2 → «лесенка».
+**The bug that kills:** in one row one button is single-line, another is two-line → height ×2 → a "staircase".
 
 ```ts
-/** Разброс высот в группе контролов + детект переноса строки. */
+/** Height spread within a control group + line-wrap detection. */
 export async function controlRowDelta(page, groupSelector): Promise<{delta:number, wrapped:number}> {
   const items = await page.$$eval(`${groupSelector} > *`, els => els.map(el => {
     const r = el.getBoundingClientRect();
@@ -71,21 +73,21 @@ export async function controlRowDelta(page, groupSelector): Promise<{delta:numbe
 }
 ```
 
-| Проверка | Тип | Гейт | Порог |
+| Check | Type | Gate | Threshold |
 |---|---|---|---|
-| `controlRowDelta('[data-btn-group]').delta == 0` | 🟩 | 🔴 | строго |
-| `.wrapped == 0` (в ряду кнопок нет переносов) ИЛИ группа `align-items:stretch` и все равны | 🟩 | 🔴 | — |
+| `controlRowDelta('[data-btn-group]').delta == 0` | 🟩 | 🔴 | strict |
+| `.wrapped == 0` (no wraps inside a button row) OR the group is `align-items:stretch` and all are equal | 🟩 | 🔴 | — |
 
-**Правило для @DEV (в `LAYOUT_INVARIANTS §12.3` дополнением):** кнопки в CLUSTER имеют **фиксированный `min-height`** и `white-space:nowrap` (или `line-clamp:1`). Если лейбл длинный — он усекается или кнопка шире, но **не выше**. Двухстрочные кнопки в одном ряду с однострочными запрещены. Если перенос неизбежен по дизайну — весь ряд `align-items:stretch`, тогда все тянутся до высшей.
+**Rule for @DEV (as an addendum in `LAYOUT_INVARIANTS §12.3`):** buttons inside a CLUSTER carry a **fixed `min-height`** and `white-space:nowrap` (or `line-clamp:1`). If the label is long — it is truncated, or the button gets wider, but **never taller**. Two-line buttons in the same row as single-line ones are forbidden. If a wrap is unavoidable by design — the whole row goes `align-items:stretch`, and then everything stretches to the tallest.
 
 ---
 
-### V17 — Chrome Type-Scale Ceiling (шрифт в «мебели» под потолком)
+### V17 — Chrome Type-Scale Ceiling (font in the "furniture" stays under the ceiling)
 
-**Баг, который убивает:** меню/нав/табы огромными шрифтами «в ущерб интерфейсу».
+**The bug that kills:** menus/nav/tabs in huge fonts "at the expense of the interface".
 
 ```ts
-/** Реальный font-size элементов по зонам против потолка зоны. */
+/** Actual font-size of elements per zone against that zone's ceiling. */
 export async function typeScaleCeiling(page, zoneCaps): Promise<Array<{zone,el,size,cap}>> {
   const viol = [];
   for (const [zone, cap] of Object.entries(zoneCaps)) {
@@ -97,149 +99,158 @@ export async function typeScaleCeiling(page, zoneCaps): Promise<Array<{zone,el,s
 }
 ```
 
-| Зона | Потолок font-size | Тип | Гейт |
+| Zone | font-size ceiling | Type | Gate |
 |---|---|---|---|
-| `nav` / header-меню | **16px** | 🟩 | 🔴 |
+| `nav` / header menu | **16px** | 🟩 | 🔴 |
 | mega-menu / dropdown item | **15px** | 🟩 | 🔴 |
 | segmented / tab | **15px** | 🟩 | 🔴 |
-| table cell | **15px** (заголовок 13) | 🟩 | 🔴 |
+| table cell | **15px** (header 13) | 🟩 | 🔴 |
 | chip / badge | **14px** | 🟩 | 🔴 |
-| display / hero / section h1–h2 | **нет потолка** (это контент, а не chrome) | 🟥 | — |
+| display / hero / section h1–h2 | **no ceiling** (this is content, not chrome) | 🟥 | — |
 
-**Разрешение конфликта «44px tap target vs огромный шрифт»:** touch-target 44×44 достигается **паддингом**, а не раздуванием шрифта. Крупный тап-таргет ≠ крупный текст. Это снимает твою претензию про «геометрия задаёт меню с огромными шрифтами».
+**Resolving the "44px tap target vs huge font" conflict:** a 44×44 touch target is reached through **padding**, not by inflating the font. A large tap target ≠ large text. This removes your objection that "geometry dictates menus with huge fonts".
 
 ---
 
-### V18 — Primitive Source (кнопка = единственный источник)
+### V18 — Primitive Source (the button has a single source)
 
-**Баг, который убивает:** кнопки разного стиля, потому что кто-то нарисовал `<button className="...">` вручную.
+**The bug that kills:** buttons in differing styles, because someone hand-drew a `<button className="...">`.
 
-| Проверка | Тип | Гейт |
+| Check | Type | Gate |
 |---|---|---|
-| eslint: `<button>` в JSX запрещён вне `ui/Button.tsx` (allowlist) → бери `<Button>` | 🟩 | 🔴 |
-| grep: нет inline `style=` c `background`/`padding`/`border-radius` на интерактиве | 🟩 | 🔴 |
-| grep: нет `class*="btn"` определений вне `theme/*.css` (все варианты — токенами) | 🟩 | 🔴 |
-| primitive-conformance (QA_VISUAL): класс примитива на рендере = класс из паспорта | 🟨 | 🔴 |
+| eslint: `<button>` in JSX is forbidden outside `ui/Button.tsx` (allowlist) → use `<Button>` | 🟩 | 🔴 |
+| grep: no inline `style=` with `background`/`padding`/`border-radius` on interactive elements | 🟩 | 🔴 |
+| grep: no `class*="btn"` definitions outside `theme/*.css` (every variant comes from tokens) | 🟩 | 🔴 |
+| primitive-conformance (QA_VISUAL): the primitive's class on render = the class from the passport | 🟨 | 🔴 |
 
-Правило-вставка в роли — §4.
+The rule inserts into the roles — see §4.
 
 ---
 
-## 1b. Canvas legibility — вектор V19 (Toy-Graph Detector)
+## 1b. Canvas legibility — vector V19 (Toy-Graph Detector)
 
-> Для node-graph продуктов (конструктор пайплайнов, agent canvas). Канон — `CANVAS_CRAFT_CANON.md`; его §9 детектор G1–G10 становится **вектором V19**. Часть машинна, часть — глаз. Эталон читаемого узла: `pipeline_constructor_readable.html`.
+> For node-graph products (pipeline builders, agent canvas). The canon is `CANVAS_CRAFT_CANON.md`; its §9 detector G1–G10 becomes **vector V19**. Part of it is machine-checked, part is eye. The reference for a readable node: `pipeline_constructor_readable.html`.
 
-| # | Проверка | Тип | Гейт |
+| # | Check | Type | Gate |
 |---|---|---|---|
-| V19.1 | каждый узел несёт **глиф + тинт категории** (не только текст) — `[data-node] .glyph` присутствует, категорий 5–7 | 🟩 | 🔴 (G1) |
-| V19.2 | каждый узел выносит **≥1 значимый параметр в шапку** (`.node-sub` непустой) — узел без сабтайтла = 🔴 | 🟩 | 🔴 (G1) |
-| V19.3 | порты **типизированы и подписаны** (`data-port-type` + видимое имя); нелегальная цель гаснет при drag, не toast после | 🟨 | 🔴 (G2/G3) |
-| V19.4 | есть **auto-layout / «Выровнять»** в один keypress; flow-направление единое (L→R) | 🟩 | 🔴 (G4) |
-| V19.5 | **минимапа + поиск по холсту** при >20 узлов | 🟨 | 🔴 (G5) |
-| V19.6 | hover узла → подсветка подграфа (upstream+downstream), остальное dim до ~30% | 🟨 | 🟡 (G6) |
-| V19.7 | узел — **не форма** (нет `input`/`select` внутри тела узла; конфиг только в инспекторе) | 🟩 | 🔴 (G7) |
-| V19.8 | **run overlay** на том же графе, не отдельный экран лога | 🟥 | 🔴 (G8) |
-| V19.9 | клик по узлу после прогона → его фактические **вход/выход** | 🟥 | 🔴 (G9) |
-| V19.10 | петля визуально отлична + видимое условие выхода + видимый cap итераций | 🟨 | 🔴 (G10) |
+| V19.1 | every node carries a **glyph + category tint** (not text alone) — `[data-node] .glyph` present, 5–7 categories | 🟩 | 🔴 (G1) |
+| V19.2 | every node surfaces **≥1 meaningful parameter in its header** (`.node-sub` non-empty) — a node with no subtitle = 🔴 | 🟩 | 🔴 (G1) |
+| V19.3 | ports are **typed and labelled** (`data-port-type` + a visible name); an illegal target dims during the drag, not a toast afterwards | 🟨 | 🔴 (G2/G3) |
+| V19.4 | there is **auto-layout / "Align"** in a single keypress; flow direction is uniform (L→R) | 🟩 | 🔴 (G4) |
+| V19.5 | **minimap + canvas search** above 20 nodes | 🟨 | 🔴 (G5) |
+| V19.6 | node hover → the subgraph lights up (upstream+downstream), the rest dims to ~30% | 🟨 | 🟡 (G6) |
+| V19.7 | a node is **not a form** (no `input`/`select` inside the node body; config lives only in the inspector) | 🟩 | 🔴 (G7) |
+| V19.8 | **run overlay** on the same graph, not a separate log screen | 🟥 | 🔴 (G8) |
+| V19.9 | clicking a node after a run → its actual **input/output** | 🟥 | 🔴 (G9) |
+| V19.10 | a loop is visually distinct + a visible exit condition + a visible iteration cap | 🟨 | 🔴 (G10) |
 
-**Вердикт V19:** любой из G7/G8/G9/G10 → 🔴; 3+ хита суммарно → 🔴 (продукт — редактор диаграмм, притворяющийся пультом).
+**V19 verdict:** any one of G7/G8/G9/G10 → 🔴; 3+ hits in total → 🔴 (the product is a diagram editor pretending to be a control panel).
 
 ---
 
-## 1c. Page pacing — вектор V20 (ритм страницы / «экраны»)
+## 1c. Page pacing — vector V20 (page rhythm / "screens")
 
-> Page-level ось, отдельная от A/V1 (ритм внутри секции). Лечит ощущение «сайт как чердак: блоки навалены неровно, всё в кучу».
+> A page-level axis, separate from A/V1 (rhythm inside a section). It cures the feeling of "the site as an attic: blocks piled up unevenly, everything in a heap".
 
-| # | Проверка | Тип | Гейт |
+| # | Check | Type | Gate |
 |---|---|---|---|
-| V20.1 | один section-spacing токен — distinct `padding-block` у top-level `<section>` ≤ 2 | 🟩 | 🔴 (P4) |
-| V20.2 | секции не сталкиваются — `pairwiseIntersection` top-level секций == 0px² (ловит наезжающую CTA/панель) | 🟩 | 🔴 (P5) |
-| V20.3 | нет застрявшего «Загрузка…»/skeleton на осевшей странице (settle 3s) | 🟨 | 🔴 (P2) |
-| V20.4 | секция-плейсхолдер («скоро появятся») **скрыта на prod**, не рендерится полноразмерно | 🟨 | 🔴 (P2) |
-| V20.5 | >10 top-level секций на marketing-странице → флаг «pacing review» | 🟩 | 🟡 (P1) |
-| V20.6 | hero держит первый viewport; peek следующей секции ≤ ~15vh как намеренный scroll-hint | 🟨 | 🟡 (P3) |
+| V20.1 | one section-spacing token — distinct `padding-block` on top-level `<section>` ≤ 2 | 🟩 | 🔴 (P4) |
+| V20.2 | sections do not collide — `pairwiseIntersection` of top-level sections == 0px² (catches an overlapping CTA/panel) | 🟩 | 🔴 (P5) |
+| V20.3 | no stuck "Loading…"/skeleton on a settled page (settle 3s) | 🟨 | 🔴 (P2) |
+| V20.4 | a placeholder section ("coming soon") is **hidden on prod**, not rendered at full size | 🟨 | 🔴 (P2) |
+| V20.5 | >10 top-level sections on a marketing page → raise a "pacing review" flag | 🟩 | 🟡 (P1) |
+| V20.6 | the hero holds the first viewport; the peek of the next section is ≤ ~15vh as a deliberate scroll hint | 🟨 | 🟡 (P3) |
 
 ---
 
-## 2. X1–X12 (cheapness, `VISUAL_CRAFT §9`) → проверки
+## 2. X1–X12 (cheapness, `VISUAL_CRAFT §9`) → checks
 
-| # | Правило | Проверка | Тип | Гейт |
+> **The numbering is owned by the canon.** The meaning of each X is set by `VISUAL_CRAFT_CANON.md` §9; this table is only the machine projection of it and introduces no numbers of its own. Previously X6/X7/X8/X10/X11 meant something here other than in the canon — fixed.
+
+| # | Rule | Check | Type | Gate |
 |---|---|---|---|---|
-| X1 | ≤1 метод разделения на поверхность | AST: у элемента не более одного из {border, boxShadow, background-tint} как разделителя | 🟨 | 🟡 |
-| X2 | Тёплые/тонированные тени, не `rgba(0,0,0)` | grep: `box-shadow` не содержит `rgba(0,0,0` и `#000` | 🟩 | 🔴 |
-| X3 | Насыщенный цвет на большой площади запрещён | метр: площадь элементов с chroma>C и area>40vw → 0 | 🟨 | 🔴 |
-| X4 | Один accent hue family | токен-чек: `--accent-*` из одной hue-семьи; счётчик активных hue ≤ 2 | 🟩 | 🔴 |
-| X5 | Декоративный градиент без причины | grep-счётчик `linear-gradient` на секцию ≤ бюджета (hero ≤3, секция ≤2); `.btn--primary` без градиента | 🟩 | 🔴 |
-| X6 | Модульная типо-шкала, ≤6 размеров/экран | метр: `distinct(font-size)` на маршрут ≤ 6 | 🟩 | 🟡 |
-| X7 | Оптическое выравнивание | — | 🟥 | — |
-| X8 | Один источник света в тенях | AST: направление всех `box-shadow` согласовано (Δangle ≤ 15°) | 🟨 | 🟡 |
-| X9 | Нет чистых серых (`#888` и т.п.) | grep: серые с примесью бренда; запрет «мёртвых» hex из чёрного списка | 🟩 | 🔴 |
-| X10 | Радиусы концентричны (вложенный = внешний − padding) | метр: nested radius ≈ outer − pad (±2px) | 🟨 | 🟡 |
-| X11 | Bold ≤ ~30% текста | метр: доля weight≥700 по площади текста ≤ 0.3 | 🟩 | 🟡 |
-| X12 | Не ряд из 3–4 одинаковых карточек как главный аргумент | 🟥 (композиция) | 🟥 | — |
+| X1 | ≤1 separation method per surface | AST: an element carries no more than one of {border, boxShadow, background-tint} as a separator | 🟨 | 🟡 |
+| X2 | Warm/tinted shadows, not `rgba(0,0,0)` | grep: `box-shadow` contains neither `rgba(0,0,0` nor `#000` | 🟩 | 🔴 |
+| X3 | Saturated colour over a large area is forbidden | meter: area of elements with chroma>C and area>40vw → 0 | 🟨 | 🔴 |
+| X4 | One accent hue family | token check: `--accent-*` from a single hue family; active hue counter ≤ 2 | 🟩 | 🔴 |
+| X5 | A decorative gradient without a reason | grep counter of `linear-gradient` per section ≤ budget (hero ≤3, section ≤2); `.btn--primary` carries no gradient | 🟩 | 🟡 |
+| X6 | Radii are consistent and concentric (nested = outer − padding) | meter: nested radius ≈ outer − pad (±2px); distinct(border-radius) counter per route ≤ 3 | 🟨 | 🟡 |
+| X7 | Modular type scale, ≤6 sizes per screen | meter: `distinct(font-size)` per route ≤ 6 | 🟩 | 🟡 |
+| X8 | Bold ≤ ~30% of text | meter: share of weight≥700 by text area ≤ 0.3 | 🟩 | 🟡 |
+| X9 | No pure greys (`#888` and the like) | grep: greys must carry a trace of the brand; "dead" hex values from the blacklist are banned | 🟩 | 🔴 |
+| X10 | One icon set, one stroke weight, no emoji in the UI | grep: a single icon package across imports; `stroke`/`strokeWidth` at one value; emoji in JSX/UI strings → 0 | 🟩 | 🟡 |
+| X11 | `tabular-nums` in numeric columns and metrics | grep: a column of numbers without `font-variant-numeric: tabular-nums` / an equivalent class → finding | 🟩 | 🟡 |
+| X12 | Not a row of 3–4 identical cards as the main argument | 🟥 (composition) | 🟥 | — |
 
----
+**Checks outside the X row** (in the canon these are separate sections, not the cheapness detector — they used to occupy the numbers X7/X8 and crowd out the real ones):
 
-## 3. I1–I12 (stiffness, `INTERFACE_CRAFT §7`) → проверки
-
-> Операционка (`/admin`, консоли). Большинство — про поведение, часть измерима.
-
-| # | Правило | Проверка | Тип | Гейт |
+| Code | Rule | Check | Type | Gate |
 |---|---|---|---|---|
-| I1 | Есть клавиатурный путь | a11y: все действия достижимы с клавиатуры; `tabindex` корректен | 🟨 | 🔴 |
-| I2 | Bulk-select где есть списки | наличие select-all + bulk-bar в списковых экранах | 🟨 | 🟡 |
-| I3 | Не всё через модалку | метр: доля действий, открывающих modal, ≤ порога; create/edit → Drawer | 🟨 | 🟡 |
-| I4 | Фильтры переживают reload | тест: применил фильтр → reload → фильтр жив (URL/сторедж) | 🟩 | 🔴 |
-| I5 | Нет «are you sure?» на неразрушающем | grep: confirm только на destructive | 🟨 | 🟡 |
-| I6–I12 | inline-edit, оптимистик, undo, пусто-состояния, скорость мысли | 🟥 (в основном поведение) | 🟥 | — |
+| OPT | Optical alignment (`VISUAL_CRAFT §6`) | — | 🟥 | — |
+| LIGHT | A single light source across shadows (`VISUAL_CRAFT §3`) | AST: the direction of every `box-shadow` is consistent (Δangle ≤ 15°) | 🟨 | 🟡 |
 
 ---
 
-## 4. Вставки в роли (готовые к копированию)
+## 3. ST1–ST12 (stiffness, `INTERFACE_CRAFT §7`) → checks
 
-### 4.1 В `ROLE_DEV.md` → раздел «Frontend geometry» (после §12.3)
+> **Mind the numbering.** The stiffness detector is called **ST**, not I: `CONFLICT_REGISTRY` C5 freed the I1–I12 row for the **interaction inventory** (`INTERFACE_CRAFT §1`). The rows below are renumbered per the canon; in particular `I4` in the old edition meant "filters survive a reload", while the live `I4` of the canon is "undo instead of confirm". Referring to a bare `I4` is not allowed.
+
+| # | Rule | Check | Type | Gate |
+|---|---|---|---|---|
+| ST1 | Not everything through a modal | meter: share of actions that open a modal ≤ threshold; create/edit → Drawer | 🟨 | 🟡 |
+| ST2 | No "are you sure?" on a non-destructive action | grep: confirm only on destructive actions (the action class is `INTERFACE_CRAFT` I4) | 🟨 | 🟡 |
+| ST3 | A keyboard path exists | a11y: every action is reachable from the keyboard; `tabindex` is correct | 🟨 | 🔴 |
+| ST6 | Filters and view survive a reload | test: apply a filter → reload → the filter is alive (URL/storage) | 🟩 | 🔴 |
+| ST7 | Bulk-select wherever there are lists | presence of select-all + a bulk bar on list screens | 🟨 | 🟡 |
+| remaining ST | inline edit, optimistic updates, undo, empty states, speed of thought | 🟥 (mostly behaviour) — the verdict is issued by @QA_VISUAL from the catalogue | 🟥 | — |
+
+---
+
+## 4. Role inserts (ready to copy)
+
+### 4.1 Into `ROLE_DEV.md` → the "Frontend geometry" section (after §12.3)
 
 ```
-□ §12.4 КНОПКА — ТОЛЬКО ПРИМИТИВ. Кнопка рендерится через <Button> (ui/Button.tsx).
-  Сырой <button className>, inline-стили фона/паддинга/радиуса на интерактиве,
-  локальные .btn-* классы — ЗАПРЕЩЕНЫ (CRAFT_LINT V18). Нет нужного варианта →
-  эскалация к @FRONTEND, не рисовать руками.
-□ §12.5 РЯД КОНТРОЛОВ РОВНЫЙ. Кнопки/чипы в группе: фиксированный min-height +
-  white-space:nowrap (или line-clamp:1). Двухстрочная кнопка в ряду с однострочными
-  запрещена. Перенос неизбежен → вся группа align-items:stretch (V16).
-□ §12.6 ТЕКСТ ЧИТАЕМ ВО ВСЕХ СОСТОЯНИЯХ. hover/active/focus/disabled меняют фон/тень,
-  но не уводят color к цвету фона. Контраст ≥4.5 в каждом состоянии (V15).
-□ §12.7 CHROME ПОД ПОТОЛКОМ. Шрифт в nav/menu/tab/table/chip ≤ потолка зоны (V17).
-  Tap-target 44px — паддингом, НЕ размером шрифта.
+□ §12.4 A BUTTON IS THE PRIMITIVE, NOTHING ELSE. A button renders through <Button> (ui/Button.tsx).
+  A raw <button className>, inline background/padding/radius styles on interactive elements,
+  local .btn-* classes — FORBIDDEN (CRAFT_LINT V18). No suitable variant →
+  escalate to @FRONTEND, do not hand-draw one.
+□ §12.5 THE CONTROL ROW STAYS EVEN. Buttons/chips in a group: fixed min-height +
+  white-space:nowrap (or line-clamp:1). A two-line button in a row with single-line ones is
+  forbidden. Wrapping unavoidable → the whole group goes align-items:stretch (V16).
+□ §12.6 TEXT IS READABLE IN EVERY STATE. hover/active/focus/disabled change background/shadow,
+  but never pull color toward the background colour. Contrast ≥4.5 in every state (V15).
+□ §12.7 CHROME STAYS UNDER THE CEILING. Font in nav/menu/tab/table/chip ≤ the zone ceiling (V17).
+  A 44px tap target comes from padding, NOT from font size.
 ```
 
-### 4.2 В `ROLE_QA_VISUAL.md` → раздел «base meters» (добавить векторы)
+### 4.2 Into `ROLE_QA_VISUAL.md` → the "base meters" section (add the vectors)
 
 ```
-V15 State Contrast   — stateContrast(button).ratio ≥ 4.5 во всех состояниях
+V15 State Contrast   — stateContrast(button).ratio ≥ 4.5 in every state
 V16 Control-Row      — controlRowDelta('[data-btn-group]').delta == 0 && wrapped == 0
-V17 Type Ceiling     — typeScaleCeiling(zoneCaps) == []  (chrome не превышает потолок зоны)
-V18 Primitive Source — eslint + primitive-conformance: кнопки из <Button>, класс = паспорт
+V17 Type Ceiling     — typeScaleCeiling(zoneCaps) == []  (chrome does not exceed the zone ceiling)
+V18 Primitive Source — eslint + primitive-conformance: buttons come from <Button>, class = passport
 ```
-И в PILLARS добавить: **«12. Каталог эстета обязателен — отчёт без заполненного crime-verdict из `QA_VISUAL_AESTHETE_SENSOR.md` неполон.»**
+And add to PILLARS: **"12. The aesthete's catalogue is mandatory — a report without a filled-in crime verdict from `QA_VISUAL_AESTHETE_SENSOR.md` is incomplete."**
 
 ---
 
-## 5. CI-джоб `craft` (скелет)
+## 5. CI job `craft` (skeleton)
 
 ```yaml
-# .ci/craft.yml  — рядом с job:visual, блокирует merge
+# .ci/craft.yml  — sits next to job:visual, blocks the merge
 craft:
   needs: [build]
   steps:
     - run: npm run lint:craft         # eslint: V18 (button primitive), no-inline-style, no magic hex
-    - run: npm run grep:craft         # X2/X4/X5/X9: тени, hue-count, gradient-budget, dead-greys
-    - run: npx playwright test tests/visual/craft.spec.ts   # V15/V16/V17 измеримо
+    - run: npm run grep:craft         # X2/X4/X5/X9: shadows, hue-count, gradient-budget, dead-greys
+    - run: npx playwright test tests/visual/craft.spec.ts   # V15/V16/V17 measurably
     - run: node scripts/craft-report.js --fail-on=blocking  # 🔴 → exit 1
 ```
 
 ```ts
-// tests/visual/craft.spec.ts (ядро)
+// tests/visual/craft.spec.ts (core)
 for (const route of ROUTES) {
   test(`craft ${route}`, async ({ page }) => {
     await render(page, route, { viewport:[360,768,1280,1920], fixture:'longtext' });
@@ -257,14 +268,14 @@ for (const route of ROUTES) {
 }
 ```
 
-**Правило:** блокирующие (🔴) роняют билд — их слабая модель не может «подписать себе». Advisory (🟡) идут в отчёт и на глаз-ревью эстета.
+**Rule:** blocking findings (🔴) fail the build — a weak model cannot "sign them off for itself". Advisory ones (🟡) go into the report and on to the aesthete's eye review.
 
 ---
 
-## 6. Что сюда НЕ влезло (уходит в глаз)
+## 6. What did NOT fit here (it goes to the eye)
 
-X7 (оптика), X12 (ряд-как-аргумент), I6–I12 (скорость мысли), композиция, баланс асимметрии, сочетание цветов, «безвкусица» — это `QA_VISUAL_AESTHETE_SENSOR.md`. Там нет метра, но есть **каталог с обязательным вердиктом**: молчание по пункту = пропуск = отчёт неполон.
+X7 (optics), X12 (row-as-argument), I6–I12 (speed of thought), composition, the balance of asymmetry, colour combination, "bad taste" — that is `QA_VISUAL_AESTHETE_SENSOR.md`. There is no meter there, but there is **a catalogue with a mandatory verdict**: silence on an item = a miss = the report is incomplete.
 
 ---
 
-*Версия 1.0 — 2026-07-20 — машинный пол; V15–V18 закрывают частые баги рядов/состояний/шрифтов.*
+*Version 1.0 — 2026-07-20 — the machine floor; V15–V18 close frequent bugs of rows/states/fonts.*

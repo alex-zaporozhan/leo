@@ -1,6 +1,6 @@
 # TEMPLATE_MOTION_LANGUAGE
 
-> Универсальный шаблон motion language для проекта.
+> The universal motion-language template for a project.
 
 ---
 

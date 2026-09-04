@@ -1,4 +1,6 @@
-# FRONTEND_CAPABILITY_CANON.md
+# FRONTEND_CAPABILITY_CANON
+
+> **Greenfield clause — the map is written against what will exist, not only against what does.** On a module whose backend has not been built yet, "read the actual backend" has nothing to read, and the blocker "no map → no handoff to @DESIGN" would stop every new module forever. In that case the map is produced from the **`DOMAIN_MODEL_[MODULE].md`** (layers 2 lifecycles · 4 invariants · 5 events · 7 authority) and the ARCH spine, and every row is marked `PLANNED` instead of citing a file and line. It converts to `VERIFIED` — with real paths — at the first @QA_ARCH pass after the backend lands, and a row still `PLANNED` at that point is a finding, not a formality. What is never allowed is writing the map from the ticket.
 # The canon that closes the "tablecloth frontend": a rich backend covered by a thin film of CRUD forms.
 # Position: between the backend contract (@ARCH) and the screen (@DESIGN SPEC). Nothing else in the system asks
 # the question this file asks. Owners: @FRONTEND (reads the backend, produces the map), @ARCH (confirms it),

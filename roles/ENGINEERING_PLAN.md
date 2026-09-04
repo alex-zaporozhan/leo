@@ -345,5 +345,5 @@ Examples:
 
 ---
 
-Reference: `.cursorrules` (CHAIN PROTOCOL — source of truth) · roles/ROLE_LEAD.md · roles/LEAD_PRODUCT_GATE_PROTOCOL.md · roles/ROLE_QA_ARCH.md · roles/ROLE_QA_VISUAL.md · roles/ROLE_PENTEST.md · roles/SECURITY_GATE_PROTOCOL.md · roles/ROLE_AUDITOR.md · roles/ROLE_ARCH.md · roles/ROLE_PRINCIPLE.md · roles/ROLE_AI_ENGINEER.md · roles/ROLE_MEDIA_ENGINEER.md · roles/ROLE_SEO.md · roles/PRODUCTION_READINESS_CANON.md · roles/PLANNING_MATURITY_CANON.md · roles/ARCHITECTURE_DOCUMENTATION_STANDARD.md · roles/SYSTEM_EVOLUTION_PROTOCOL.md (REFLEX/@EVOLVE) · roles/CRYSTALS.md (crystallised routes)
+Reference: `.cursorrules` (CHAIN PROTOCOL — source of truth) · roles/ROLE_LEAD.md · roles/LEAD_PRODUCT_GATE_PROTOCOL.md · roles/ROLE_QA_ARCH.md · roles/ROLE_QA_VISUAL.md · roles/ROLE_PENTEST.md · roles/SECURITY_GATE_PROTOCOL.md · roles/ROLE_AUDITOR.md · roles/ROLE_ARCH.md · roles/ROLE_PRINCIPLE.md · roles/ROLE_AI_ENGINEER.md · roles/ROLE_MEDIA_ENGINEER.md · roles/ROLE_SEO.md · roles/PRODUCTION_READINESS_CANON.md · roles/PLANNING_MATURITY_CANON.md · roles/ARCHITECTURE_DOCUMENTATION_STANDARD.md · roles/SYSTEM_EVOLUTION_PROTOCOL.md (REFLEX/@EVOLVE) · roles/ROLE_LEAD.md (§CRYSTALLIZATION) (crystallised routes)
 Version: 4.0 | 2026-07-23

@@ -2,7 +2,7 @@
 
 > **[v6.16] Token canon — `roles/FRONTEND_DESIGN_EXCELLENCE.md` (single source).** This file — the INJECTION POINTS of tokens into the repository (`theme.ts`, `index.css`), not their definition. Geometry — `roles/LAYOUT_INVARIANTS.md`.
 
-**Purpose:** the single point for **injecting** light working zone norms and **Crisp SaaS** tokens into this repository. The general UI logic canon — `docs/TECH_PASSPORT_FRONTEND_UI_LOGIC.md` (§1–6, **§7** light theme, **§8** Roadmap, **§9** Premium Micro-Design Codex — **reference for Mantine v7 micro-layout**). Routes and stack — `docs/artifacts/ARCH_FRONTEND_TECH_PASSPORT_DENTAL_BOOKING.md`.
+**Purpose:** the single point for **injecting** light working zone norms and **Crisp SaaS** tokens into this repository. The general UI logic canon — `roles/TECH_PASSPORT_FRONTEND_UI_LOGIC.md` (§1–6, **§7** light theme, **§8** Roadmap, **§9** Premium Micro-Design Codex — **reference for Mantine v7 micro-layout**). Routes and stack — `docs/artifacts/ARCH_FRONTEND_TECH_PASSPORT_DENTAL_BOOKING.md`.
 
 **Current code state:** `frontend/src/theme.ts` — light operational theme (**`primaryColor: indigo`**, multi-layer shadows, `Paper`/`Card`/`Button` — see file header). This document and **§7–§9** of the tech passport are a checklist to stay aligned with the canon.
 
@@ -92,6 +92,6 @@ Increase opacity to `0.85` if needed for readability on dense tables.
 
 - `docs/artifacts/DEV_PROMPTS_ADMIN_CRISP_SAAS_UI_2026.md` — **prompts for @DEV**: work order, DoD, unified `DEV_PROMPT_CRISP_UI_001` block for global §7 implementation.
 - `docs/artifacts/ARCH_FRONTEND_DESIGN_SYSTEM_MIDNIGHT.md` — historical/current visual base; on name conflict — resolution via epic and update of both documents.
-- `docs/TEMPLATE_DESIGN_UX.md` — marketing pages only, not admin panel.
+- `roles/TEMPLATE_DESIGN_UX.md` — marketing pages only, not admin panel.
 
 Version: 1.2 | 2026-03-26 — reference to `TECH_PASSPORT` §9 (Premium Micro-Design Codex); `theme.ts` description updated
