@@ -11,9 +11,9 @@ A written constitution that turns a general-purpose LLM coding agent into a disc
 [![Roles](https://img.shields.io/badge/roles-22-orange)](./ARCHITECTURE.md)
 [![Laws](https://img.shields.io/badge/absolute%20laws-44-red)](#4-forty-four-laws-forged-from-incidents-not-opinions)
 [![Task classes](https://img.shields.io/badge/task%20classes-22-purple)](#2-every-task-is-classified-before-it-is-started)
-[![Agent-agnostic](https://img.shields.io/badge/works%20with-Cursor%20%C2%B7%20Claude%20Code%C2%B7%20Windsurf%20%C2%B7%20Copilot-black)](#compatibility)
+[![Agent-agnostic](https://img.shields.io/badge/works%20with-Cursor%20%C2%B7%20Claude%20Code%20%C2%B7%20Windsurf%20%C2%B7%20Copilot-black)](#compatibility)
 
-[What it is](#what-leo-actually-is) · [Why it exists](#why-this-exists) · [How it works](#how-it-works) · [Proof at scale](#proof-at-scale) · [Get started](#get-started) · [**For founders — the business case**](./BUSINESS_CASE.md) · [The Manifesto](./MANIFESTO.md) · [License](#license)
+[What it looks like](#what-it-actually-looks-like) · [What it is](#what-leo-actually-is) · [Why it exists](#why-this-exists) · [How it works](#how-it-works) · [Proof at scale](#proof-at-scale) · [Get started](#get-started) · [**For founders — the business case**](./BUSINESS_CASE.md) · [Steering the frontend](./GUIDE_FRONTEND_CONTROL.md) · [The Manifesto](./MANIFESTO.md) · [License](#license)
 
 </div>
 
@@ -21,21 +21,81 @@ A written constitution that turns a general-purpose LLM coding agent into a disc
 
 ## TL;DR
 
-LEO is not a Python package and there is nothing to `pip install`. It is a **rule system**: a `.cursorrules` constitution plus a **131-file, ~36,600-line, ~287,000-word role library** (`roles/*.md`, including 5 niche-bootstrap packages under `roles/niches/`) that you hand to a coding agent — Cursor, Claude Code, Windsurf, or anything else with file-system/tool access that reads a system-prompt / project-rules file — instead of a one-line "you are a helpful senior engineer" prompt.
+LEO is not a Python package and there is nothing to `pip install`. It is a **rule system**: a `.cursorrules` constitution plus a **133-file, ~37,300-line, ~299,000-word role library** (`roles/*.md`, including 5 niche-bootstrap packages under `roles/niches/`) that you hand to a coding agent — Cursor, Claude Code, Windsurf, or anything else with file-system/tool access that reads a system-prompt / project-rules file — instead of a one-line "you are a helpful senior engineer" prompt.
 
 Where a raw LLM agent free-improvises architecture, skips edge cases under time pressure, and silently forgets a decision it made 40 messages ago, LEO gives it:
 
 - **A single entry point** (`@LEAD`) that routes every request to the right specialist instead of one model trying to be architect, developer, and QA simultaneously in the same breath.
-- **A task router** that resolves every request into one of **22 task classes** (`TC-00`…`TC-21`) and names the ≤6 files to read *first*, in order — so the agent never opens a 131-file library wondering where to start, and never starts a screen without the canon that governs it.
+- **A task router** that resolves every request into one of **22 task classes** (`TC-00`…`TC-21`) and names the ≤6 files to read *first*, in order — so the agent never opens a 133-file library wondering where to start, and never starts a screen without the canon that governs it.
 - **22 specialist roles** with narrow, named jurisdictions — `@ARCH`, `@DEV`, `@PRINCIPLE`, `@QA_ARCH`, `@QA_VISUAL`, `@PENTEST`, `@SEO`, `@DESIGN`, `@AI_ENGINEER`, and 13 more — so "who decides this" is never a coin flip.
 - **44 Absolute Laws** distilled from real production incidents (double-booked appointments, zombie Celery workers, leaked UUIDs in a UI, a `Promise.all` that silently ate an error) — so the same class of bug cannot recur, because the rule that would have caught it is now permanent.
-- **A gate protocol (GATE-0 → GATE-6)** that blocks the chain from advancing without a concrete artifact as proof — never on the agent's word alone.
+- **A gate protocol** that blocks the chain from advancing without a concrete artifact as proof — never on the agent's word alone.
+- **Reflexes** — before every handoff the agent runs a list of **literal greps over its own diff** (a forgotten `await`, a `Promise.all` with mutations, an entrance that animates opacity and nothing else, an animated layout property) and reports the count even when it is zero. The reviewing role runs the same greps: if the author ran them, the reviewer finds nothing.
 - **A second pass in a clean context** — every delivered unit is re-audited by an agent that never saw it being built, because the session that wrote the code is the worst possible judge of whether the code is finished.
 - **Artifacts instead of chat history** — every architectural decision, security threat model, and QA verdict lives in a versioned markdown file the *next* agent session reads before doing anything, closing the single biggest failure mode of long-running agentic work: **context drift**.
 
-LEO has been directing real, shipped engineering work — not toy demos — across a multi-tenant healthcare SaaS, an AI training platform with RAG and executable agent graphs, and a public-facing marketing + CMS platform. See [Proof at scale](#proof-at-scale).
+LEO has directed the engineering of three shipped production systems across a multi-tenant healthcare SaaS, an AI training platform with RAG and executable agent graphs, and a public-facing marketing + CMS platform. See [Proof at scale](#proof-at-scale).
 
 > **Evaluating this as a business decision rather than a technical one?** [`BUSINESS_CASE.md`](./BUSINESS_CASE.md) is the one-page version: what shipped and in how long, where the money actually is, what adopting it costs, and what it does not do.
+
+
+---
+
+## What it actually looks like
+
+The whole product is text, so here is the text. An ordinary request against a project already running LEO:
+
+```
+you: add a bulk "archive" action to the clients table
+
+@LEAD
+CLASS: TC-01 · operational-screen                    ← resolved before anything is read
+COST: goal=staff clear stale clients without opening each one
+      tier=E2 · reopens=[]                           ← declared before the first hand-off
+READ, in order (6, the class minimum — copied from RAG_CANON §2, not paraphrased):
+  1 VISUAL_CRAFT_CANON  §1-§6 · §9 · §11    restraint, chroma, type scale · X1-X12 · THE FLOOR
+  2 INTERFACE_CRAFT_CANON §1 · §3 · §7      inventory I1-I12 · density · stiffness ST1-ST12
+  3 LAYOUT_COMPOSITION  §2 · §3 · §5        primitives · proximity as a number · action grammar
+  4 LAYOUT_INVARIANTS   §1-§9 · §12         deterministic geometry · collision and stacking
+  5 COMPONENT_REGISTRY  (whole)             every block maps to a registered component
+  6 MOTION_CRAFT_CANON  §1 · §3             THE MOTION FLOOR · stiffness M1-M12
+  + DOMAIN_STANDARDS §0 · §9 + this page type — the business minimum. Content, not craft:
+    it does not count against the six-file cap. Nor does MOTION_REFLEX, run over the diff later.
+OUT: EDITORIAL_CRAFT_CANON (wrong register — it makes a settings screen shout) · HERO_ARCHETYPES
+     · MOTION_LIBRARY scroll narrative S1-S4 only · SEO canons
+→ @DESIGN not required: bulk-select is an existing registered pattern (Law 19)
+→ @DEV, with I3 (bulk select) and I4 (undo instead of confirm) from the inventory
+```
+
+`@DEV` writes the code, then runs its reflexes over its own diff before handing anything back —
+literal strings, not topics:
+
+```
+ASYNC_AWAIT_REFLEX  A1  await (client|http|session|httpx|conn|provider|llm|redis|s3)\.
+                        → where is timeout=? what does the user see if it hangs for 5 minutes?
+MOTION_REFLEX       R1  transition[^;]*opacity        (with no transform on the same rule)
+                        → is this an entrance? an entrance that fades and nothing else is M1
+MOTION_REFLEX       R2  \.map\(  …  with no per-sibling delay
+                        → one line: transition-delay: calc(var(--stagger-base) * var(--i))
+MOTION_REFLEX       R8  transition[^;]*(top|left|width|height|margin|padding)
+                        → 🔴 on its own. reflow every frame. use transform.
+```
+
+```
+@DEV → @LEAD
+EVIDENCE:  what my own diff shows — src/clients/BulkBar.tsx:1-88, useArchiveMany.ts:12-40,
+           tests/clients/test_archive_many.py::test_partial_failure_reports_per_row
+MOTION REFLEX: 3 triggers, 3 fixed, 0 N/A
+NOT DONE:  the archived-clients filter view — out of the declared scope, and it is a
+           second screen rather than a state of this one. Raising it, not doing it.
+```
+
+Three things in that exchange are the whole system. The task was **classified** before anything was
+read, so the concurrency canon arrives on a payments change whether or not the developer thought of
+it. The effort was **declared in decisions reopened**, before the work, in a unit both sides can count.
+And the last block is a report that says what the diff shows, what was checked mechanically, and what
+was consciously left — because a boundary chosen and not stated is indistinguishable from one that was
+missed, and the next prompt re-opens it.
 
 ---
 
@@ -74,13 +134,13 @@ If you came here expecting `npm install leo-orchestrator`, you'll be disappointe
 
 `@LEAD` is the Tech Lead. It never writes code. It reads the request, decides which specialist owns it, and — critically — runs four gates *before* anything gets built, in this order, so that architecture-scale decisions don't get made accidentally inside a "quick fix":
 
-**fitness** (should this exist at all?) → **model** (does this touch states, money, authority, lifecycles? then the domain model comes before the structure — Law 42) → **foundation** (is this the load-bearing 20% that cannot be redone later? then it is built in full, today — Law 41) → **cost** (what tier of effort is this result worth, counted in decisions reopened — Law 43).
+**fitness** (should this exist at all?) → **leverage-point analysis** (six lenses: where is the change that makes the other changes unnecessary?) → **model** (does this touch states, money, authority, lifecycles? then the domain model comes before the structure — Law 42) → **foundation** (is this the load-bearing 20% that cannot be redone later? then it is built in full, today — Law 41) → **cost** (what tier of effort is this result worth, counted in decisions reopened — Law 43).
 
 Cost is declared last on purpose: you cannot know the tier until the model and the foundation questions are answered. And the declaration is one line, written before the first hand-off — `COST: goal=… tier=E2 · reopens=[ADR-031, spine v4]` — because an undeclared tier is an undeclared budget, and a budget nobody declared is a budget nobody can overrun.
 
 ### 2. Every task is classified before it is started
 
-A 131-file rule library has an obvious failure mode: the agent does not know which handful of files this particular task actually needs, so it either reads nothing or grep-wanders. `roles/RAG_CANON.md` §2 is the router that closes it. `@LEAD` names the class in the first line of the reply — `CLASS: TC-03` — and the class states the **≤6 files to open, in that order**, with a section pointer where the canon is large, plus an explicit **OUT list** of what is deliberately not in scope for it.
+A 133-file rule library has an obvious failure mode: the agent does not know which handful of files this particular task actually needs, so it either reads nothing or grep-wanders. `roles/RAG_CANON.md` §2 is the router that closes it. `@LEAD` names the class in the first line of the reply — `CLASS: TC-03` — and the class states the **≤6 files to open, in that order**, with a section pointer where the canon is large, plus an explicit **OUT list** of what is deliberately not in scope for it.
 
 | | |
 |---|---|
@@ -129,7 +189,11 @@ A sample — the full list lives in [`.cursorrules`](./.cursorrules):
 
 **And there is a protocol for changing a law, because a mechanically correct audit can destroy a rule.** `roles/RULE_INTEGRITY_PROTOCOL.md` is seven tests a rule must pass — **goal · axis · home · name · reach · sides · measure** — run on the proposed change *and on the finding that prompted it*. Two of them exist because we watched them fail: **T0 GOAL** (a law carrying two goals enforces neither, because the reader satisfies the cheaper one and reports it as met — this is how a good law dies of a well-meant edit) and **T1 AXIS** (a rule is true only on its own axis: demanding an owner and a gate for a *register* law is a category error that destroys it).
 
-These laws did not come from a whiteboard. Several were written the week a specific defect happened in production — a Celery worker held a slot open past its lease, a rate limiter let a retry storm through, a race condition double-booked a clinic appointment slot. Each incident became a permanent, greppable rule instead of a lesson someone had to remember. That upgrade trail is preserved in `roles/SYSTEM_UPGRADE_MANIFEST.md` — including the drafts that were rejected, and why.
+**A law on its own does not change what an agent produces, and this system found that out the expensive way.** A discipline is enforceable here only when it has four things: a **floor** (what to take when nothing has been decided), **numbered detectors** (3+ hits = 🔴), a **reflex** (literal greps the author runs over the diff), and a **blocking vector** in Law 39. Visual craft has had all four for versions. Motion had a law, a technique library, a boldness dial and a dedicated role — and none of the four — and produced a fade on everything until they were built. The full account is in §7 below; it is the clearest evidence in this repository of the process catching the process.
+
+These laws did not come from a whiteboard. Several were written the week a specific defect happened in production — a Celery worker held a slot open past its lease, a rate limiter let a retry storm through, a race condition double-booked a clinic appointment slot. Each incident became a permanent, greppable rule instead of a lesson someone had to remember. That upgrade trail is preserved in `roles/SYSTEM_UPGRADE_MANIFEST.md`.
+
+**If you want one file to judge this repository by, make it that one — and read the entry on Law 5.** It records two rewrites of that law that were written, tried and **thrown away**, and why each was wrong: both were mechanically correct audit findings that would have destroyed the rule. A changelog listing only wins is a marketing document. That entry is the fastest way to tell which kind this is.
 
 ### 5. Artifacts, not vibes — "state, not history"
 
@@ -150,31 +214,41 @@ flowchart TD
     D -->|"no"| F["DEV_PROMPTS finalized"]
     E --> F
     F --> G["@DEV\nexecutes to-dos, writes code"]
-    G --> H["@QA_ARCH\nbusiness-logic audit"]
+    G --> RX["REFLEX over its own diff\nasync · motion — literal greps\nreported even at zero"]
+    RX --> H["@QA_ARCH\nbusiness-logic audit"]
     H -->|"red flag"| G
-    H -->|"green + UI"| I["@QA_VISUAL\nrender & measure"]
+    H -->|"green + UI"| I["@QA_VISUAL\nrender & measure\nV1–V21 · X/ST/Y/M detectors"]
     I -->|"red flag"| G
     H -->|"green, no UI"| J["@QA"]
     I -->|"green"| J
     J --> K["@SEC + @PENTEST S-Wave\n+ @SEO TECH"]
     K -->|"red flag"| G
-    K -->|"green"| S["SECOND PASS\nfresh context, never saw the build\n(SP-1 unit · SP-2 stage · SP-3 batch)"]
+    K -->|"green"| S["SECOND PASS — a human opens a NEW chat\nSP-1 fires per delivered unit, not only here\nSP-2 per stage · SP-3 per batch"]
     S -->|"finding"| G
     S -->|"clean"| L["Human reviews\nHuman publishes\n(Law 40)"]
 ```
 
 A phase transition is never "the agent said it's done." Every gate needs a file as proof. `roles/LEAD_ANTI_CHECKBOX_PROTOCOL.md` exists specifically to catch the agent asserting completion without evidence.
 
+**Three layers check the work, and each catches what the previous one structurally cannot:** the **reflex** (the author greps its own diff, where the fix is cheapest) → the **gate** (a different jurisdiction, against a stated threshold) → the **second pass** (a context that never saw the build, opened **by you** — it is a human step, and on a delivered unit it can cost several times the unit itself). The first two are passed by the same session that wrote the code, which is why the third exists.
+
+**One thing to be exact about, because the rest of the page depends on it.** LEO ships **no runnable code** — that is a deliberate design decision, not an omission. The machine floor (`V15–V21`, the four detector sets) is a **specification with thresholds**, and the adopting project builds its executor as its own test code. Law 39 says so in its own text, and adds the part that matters: *a floor claimed but not built is itself a false green, and claiming it is worse than not having it.* So: the detectors are enforced by a rule the agent must read plus a pass that checks it, and they become machine-enforced the moment your project writes the job. Where a page here shows a vector at a gate, that is what it means.
+
+
 ### 7. The second pass — a clean context is the only real auditor
 
-The session that wrote the code is the worst possible judge of whether the code is finished. It remembers what it *meant*, so it reads its own intention back out of the file; it already argued itself into every shortcut it took; and it has the whole build in context, which is exactly what makes a hole invisible. `roles/SECOND_PASS_PROTOCOL.md` makes the fix structural: every delivered unit is re-audited in a **new chat that never saw it being built**, given a broad search instruction rather than a narrowed checklist — because a checklist tells the auditor what to find, and an auditor who is told what to find stops looking.
+Layers one and two above are both passed by the session that wrote the code — and that session is the worst possible judge of whether the code is finished. It remembers what it *meant*, so it reads its own intention back out of the file; it already argued itself into every shortcut it took; and it has the whole build in context, which is exactly what makes a hole invisible. `roles/SECOND_PASS_PROTOCOL.md` makes the fix structural: every delivered unit is re-audited in a **new chat that never saw it being built**, given a broad search instruction rather than a narrowed checklist — because a checklist tells the auditor what to find, and an auditor who is told what to find stops looking.
 
 - **SP-0** — an interceptor that verifies the previous unit actually landed on disk before the next one is pasted.
 - **SP-1 per unit · SP-2 per stage · SP-3 per batch.** These are slots in the plan, not good intentions: a batch map showing only production steps is an incomplete batch map, and Law 43 explicitly does **not** count a planned second pass against the effort tier — an audit costing several times its unit is the correct price of that unit.
 - **The role set is a lookup, not a judgement call** — resolved from the task class. It is a default and never a permission list: no role is excluded by the table, and no set is complete merely because the table says so. What it removes is the blank page, not the choice.
 - **A catalogue of false greens (`FG-1`…`FG-12`)** with a per-project tally — the specific ways a pass reports 🟢 on something it did not actually check. And the audit of a QA report is itself a second-pass class: spot-check two or three of the report's own claims against the code, because a green that does not survive re-reading was never green.
 
-This repository's own rule set was rectified this way. A clean-context pass over five waves of changes found a gate carrying two different numeric thresholds for the same countable rule, a source-priority ladder readable as "a project artifact outranks a law", a quality gate applying one visual register's checklist to both registers, and a protocol that had written the rule "a canon the router does not know does not exist" while being itself unregistered. None of those are visible from inside the session that wrote them.
+**A worked example, because this is the mechanism the repository can actually prove.** The complaint was that everything LEO produced moved like a hinge: point A, point B, one effect. A clean-context pass found why. A stability invariant — the one protecting the reader's scroll position — had been written **without a scope** and was being read across eight files as a ban on *movement*, even though a `transform` never participates in layout and therefore moves nothing but itself. That left exactly one legal pattern, an opacity fade, pre-filled as the answer in the design spec template. And nothing could catch it, because every motion check in the system measured *harmlessness*: a page with no animation at all scored perfect on all of them.
+
+Then the second pass was run **on the fix**, and came back with one sentence: *permission was fixed, enforcement was not.* Ten copies of the old rule were still live — three of them gates, one a 🔴 that rejected the corrected motion, running before the role that had just been given the new detector — and the changelog said "applied everywhere". Written from intention, not from grep.
+
+Both halves are the argument. **A rule system fails silently in the direction nobody measures**, and **a fix is finished when it is grepped, not when it is written.** Earlier passes found the same class of thing: a gate carrying two different numeric thresholds for one countable rule, a source-priority ladder readable as "a project artifact outranks a law", and a protocol that had authored the rule *"a canon the router does not know does not exist"* while being itself unregistered.
 
 ### 8. The system can evolve — but only a human pulls the trigger
 
@@ -184,18 +258,19 @@ This repository's own rule set was rectified this way. A clean-context pass over
 
 ## Proof at scale
 
-LEO is not a thought experiment. It has directed real, shipped engineering work across three systems of meaningfully different shape — a regulated multi-tenant SaaS, an AI/agent platform, and a public marketing + CMS platform. Full write-up with stack, scale, and what LEO's gates actually caught: **[`CASE_STUDIES.md`](./CASE_STUDIES.md)**. The same three systems framed as cost, risk and elapsed time: **[`BUSINESS_CASE.md`](./BUSINESS_CASE.md)**.
+Three systems of deliberately different shape, each directed end-to-end through this process of meaningfully different shape — a regulated multi-tenant SaaS, an AI/agent platform, and a public marketing + CMS platform. Full write-up with stack, scale, and what LEO's gates actually caught: **[`CASE_STUDIES.md`](./CASE_STUDIES.md)**. The same three systems framed as cost, risk and elapsed time: **[`BUSINESS_CASE.md`](./BUSINESS_CASE.md)**.
 
 | | MedCore | Enterprise AI Training Platform | Public Education Platform |
 |---|---|---|---|
 | **Class** | Multi-tenant B2B clinic OS | AI content/agent SaaS | Public site + CMS |
 | **Backend** | FastAPI, SQLAlchemy 2 async, PostgreSQL 16, Celery/Redis | FastAPI, SQLAlchemy 2 async, PostgreSQL + pgvector, LangGraph 1.2 with Postgres checkpointing, Celery/Valkey | FastAPI, SQLAlchemy 2 async, PostgreSQL 16, Valkey |
 | **Frontend** | React 18, Vite, Mantine, TanStack Query | React 18, Mantine 7, two separate SPA entry points, node-graph pipeline builder (XYFlow), TanStack Query + virtualization | Next.js 15 (SSR/SSG), React admin SPA |
-| **Notable engineering** | Tenant isolation, advisory locks, transactional outbox, 49-code RBAC matrix with CI-enforced router↔matrix inventory | RAG (pgvector), executable agent graphs, generative-media pipeline, 273 HTTP endpoints across 30 router modules, 48 Celery task types, 124 Alembic migrations, 61 numbered ADRs, a dedicated adversarial/security test subset | SEO-gated SSR, licensed-content compliance, WCAG AA, a 20-block-type page builder, a shipped `craft-lint` CI stage (Law 39) |
+| **Notable engineering** | Tenant isolation, advisory locks, transactional outbox, 49-code RBAC matrix with CI-enforced router↔matrix inventory | RAG (pgvector), executable agent graphs, generative-media pipeline, 273 HTTP endpoints across 30 router modules, 48 Celery task types, 124 Alembic migrations, 61 numbered ADRs, a dedicated adversarial/security test subset | SEO-gated SSR, licensed-content compliance, WCAG AA, a 20-block-type page builder, a written `craft-lint` CI stage (Law 39) — on file, not the active pipeline |
 | **Test surface** | 189 pytest modules, 816 collected test cases (verified) + Playwright | **366 pytest modules, 3,888 test functions** (static count, Sept 2026) across ~149k lines of test code — against ~129k lines of application code — + 115 frontend test files | 1,124 backend + 1,027 frontend Vitest cases (verified, all green) + 17 Playwright visual/a11y specs |
+| **Elapsed, one engineer** | 2 months | 3 months | 1.5 months, including the CMS page builder |
 | **Status** | Shipped; source-available (PolyForm Shield), going public at [github.com/alex-zaporozhan/medCore](https://github.com/alex-zaporozhan/medCore) | Client engagement (NDA — architecture disclosed, business logic withheld) | Shipped |
 
-These aren't demo apps. They are the reason most of LEO's 44 Laws exist in the first place — each one is a scar from something that actually broke.
+Those timings are self-reported and unaudited — treat them as you would any builder's own numbers. The commit history of the first system dates itself once it is public. What the three have in common is that most of LEO's 44 Laws exist because of a specific defect in one of them.
 
 ---
 
@@ -209,7 +284,7 @@ LEO is a file, not a build step.
 4. **Talk to `@LEAD` first.** Open your agent, address `@LEAD`, and describe the task. Let it route. A correct reply carries the task class (`CLASS: TC-xx`) and the effort tier (`COST: tier=Ex`) — on the opening line when you address a specialist role directly, and in the COMMAND CENTER block that closes every `@LEAD` reply. If neither is anywhere in the answer, the agent skipped the router and you should say so.
 5. **Trim to your stack.** LEO ships with canons for a specific opinionated stack (Python/FastAPI, PostgreSQL, React/TypeScript, Celery/Redis) because *specificity is what makes a rule enforceable*. Swap the stack-specific canons (`roles/STACK_SELECTION.md`, `roles/DATA_STORE_SELECTION.md`, `roles/TEMPLATE_ADMIN_UI_UX.md`, …) for your own; keep the *process* canons (gates, laws, artifact contracts) as-is.
 
-**Minimum viable adoption:** even using just `.cursorrules` (the 44 Laws + LAW PRECEDENCE + Chain Protocol) without the full 131-file role library already fixes the most common agentic-coding failure modes — context drift and unearned confidence.
+**Minimum viable adoption:** even using just `.cursorrules` (the 44 Laws + LAW PRECEDENCE + Chain Protocol) without the full 133-file role library already fixes the most common agentic-coding failure modes — context drift and unearned confidence.
 
 ### Compatibility
 
@@ -232,9 +307,11 @@ LEO/
 ├── BUSINESS_CASE.md                # For founders: what shipped and in how long, where the money is,
 │                                   #   what adoption costs, and what the system does not do
 ├── MANIFESTO.md                    # Long-form: why context drift kills agentic dev, and how LEO stops it
+├── GUIDE_FRONTEND_CONTROL.md       # Operator's guide: which design role owns what, whom to address
+│                                   #   with what, and what a request has to name
 ├── LICENSE                         # PolyForm Shield 1.0.0 (source-available)
 ├── LICENSING.md                    # Why this license, in plain language, with a comparison table
-├── roles/                          # 125 top-level files + niches/ — 131 files total, the role library
+├── roles/                          # 127 top-level files + niches/ — 133 files total, the role library
 │   ├── RAG_CANON.md                #   THE TASK ROUTER — 22 task classes, the ≤6 files each one reads first
 │   ├── ROLE_LEAD.md                #   The orchestrator: routing, gates, the model and cost gates, REFLEX
 │   ├── ROLE_ARCH.md ROLE_DEV.md …  #   One constitution per specialist role
@@ -243,8 +320,14 @@ LEO/
 │   ├── DATABASE_RUNTIME_CANON.md   #   Lock discipline, connection budgets, the "corpse-lock" pattern
 │   ├── ASYNC_WORKERS_CANON.md      #   Queue design, lease clocks, retry ownership
 │   ├── ARCH_SPINE_PROTOCOL.md      #   The 12-vertebra architectural decision record
+│   ├── ASYNC_AWAIT_REFLEX.md       #   Reflex: literal greps @DEV runs over its own diff before handoff
+│   ├── MOTION_REFLEX.md            #   The same for movement — R1…R12, mirrored at @QA_VISUAL
+│   ├── VISUAL_CRAFT_CANON.md       #   Instrument craft + THE FLOOR (§11) — taken verbatim when no concept exists
+│   ├── MOTION_CRAFT_CANON.md       #   The motion floor, the grammar of the in-between, M1–M12 stiffness
 │   ├── SECOND_PASS_PROTOCOL.md     #   The clean-context audit: SP-0…SP-3, the false-green catalogue
 │   ├── RULE_INTEGRITY_PROTOCOL.md  #   The seven tests a rule must pass before it enters the system
+│   ├── ROLE_LEO_EDITOR.md       #   The maintainer's role: changing LEO itself. Invoked by hand, never
+│   │                               #   loaded during delivery work — the constitution stays battle kit
 │   ├── SYSTEM_EVOLUTION_PROTOCOL.md#   The @EVOLVE command — how rules may change (human-gated)
 │   ├── SYSTEM_UPGRADE_MANIFEST.md  #   The changelog of every rule the system learned the hard way
 │   ├── niches/                     #   5 niche-bootstrap packages (CRM/ERP, marketplace, mobile-consumer,
@@ -265,7 +348,7 @@ LEO/
 **Is this "vibe coding with extra Markdown"?**
 No — the entire point is the opposite. Vibe coding is "describe what you want, accept what comes back." LEO forces every non-trivial decision through a named owner, a written artifact, and a gate that a *different* pass of the agent — in a context that never saw the work being built — or a human has to actually check. The 44 Laws exist because the boring, unglamorous 20% of software (error contracts, race conditions, empty states) is exactly what an unconstrained agent skips first.
 
-**Do I need all 131 files?**
+**Do I need all 133 files?**
 No — and you are never expected to *read* them all either, which is the point of the router. Start with `.cursorrules` alone; add canons as you hit the problem they solve. The library is intentionally modular, and two files exist specifically to keep a rule set this size internally consistent as it grows: `roles/CONFLICT_REGISTRY.md` (a repeated collision gets one named winner, decided once) and `roles/RAG_CANON.md` §6 (a canon that is not reachable from the router does not exist).
 
 **Forty-four laws all act at once. What happens when two of them disagree?**
@@ -295,17 +378,9 @@ Full reasoning, a comparison against MIT / Apache-2.0 / CC-BY-NC-SA / PolyForm-N
 
 ## About the author
 
-**Alexandr Zaporozhan** — AI-Native Systems Engineer and solo builder bridging computer-science fundamentals with high-velocity agentic orchestration.
+**Alexandr Zaporozhan** — author of LEO, and the one person who operates it. Three production systems were directed end-to-end through this process: a multi-tenant healthcare SaaS, an AI/agent platform, and a public-sector education platform ([`CASE_STUDIES.md`](./CASE_STUDIES.md)).
 
-- 5 years in Emergency ICU — zero-error tolerance, algorithmic discipline, and rapid crisis execution, carried directly into how LEO treats a production defect (a permanent rule, not a one-off fix).
-- A rigorous CS foundation (algorithms & data structures in C++, OOP design, Java Core) built specifically because production SDLC cannot be learned from toy katas.
-- Facing the junior-hiring freeze, instead of waiting for a team, engineered one: LEO directs 22 specialized agent roles through 44 codified engineering laws and a closed-loop verification chain — from S-0 threat modeling to Playwright visual-render tests and adversarial security checks.
-- Directed 14B+ tokens across iterative verification loops in real client work and independent products, shipping a multi-tenant healthcare SaaS with database-enforced tenant separation and 800+ tests, an AI platform with executable LangGraph agent graphs and pgvector RAG, and a custom high-throughput CMS/PWA.
-- **Core stack:** Python 3.11 (FastAPI, SQLAlchemy 2 async, Alembic) · PostgreSQL 16 (pgvector, RLS) · Celery · Redis/Valkey · TypeScript, React 18, Vite, TanStack Query, Mantine, Tailwind · Agentic orchestration, context engineering, LangGraph, RAG, spec-driven development.
-
-Open to Founding Engineer roles, AI-native full-stack positions, and strategic AI-SDLC architecture contracts.
-
-[LinkedIn — Alexandr Zaporozhan](https://www.linkedin.com/in/alex-zaporozhan/)
+[LinkedIn](https://www.linkedin.com/in/alex-zaporozhan/) · engagements through **LEAD ENGINEERING ORCHESTRATION S.R.L.** (Moldova)
 
 ---
 

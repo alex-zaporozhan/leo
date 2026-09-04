@@ -6,15 +6,15 @@ How LEO is actually built: the file layout, the role graph, the gate protocol, a
 
 ## 1. The three physical layers
 
-LEO's own knowledge is split into three layers so the agent never has to load all ~287,000 words of it at once — it loads the constitution always, and pulls a specific canon only when a task actually needs it. This split only pays off when the agent can actually open a file on demand — see [Compatibility](./README.md#compatibility) in the README for the tool-use requirement this implies.
+LEO's own knowledge is split into three layers so the agent never has to load all ~299,000 words of it at once — it loads the constitution always, and pulls a specific canon only when a task actually needs it. This split only pays off when the agent can actually open a file on demand — see [Compatibility](./README.md#compatibility) in the README for the tool-use requirement this implies.
 
 ```
 LEO/
 ├── .cursorrules        # Layer 0 — the constitution. Always loaded. 551 lines: 44 Laws,
 │                        # LAW PRECEDENCE, TASK ROUTING, role map, chain protocol, gate map,
 │                        # command centre. Everything else is reached FROM here.
-├── roles/               # Layer P — process norm. 125 top-level files + 6 under niches/ = 131 files,
-│   └── niches/           # ~36,600 lines, ~287,000 words. Loaded on demand via the task router.
+├── roles/               # Layer P — process norm. 127 top-level files + 6 under niches/ = 133 files,
+│   └── niches/           # ~37,300 lines, ~299,000 words. Loaded on demand via the task router.
 │                          # niches/ holds 5 domain-bootstrap packages (CRM/ERP, marketplace,
 │                          # mobile-consumer, content/social, AI-assistant) picked once at project start.
 └── docs/                # Layers S + W — product state & working artifacts.
@@ -39,7 +39,7 @@ LEO/
 
 ## 2. The role graph
 
-`@LEAD` is not a role among equals — it is the only role the user talks to directly in the default flow. Every other role is reached through a **hand-off**, and every hand-off has a fixed shape (the Transmission Protocol, below). This keeps the system a **star topology with one router**, not a free-for-all where 22 personas argue with each other in the same context. *(23 `ROLE_*.md` files: 22 specialists plus @LEAD, which is the router rather than one of them.)*
+`@LEAD` is not a role among equals — it is the only role the user talks to directly in the default flow. Every other role is reached through a **hand-off**, and every hand-off has a fixed shape (the Transmission Protocol, below). This keeps the system a **star topology with one router**, not a free-for-all where 22 personas argue with each other in the same context. *(24 `ROLE_*.md` files: 22 specialists, plus @LEAD which is the router rather than one of them, plus `ROLE_LEO_EDITOR` — the maintainer's role for changing LEO itself. That one is deliberately outside the chain, outside the constitution and outside the 22: it is invoked by hand, between projects, and never during delivery work.)*
 
 ```mermaid
 flowchart LR
@@ -105,7 +105,7 @@ Every arrow that isn't a dotted "escalation" line is a **hand-off with an artifa
 
 ---
 
-## 3. The task router — how 131 files stay usable
+## 3. The task router — how 133 files stay usable
 
 Every task begins by being **classified**, not by being read into. `@LEAD` writes `CLASS: TC-xx` in the first line of the reply, and `roles/RAG_CANON.md` §2 answers what that class reads: **at most six files, in a stated order**, with a section pointer where the canon is large, plus an explicit **OUT list** naming what the neighbouring class owns instead.
 
@@ -163,7 +163,8 @@ flowchart TD
     SURF -->|"no"| PROMPTS
     S0 --> PROMPTS["DEV_PROMPTS file finalized\n(numbered to-dos, contracts, domain checklist)"]
     PROMPTS --> DEVSTEP["@DEV executes to-dos, writes code"]
-    DEVSTEP --> QAA{"@QA_ARCH audit"}
+    DEVSTEP --> RFX["REFLEX over its own diff\nASYNC_AWAIT + MOTION — literal greps\nreported even at zero (§13)"]
+    RFX --> QAA{"@QA_ARCH audit — the same greps,\nso a run reflex means zero findings"}
     QAA -->|"red flag"| DEVSTEP
     QAA -->|"green, UI change"| QAV["@QA_VISUAL\nrender, measure, compare"]
     QAA -->|"green, no UI"| QASTEP
@@ -171,7 +172,7 @@ flowchart TD
     QAV -->|"green"| QASTEP["@QA — risk-tiered gate"]
     QASTEP --> SEC2["@SEC + @PENTEST S-Wave\n+ @SEO TECH (public site)"]
     SEC2 -->|"red flag"| DEVSTEP
-    SEC2 -->|"green"| SP["SECOND PASS — clean context\nnew chat, broad instruction,\nrole set looked up from the class"]
+    SEC2 -->|"green"| SP["SECOND PASS — a HUMAN opens a new chat\nSP-1 already fired per unit; SP-2 stage, SP-3 batch\nbroad instruction, role set from the class"]
     SP -->|"finding"| DEVSTEP
     SP -->|"clean"| HUMAN["Human review\nHuman publishes (Law 40)"]
 ```
@@ -267,7 +268,18 @@ Two "registers" get explicitly different rulebooks, because applying the wrong o
 - **`instrument`** (admin panels, dashboards, tools) → `VISUAL_CRAFT_CANON.md` + `INTERFACE_CRAFT_CANON.md`: restraint *is* the craft — one separation method per surface, one light source, chrome that whispers.
 - **`statement`** (landing pages, hero sections, campaigns) → `EDITORIAL_CRAFT_CANON.md`: **partly opposite laws** — scale as a weapon, deliberate asymmetry, one gesture committed to completely. *"Applying instrument-restraint to a showcase is exactly how a landing becomes a settings screen with a big button on it."*
 
-The registers carry numbered detectors — three of them, one of which is register-independent (`X1–X12` cheapness, `ST1–ST12` stiffness, `Y1–Y12` timidity) that `@QA_VISUAL` and `@DESIGN` run against a render — not against a description of the render.
+Craft is carried by **numbered detector sets**, run by `@QA_VISUAL` and `@DESIGN` against a render — never against a description of one. Four of them now, and **3+ hits on any one is 🔴, not fixable by polishing**:
+
+| | Catches | Where |
+|---|---|---|
+| `X1–X12` | cheapness — any surface | `VISUAL_CRAFT_CANON` §9 |
+| `ST1–ST12` | interaction stiffness — operational surfaces | `INTERFACE_CRAFT_CANON` §7 |
+| `Y1–Y12` | timidity — statement surfaces | `EDITORIAL_CRAFT_CANON` §8 |
+| `M1–M12` | motion stiffness — any surface with interaction | `MOTION_CRAFT_CANON` §3 |
+
+**And each register has a FLOOR — what you take when nothing has been decided.** This is the mechanism that makes "no design concept yet" survivable: `VISUAL_CRAFT_CANON` §11 hands over a complete token set (neutrals, accent, elevation, space and type scales, radii, row heights) to be applied *verbatim*, and `MOTION_CRAFT_CANON` §1 does the same for movement (four durations, three easings by role plus one spring, three stagger steps, an entrance that is not a bare fade). **The absence of a concept is a licence to take the floor, never to improvise and never to ship nothing.**
+
+**What "a discipline is complete" means here**, learned the expensive way: a discipline needs a **floor**, **numbered detectors**, a **reflex** (§13) and a **blocking vector** in Law 39. Motion had a law, a technique library, a boldness dial and a dedicated role — and none of those four — and it emitted one short opacity fade on everything it ever touched. **Section 13 is the worked example; this four-part test is what it generalises to.**
 
 ---
 
@@ -285,9 +297,28 @@ Rejecting an `@EVOLVE` proposal is an explicitly valid, healthy outcome — most
 
 ---
 
-## 13. The second pass — the only auditor that is not the author
+## 13. Three layers of verification — reflex, gate, clean context
 
-Everything in section 4 is a gate the *same session* passes. That session is structurally the worst available judge of its own output: it remembers what it meant, so it reads its own intention back out of the file; it already argued itself into every shortcut it took; and it holds the whole build in context, which is precisely what makes a hole invisible. `roles/SECOND_PASS_PROTOCOL.md` puts the fix in the plan rather than in good intentions.
+Work is checked three times, by three different things, and each layer catches what the previous one structurally cannot.
+
+### Layer 1 — the reflex: the agent greps its own diff
+
+The cheapest defect is the one caught before the handoff, and the agent is capable of catching it — it just has to be told to look at what it *typed* rather than at what it *meant*. A **reflex map** is a list of literal patterns, each with a stop-question and a fix. The agent runs the greps over its own diff before handing off, and writes one line in the report: `<N> triggers, <N> fixed, <N> N/A + reason`. **The line is required even when the count is zero** — silence reads as "not run" (Law 12).
+
+- **`ASYNC_AWAIT_REFLEX.md`** — hangs, races, duplicates, transactions crossed with queues. Built around what a developer physically types (`await`, `Promise.all`, `.delay(`, a broad `except`), not around topics.
+- **`MOTION_REFLEX.md`** — `R1…R12`: an entrance animating `opacity` alone · a rendered list of siblings sharing one delay · fewer than two distinct durations · `ease-in-out` by default · a scaling panel with no `transform-origin` · a `key` bound to a status, which forces a remount where the object should have morphed · an entrance with no exit · any animated layout property · `prefers-reduced-motion` absent, or present and clamping everything to `.001ms` · every wait rendered as the same spinner · a completed action with no affirmative moment anywhere on the surface · motion tokens invented where the project already declares a world.
+
+The same greps are mirrored at the reviewing role. **If the author ran them, the reviewer finds zero and sends nothing back** — which is the point: a reflex is not an extra gate, it is the gate moved to where the fix is cheapest.
+
+### Layer 2 — the gate: a different role, against a criterion
+
+**What "machine vector" means here, exactly.** This system ships no runnable code by design; `CRAFT_LINT_SPEC` is a **specification with thresholds** and the adopting project builds the executor as its own test code. Law 39 states it and adds the consequence: *a floor claimed but not built is itself a false green, and claiming it is worse than not having it.* Until a project writes that job, `V15–V21` are enforced the way everything else here is — a rule the agent must read, plus a pass that checks it against a number rather than an impression.
+
+Section 4. A phase advances on an artifact a *different* jurisdiction checked against a stated threshold, never on the author's word. Law 39 is the blocking craft layer — machine vectors `V15–V21` plus the four reducible detector sets (X · ST · Y · M) — and `V21` is worth naming because of what it fixed: it is the first motion vector in the system that can **fail on absence**. Every earlier one scored a dead page as perfect.
+
+### Layer 3 — the second pass: the only auditor that is not the author
+
+Layers 1 and 2 are both passed by the *same session*. That session is structurally the worst available judge of its own output: it remembers what it meant, so it reads its own intention back out of the file; it already argued itself into every shortcut it took; and it holds the whole build in context, which is precisely what makes a hole invisible. `roles/SECOND_PASS_PROTOCOL.md` puts the fix in the plan rather than in good intentions.
 
 **The three conditions that make a pass a second pass** — drop any one and it degrades into a re-read:
 
@@ -308,7 +339,13 @@ A batch map showing only production steps is an **incomplete batch map**. Law 43
 
 **False greens are catalogued, not lamented.** `FG-1`…`FG-12` name the specific shapes a pass takes when it reports 🟢 on something it did not check, with a per-project tally in `docs/artifacts/FALSE_GREEN_REGISTER.md` — the point being that a recurring `FG` number is a fact about the process, not about one report. The second pass over a QA report is an audit of the auditor: spot-check two or three of the report's own claims against the code, because **a green that does not survive re-reading was never green.**
 
-This document's own rule set was rectified this way. A clean-context pass across five waves of changes to LEO found a gate carrying two different numeric thresholds for one countable rule, a source-priority ladder readable as "a project artifact outranks a law", a quality gate applying one visual register's checklist to both registers, and a protocol that had authored the rule *"a canon the router does not know does not exist"* while being itself unregistered. None of those are visible from inside the session that wrote them — not because the session was careless, but because it was the author.
+**The worked example: how this system found out it could not animate.** The symptom was that everything LEO produced moved like a hinge — point A, point B, one effect. A clean-context pass traced it to two independent causes that reinforced each other. First, a stability invariant written **without a scope**: it protects the reader's scroll position and the absence of reflow, and it was being read across eight files as a ban on *movement* — even though a `transform` never participates in layout, so an element that translates keeps its box and moves nothing. That left exactly one legal pattern, an opacity fade, and the design SPEC template shipped with it **pre-filled as the answer**. Second, the verification: every motion vector measured harmlessness, so the stiff outcome scored perfect. Motion had a technique library, a boldness dial and a role — and no floor, no detectors, no reflex and nothing blocking.
+
+Then the second pass was run **on the fix**, and returned one sentence: *permission was fixed, enforcement was not.* The rescoping had been declared complete from intention rather than from grep — ten copies of the old rule were still live, three of them gates, and one of those was a 🔴 in `@QA_ARCH` that **rejected** floor-compliant motion, running *before* the role that had just been given the new detector. The blocking law itself had been named as the cause in the changelog and never edited. The canon's own containment rule forbade the canon's own entrance on the element class it told you to stagger.
+
+Two things are worth taking from that, and they are why this section exists rather than a paragraph saying "we review our work". **A rule system fails silently in the direction nobody measures** — here the answer to "is the motion good?" was a number that went up when the motion disappeared. And **a fix is not finished when it is written, only when it is grepped**: the same author who diagnosed the problem correctly then wrote "applied everywhere" over ten live counter-examples, twice. The clean context is not a formality in the process. It is the only reader who does not already believe the work is done.
+
+Earlier passes found the same class of thing: a gate carrying two different numeric thresholds for one countable rule, a source-priority ladder readable as "a project artifact outranks a law", a quality gate applying one visual register's checklist to both registers, and a protocol that had authored the rule *"a canon the router does not know does not exist"* while being itself unregistered.
 
 ---
 
@@ -342,9 +379,9 @@ The protocol carries an explicit scope guard, and it matters more than the tests
 
 ---
 
-## 15. What "22 roles, 44 laws, 131 files" actually buys you
+## 15. What "22 roles, 44 laws, 133 files" actually buys you
 
-None of this is complexity for its own sake. Each mechanism above maps to a specific, named failure mode of unconstrained agentic coding:
+Each mechanism above exists because of a specific, named failure mode of unconstrained agentic coding:
 
 | Failure mode of a raw agent | LEO's countermeasure |
 |---|---|
@@ -354,7 +391,10 @@ None of this is complexity for its own sake. Each mechanism above maps to a spec
 | Skips the boring 20% under time pressure | 44 Laws that make skipping *expensive* (a named 🔴, not a style nit) |
 | No adversary, no second opinion | `@PENTEST` blocking gate, `@QA_ARCH` audit, `@QA_VISUAL` render checks — separate passes, separate jurisdictions |
 | The session that built it is the one grading it | `SECOND_PASS_PROTOCOL.md` — a clean context that never saw the build, with a catalogued list of false greens |
-| Doesn't know which of 131 files this task needs | `RAG_CANON.md` §2 — 22 task classes, each naming ≤6 files in reading order |
+| It ships a defect it could have caught by reading its own diff | Reflex maps — literal greps the author runs before handoff, mirrored at the reviewer (`ASYNC_AWAIT_REFLEX`, `MOTION_REFLEX`) |
+| Everything it animates moves like a hinge — A, B, one effect | `MOTION_CRAFT_CANON` — a floor taken verbatim when nothing is decided, a grammar for the part between the endpoints, and `M1–M12`, the first detector set here that fails on the **absence** of motion |
+| A quality metric that a dead page scores perfectly on | Law 39 now blocks on `V21` too: ≥2 durations, ≥2 easings, ≥1 entrance carrying a transform |
+| Doesn't know which of 133 files this task needs | `RAG_CANON.md` §2 — 22 task classes, each naming ≤6 files in reading order |
 | Drifts from a small fix into a reconstruction nobody asked for | Law 43 — the effort tier declared up front in decisions reopened, with a countable stop threshold |
 | An audit "fixes" a rule and quietly destroys it | `RULE_INTEGRITY_PROTOCOL.md` — seven tests run on the *finding*, not only on the rule |
 | Race conditions and double-writes | `DATA_INTEGRITY_CANON.md` — protection at the schema/lock level, not an `if` |

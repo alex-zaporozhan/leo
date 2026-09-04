@@ -54,7 +54,7 @@ So the bet underneath LEO was never really a career strategy. It was closer to: 
 
 That system is **LEO — Lead Engineering Orchestrator.**
 
-LEO is not a library, a plugin, or a hosted product. It's a **written constitution** — a `.cursorrules` file plus a 131-file, ~287,000-word role library — that any coding agent with file-system/tool access can load instead of a one-line personality. It gives the agent:
+LEO is not a library, a plugin, or a hosted product. It's a **written constitution** — a `.cursorrules` file plus a 133-file, ~299,000-word role library — that any coding agent with file-system/tool access can load instead of a one-line personality. It gives the agent:
 
 - **A single entry point, `@LEAD`,** that routes every request to a named specialist instead of one model trying to simultaneously be the architect, the developer, and the auditor of its own work in the same breath.
 - **Twenty-two roles with real jurisdiction** — `@ARCH` owns the database and API contracts; `@PRINCIPLE` owns whether a state is logically reachable at all, independent of whether it's technically buildable; `@QA_ARCH` audits business logic before anything ships; `@PENTEST` holds a genuinely *blocking* security verdict, not an advisory checklist; `@DEV` is the only role permitted to touch code, and it is allowed to refuse — to raise a **MODEL BLOCKER** — rather than guess at a hole in the spec.
@@ -83,7 +83,7 @@ I'll say plainly where MedCore sits relative to the other two: it was my own fir
 
 ## Is this "open source"? Be precise about it.
 
-I want people to use LEO freely — including at work, including as the backbone of software they charge money for. I do not want someone to take these 131 files, reskin the headers, and sell it as a competing framework. Those two goals sound compatible with "open source" until you actually read the Open Source Definition's field-of-use clause, which explicitly forbids exactly the second restriction. So I'm not calling it that.
+I want people to use LEO freely — including at work, including as the backbone of software they charge money for. I do not want someone to take these 133 files, reskin the headers, and sell it as a competing framework. Those two goals sound compatible with "open source" until you actually read the Open Source Definition's field-of-use clause, which explicitly forbids exactly the second restriction. So I'm not calling it that.
 
 LEO ships under **PolyForm Shield 1.0.0** — a source-available license with a noncompete clause instead of a noncommercial one. Practically: use it for anything, including your own paid product. Just don't resell LEO itself. It's the same license I already ship on MedCore, for the same reason, and I've written out the full comparison against MIT, GPL, and the Creative Commons NonCommercial family in [`LICENSING.md`](./LICENSING.md) — because I'd rather be boringly precise about this than technically inaccurate and hand a critic an easy, correct point to make.
 
