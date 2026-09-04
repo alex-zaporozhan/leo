@@ -1,49 +1,49 @@
 # NICHE_AI_ASSISTANT
 
-Нишевой пакет для AI-first приложений и ассистентов.
+Niche pack for AI-first applications and assistants.
 
-## Где применять
+## Where to apply
 
-- AI copilot/assistant в вебе и мобильных приложениях.
-- Инструменты генерации текста/кода/аналитики.
-- Продукты с RAG, tool-calling и агентными сценариями.
+- AI copilot/assistant in web and mobile apps.
+- Text/code/analytics generation tools.
+- Products with RAG, tool-calling and agentic scenarios.
 
-## Приоритеты
+## Priorities
 
-- Качество ответов и управляемость контекста.
-- Стоимость inference и лимиты использования.
-- Безопасность промптов и данных.
-- Наблюдаемость качества (hallucination, refusal, latency).
+- Answer quality and context controllability.
+- Inference cost and usage limits.
+- Prompt and data security.
+- Quality observability (hallucination, refusal, latency).
 
-## Микро-инварианты (обязательные)
+## Micro-invariants (mandatory)
 
-- Ответ без источника в RAG-контуре маркируется как uncertain.
-- Запросы с чувствительными данными проходят policy-фильтр.
-- Tool-calling имеет allowlist и валидацию входов.
-- Retry не должен дублировать side effects.
-- Пользователь видит явное сообщение при fallback-модели.
+- An answer with no source in the RAG contour is marked as uncertain.
+- Requests carrying sensitive data pass through the policy filter.
+- Tool-calling has an allowlist and input validation.
+- Retry must not duplicate side effects.
+- The user sees an explicit message when a fallback model is used.
 
-## Критичные доменные контуры
+## Critical domain contours
 
 - Context lifecycle (ingest -> index -> retrieve -> respond).
 - Guardrails lifecycle (detect -> block -> fallback -> log).
 - Cost lifecycle (quota -> consume -> alert -> throttle).
 
-## Обязательные шаблоны
+## Mandatory templates
 
 - `roles/RAG_CANON.md`
 - `roles/METRICS_PROTOCOL.md`
 - `roles/ROLE_SEC.md`
 - `roles/TEMPLATE_DOCUMENTATION_ARCHITECTURE.md`
 
-## Обязательные разделы в DEV_PROMPTS
+## Mandatory sections in DEV_PROMPTS
 
-- Источники истины и границы RAG-контекста.
-- Политика fallback (модель/режим/сообщение пользователю).
-- Ограничения tool execution и permission boundary.
-- Тесты на hallucination/unsafe output/latency budget.
+- Sources of truth and RAG context boundaries.
+- Fallback policy (model/mode/message to the user).
+- Tool execution limits and permission boundary.
+- Tests for hallucination/unsafe output/latency budget.
 
-## Метрики уровня ниши (минимум)
+## Niche-level metrics (minimum)
 
 - Answer grounded rate.
 - Hallucination report rate.
@@ -51,37 +51,37 @@
 - p50/p95 latency per model.
 - Cost per successful session.
 
-## Критичные проверки
+## Critical checks
 
-- Жесткий список источников истины для RAG.
-- Контроль доступа к данным в запросах к моделям.
-- Явные fallback-сценарии при ошибках провайдера LLM.
+- A hard list of sources of truth for RAG.
+- Access control for the data sent in model requests.
+- Explicit fallback scenarios for LLM provider failures.
 
-## Риски и анти-паттерны
+## Risks and anti-patterns
 
-- Свободный RAG без allowlist и приоритета источников.
-- Tool execution без sandbox/permission checks.
-- Экономия на safety-фильтрах в пользу скорости релиза.
-- Отсутствие telemetry по качеству ответов.
+- Unrestricted RAG with no allowlist and no source priority.
+- Tool execution without sandbox/permission checks.
+- Cutting corners on safety filters to ship faster.
+- No telemetry on answer quality.
 
-## Definition of Done (ниша)
+## Definition of Done (niche)
 
-- RAG-контур верифицирован и проходит проверку целостности якорей.
-- Guardrails покрывают критичные unsafe-сценарии.
-- Cost/latency budgets зафиксированы и мониторятся.
-- Пользовательский fallback понятен и повторяем.
+- The RAG contour is verified and passes the anchor integrity check.
+- Guardrails cover the critical unsafe scenarios.
+- Cost/latency budgets are fixed and monitored.
+- The user-facing fallback is clear and repeatable.
 
-## COMMAND CENTER (готовый шаблон)
+## COMMAND CENTER (ready-made template)
 
 ```
 ***
 COMMAND CENTER:
-> Фаза: [Старт / RAG / Архитектура / Разработка / QA_ARCH]
-> Ниша: AI_ASSISTANT
-> Сделано: [что закрыто по качеству ответов]
-> Grounding/safety: [ok / риск]
-> Cost/latency: [текущее значение vs бюджет]
-> Следующий шаг: @[РОЛЬ] → [конкретная задача]
-> Промпт для копирования: [готовый промпт или "не нужен"]
+> Phase: [Start / RAG / Architecture / Development / QA_ARCH]
+> Niche: AI_ASSISTANT
+> Done: [what is closed on answer quality]
+> Grounding/safety: [ok / risk]
+> Cost/latency: [current value vs budget]
+> Next step: @[ROLE] → [specific task]
+> Prompt to copy: [ready prompt or "not needed"]
 ***
 ```

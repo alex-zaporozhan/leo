@@ -1,8 +1,8 @@
 # NICHES README
 
-Каталог нишевых пакетов, которые подключаются на старте проекта.
+Catalog of niche packs that are plugged in at project start.
 
-## Доступные пакеты
+## Available packs
 
 - `NICHE_CRM_ERP.md`
 - `NICHE_MOBILE_CONSUMER.md`
@@ -10,23 +10,23 @@
 - `NICHE_CONTENT_SOCIAL.md`
 - `NICHE_AI_ASSISTANT.md`
 
-## Как использовать
+## How to use
 
-1. @LEAD выбирает пакет по `roles/NICHE_BOOTSTRAP_PROTOCOL.md`.
-2. Заполняется `roles/TEMPLATE_PROJECT_PROFILE.md`.
-3. Профиль сохраняется в `docs/artifacts/PROJECT_PROFILE.md`.
-4. В `docs/knowledge/DEVELOPMENT_PLAN.md` (или `docs/[project]/DEVELOPMENT_PLAN.md`) фиксируется активный пакет.
-5. В первый `DEV_PROMPTS` добавляются инварианты и метрики выбранной ниши.
+1. @LEAD selects the pack per `roles/NICHE_BOOTSTRAP_PROTOCOL.md`.
+2. `roles/TEMPLATE_PROJECT_PROFILE.md` is filled in.
+3. The profile is saved to `docs/artifacts/PROJECT_PROFILE.md`.
+4. The active pack is recorded in `docs/knowledge/DEVELOPMENT_PLAN.md` (or `docs/[project]/DEVELOPMENT_PLAN.md`).
+5. The invariants and metrics of the selected niche are added to the first `DEV_PROMPTS`.
 
-## Правило структуры пакета
+## Pack structure rule
 
-Каждый `NICHE_*` файл обязан содержать:
+Every `NICHE_*` file must contain:
 
-- Где применять
-- Микро-инварианты
-- Обязательные шаблоны
-- Обязательные секции DEV_PROMPTS
-- Метрики ниши
-- Риски и анти-паттерны
+- Where to apply
+- Micro-invariants
+- Mandatory templates
+- Mandatory DEV_PROMPTS sections
+- Niche metrics
+- Risks and anti-patterns
 - Definition of Done
-- Готовый COMMAND CENTER шаблон для @LEAD
+- Ready-made COMMAND CENTER template for @LEAD

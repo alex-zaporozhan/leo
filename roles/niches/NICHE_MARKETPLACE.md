@@ -1,87 +1,87 @@
 # NICHE_MARKETPLACE
 
-Нишевой пакет для маркетплейсов и двухсторонних платформ.
+Niche pack for marketplaces and two-sided platforms.
 
-## Где применять
+## Where to apply
 
-- C2C/B2C/B2B маркетплейсы.
-- Платформы "поставщик <-> покупатель".
-- Продукты с escrow, dispute, рейтингами и SLA.
+- C2C/B2C/B2B marketplaces.
+- "Supplier <-> buyer" platforms.
+- Products with escrow, dispute, ratings and SLA.
 
-## Приоритеты
+## Priorities
 
-- Баланс спроса и предложения.
-- Безопасные транзакции и споры.
-- Рейтинг/репутация и антифрод.
-- Удержание обеих сторон платформы.
+- Balance of supply and demand.
+- Safe transactions and disputes.
+- Rating/reputation and anti-fraud.
+- Retention of both sides of the platform.
 
-## Микро-инварианты (обязательные)
+## Micro-invariants (mandatory)
 
-- Любая оплата/возврат имеет идемпотентный ключ.
-- Статус заказа меняется только по разрешенным переходам.
-- Спор/чарджбек не может быть в двух финальных статусах одновременно.
-- Комиссии и выплаты воспроизводимы по журналу событий.
-- Для карточек/листингов есть предсказуемые Empty/Error states.
+- Every payment/refund carries an idempotency key.
+- Order status changes only through allowed transitions.
+- A dispute/chargeback cannot sit in two final statuses at once.
+- Commissions and payouts are reproducible from the event log.
+- Cards/listings have predictable Empty/Error states.
 
-## Критичные доменные контуры
+## Critical domain contours
 
 - Listing lifecycle (draft -> active -> paused -> archived).
 - Order lifecycle (created -> paid -> fulfilled -> completed/cancelled).
 - Settlement lifecycle (commission, payout, refund).
 - Trust layer (rating, moderation, anti-fraud flags).
 
-## Обязательные шаблоны
+## Mandatory templates
 
 - `roles/TEMPLATE_MODULE_DEV.md`
 - `roles/METRICS_PROTOCOL.md`
 - `roles/ROLE_SEC.md`
 - `roles/ROLE_QA_ARCH.md`
 
-## Обязательные разделы в DEV_PROMPTS
+## Mandatory sections in DEV_PROMPTS
 
-- State machine для заказов/платежей/споров.
-- Контракт ошибок по конфликтам статусов.
-- Антифрод-гипотезы и минимальные блокировки.
-- Тесты на конкуренцию и повторные платежные callbacks.
+- State machine for orders/payments/disputes.
+- Error contract for status conflicts.
+- Anti-fraud hypotheses and the minimal set of blocks.
+- Tests for concurrency and repeated payment callbacks.
 
-## Метрики уровня ниши (минимум)
+## Niche-level metrics (minimum)
 
 - Conversion: listing -> order -> payment -> completion.
 - Refund/dispute rate.
-- Fraud alert rate и false positive rate.
-- Время разрешения спора.
+- Fraud alert rate and false positive rate.
+- Dispute resolution time.
 
-## Критичные проверки
+## Critical checks
 
-- Идемпотентность денежных действий.
-- Статусы заказов и споров непротиворечивы.
-- Наблюдаемость воронки (listing -> order -> payment -> completion).
+- Idempotency of money operations.
+- Order and dispute statuses are consistent.
+- Funnel observability (listing -> order -> payment -> completion).
 
-## Риски и анти-паттерны
+## Risks and anti-patterns
 
-- Логика комиссий в коде без явного контрактного описания.
-- Отсутствие retry-safe механики в платежных вебхуках.
-- Смешение пользовательских и финансовых статусов.
-- Прозрачность рейтинга без анти-манипуляционных мер.
+- Commission logic living in code with no explicit contract description.
+- No retry-safe mechanics in the payment webhooks.
+- Mixing user-facing and financial statuses.
+- Rating transparency without anti-manipulation measures.
 
-## Definition of Done (ниша)
+## Definition of Done (niche)
 
-- Платежный и спорный контуры проходят сценарии success/fail/retry.
-- Все ключевые статусы покрыты тестами переходов.
-- Метрики воронки и риска зафиксированы и наблюдаемы.
-- SEC и QA_ARCH подтверждают отсутствие критичных блокеров.
+- The payment and dispute contours pass the success/fail/retry scenarios.
+- All key statuses are covered by transition tests.
+- Funnel and risk metrics are fixed and observable.
+- SEC and QA_ARCH confirm there are no critical blockers.
 
-## COMMAND CENTER (готовый шаблон)
+## COMMAND CENTER (ready-made template)
 
 ```
 ***
 COMMAND CENTER:
-> Фаза: [Старт / Архитектура / Разработка / QA_ARCH / Security]
-> Ниша: MARKETPLACE
-> Сделано: [что закрыто по воронке и платежам]
-> Payment/dispute: [ok / риск]
-> Anti-fraud: [ok / риск]
-> Следующий шаг: @[РОЛЬ] → [конкретная задача]
-> Промпт для копирования: [готовый промпт или "не нужен"]
+> Phase: [Start / Architecture / Development / QA_ARCH / Security]
+> Niche: MARKETPLACE
+> Done: [what is closed on the funnel and payments]
+> Payment/dispute: [ok / risk]
+> Anti-fraud: [ok / risk]
+> Next step: @[ROLE] → [specific task]
+> Prompt to copy: [ready prompt or "not needed"]
 ***
 ```

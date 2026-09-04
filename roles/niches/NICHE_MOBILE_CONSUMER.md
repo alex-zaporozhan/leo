@@ -1,51 +1,51 @@
 # NICHE_MOBILE_CONSUMER
 
-Нишевой пакет для мобильных приложений (Google Play / Apple App Store).
+Niche pack for mobile applications (Google Play / Apple App Store).
 
-## Где применять
+## Where to apply
 
-- B2C mobile-first продукты.
-- Super-app companion для существующего web/backend.
-- Проекты с жесткими требованиями App Store / Google Play.
+- B2C mobile-first products.
+- Super-app companion for an existing web/backend.
+- Projects with hard App Store / Google Play requirements.
 
-## Приоритеты
+## Priorities
 
-- Онбординг и быстрый первый успех пользователя.
-- Устойчивость на слабой сети и офлайн-сценарии.
-- Crash/ANR дисциплина и стабильные релизы.
-- Соответствие store policy и приватности данных.
+- Onboarding and fast first success for the user.
+- Resilience on weak networks and offline scenarios.
+- Crash/ANR discipline and stable releases.
+- Compliance with store policy and data privacy.
 
-## Микро-инварианты (обязательные)
+## Micro-invariants (mandatory)
 
-- Каждый экран имеет 4 состояния: Loading / Empty / Error / Success.
-- Любая мутация блокирует повторный submit до завершения запроса.
-- Ошибки API на клиенте отображаются в едином формате `detail + code`.
-- Для критичных действий есть явный fallback при сетевой деградации.
-- Push и фоновая синхронизация не должны ломать целостность локальных данных.
-- Идемпотентность событий синхронизации обязательна.
+- Every screen has 4 states: Loading / Empty / Error / Success.
+- Any mutation blocks repeat submit until the request completes.
+- API errors on the client are surfaced in a single `detail + code` format.
+- Critical actions have an explicit fallback under network degradation.
+- Push and background sync must not break local data integrity.
+- Idempotency of sync events is mandatory.
 
-## Обязательные разделы в архитектуре
+## Mandatory sections in the architecture
 
-- Управление версиями и релиз-каналы (alpha/beta/prod).
-- Push-уведомления и разрешения.
-- Offline-first / синхронизация.
+- Version management and release channels (alpha/beta/prod).
+- Push notifications and permissions.
+- Offline-first / synchronization.
 - Telemetry (crash, startup time, retention events).
 
-## Обязательные разделы в DEV_PROMPTS
+## Mandatory sections in DEV_PROMPTS
 
-- Нефункциональные ограничения по мобильному UX (latency, crash-budget).
-- Матрица сетевых сценариев (online/intermittent/offline).
-- Тест-план для upgrade path (обновление приложения без потери состояния).
-- Чеклист store compliance перед релизом.
+- Non-functional constraints for mobile UX (latency, crash-budget).
+- Network scenario matrix (online/intermittent/offline).
+- Test plan for the upgrade path (app update without state loss).
+- Store compliance checklist before release.
 
-## Обязательные шаблоны
+## Mandatory templates
 
 - `roles/TESTING_CANON.md`
 - `roles/METRICS_PROTOCOL.md`
-- `roles/DOCKER_INFRA_PASSPORT.md` (backend/mobile API контур)
-- `roles/TEMPLATE_DESIGN_UX.md` (если есть витринные экраны)
+- `roles/DOCKER_INFRA_PASSPORT.md` (backend/mobile API contour)
+- `roles/TEMPLATE_DESIGN_UX.md` (if there are storefront screens)
 
-## Метрики уровня ниши (минимум)
+## Niche-level metrics (minimum)
 
 - Crash-free users (%).
 - ANR rate (%).
@@ -56,48 +56,48 @@
 
 ## Store readiness checklist
 
-- Подписывание и bundle IDs настроены.
-- Privacy policy и data usage задокументированы.
-- Crash rate, ANR и startup budget определены.
-- План rollback/hotfix зафиксирован.
+- Signing and bundle IDs configured.
+- Privacy policy and data usage documented.
+- Crash rate, ANR and startup budget defined.
+- Rollback/hotfix plan locked in.
 
-## Риски и анти-паттерны
+## Risks and anti-patterns
 
-- Выпуск без canary-группы и crash-мониторинга.
-- Offline cache без стратегии инвалидирования.
-- Push-логика без дедупликации событий.
-- Логирование персональных данных в telemetry.
+- Shipping without a canary group and crash monitoring.
+- Offline cache without an invalidation strategy.
+- Push logic without event deduplication.
+- Logging personal data into telemetry.
 
-## Definition of Done (ниша)
+## Definition of Done (niche)
 
-- Пройден функциональный smoke на iOS и Android.
-- Подтверждена корректность offline -> online sync.
-- Store checklist закрыт без критичных блокеров.
-- Метрики релизного качества заведены в `METRICS_REGISTRY`.
+- Functional smoke passed on iOS and Android.
+- Offline -> online sync correctness confirmed.
+- Store checklist closed with no critical blockers.
+- Release quality metrics registered in `METRICS_REGISTRY`.
 
-## Передача @LEAD (шаблон)
+## Handoff to @LEAD (template)
 
 ```
-ПЕРЕДАЧА @[РОЛЬ] → @LEAD
+HANDOFF @[ROLE] → @LEAD
 
-Ниша: MOBILE_CONSUMER
-Что сделано: [кратко]
-Store readiness: [готово / не готово + блокеры]
-Crash/ANR budget: [факт]
-Следующий шаг: @[РОЛЬ] → [задача]
+Niche: MOBILE_CONSUMER
+Done: [briefly]
+Store readiness: [ready / not ready + blockers]
+Crash/ANR budget: [actual]
+Next step: @[ROLE] → [task]
 ```
 
-## COMMAND CENTER (готовый шаблон)
+## COMMAND CENTER (ready-made template)
 
 ```
 ***
 COMMAND CENTER:
-> Фаза: [Старт / Архитектура / Разработка / QA_ARCH / Релиз]
-> Ниша: MOBILE_CONSUMER
-> Сделано: [кратко: что готово по iOS/Android]
-> Store readiness: [готово / блокер]
-> Crash/ANR: [текущее значение vs бюджет]
-> Следующий шаг: @[РОЛЬ] → [конкретная задача]
-> Промпт для копирования: [готовый промпт или "не нужен"]
+> Phase: [Start / Architecture / Development / QA_ARCH / Release]
+> Niche: MOBILE_CONSUMER
+> Done: [briefly: what is ready on iOS/Android]
+> Store readiness: [ready / blocker]
+> Crash/ANR: [current value vs budget]
+> Next step: @[ROLE] → [specific task]
+> Prompt to copy: [ready prompt or "not needed"]
 ***
 ```

@@ -1,3 +1,3 @@
-# Волна 1 — здесь лежат ВМЕСТЕ все артефакты этого этапа:
+# Wave 1 — every artifact of this stage lives here TOGETHER:
 # DEV_PROMPTS_*.md · QA_REPORT_*.md · VISUAL_QA_REPORT_*.md · DESIGN_SPEC_*.md · MOTION_CONCEPT_*.md · MICRO_SPEC_*.md
-# Группировка по волне (по имени-префиксу внутри), не по типу.
+# Grouped by wave (the type is in the name prefix), not by type.

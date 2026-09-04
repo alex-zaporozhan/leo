@@ -1,89 +1,89 @@
 # NICHE_CRM_ERP
 
-Нишевой пакет для CRM/ERP и бизнес-операционных систем.
+Niche pack for CRM/ERP and business operations systems.
 
-## Где применять
+## Where to apply
 
-- CRM, ERP, учетные и операционные платформы.
-- B2B системы с ролями, правами и audit trail.
-- Продукты с финансовыми и документными контурами.
+- CRM, ERP, accounting and operations platforms.
+- B2B systems with roles, permissions and audit trail.
+- Products with financial and document contours.
 
-## Приоритеты
+## Priorities
 
-- Процессы, роли и права доступа.
-- Стабильность справочников и данных.
-- Финансовые операции и аудируемость.
-- Отчетность и метрики.
+- Processes, roles and access rights.
+- Stability of reference data and records.
+- Financial operations and auditability.
+- Reporting and metrics.
 
-## Микро-инварианты (обязательные)
+## Micro-invariants (mandatory)
 
-- UI не показывает UUID в пользовательских полях.
-- Для таблиц и списков есть EmptyState + CTA.
-- Деструктивные действия всегда с confirm-диалогом.
-- После POST/PUT/DELETE данные инвалидируются и обновляются.
-- Финансовые операции идемпотентны и трассируемы.
-- Ошибки API соблюдают единый контракт (`detail`, `code`).
+- The UI never shows UUIDs in user-facing fields.
+- Tables and lists have an EmptyState + CTA.
+- Destructive actions always go through a confirm dialog.
+- After POST/PUT/DELETE the data is invalidated and refetched.
+- Financial operations are idempotent and traceable.
+- API errors follow a single contract (`detail`, `code`).
 
-## Критичные бизнес-контуры
+## Critical business contours
 
-- Master data (клиенты, товары, услуги, сотрудники).
-- Операционный цикл (задача/сделка/заказ/выполнение).
-- Финансовый цикл (начисление/списание/возврат/корректировка).
-- Отчетность и сверка агрегатов.
+- Master data (customers, goods, services, employees).
+- Operational cycle (task/deal/order/fulfillment).
+- Financial cycle (charge/write-off/refund/adjustment).
+- Reporting and aggregate reconciliation.
 
-## Обязательные шаблоны
+## Mandatory templates
 
 - `roles/TEMPLATE_MODULE_DEV.md`
 - `roles/DOMAIN_STANDARDS.md`
 - `roles/TEMPLATE_ADMIN_UI_UX.md`
 - `roles/METRICS_PROTOCOL.md`
 
-## Обязательные разделы в DEV_PROMPTS
+## Mandatory sections in DEV_PROMPTS
 
-- Domain Checklist по типу страницы.
-- Контракт ошибок и список кодов для модуля.
-- Набор тестов на бизнес-инварианты.
-- Чеклист рефреша и синхронизации списков.
+- Domain Checklist per page type.
+- Error contract and the list of codes for the module.
+- Test set for the business invariants.
+- Refresh and list synchronization checklist.
 
-## Метрики уровня ниши (минимум)
+## Niche-level metrics (minimum)
 
-- Время закрытия ключевого процесса (lead/order/task cycle time).
-- Ошибки бизнес-валидации по модулям.
-- Расхождения агрегатов (raw vs report).
-- Успешность финансовых транзакций.
+- Time to close the key process (lead/order/task cycle time).
+- Business validation errors per module.
+- Aggregate mismatches (raw vs report).
+- Financial transaction success rate.
 
-## Критичные проверки
+## Critical checks
 
-- Нет UUID в UI.
-- Мутации не ломают целостность данных.
-- Есть Empty/Error/Loading/Success.
-- После мутаций обновляются данные.
+- No UUIDs in the UI.
+- Mutations do not break data integrity.
+- Empty/Error/Loading/Success are present.
+- Data is refreshed after mutations.
 
-## Риски и анти-паттерны
+## Risks and anti-patterns
 
-- Денежные операции без идемпотентности.
-- Отчеты без контроля источника и периода.
-- Форма сохраняет данные, но UI не отражает новое состояние.
-- Массовые операции без audit trail.
+- Money operations without idempotency.
+- Reports with no control over source and period.
+- The form saves the data, but the UI does not reflect the new state.
+- Bulk operations without an audit trail.
 
-## Definition of Done (ниша)
+## Definition of Done (niche)
 
-- Основной бизнес-маршрут проходит end-to-end без ручных фиксов.
-- Отчетные значения согласованы с источником данных.
-- QA_ARCH не фиксирует красных дефектов по state/data/UX.
-- Финансовые/критичные мутации имеют подтвержденную трассируемость.
+- The main business route runs end-to-end with no manual fixes.
+- Reported values are consistent with the source data.
+- QA_ARCH records no red defects on state/data/UX.
+- Financial/critical mutations have confirmed traceability.
 
-## COMMAND CENTER (готовый шаблон)
+## COMMAND CENTER (ready-made template)
 
 ```
 ***
 COMMAND CENTER:
-> Фаза: [Старт / Картография / Архитектура / Разработка / QA_ARCH]
-> Ниша: CRM_ERP
-> Сделано: [что закрыто по бизнес-маршрутам]
-> Data integrity: [ok / риск]
-> Финконтур: [ok / риск]
-> Следующий шаг: @[РОЛЬ] → [конкретная задача]
-> Промпт для копирования: [готовый промпт или "не нужен"]
+> Phase: [Start / Cartography / Architecture / Development / QA_ARCH]
+> Niche: CRM_ERP
+> Done: [what is closed on the business routes]
+> Data integrity: [ok / risk]
+> Finance contour: [ok / risk]
+> Next step: @[ROLE] → [specific task]
+> Prompt to copy: [ready prompt or "not needed"]
 ***
 ```

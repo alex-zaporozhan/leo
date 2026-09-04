@@ -1,87 +1,87 @@
 # NICHE_CONTENT_SOCIAL
 
-Нишевой пакет для контентных и социальных приложений.
+Niche pack for content and social applications.
 
-## Где применять
+## Where to apply
 
-- Социальные сети, медиа-платформы, UGC-продукты.
-- Контентные ленты и комьюнити-приложения.
-- Продукты с высокой частотой публикаций/реакций.
+- Social networks, media platforms, UGC products.
+- Content feeds and community apps.
+- Products with a high rate of posts/reactions.
 
-## Приоритеты
+## Priorities
 
-- Лента и персонализация.
-- Модерация и безопасность контента.
-- Метрики вовлечения и удержания.
-- Масштабируемость чтения/записи.
+- Feed and personalization.
+- Moderation and content safety.
+- Engagement and retention metrics.
+- Read/write scalability.
 
-## Микро-инварианты (обязательные)
+## Micro-invariants (mandatory)
 
-- Публикация и удаление контента должны быть консистентны в ленте.
-- Удаленный/скрытый контент не возвращается в рекомендациях.
-- Жалоба на контент фиксируется с трассируемым статусом.
-- Ограничения приватности применяются на всех API-уровнях.
-- Лента не должна зависеть от неограниченных full-scan запросов.
+- Publishing and deleting content must stay consistent in the feed.
+- Deleted/hidden content never comes back in recommendations.
+- A content report is recorded with a traceable status.
+- Privacy restrictions are enforced at every API level.
+- The feed must not depend on unbounded full-scan queries.
 
-## Критичные доменные контуры
+## Critical domain contours
 
 - Content lifecycle (draft -> published -> moderated -> removed).
 - Engagement lifecycle (view -> react -> comment -> share).
 - Moderation lifecycle (flag -> review -> decision -> appeal).
 
-## Обязательные шаблоны
+## Mandatory templates
 
 - `roles/METRICS_PROTOCOL.md`
 - `roles/ROLE_SEC.md`
 - `roles/TESTING_CANON.md`
 - `roles/TEMPLATE_DESIGN_UX.md`
 
-## Обязательные разделы в DEV_PROMPTS
+## Mandatory sections in DEV_PROMPTS
 
-- Политика модерации и статусы решений.
-- Контракт приватности контента.
-- Тесты ленты при больших объемах данных.
-- План деградации ранжирования при отказах внешних сервисов.
+- Moderation policy and decision statuses.
+- Content privacy contract.
+- Feed tests at large data volumes.
+- Ranking degradation plan for external service failures.
 
-## Метрики уровня ниши (минимум)
+## Niche-level metrics (minimum)
 
 - Retention D1/D7/D30.
-- Session duration и frequency.
+- Session duration and frequency.
 - Reported content rate.
 - Moderation SLA.
 - Feed freshness latency.
 
-## Критичные проверки
+## Critical checks
 
-- Защита от спама и злоупотреблений.
-- Контроль приватности и видимости контента.
-- Низкая задержка в ключевых сценариях чтения.
+- Protection against spam and abuse.
+- Content privacy and visibility control.
+- Low latency in the key read scenarios.
 
-## Риски и анти-паттерны
+## Risks and anti-patterns
 
-- Модерация только вручную без приоритизации риска.
-- Публичный контент без четкой модели приватности.
-- Непрозрачные "теневые" блокировки без статуса для пользователя.
-- Метрики вовлечения без метрик безопасности.
+- Manual-only moderation with no risk prioritization.
+- Public content with no clear privacy model.
+- Opaque "shadow" bans with no status for the user.
+- Engagement metrics without safety metrics.
 
-## Definition of Done (ниша)
+## Definition of Done (niche)
 
-- Контентный и модерационный циклы покрыты end-to-end.
-- Приватность и видимость проходят негативные тесты.
-- Метрики удержания/безопасности заведены и проверены.
-- Производительность ленты соответствует целевым бюджетам.
+- The content and moderation contours are covered end-to-end.
+- Privacy and visibility pass negative tests.
+- Retention/safety metrics are set up and verified.
+- Feed performance meets the target budgets.
 
-## COMMAND CENTER (готовый шаблон)
+## COMMAND CENTER (ready-made template)
 
 ```
 ***
 COMMAND CENTER:
-> Фаза: [Старт / Архитектура / Разработка / QA_ARCH / Moderation]
-> Ниша: CONTENT_SOCIAL
-> Сделано: [что закрыто по ленте и модерации]
-> Privacy/moderation: [ok / риск]
-> Feed latency: [текущее значение vs бюджет]
-> Следующий шаг: @[РОЛЬ] → [конкретная задача]
-> Промпт для копирования: [готовый промпт или "не нужен"]
+> Phase: [Start / Architecture / Development / QA_ARCH / Moderation]
+> Niche: CONTENT_SOCIAL
+> Done: [what is closed on the feed and moderation]
+> Privacy/moderation: [ok / risk]
+> Feed latency: [current value vs budget]
+> Next step: @[ROLE] → [specific task]
+> Prompt to copy: [ready prompt or "not needed"]
 ***
 ```
