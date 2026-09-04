@@ -1,6 +1,6 @@
 # Your AI Coding Agent Doesn't Have a Junior-Developer Problem. It Has an Amnesia Problem.
 
-*How 41 codified laws, 22 specialist roles, and a file-based memory system stopped an autonomous coding agent from quietly re-breaking the same production defect every few weeks — and why I'm open-sourcing the whole thing as LEO.*
+*How 44 codified laws, 22 specialist roles, and a file-based memory system stopped an autonomous coding agent from quietly re-breaking the same production defect every few weeks — and why I'm open-sourcing the whole thing as LEO.*
 
 ---
 
@@ -54,7 +54,7 @@ So the bet underneath LEO was never really a career strategy. It was closer to: 
 
 That system is **LEO — Lead Engineering Orchestrator.**
 
-LEO is not a library, a plugin, or a hosted product. It's a **written constitution** — a `.cursorrules` file plus a 127-file, ~254,000-word role library — that any coding agent with file-system/tool access can load instead of a one-line personality. It gives the agent:
+LEO is not a library, a plugin, or a hosted product. It's a **written constitution** — a `.cursorrules` file plus a 129-file, ~294,000-word role library — that any coding agent with file-system/tool access can load instead of a one-line personality. It gives the agent:
 
 - **A single entry point, `@LEAD`,** that routes every request to a named specialist instead of one model trying to simultaneously be the architect, the developer, and the auditor of its own work in the same breath.
 - **Twenty-two roles with real jurisdiction** — `@ARCH` owns the database and API contracts; `@PRINCIPLE` owns whether a state is logically reachable at all, independent of whether it's technically buildable; `@QA_ARCH` audits business logic before anything ships; `@PENTEST` holds a genuinely *blocking* security verdict, not an advisory checklist; `@DEV` is the only role permitted to touch code, and it is allowed to refuse — to raise a **MODEL BLOCKER** — rather than guess at a hole in the spec.
@@ -75,7 +75,7 @@ So LEO's shape isn't "divide and conquer, keep every role's window small." It's 
 
 ## This isn't a thought experiment
 
-I've directed over 14 billion tokens of iterative, gated agentic work through this system across real client engagements and independent products — not toy demos. **MedCore**, a multi-tenant dental-clinic operations SaaS with row-level security, advisory-lock concurrency protection, and 800+ tests. An AI training platform with executable LangGraph agent graphs, pgvector-backed retrieval, and a generative-media pipeline. A public-sector education platform where SSR-for-SEO and license-compliance weren't afterthoughts because Law 29 and Law 41 made them non-negotiable *before* the first line of layout code existed.
+I've directed over 14 billion tokens of iterative, gated agentic work through this system across real client engagements and independent products — not toy demos. **MedCore**, a multi-tenant dental-clinic operations SaaS with row-level security, advisory-lock concurrency protection, and 800+ tests. An AI training platform with executable LangGraph agent graphs, pgvector-backed retrieval, and a generative-media pipeline — now 366 backend test modules and 3,888 test functions against ~129k lines of application code, 124 migrations and 61 numbered architectural decisions. A public-sector education platform where SSR-for-SEO and license-compliance weren't afterthoughts because Law 29 and Law 41 made them non-negotiable *before* the first line of layout code existed.
 
 Every one of these systems stress-tested a different part of the rulebook. MedCore is why the data-integrity canon insists that "no double-booking" lives in a database constraint, never an `if` statement — because an `if` check is exactly the thing that fails when two requests race, which is precisely when the invariant matters. The AI platform is why there's a separate `@AI_ENGINEER` lane instead of folding retrieval and agent-graph decisions into generic backend architecture — RAG has its own failure modes (stale embeddings, duplicate generation on retry) that a standard code review doesn't have a vocabulary for. The public site is why a search-visibility decision (SSR vs. SPA) gets made at the architecture-spine stage, not discovered as a regret after launch.
 
@@ -83,7 +83,7 @@ I'll say plainly where MedCore sits relative to the other two: it was my own fir
 
 ## Is this "open source"? Be precise about it.
 
-I want people to use LEO freely — including at work, including as the backbone of software they charge money for. I do not want someone to take these 127 files, reskin the headers, and sell it as a competing framework. Those two goals sound compatible with "open source" until you actually read the Open Source Definition's field-of-use clause, which explicitly forbids exactly the second restriction. So I'm not calling it that.
+I want people to use LEO freely — including at work, including as the backbone of software they charge money for. I do not want someone to take these 129 files, reskin the headers, and sell it as a competing framework. Those two goals sound compatible with "open source" until you actually read the Open Source Definition's field-of-use clause, which explicitly forbids exactly the second restriction. So I'm not calling it that.
 
 LEO ships under **PolyForm Shield 1.0.0** — a source-available license with a noncompete clause instead of a noncommercial one. Practically: use it for anything, including your own paid product. Just don't resell LEO itself. It's the same license I already ship on MedCore, for the same reason, and I've written out the full comparison against MIT, GPL, and the Creative Commons NonCommercial family in [`LICENSING.md`](./LICENSING.md) — because I'd rather be boringly precise about this than technically inaccurate and hand a critic an easy, correct point to make.
 
@@ -93,7 +93,7 @@ If you're building with autonomous coding agents and you keep hitting the same c
 
 I'll say the underlying motive directly, because I think it matters more than the rule count. I don't want "AI just writes garbage" to become the settled opinion of the software industry, and I think it's currently on track to become exactly that — for reasons that have everything to do with process and nothing to do with the technology's actual ceiling. I think agentic coding is a genuine inflection point, not a toy, and it's already changing how software gets built whether any of us are fully ready for that or not. Publishing LEO is my attempt to push that outcome in a specific direction: make AI-driven software development measurably more stable and reliable at a global scale, put a concrete idea in front of people who are hitting the same wall I hit, and let the world decide if it's useful. That's the whole bet.
 
-And if you're a junior stuck in the same catch-22 I described above — locked out of the experience you need because nobody will hand it to you first — I'd like this to land for you specifically, not only for teams already inside the industry. Underneath the 41 laws and the 22 roles, LEO is one junior who knew the fundamentals and nothing else, trying to organize an AI's work through instructions precise enough that the AI could open a door the market had closed. If any part of this helps you turn a tool people keep insisting only writes garbage into the engineering department willing to let you become whoever you're actually trying to become — do it, even when the conditions in front of you say it isn't possible. Mine said exactly that, for a long time, before they stopped.
+And if you're a junior stuck in the same catch-22 I described above — locked out of the experience you need because nobody will hand it to you first — I'd like this to land for you specifically, not only for teams already inside the industry. Underneath the 44 laws and the 22 roles, LEO is one junior who knew the fundamentals and nothing else, trying to organize an AI's work through instructions precise enough that the AI could open a door the market had closed. If any part of this helps you turn a tool people keep insisting only writes garbage into the engineering department willing to let you become whoever you're actually trying to become — do it, even when the conditions in front of you say it isn't possible. Mine said exactly that, for a long time, before they stopped.
 
 That's what LEO is. It's a constitution, not a product — text you can read in an afternoon, delete the parts you don't need from, and hand to whatever agent you're already using. The repository, the full role library, the architecture deep-dive, and the real shipped systems it ran are all here:
 
