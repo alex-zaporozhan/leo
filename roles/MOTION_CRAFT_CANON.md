@@ -1,7 +1,8 @@
 # MOTION_CRAFT_CANON.md
 # The craft of movement: the floor, the grammar of the in-between, and the twelve signs of stiffness.
 # Owner: @MOTION · applied by @FRONTEND and @DEV · measured by @QA_VISUAL.
-# Position: the motion peer of `roles/VISUAL_CRAFT_CANON.md`. That file makes a screen look right with zero
+# Position: one of three floors taken together — tokens (`VISUAL_CRAFT_CANON` §11) · movement (here) ·
+#           composition (`INTERFACE_CRAFT_CANON` §3.5). That file makes a screen look right with zero
 #           decisions; this one makes it MOVE right with zero decisions.
 
 > **Why this file exists.** LEO had a motion *library* (a rich arsenal of techniques), a motion *dial*

@@ -341,9 +341,9 @@ products feel calm. Craft is mostly subtraction; the additive instinct is the am
 ## §11. THE FLOOR — the default operational system (when there is NO concept)
 
 > **The rule this exists to enforce:** the absence of a concept is **NOT a licence to invent**.
-> It is a licence to take the floor. **This floor covers the still image only. Its motion peer is
-> `roles/MOTION_CRAFT_CANON.md` §1, taken verbatim at the same moment — a screen that took this floor
-> and shipped no movement took half of it.** An internal admin, a tool, an ops panel does not need a *world* —
+> It is a licence to take the floor. **This floor covers the still image only. There are three, and they are taken together:
+> the tokens here · the movement in `roles/MOTION_CRAFT_CANON.md` §1 · the composition in
+> `roles/INTERFACE_CRAFT_CANON.md` **§3.5**. A screen that took this floor alone took a third of it.** An internal admin, a tool, an ops panel does not need a *world* —
 > it needs **craft**. Improvisation here is exactly how 2008 gets in.
 
 When a screen is operational (`/admin`, `/app`, internal tooling) **and** no `VISUAL_CONCEPT` applies —

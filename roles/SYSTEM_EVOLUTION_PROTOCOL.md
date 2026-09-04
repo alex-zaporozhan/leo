@@ -1,4 +1,5 @@
-# SYSTEM_EVOLUTION_PROTOCOL.md
+# SYSTEM_EVOLUTION_PROTOCOL
+# Entry point for any change to LEO: `roles/ROLE_LEO_EDITOR.md` (the maintainer's role — read it first).
 # How the role system grows without rotting. Manual trigger only — the system NEVER edits itself.
 # Owner: @LEAD (runs it), the developer (triggers it, approves every change).
 # Position: this is the meta-protocol. It governs how every other file in roles/ may be changed.

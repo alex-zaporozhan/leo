@@ -134,6 +134,103 @@ EMPTY CELLS: an em-dash "—" at reduced contrast, never blank, never "N/A", nev
 
 ---
 
+## §3.5 THE COMPOSITION FLOOR — what to BUILD on the recurring surfaces
+
+> **Why this section exists, measured rather than felt.** The design canons of this system carry roughly
+> **twice the density of prohibitions** of the backend canons at the same density of thresholds. The cause is
+> structural: a backend ban states the construction in the same sentence — "every outgoing call has a timeout"
+> also tells you what to type — and a design ban does not. *"Never two separation methods on one surface"*
+> never says which one to use. So the construction has to be stated separately, and mostly it was not.
+> Law 5 names what is left when it is not: **a warning with no call to action is noise.**
+>
+> **This section is the affirmative half of the bans in this file and adds no rules of its own.** It repeats no
+> value that §2, §3, §5 or another canon already sets — where one does, it points. Take it verbatim when the
+> project has decided nothing; it is the third floor, with the tokens (`VISUAL_CRAFT_CANON` §11) and the
+> movement (`MOTION_CRAFT_CANON` §1), and **a screen that took only the token floor took a third of it**.
+>
+> **A floor, not a ceiling.** `PRODUCT_MATURITY_CANON` puts these constructions at roughly L2–L3, and a client
+> product does not ship below L3 — so this is where a surface *starts*, not where it is finished.
+
+**States** — owned by `roles/ROLE_DESIGN.md` State Spec (four base + the intermediate list). Not restated here.
+
+**THE LIST / TABLE**
+```
+Row height, columns, alignment, dates, zebra, sticky header, empty cells → §3 above. Not repeated.
+IDENTIFIER      column 1, clickable through to the record, never truncated to uselessness (§3)
+STATUS          not a column of its own — a tinted background + a LEFT border on the row
+                (VISUAL_CRAFT §4.4), so one glance down the leading edge answers "what needs me"
+ACTIONS         last column, sticky on horizontal scroll. Revealed on hover/focus, not always visible (I7/ST4);
+                one primary verb + a row menu for the rest
+SORT            one default that answers "what did I come here for" — usually most-recent-first, and it is
+                STATED in the spec, not left to the ORM
+SELECTION       a checkbox column only where a bulk action exists (I3). Selecting shows a bar with the count
+                and the actions, and shifts the table by zero pixels
+ROW CLICK       the whole row opens the record; an inline-editable cell edits on click (I2)
+PAGINATION      server-enforced page size; the control reads "1–50 of 4,102". Infinite scroll only for a feed
+STRUCTURE       under ~200 peers compared by the same fields — otherwise §2.1 picks a different structure
+```
+
+**THE FORM**
+```
+PLACE           Drawer over the record for a short form, a page for a long one; a Modal is for a DECISION,
+                never for data entry (§5, TEMPLATE_ADMIN_UI_UX §4.1 own the threshold — not restated here)
+LABELS          above the field. A placeholder is an example, never a label — it disappears exactly when needed
+REQUIRED        mark the OPTIONAL ones. Asterisks on every field are noise; "(optional)" on three is information
+GROUPING        3–6 fields per group, one heading, one column. Two columns only for paired values (from/to)
+VALIDATION      on blur for a field the user has left; never per keystroke; again on submit. The message sits
+                under its own field and says what to do: "Use a work email", not "Invalid format"
+SUBMIT          one primary, bottom right. Disabled ONLY while in flight, and showing it.
+                **Never disabled because the form is invalid** — say what is wrong instead of going dead
+API ERRORS      field errors map back to their fields; a general error sits above the actions;
+                a 409 says what changed and offers to reload (FRONTEND_CAPABILITY C5)
+UNSAVED         a dirty form asks once — Save · Discard · Cancel. An autosaved form says when, and never asks
+```
+
+**THE RECORD / DETAIL**
+```
+HEADER          the name, the status, and the ONE number that matters for this entity. Nothing competes with it
+ACTIONS         one primary; destructive never adjacent to it
+BODY            tabs only where sections are genuinely independent and the user works in one at a time —
+                a tab that hides a field the user is comparing is worse than a long page
+RELATED         related collections render as their own lists above, paginated, with their own states
+HISTORY         a surface, not a modal (FRONTEND_CAPABILITY C6)
+NAMES           a human name always. Law 8 is unconditional: a technical id does not appear in the UI
+```
+
+**THE FILTER / SEARCH BAR**
+```
+PLACE           above the table, aligned with its first column
+ACTIVE          every applied filter is a removable chip carrying its value — a filter the user cannot see is
+                why they think the data is missing
+COUNT           "N of M" whenever any filter is active. This one line prevents the most common support ticket
+                in any admin product
+SEARCH          debounce 300ms; search the fields a human would name, and say which ones
+PERSISTENCE     filters survive navigation and live in the URL (I9/ST6) — a filtered view is a thing people send
+RESET           one [Clear all] whenever more than one filter is active
+INDEXES         a column offered as a filter or sort is indexed — cannot be indexed, it is not offered.
+                The decision is owned by SYSTEM_DESIGN_PROTOCOL Step 1 (THE LOAD FLOOR) and checked by
+                LOAD_REFLEX LD3; it appears here because this is the surface where it gets decided
+```
+
+**THE DESTRUCTIVE ACTION** — the confirm/undo winner is owned by I4 and registered in `CONFLICT_REGISTRY`.
+```
+DEFAULT         undo (I4). Do it, say it, offer 5–10 seconds to reverse
+CONFIRM         only for the genuinely irreversible — money moved, data destroyed, a message sent, an external
+                system called. Then the dialog NAMES the object ("Delete invoice #2841 for Acme Ltd?") and the
+                primary button is the verb, not "OK"
+TYPE-TO-CONFIRM where the blast radius is a whole tenant or an account
+AFTER           the row collapses into the gap it leaves; neighbours close after it (MOTION_CRAFT §2 G4)
+NEVER           destructive adjacent to the primary · destructive as a row's only visible action ·
+                destructive with no way to know what it will destroy
+```
+
+**What this floor does not decide:** the world · the register (Law 33) · the tokens (`VISUAL_CRAFT_CANON` §11) ·
+the motion values (`MOTION_CRAFT_CANON` §1) · the states (`ROLE_DESIGN` State Spec) · the business minimum per
+page type (`DOMAIN_STANDARDS`) · the load ceilings (`SYSTEM_DESIGN_PROTOCOL`). Composition only, and overridden
+by any of those where they speak.
+
+---
+
 ## §4. NAVIGATION MODELS — one per screen, not three
 
 | Model | Use when | Cost |

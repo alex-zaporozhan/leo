@@ -86,6 +86,8 @@ This is the canonical index of global system files for agent work in this reposi
 - `roles/ROLE_MEDIA_ENGINEER.md` · `roles/MEDIA_SYNTHESIS_CANON.md` *(generative media pipelines — Law 28, added v6.34)*
 - `roles/LOGIC_MODELING_CANON.md` *(DOMAIN_MODEL — @PRINCIPLE MODE: MODEL, Law 42)*
 - `roles/SECOND_PASS_PROTOCOL.md` *(the clean-context audit pass — SP-0…SP-3; role set by task class; not automatable by design)*
+- `roles/ROLE_LEO_EDITOR.md` *(the maintainer's role for changing LEO itself — invoked manually by a human, outside delivery work; deliberately NOT in `.cursorrules`, because instructions about editing laws fire on one task in fifty and their presence in the always-loaded file invites an agent to reason about the rules instead of doing the work)*
+- `roles/LOAD_REFLEX.md` *(LD1–LD12 — the volume half of the reflex layer: what has no ceiling, what multiplies, what does not belong in a request, and what the browser carries. Enforces the five decisions of the LOAD FLOOR. Run by @DEV before handoff, mirrored at @QA_ARCH)*
 - `roles/MOTION_REFLEX.md` *(R1–R12 — literal greps over the diff, the motion peer of `ASYNC_AWAIT_REFLEX`; run by @DEV/@FRONTEND before handoff, mirrored at @QA_VISUAL)*
 - `roles/MOTION_CRAFT_CANON.md` *(the motion peer of `VISUAL_CRAFT_CANON`: the floor taken verbatim when no motion concept exists, the grammar of the in-between, and M1–M12 — the first detector set in the system that fails on the ABSENCE of motion)*
 - `roles/RULE_INTEGRITY_PROTOCOL.md` *(the seven tests a rule must pass — goal · axis · home · name · reach · sides · measure — and the priority ladder between two true rules; run on an audit finding **before** it is accepted as a defect)*

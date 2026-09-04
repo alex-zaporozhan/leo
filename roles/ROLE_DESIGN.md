@@ -5,7 +5,7 @@
 
 > **Place in the chain:** @ARCH/@FRONTEND → **@DESIGN** → @DEV → @QA_ARCH
 > **Related:** `roles/TECH_PASSPORT_FRONTEND_UI_LOGIC.md` · `roles/TEMPLATE_MODULE_DEV.md` · `roles/DOMAIN_STANDARDS.md` · `.cursorrules` (ABSOLUTE LAWS)
-> **ACTIVATES_CANONS:** on activation, read — `roles/PRODUCTION_READINESS_CANON.md` (concept locked before layout; craft delivered to ambition — Law 41) · `roles/VISUAL_CONCEPT_PROTOCOL.md` · `roles/FRONTEND_DESIGN_EXCELLENCE.md` · `roles/INTERFACE_CRAFT_CANON.md` (confirm/undo by action class — I4) · `roles/MOTION_CRAFT_CANON.md` (**§1 floor · §2 the choreography block the SPEC must answer**) · `roles/LAYOUT_INVARIANTS.md` §12 (collision & stacking — a z-index or an overlap is a **composition** decision made here, not a CSS patch made later) · `roles/CONFLICT_REGISTRY.md` (@DESIGN scope = new pattern; confirm/undo winner).
+> **ACTIVATES_CANONS:** on activation, read — `roles/PRODUCTION_READINESS_CANON.md` (concept locked before layout; craft delivered to ambition — Law 41) · `roles/VISUAL_CONCEPT_PROTOCOL.md` · `roles/FRONTEND_DESIGN_EXCELLENCE.md` · `roles/INTERFACE_CRAFT_CANON.md` (confirm/undo by action class — I4) · `roles/INTERFACE_CRAFT_CANON.md` **§3.5** (**the composition floor — what to BUILD on a list, form, record, filter bar and destructive action; the affirmative half of this file's own bans**) · `roles/MOTION_CRAFT_CANON.md` (**§1 floor · §2 the choreography block the SPEC must answer**) · `roles/LAYOUT_INVARIANTS.md` §12 (collision & stacking — a z-index or an overlap is a **composition** decision made here, not a CSS patch made later) · `roles/CONFLICT_REGISTRY.md` (@DESIGN scope = new pattern; confirm/undo winner).
 > **Trigger (C2 winner):** @DESIGN fires on a **new pattern / composition**, not on "any screen" literally — a screen built entirely on an existing pattern (CRUD table · ≤5-field form on an existing drawer · text/icon/status-colour change · technical config page) skips it.
 
 ---
@@ -150,7 +150,7 @@ Full recipes (hex/fonts/effects/motion) — in the worlds of `roles/CONCEPT_DNA_
 **Input:** a screenshot + context (screen type, user role, the screen's business task)
 **Output:** `docs/artifacts/DESIGN_AUDIT_[NAME].md`
 
-### Audit protocol (10 lenses)
+### Audit protocol (11 lenses)
 
 **Lens 1 — First glance (3 seconds)**
 - What does the user see in the first 3 seconds?
@@ -386,7 +386,16 @@ Loading · Empty(icon+text+CTA) · Error · Success
 
 ## Intermediate states (beyond the four — the ones that get skipped and become bugs)
 [Declare each that applies, or mark N/A: partial success · stale-data badge · "saving…" (optimistic) ·
- disabled-while-dirty · conflict / 409 state · filtered-empty (≠ true-empty: "nothing found", NO create-CTA)]
+ disabled-while-dirty · conflict / 409 state · filtered-empty (≠ true-empty: "nothing found",
+ NO create-CTA — the action offered is [Clear filters], and the count reads "0 of 4,102") ·
+ **loading-on-REFETCH** (≠ first load: the content STAYS, dimmed, controls disabled — scroll position and
+ selection survive; blanking a populated table to a skeleton loses the reader's place) ·
+ **error-that-retry-cannot-fix** (403 / 404 / validation: what happened, what the user can do, who can help,
+ and **NO Retry button** — an action that cannot work is worse than no action)]
+
+> **This block is the source of truth for the state set** (`CONFLICT_REGISTRY`). Every other file states four
+> base states and points here for the rest; the four are the ones everybody builds, and this list is the ones
+> that ship broken.
 
 ## Responsive Matrix (mandatory — geometry is decided, not left to the browser)
 > **The viewports are the project's declared surfaces** (`FRONTEND_PASSPORT_[PROJECT].md` §Surfaces), not a fixed

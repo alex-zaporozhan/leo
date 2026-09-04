@@ -1,5 +1,6 @@
 # RULE_INTEGRITY_PROTOCOL.md
 # The seven tests a rule must pass before it enters this system — and the ladder that decides between two rules that are both true.
+# Entry point: `roles/ROLE_LEO_EDITOR.md` — this file holds the tests; that one holds where a rule belongs and what the machine does with its shape.
 # Owner: @LEAD · run by: anyone adding, rewriting or auditing a rule (`@EVOLVE`, the second pass, any role writing a canon).
 # Position: before a rule is written, and before an audit finding about a rule is accepted as a defect.
 

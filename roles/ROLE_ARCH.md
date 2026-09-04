@@ -91,7 +91,7 @@ For large-scale projects (10k+ tenants, > 1M rows in hot tables):
 
 ## STEP 0B: SYSTEM DESIGN GATE ← mandatory under non-trivial load
 
-**Before writing DEV_PROMPTS** for modules with: financial operations, real-time, large lists, AI/LLM, high RPS — run `roles/SYSTEM_DESIGN_PROTOCOL.md`.
+**Before the spine, not before DEV_PROMPTS** — for modules with: financial operations, real-time, large lists or search, a storage/queue change, AI/LLM on a critical path, or a project start — run `roles/SYSTEM_DESIGN_PROTOCOL.md`.
 
 The minimum that must be fixed:
 

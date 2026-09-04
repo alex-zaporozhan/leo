@@ -344,11 +344,20 @@ Add a new domain at the start of a project or after the first audit of a new bus
 **Design tokens:** see `roles/TECH_PASSPORT_FRONTEND_UI_LOGIC.md` §7–9 if applicable to the project.
 
 ### State Matrix — mandatory for every component with data
+
+> **Four base states, plus the intermediate list — and the intermediates are the ones that ship broken.**
+> The source of truth is `roles/ROLE_DESIGN.md` **State Spec**; this table is a summary of it, not a second
+> decision. Graded by `roles/ROLE_QA_ARCH.md` Vector 3.
+
 ```
-Loading  → Skeleton (not Spinner, not a white screen)
-Empty    → EmptyState: icon + text + CTA button
-Error    → Toast/Alert + "Retry" button
-Success  → form resets, Drawer closes, list refreshes
+Loading — first        Skeleton shaped like the arriving layout (not a Spinner, not a white screen)
+Loading — refetch      Content STAYS, dimmed, controls disabled. Scroll and selection survive.
+Empty   — no data yet  EmptyState: icon + what this surface is for + the action that creates the first one
+Empty   — filtered out "No results for these filters" + [Clear filters] + the count "0 of 4,102"
+Error   — retryable    Plain-words line + [Retry], keeping whatever is already on screen
+Error   — not retryable 403/404/validation: what happened, what to do, who can help. NO Retry button.
+Success — whole        Object updates in place, form closes, list refreshes, one affirmative moment
+Success — partial      "412 of 500 imported" + what failed, per row, downloadable. Never a green toast alone.
 ```
 
 ### Data Integrity

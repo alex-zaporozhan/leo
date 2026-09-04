@@ -104,6 +104,8 @@
 
 | Set | SoT (source of truth) | Accents (mirror locations) | Kind |
 |-----|----------------------|----------------------------|------|
+| THE LOAD FLOOR (concurrency · RPS · table size · p95 targets · the five decisions it makes once) | `SYSTEM_DESIGN_PROTOCOL.md` Step 1 | `LOAD_REFLEX.md` (`Floor:` lines under LD1/LD2/LD3/LD8/LD9) · `ROLE_LEAD.md` step 1.75 · `.cursorrules` Law 31 · `ROLE_ARCH.md` STEP 0B · `ROLE_QA_ARCH.md` Vector 20 | verbatim numbers |
+| LD1–LD12 load reflex | `LOAD_REFLEX.md §1` | `ROLE_QA_ARCH.md` Vector 20 · `ROLE_DEV.md` · `ROLE_FRONTEND.md` (Block D) | verbatim grep set |
 | The motion floor (durations · easings · stagger · the floor entrance · reduced-motion) | `MOTION_CRAFT_CANON.md §1` | `TEMPLATE_MOTION_LANGUAGE.md §2` · `MOTION_AMBITION_DIAL.md` MICRO catalogue · `LAYOUT_INVARIANTS.md §10` reference CSS · `CRAFT_LINT_SPEC.md §1d` | verbatim tokens |
 | M1–M12 motion stiffness | `MOTION_CRAFT_CANON.md §3` | `ROLE_QA_VISUAL.md` report format · `CRAFT_LINT_SPEC.md §1d` · `MOTION_REFLEX.md` · `.cursorrules` Law 39 | reference |
 | R1–R12 motion reflex | `MOTION_REFLEX.md §1` | `ROLE_DEV.md` · `ROLE_FRONTEND.md` · `ROLE_QA_VISUAL.md` · `CRAFT_LINT_SPEC.md §4.0` | reference |

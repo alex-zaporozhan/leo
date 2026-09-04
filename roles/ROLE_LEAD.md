@@ -297,7 +297,27 @@ Two checkpoints that force planning to production depth. Canons: `roles/PRODUCTI
   ↓
 1.7 An operational screen with interactions? **Every one of them, at creation — not only when someone reports that buttons twitch.** It takes the motion floor (`roles/MOTION_CRAFT_CANON.md` §1) alongside the visual floor, and the MICRO catalogue (`roles/MOTION_AMBITION_DIAL.md` Part 2) answers its moments
    YES → @MOTION MICRO → docs/artifacts/waves/[N]/MICRO_SPEC_[NAME].md → @DEV → @QA_VISUAL
-   NO → go to step 1.8
+   NO → go to step 1.75
+  ↓
+1.75 **A LOAD trigger?** — money · real-time (WebSocket/SSE/push) · **large lists, tables or search** ·
+     a storage or queue change · AI/LLM on a critical path · the start of a project.
+   **Its own question, asked before 1.8, because its trigger list is WIDER than the architectural one.**
+   A refund posting on an existing schema, a sortable list over an existing table, a search filter — none of
+   these is a new service, store, queue or contract, so 1.8 answers "no", and every one of them is a load
+   decision. That gap is how a load defect reaches production: it does not look like architecture, and it is
+   **the only failure class whose symptom is success** — it passes every test on a small fixture and appears
+   when the table has grown.
+   YES → `docs/artifacts/SYSTEM_DESIGN_[PROJECT].md` with the steps that trigger names
+        (`roles/SYSTEM_DESIGN_PROTOCOL.md`), **written before any spine** — the order is model → load → spine,
+        because a spine drafted first answers its twelve vertebrae against a scale nobody chose.
+        **No figures from the business is not a blocker:** the LOAD FLOOR is taken verbatim, marked
+        `FLOOR — not measured`, and the work continues. Neither a profile nor an `N/A + reason` → stop, @ARCH.
+        Enforced afterwards at the keyboard: @DEV runs `roles/LOAD_REFLEX.md` (LD1–LD12) over its own diff and
+        reports the count; **@QA_ARCH Vector 20 runs the same greps.** A profile with no vector behind it is a
+        number in a document.
+   NO → write `[SYSTEM DESIGN: N/A — no load trigger]` in the report, then step 1.8. **Silence is not an
+        answer:** "no load analysis" and "the load analysis says this is fine" look identical afterwards, and
+        only one of them is a decision.
   ↓
 1.8 An architectural trigger (new service/store/integration/queue/schema/public contract/tier change)?
    [architecture gates — Laws 30, 31, 32]

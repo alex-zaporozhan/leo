@@ -10,15 +10,22 @@
 
 ## When invoked
 
-| Trigger | Mandatory |
-|---------|-----------|
-| New project start (any mode) | yes |
-| New module with financial operations | yes |
-| New module with real-time (WebSocket, SSE, push) | yes |
-| New module with large lists or search | yes |
-| Change of storage or queue | yes |
-| Adding AI/LLM to a critical path | yes |
-| Typical CRUD without concurrency or growth | no — mark N/A in artifact |
+**These "minimums" are floors on top of `roles/ROLE_ARCH.md` STEP 0B, never reductions of it.** 0B asks for the load profile, the latency budget, the bottleneck, the failure modes and the store/queue choice on every module it fires for; a row below that names fewer steps adds specificity, it does not licence dropping one 0B already required. Where the two differ, **the larger set wins.**
+
+**WHEN, exactly: before the structure is drafted, not after it is drawn.** The order is
+`DOMAIN_MODEL` (Law 42 — what is true) → **this protocol** (what the load is) → `ARCH_SPINE` (what the structure
+is). A spine drafted before the load profile encodes an assumption nobody stated; the twelve vertebrae then get
+answered against a scale nobody chose.
+
+| Trigger | Mandatory | The action it produces |
+|---------|-----------|------------------------|
+| New project start (any mode) | yes | Steps 1–7 in full → `docs/artifacts/SYSTEM_DESIGN_[PROJECT].md`; Steps 8–9 answered or marked `N/A + reason`. The load profile takes the floor below if the business has no figures |
+| New module with financial operations | yes | Steps 1, 2, 5 minimum. Money paths get an explicit peak-concurrency row and a named behaviour under contention |
+| New module with real-time (WebSocket, SSE, push) | yes | Steps 1, 2, 4 **and Step 8 (real-time architecture)**. Connection count is a capacity number, not a feature |
+| New module with large lists or search | yes | Steps 1, 3 minimum. Pagination, index coverage and the N+1 answer are written before the endpoint exists |
+| Change of storage or queue | yes | Steps **1**, 3, 4, 6 + `DATA_STORE_SELECTION` — Step 1 *is* the load profile, and this row's own point is that a store change without one is a preference, not a decision |
+| Adding AI/LLM to a critical path | yes | Steps 1, 2, 5 minimum. Provider latency and rate limits are the budget; the fallback on provider failure is named |
+| Typical CRUD without concurrency or growth | no — mark N/A in artifact | **`N/A + the reason` is a written answer, not silence.** "No load analysis" and "load analysis says this is fine" look identical afterwards, and only one of them is a decision |
 
 ---
 
@@ -28,7 +35,38 @@
 
 ## Step 1: LOAD PROFILE
 
-Record before any architectural work. If numbers are unknown — a range and justification. "We don't know" is not an answer; use domain data from ROLE_DOMAIN_EXPERT.md.
+**THE LOAD FLOOR — take this verbatim when nothing is declared.** The absence of a number is not a licence to
+design for one user, and it is not a licence to stop and wait for the business. It is a licence to take the floor,
+exactly as `VISUAL_CRAFT_CANON` §11 works for colour and `MOTION_CRAFT_CANON` §1 for movement. **Write the floor
+into the artifact, marked `FLOOR — not measured`, and continue.** A figure that later arrives from the business
+replaces it; a figure that never arrives has still been designed against.
+
+```
+--- THE FLOOR (internal / B2B tool, unless the project says otherwise) ---
+Concurrent active users      50          peak 200          growth ×10 in 12 months
+Requests/sec                 20 avg      100 peak          read/write 80/20
+Main table                   100k rows now, ×5 per year
+p95 latency target           read 300ms · write 800ms · report 3s (and a report over 3s is a job, not a request)
+Payload                      ≤200KB per response; anything larger is paginated or streamed
+--- FOR A PUBLIC-FACING PRODUCT, raise to ---
+Concurrent active users      500         peak 5000 (a campaign, a mention, a seasonal spike)
+Requests/sec                 200 avg     2000 peak
+Main table                   1M rows now, ×10 per year
+
+--- WHAT THE FLOOR ALREADY DECIDES, so that nobody re-decides it per module ---
+Every list endpoint is paginated. There is no unbounded SELECT in a request path.
+Every filter and sort column a UI exposes has an index, or the UI does not expose it.
+Every outgoing call has a timeout and a declared behaviour on timeout (Law 31).
+Anything over the p95 write target moves to a queue with a JOB_PASSPORT (Law 30), not to a longer timeout.
+The connection budget is summed across API + workers + cron + migrations, not per process.
+```
+
+**The floor is enforced at the keyboard by `roles/LOAD_REFLEX.md`** — LD1–LD12, literal greps @DEV runs over the diff before handoff. Each of the five decisions above has a check that fires on it; a floor with no reflex is a number in an artifact that never reaches the hand typing `.all()`.
+
+**Growth ×10 is the floor's own stress test:** multiply the numbers by ten and name what breaks first. That one
+sentence is the whole point of the step — a design that has never been asked what breaks first has not been designed.
+
+If real numbers exist, use them. "We don't know" is not an answer; use domain data from ROLE_DOMAIN_EXPERT.md.
 
 ```
 ## Load Profile

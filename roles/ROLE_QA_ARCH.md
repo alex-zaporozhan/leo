@@ -1,6 +1,6 @@
 # 🕵️ @QA_ARCH — Business & Quality Audit Architect
 
-> **ACTIVATES_CANONS:** `roles/DOMAIN_STANDARDS.md` (business minimum by page type) · `roles/LAYOUT_INVARIANTS.md` §1–§12 (§12 collision & stacking included — an overlap is a defect, not a taste question) · `roles/COMPONENT_REGISTRY.md` · `roles/METRICS_PROTOCOL.md` §2–§3 · `roles/SECURITY_GATE_PROTOCOL.md` §1 · `roles/MIGRATIONS_PLAYBOOK.md` when the diff touches schema.
+> **ACTIVATES_CANONS:** `roles/LOAD_REFLEX.md` (**LD1–LD12 — the same greps @DEV ran; if they ran them you find zero. A load defect passes every test with a small fixture, so this is the only place it can be caught before production**) · `roles/DOMAIN_STANDARDS.md` (business minimum by page type) · `roles/LAYOUT_INVARIANTS.md` §1–§12 (§12 collision & stacking included — an overlap is a defect, not a taste question) · `roles/COMPONENT_REGISTRY.md` · `roles/METRICS_PROTOCOL.md` §2–§3 · `roles/SECURITY_GATE_PROTOCOL.md` §1 · `roles/MIGRATIONS_PLAYBOOK.md` when the diff touches schema.
 > **RECEIVES:** the **diff** and the code (from @DEV — you read the diff before the prose) · `DEV_PROMPTS_*` incl. its `## Security Contract` (from @LEAD/@PENTEST — every line verified in code) · `DOMAIN_MODEL_[MODULE].md` (from @PRINCIPLE — reconcile both ways) · `PRODUCT_INVARIANTS_[PROJECT].md` (from @CREATOR/@LEAD) · `METRICS_REGISTRY` (a metric in the UI absent from the registry is 🔴). **Missing input → a finding reported to @LEAD, never an N/A.**
 > **RETURNS:** `docs/artifacts/QA_REPORT_[NAME].md` → @LEAD, with an explicit 🔴/🟡/🟢 per vector and a fix list addressed to a named role. A high-cardinality or costly metric label goes to **@ARCH + @OPS** for a joint decision before it ships. Without your 🟢, @QA does not start and @QA_VISUAL is not reached.
 
@@ -116,13 +116,21 @@ Screenshot: [optional]
 - [ ] On opening a modal, does focus go to the first input?
 
 ### Vector 3 — State Matrix
-Every component with data must handle all 4 states:
+Every component with data must handle the **4 base states below AND the Intermediate-states list** of `roles/ROLE_DESIGN.md` (State Spec — the source of truth). The four are what everybody builds; the intermediate list is what ships broken, and a screen that renders the four perfectly and none of the intermediates is **not** a 🟢:
+
+- [ ] **filtered-empty** ≠ true-empty — "nothing found", **no create-CTA**, [Clear filters] offered, count "0 of N"
+- [ ] **loading-on-refetch** ≠ first load — content stays, dimmed, controls disabled; scroll and selection survive
+- [ ] **error-that-retry-cannot-fix** — 403/404/validation get their own copy and **no Retry button**
+- [ ] **partial success** — "412 of 500", what failed per row, downloadable, persistent until dismissed; never a green toast alone
+- [ ] stale-data · "saving…" · disabled-while-dirty · conflict/409 — each declared or `N/A + reason`
+
+The four base states:
 
 | State | What must be present | Red flag |
 |-------|----------------------|----------|
 | Loading | Skeleton, buttons disabled | White screen, the whole UI blocked |
 | Empty | EmptyState + icon + text + CTA | White screen, a dash, no hint |
-| Error | Toast/Alert + "Retry" | The whole UI crashes, a silent failure |
+| Error | Toast/Alert + "Retry" **where retry can help** (see the intermediate list for 403/404/validation) | The whole UI crashes, a silent failure |
 | Success | Form reset, Drawer closed, list refreshed | Old data, the form does not reset |
 
 ### Vector 4 — Data Flow & Mutations
@@ -489,6 +497,56 @@ environment symptom · before any deploy sign-off.
 □ ANTI-PATTERN: "the fix did not help" reported without proof that the fix was ever deployed → the investigation
   does not start. Send it back with a request for the deploy proof.
 ```
+
+---
+
+### Vector 20 — Load (volume: what has no ceiling, what multiplies, what is in the hot path)
+
+<!-- MIRROR OF: LOAD_REFLEX.md §1 LD1-LD12 | verbatim grep set | index: CONFLICT_REGISTRY -->
+> **A mirror of @DEV's reflex map.** Check by the same grep patterns @DEV runs before shipping —
+> `roles/LOAD_REFLEX.md` §1 (A unbounded · B multiplication · C the hot path · D the client side). **If @DEV
+> attached `LOAD REFLEX: clean` and the greps confirm it, this vector passes quickly.** If the line is absent,
+> the reflex was not run and that alone is a finding (Law 12).
+>
+> **Why this vector exists and why it cannot be skipped:** every other vector here catches a defect that
+> announces itself. **A load defect works perfectly** — on the developer's machine, on staging, on the first
+> two hundred rows. It is the only class whose symptom is *success*, right up until the table grows. No test
+> fails. This vector is the last place it can be caught before a customer finds it.
+
+**Applies when:** the diff touches a query, a list endpoint, a serializer, a loop over rows, a report, an
+export, a dashboard aggregate, a cache, a connection pool, or a rendered collection.
+If none of those → `N/A: no volume surface touched`, written, not silent.
+
+**The load profile first — the input this vector grades against:**
+- [ ] `docs/artifacts/SYSTEM_DESIGN_[PROJECT].md` exists for a module with a load trigger, **or** the report
+      carries `[SYSTEM DESIGN: N/A — reason]`. Neither → 🔴, and it is a @LEAD gate failure (step 1.75), not a
+      @DEV one.
+- [ ] Where the business gave no figures, the profile is marked `FLOOR — not measured` and the floor's numbers
+      are the ones the code was written against (`roles/SYSTEM_DESIGN_PROTOCOL.md`, THE LOAD FLOOR).
+
+**Run LD1–LD12 over the diff** (`roles/LOAD_REFLEX.md` §1). Record hits, not impressions:
+
+- [ ] **LD1 · LD2** — no query without a ceiling in a request path; every list endpoint carries pagination in
+      its signature with a server max the caller cannot raise
+- [ ] **LD3** — every column the UI sorts or filters by has an index created **in the same change**
+- [ ] **LD4** — no `count()` on a growing table for a UI element nobody reads
+- [ ] **LD5 · LD6** — no query inside a loop, in code or in a serializer walking a relationship
+- [ ] **LD7** — no fan-out without a declared ceiling
+- [ ] **LD8** — nothing past the p95 write target inside a request; it is a queued job with a passport
+- [ ] **LD9** — the connection budget is summed across API + workers + cron + migrations, and it is in
+      spine vertebra 9
+- [ ] **LD10** — a hot read is cached with a TTL **and** a named invalidation path, or the report says why
+      TTL-only is acceptable here (`roles/CACHE_STRATEGY.md` permits it where eventual consistency is assessed)
+- [ ] **LD11 · LD12** — the client does not fetch everything and filter in memory; a long list is virtualised
+      and its page size is enforced by the API
+
+**Verdict.** Any **LD1, LD2, LD5, LD6 or LD8** hit that survives review = 🔴 on its own — those five are the
+ones that reach production and cannot be fixed by tuning. **Three or more hits across LD1–LD12 = 🔴** whatever
+they are, exactly as 3+ hits on a craft detector set is (`roles/ROLE_LEO_EDITOR.md` §4). Any unmet point above
+→ no 🟢 for this vector.
+
+**And the question that stands above all twelve** — the floor's own stress test: *what does this do at ten
+times the current data?* If the report cannot answer it for the code under review, the review is not finished.
 
 ---
 
