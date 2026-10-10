@@ -1,0 +1,1 @@
+# OPERATIONS — runbooks for THIS product: DEPLOY_RUNBOOK, RUN_SERVICES, MIGRATION_RUNBOOK, INCIDENT_RUNBOOK, SCALE_ENVELOPES. Universal ops protocols live in roles/. See roles/DOC_TOPOLOGY.md
